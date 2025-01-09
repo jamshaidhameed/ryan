@@ -43,6 +43,16 @@
                                 <th class="text-center">Status</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            @foreach(\App\Models\IssueTickets::where('tenant_contract_id',$e_id)->get() as $issue)
+                             <tr>
+                                <td class="text-center">{{ $issue->issue_code}}</td>
+                                <td class="text-center">{{ $issue->title}}</td>
+                                <td class="text-center"></td>
+                                <td class="text-center">{{ $issue->status}}</td>
+                             </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>

@@ -33,49 +33,51 @@ Rayan Rent and Co
         <div class="container">
             <div class="search-area-inner">
                 <div class="search-contents ">
-                    <form action="index.html" method="GET">
-                        <div class="row">
+                    <form action="{{ route('advance.search') }}" method="post">
+                        @csrf
+                         <div class="row">
+                            <!-- <div class="col-6 col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <select class="selectpicker search-fields" name="area_from">
+                                        <option value="">Area From</option>
+                                        <option value="1500">1500</option>
+                                        <option value="1200">1200</option>
+                                        <option value="900">900</option>
+                                        <option value="600">600</option>
+                                        <option value="1300">300</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                            </div> -->
                             <div class="col-6 col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="brand">
-                                        <option>Area From</option>
-                                        <option>1500</option>
-                                        <option>1200</option>
-                                        <option>900</option>
-                                        <option>600</option>
-                                        <option>300</option>
-                                        <option>100</option>
+                                    <select class="selectpicker search-fields" name="postal_code">
+                                        <option value="">Postal Code</option>
+                                        @php $postal_codes  = \App\Models\Properties::orderBy('postcode','asc')->select('postcode')->distinct()->get(); @endphp
+
+                                        @foreach($postal_codes as $postcode)
+                                          <option value="{{ $postcode->postcode}}">{{ $postcode->postcode}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="property-status">
-                                        <option>Property Status</option>
-                                        <option>For Sale</option>
-                                        <option>For Rent</option>
+                                    <select class="selectpicker search-fields" name="province">
+                                        <option value="">Location</option>
+                                        @foreach(\App\Models\Provinces::all() as $province)
+                                         <option value="{{ $province->id }}">{{ $province->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="location">
-                                        <option>Location</option>
-                                        <option>United Kingdom</option>
-                                        <option>American Samoa</option>
-                                        <option>Belgium</option>
-                                        <option>Canada</option>
-                                        <option>Delaware</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-6 col-lg-3 col-md-3">
-                                <div class="form-group">
-                                    <select class="selectpicker search-fields" name="category">
-                                        <option>Property Types</option>
-                                        <option>Residential</option>
-                                        <option>Commercial</option>
-                                        <option>Land</option>
+                                    <select class="selectpicker search-fields" name="property_type">
+                                        <option value="">Property Types</option>
+                                        @foreach(\App\Models\PropertyTypes::orderBy('name','asc')->get() as $type)
+                                         <option value="{{ $type->id }}">{{ $type->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -83,35 +85,35 @@ Rayan Rent and Co
                         <div class="row">
                             <div class="col-6 col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="body">
-                                        <option>Bedrooms</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                        <option>9</option>
+                                    <select class="selectpicker search-fields" name="bedrooms">
+                                        <option value="">Bedrooms</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="transmission">
-                                        <option>Bathrooms</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                    <select class="selectpicker search-fields" name="bathrooms">
+                                        <option value="">Bathrooms</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-6 col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <div class="range-slider">
-                                        <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                        <div data-min="0" data-max="15000" data-unit="€" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
                                         <div class="clearfix"></div>
                                     </div>
                                 </div>
@@ -301,7 +303,7 @@ Rayan Rent and Co
                             </div> -->
 
                         </div>
-                        <a href="{{ route('property.listing') }}" class="btn btn-4">Read more</a>
+                        <a href="{{ route('properties.list') }}" class="btn btn-4">Read more</a>
                     </div>
                 </div>
             </div>

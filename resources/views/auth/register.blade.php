@@ -86,7 +86,7 @@
                             <input type="password" name="password_confirmation" id="" class="input-text form-control" value="{{ old('password_confirmation') }}" placeholder="{{ __('Confirm Password')}}">
                          </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-4 btn-block">{{ __('Register') }}</button>
+                            <button type="submit" class="btn btn-4 btn-block" style="background-color: #f26928;">{{ __('Register') }}</button>
                         </div>
 
                         <!-- <div class="extra-login form-group clearfix">

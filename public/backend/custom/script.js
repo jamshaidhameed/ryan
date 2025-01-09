@@ -223,3 +223,14 @@ $(document).on("click", ".landlord-contract", function (e) {
     .val(price);
   $(".landlord-contract-modal").modal("show");
 });
+
+//Assign Technical Peron
+
+$(document).on("click", ".assign-technical-person", function (e) {
+  e.preventDefault();
+
+  var id = $(this).data("id");
+
+  $(".assign-technision").find("form").find('input[name="ticket_id"]').val(id);
+  $(".assign-technision").modal("show");
+});

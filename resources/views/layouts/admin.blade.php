@@ -143,13 +143,13 @@
             <div class="dropdown-menu" role="menu">
                 <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
                 <span class="flag-icon flag-icon-gb"></span> English</a>
-                <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
+                <!-- <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
                 <span class="flag-icon flag-icon-fr"></span> French</a>
                 <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
                 <span class="flag-icon flag-icon-cn"></span> Chinese</a>
                 <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
                 <span class="flag-icon flag-icon-de"></span> German</a>
-                <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
+                <a class="dropdown-item" href="javascript:void(0)" role="menuitem"> -->
                 <span class="flag-icon flag-icon-nl"></span> Dutch</a>
             </div>
             </li>
@@ -314,8 +314,8 @@
             </li>
              <!-- Technisions Menu End -->
               <!-- Booking Enquiries Menu Start -->
-              <li class="site-menu-category">Bookings</li>
-             <li class="site-menu-item has-sub {{ Route::currentRouteName() == 'admin.booking.enquiries' ? 'active open' : ''}}">
+              <!-- <li class="site-menu-category">Bookings</li> -->
+             <!-- <li class="site-menu-item has-sub {{ Route::currentRouteName() == 'admin.booking.enquiries' ? 'active open' : ''}}">
                 <a href="javascript:void(0)">
                   <i class="site-menu-icon wb-grid-9" aria-hidden="true"></i>
                   <span class="site-menu-title">Enquiries</span>
@@ -329,8 +329,17 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> -->
              <!-- Technisions Menu End -->
+
+             <li class="site-menu-item {{ Route::currentRouteName() == 'admin.rented.properties' ? 'active' : ''}}">
+                <a href="{{ route('admin.rented.properties') }}">
+                  <!-- <i class="site-menu-icon wb-users" aria-hidden="true"></i> -->
+                   <i class="icon wb-home" aria-hidden="true" style="font-size: 15px;margin-right:10px;"></i>
+                  <span class="site-menu-title">Rented Properties</span>
+                 
+              </a>
+            </li>
           </ul>
           <!--  -->
         </div>

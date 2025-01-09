@@ -15,6 +15,7 @@ Route::get('/', [App\Http\Controllers\Front\HomeController::class, 'index'])->na
 //Booking Routes 
 Route::post('/booking',[App\Http\Controllers\BookingController::class,'book_property'])->name('property.book');
 
+
 require __DIR__.'/front.php';
 require __DIR__.'/admin.php';
 require __DIR__.'/landlord.php';

@@ -202,7 +202,7 @@
                              
                              <div class="row">
                                 <div class="col col-md-3"><a href="{{ asset('upload/booking/'.$tenant_contract->link) }}" class="btn btn-primary btn-outline">Download Contract</a> <br>
-                                   <a href="" class="btn btn-primary btn-outline">Issue Tickets</a>
+                                   <a href="{{ route('admin.issue.tickets',$tenant_contract->id)}}" class="btn btn-primary btn-outline">Issue Tickets</a>
                                 </div>
                                 <div class="col col-md-3"><a href="{{ route('admin.booking.tenant.invoices',$tenant_contract->id) }}" class="btn btn-primary btn-outline btn-invoices">Invoices</a> <br>
                                    <a href="" class="btn btn-primary btn-outline">Commission Details</a>

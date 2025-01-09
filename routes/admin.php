@@ -81,4 +81,13 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
         //Pay Invoice 
         Route::get('/booking/invoice/pay/{id}',[App\Http\Controllers\Admin\HomeController::class,'pay_invoice'])->name('invoice.pay');
 
+        //Issue Tickets
+
+       Route::get('/issue/tickets/{b_id}',[App\Http\Controllers\Admin\HomeController::class,'issue_tickets'])->name('issue.tickets');
+
+       Route::get('issue/ticket/{id}',[App\Http\Controllers\Admin\HomeController::class,'issue_ticket'])->name('issue.ticket');
+       Route::post('issue/ticket/assign',[App\Http\Controllers\Admin\HomeController::class,'assign_technision'])->name('ticket.assign');
+       //Rented Properties 
+       Route::get('rented/properties',[App\Http\Controllers\Admin\HomeController::class,'rented_properties'])->name('rented.properties'); 
+
     });

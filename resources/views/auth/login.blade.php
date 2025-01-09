@@ -85,7 +85,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-4 btn-block">{{ __('Login') }}</button>
+                            <button type="submit" class="btn btn-4 btn-block" style="background-color: #f26928;">{{ __('Login') }}</button>
                         </div>
 
                         <!-- <div class="extra-login form-group clearfix">

@@ -17,6 +17,7 @@ use App\Models\BookingEnquiries;
 use App\Models\Invoices;
 use App\Models\LandlordContracts;
 use App\Models\TenantContracts;
+use App\Models\IssueTickets;
 use Redirect;
 use File;
 use DateTime;
@@ -908,6 +909,55 @@ class HomeController extends Controller
         }else{
             return view('admin.bookings.enquiries.contract_files.landlord-contracts',compact('todays_date','property_owner','company_name','property'));
         }
+    }
+
+    //Issue Tickets 
+
+    public function issue_tickets($b_id){
+
+        $issue_tickets = IssueTickets::issue_tickets($b_id);
+
+        return view('admin.issues.index',compact('issue_tickets'));
+    }
+    public function issue_ticket($id){
+
+        $issue_ticket = IssueTickets::find($id);
+        $tichenisions = User::where('role','technision')->get();
+
+        return view('admin.issues.single',compact('issue_ticket','tichenisions'));
+    }
+
+    public function assign_technision(Request $request){
+
+        $request->validate(
+            [
+                'ticket_id' => 'required',
+                'technision' => 'required',
+                'priority' => 'required',
+            ]
+            );
+
+        IssueTickets::where('id',$request->ticket_id)->update(
+            [
+                'assigned_to' => $request->technision,
+                'assigned_by' => Auth::user()->id,
+                'priority' => $request->priority,
+                'status' => 'in progress'
+            ]
+            );
+        
+        session()->flash('success','Technision Assigned Successfully');
+
+        return redirect()->route('admin.issue.ticket',$request->ticket_id);
+    }
+
+    //Rented Properties 
+
+    public function rented_properties(){
+
+        $tenant_contracts = TenantContracts::orderBy('id','desc')->with(['tenant','property'])->get();
+
+        return view('admin.properties.rented',compact('tenant_contracts'));
     }
 
     

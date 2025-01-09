@@ -11,6 +11,7 @@ use App\Models\Properties;
 use App\Models\BookingEnquiries;
 use App\Models\Invoices;
 use App\Models\TenantContracts;
+use App\Models\IssueTickets;
 use Auth;
 use File;
 
@@ -179,8 +180,50 @@ class HomeController extends Controller
                 'priority' => 'required',
             ]
             );
-        
-        
+
+           $image = $request->file;
+           $new_name = '';
+
+        if (!empty($image)) {
+
+            $new_name = rand().'.'.$image->getClientOriginalExtension();
+
+            $image->move(public_path('upload/issue'),$new_name);
+
+            // if(File::exists(public_path('upload/tenant/').$tenant->image)) {
+            //     File::delete(public_path('upload/tenant/').$tenant->image);
+            // }
+        }
+
+        $issue_code = '';
+
+        do{
+            $v_code = rand(10000000,12345678);
+            $issue_code = $v_code;
+
+            $exist = IssueTickets::where('issue_code',$issue_code)->get();
+
+        }while(count($exist) !=0);
+
+
+        IssueTickets::create(
+            [
+                'tenant_contract_id' => $request->prop_id,
+                'issue_raised_by' => Auth::user()->id,
+                'issue_ticket_type' => $request->issue_type,
+                'issue_code' => $issue_code,
+                'title' => $request->title,
+                'slug' => Str::slug($request->title, '-'),
+                'description' => $request->description,
+                'status' => 'pending',
+                'priority' => $request->priority,
+                'photo' => $new_name
+            ]
+            );
+
+            session()->flash('success','Issue Ticket Added Successfully');
+
+            return redirect()->route('tenant.booking.property.complaints',$request->prop_id);
     }
     
 }

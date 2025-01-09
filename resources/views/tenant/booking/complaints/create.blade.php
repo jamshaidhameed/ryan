@@ -65,7 +65,7 @@ Issue Ticket
                                 <div class="form-group">
                                     <label for="" class="form-control-label">Issue Ticket Type</label>
                                    
-                                    <select name="property_id" id="" class="form-control" data-fv-notempty="true">
+                                    <select name="issue_type" id="" class="form-control" data-fv-notempty="true">
                                         <option value="">Please Choose</option>
                                         <option value="Furniture">Furniture</option>
                                         <option value="Plumber">Plumber</option>
