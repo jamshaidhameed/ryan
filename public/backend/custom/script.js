@@ -234,3 +234,82 @@ $(document).on("click", ".assign-technical-person", function (e) {
   $(".assign-technision").find("form").find('input[name="ticket_id"]').val(id);
   $(".assign-technision").modal("show");
 });
+
+//Landlord Invoices
+
+$(document).on("click", ".landlord-invoices", function (e) {
+  e.preventDefault();
+
+  var url = $(this).attr("href"),
+    html_data = "";
+
+  $.ajax({
+    type: "get",
+    url: url,
+    dataType: "json",
+    success: function (data) {
+      if (data) {
+        $.each(data, function () {
+          var row = this;
+          html_data +=
+            "<tr> <td>" +
+            row.invoice_number +
+            "</td><td>" +
+            row.month +
+            "</td><td>" +
+            row.amount +
+            "</td>";
+
+          if (row.status == "paid") {
+            html_data +=
+              '<td><span class="badge badge-success  font-weight-100">Paid</span></td><td><button class="btn btn-primary btn-outline disabled">Pay</button></td>';
+          } else {
+            html_data +=
+              '<td><span class="badge badge-danger  font-weight-100">Not Paid</span></td><td><a type="button" href="/admin/landlord/invoice/pay/' +
+              row.id +
+              '" class="btn btn-primary btn-outline btn-landlord-invoice-pay" onClick="return confirm(`Are you Sure to Pay this Invoice ? `)" >Pay</a></td>';
+          }
+          html_data += "</tr>";
+        });
+      }
+
+      $(".landlord-invoices-modal").find("table tbody").empty();
+      $(".landlord-invoices-modal").find("table tbody").html(html_data);
+    },
+  });
+
+  $(".landlord-invoices-modal").modal("show");
+});
+
+//Click on Landlord Invoice Pay
+$(document).on("click", ".btn-landlord-invoice-pay", function (e) {
+  e.preventDefault();
+  var url = $(this).attr("href");
+
+  $.ajax({
+    type: "get",
+    url: url,
+    dataType: "json",
+    success: function (data) {
+      if (data.success) {
+        swal({
+          title: "Success",
+          text: data.message,
+          type: "success",
+          confirmButtonClass: "btn-success",
+          confirmButtonText: "OK",
+        });
+
+        $(".landlord-invoices-modal").modal("hide");
+      } else {
+        swal({
+          title: "Error",
+          text: data.message,
+          type: "error",
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "OK",
+        });
+      }
+    },
+  });
+});

@@ -90,4 +90,13 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
        //Rented Properties 
        Route::get('rented/properties',[App\Http\Controllers\Admin\HomeController::class,'rented_properties'])->name('rented.properties'); 
 
+       //Landlord Invoices 
+
+       Route::get('/booking/labdlord/invoices/{b_id}',[App\Http\Controllers\Admin\HomeController::class,'landlord_invoices'])->name('landlord.invoices');
+       Route::get('landlord/invoice/pay/{id}',[App\Http\Controllers\Admin\HomeController::class,'pay_landlord_invoice'])->name('landlord.invoice.pay');
+
+       //Get Issue Ticket Receipt
+
+       Route::get('/issue/ticket/receipt/{id}',[App\Http\Controllers\Admin\HomeController::class,'issue_ticket_receipt'])->name('ticket.receipt');
+
     });

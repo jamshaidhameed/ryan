@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Models\BookingEnquiries;
+use App\Models\Properties;
 use App\Models\User;
+use App\Mail\InterestedProperty;
 use Session;
 use Auth;
 use URL;
@@ -28,6 +31,10 @@ class BookingController extends Controller
             return redirect()->back()->withErrors('you are not authorized to book property');
         }
 
+        $admins = User::where('role','admin')->get();
+
+        $property_info = Properties::find($request->property_id);
+
 
         if (!empty(Auth::user()->id)) {
         
@@ -39,6 +46,12 @@ class BookingController extends Controller
                     'enquiry_no' => rand(10000,123456)
                 ]
                 );
+            // Email To Admins
+
+            foreach ($$admins as $ad) {
+                
+                Mail::to($ad->email)->send(new InterestedProperty($property_info));
+            }
             session()->flash('success', 'Booking Enquiry has been created successfully');
             return redirect()->route('tenant.booking.enquiries');
         }else{
@@ -74,6 +87,14 @@ class BookingController extends Controller
                     'enquiry_no' => rand(10000,123456)
                 ]
                 );
+
+
+        // Email To Admins
+
+        foreach ($$admins as $ad) {
+            
+            Mail::to($ad->email)->send(new InterestedProperty($property_info));
+        }
         session()->flash('success', 'Booking Enquiry has been created successfully');
 
         return redirect()->back();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Landlord;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Provinces;
@@ -10,8 +11,9 @@ use App\Models\User;
 use App\Models\Properties;
 use App\Models\BookingEnquiries;
 use App\Models\Invoices;
+use App\Mail\PropertyAddMail;
 use Auth;
-use File;
+use File; 
 
 class HomeController extends Controller
 {
@@ -180,7 +182,7 @@ class HomeController extends Controller
 
 
 
-        Properties::create(
+     $property =    Properties::create(
             [
                 'title_en' => $request->title_en,
                 'description_en' => $request->description_en,
@@ -211,6 +213,15 @@ class HomeController extends Controller
                 'youtube_url' => $request->youtube_url
             ]
             );
+
+            // Send Email 
+
+            $admins = User::where('role' ,'admin')->get();
+
+            foreach ($admins as $key => $ad) {
+                
+                Mail::to($ad->email)->send(new PropertyAddMail(Auth::user()->first_name." ".Auth::user()->last_name,$property));
+            }
 
         session()->flash('success','Property Created Successfully');
 

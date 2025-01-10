@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="col col-md-4">
                                     
-                                   <a href="" class="btn btn-primary btn-outline">Invoices</a>
+                                   <a href="{{ route('admin.landlord.invoices',$landlord_contract->id) }}" class="btn btn-primary btn-outline landlord-invoices">Invoices</a>
                                 </div>
                                 <div class="col col-md-4">
                                   <a href="" class="btn btn-primary btn-outline">Terminate Contract</a>
@@ -423,6 +423,37 @@
     </div>
 </div>
   <!-- Landlord Contract Modal End -->
+
+  <!-- Landlord Invoices Modal -->
+   <div class="modal fade example-modal-lg landlord-invoices-modal" aria-hidden="true" aria-labelledby="exampleOptionalLarge" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="exampleOptionalLarge">Invoices</h4>
+        </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Invoice No.</th>
+                            <th>Month</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+   <!-- End Landlord Invoices -->
 @endsection
 @section('script')
 <script src="{{ asset('backend/custom/script.js') }}"></script>

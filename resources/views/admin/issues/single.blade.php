@@ -64,6 +64,11 @@
                                 <tr>
                                     <td>Invoice Details</td>
                                     <td class="text-right">
+                                        @if(empty($issue_ticket->assigned_to))
+                                         <a class="btn btn-primary btn-sm" href="">Pay</a>
+                                         @else 
+                                         <a class="btn btn-primary btn-sm" href="">Get Receipt</a>
+                                        @endif
 
                                     </td>
                                 </tr>

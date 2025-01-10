@@ -20,3 +20,4 @@ require __DIR__.'/front.php';
 require __DIR__.'/admin.php';
 require __DIR__.'/landlord.php';
 require __DIR__.'/tenant.php';
+require __DIR__.'/technision.php';

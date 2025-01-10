@@ -4,14 +4,16 @@ namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use App\Models\Provinces;
+use App\Models\Provinces; 
 use App\Models\User;
 use App\Models\Properties;
 use App\Models\BookingEnquiries;
 use App\Models\Invoices;
 use App\Models\TenantContracts;
 use App\Models\IssueTickets;
+use App\Mail\IssueTicket;
 use Auth;
 use File;
 
@@ -220,6 +222,12 @@ class HomeController extends Controller
                 'photo' => $new_name
             ]
             );
+
+            //New Enquiry Email
+
+            Mail::to(Auth::user()->email)->send(new IssueTicket(Auth::user()));
+
+            
 
             session()->flash('success','Issue Ticket Added Successfully');
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -18,6 +19,9 @@ use App\Models\Invoices;
 use App\Models\LandlordContracts;
 use App\Models\TenantContracts;
 use App\Models\IssueTickets;
+use App\Mail\TenantContract;
+use App\Mail\UserRegister;
+use App\Mail\LandlordInvoicePaid;
 use Redirect;
 use File;
 use DateTime;
@@ -60,14 +64,14 @@ class HomeController extends Controller
         $landlord_contract = LandlordContracts::orderBy('id','desc')->where(['property_id' => $property->id,'terminated_on' => null,'expired_at' => ' > '. date('Y-m-d')])->first();
         $tenant_contract = TenantContracts::orderBy('id','desc')->where(['expired_at' => ' > '. date('Y-m-d')])->first();
 
-        $t_contracts = DB::select("SELECT * FROM `tenant_contracts` WHERE expired_at >= '".date('Y-m-d')."'");
+        $t_contracts = DB::select("SELECT * FROM `tenant_contracts` WHERE expired_at >= '".date('Y-m-d')."' AND property_id = ".$property->id);
 
         if (count($t_contracts) > 0) {
            $tenant_contract = $t_contracts[0]; 
 
         }
 
-        $l_contracts = DB::select("SELECT * FROM `landlord_contracts` WHERE expired_at >= '".date('Y-m-d')."'");
+        $l_contracts = DB::select("SELECT * FROM `landlord_contracts` WHERE expired_at >= '".date('Y-m-d')."' AND property_id = ".$property->id);
 
         if (count($l_contracts) > 0) {
             
@@ -228,6 +232,12 @@ class HomeController extends Controller
         }
 
         $property_info = Properties::find($request->prop_id);
+        $landlord_info = User::find($property_info->user_id);
+
+        //Email Sent to Landlord
+        Mail::to($landlord_info->email)->send(new TenantContract($landlord_info->first_name." ".$landlord_info->last_name,public_path().'/upload/booking/'.$file_name));
+
+        //
 
         session()->flash('success', 'Landlord Contract Created Successfully');
 
@@ -369,9 +379,17 @@ class HomeController extends Controller
             $tenant_account->status = "1";
             $tenant_account->password = Hash::make($password);
             $tenant_account->save();
+
+        //Sent New Account Password 
+
+            Mail::to($tenant_account->email)->send(new UserRegister($tenant_account,$password));
         }
 
         //Updating Booking Enquiries 
+
+        //Sending Contract Email 
+
+         Mail::to($tenant_account->email)->send(new TenantContract($tenant_account->first_name." ".$tenant_account->last_name,public_path().'/upload/booking/'.$file_name));
 
         BookingEnquiries::where('id',$request->e_id)->update(['status'  => 'selected']);
 
@@ -960,6 +978,65 @@ class HomeController extends Controller
         return view('admin.properties.rented',compact('tenant_contracts'));
     }
 
-    
+    //Landlord Invoices Json
+    public function landlord_invoices($b_id){
+
+        $invoices = Invoices::where('tenant_contract_id',$b_id)->get();
+
+        $invoice_list = array();
+
+        foreach ($invoices as $key => $inc) {
+            
+            $invoice_list [] = [
+                'id' => $inc->id,
+                'invoice_number' => $inc->invoice_number,
+                'invoice_type' => ucwords($inc->invoice_type),
+                'month' => date_format(date_create($inc->from_date),'M').'-'.date_format(date_create($inc->from_date),'Y').'/'.date_format(date_create($inc->till_date),'M')."-".date_format(date_create($inc->till_date),'Y'),
+                'status' => $inc->status,
+                'amount' => number_format($inc->amount,2),
+            ];
+        }
+
+        return response()->json($invoice_list);
+    }
+
+    //Pay Landlord Invoice
+
+    public function pay_landlord_invoice($id){
+
+        $invoice = Invoices::Find($id);
+
+        if (empty($invoice)) {
+            
+            return response()->json(['success' => false,'message' => 'Invoice not found']);
+        }
+
+        $invoice->status = 'paid';
+        $invoice->paid_at = date('Y-m-d H:i:s');
+
+        $invoice->save();
+
+
+        $landlord_contract = LandlordContracts::find($invoice->tenant_contract_id);
+
+        $property = Properties::find($landlord_contract->property_id);
+
+        $owner = User::find($property->user_id);
+
+
+
+        // Landlord Invoice Paid Email 
+
+        Mail::to($owner->email)->send(new LandlordInvoicePaid($owner->first_name." ".$owner->last_name,$property->title_en,date_format(date_create($invoice->from_date),'F'),$invoice->amount));
+
+
+        return response()->json(['success' => true,'message' => 'Invoice Paid Successfully']);
+    }
+
+    //Issue Ticket Receipt 
+
+    public function issue_ticket_receipt($id){
+
+    }
     
 }
