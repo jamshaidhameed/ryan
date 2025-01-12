@@ -107,8 +107,8 @@
             <tbody>
                 <tr>
                     <td>01</td>
-                    <td>{{$ticket->title}}</td>
-                    <td class="text-right">{{$cost}}</td>
+                    <td>{{$issue_ticket->title}}</td>
+                    <td class="text-right">{{$ticket->cost}}</td>
                 </tr>
             </tbody>
         </table>
@@ -117,7 +117,7 @@
                 <tbody>
                     <tr>
                         <td>Total amount</td>
-                        <td class="text-right">{{$cost}} {{$paid}}</td>
+                        <td class="text-right">{{$ticket->cost}} {{$ticket->paid == 1 ? 'Yes' : 'No'}}</td>
                     </tr>
                 </tbody>
             </table>

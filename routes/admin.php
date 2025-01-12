@@ -96,7 +96,9 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
        Route::get('landlord/invoice/pay/{id}',[App\Http\Controllers\Admin\HomeController::class,'pay_landlord_invoice'])->name('landlord.invoice.pay');
 
        //Get Issue Ticket Receipt
-
+       Route::get('/issue/ticket/resolve/{id}',[App\Http\Controllers\Admin\HomeController::class,'resolve_issue_add'])->name('issue.ticket.resolve');
+       Route::post('/issue/ticket/resolve/post',[App\Http\Controllers\Admin\HomeController::class,'resolve_issue_post'])->name('issue.ticket.resolve.post');
+       Route::post('/issue/ticket/pay',[App\Http\Controllers\Admin\HomeController::class,'issue_ticket_payment'])->name('issue.ticket.pay');
        Route::get('/issue/ticket/receipt/{id}',[App\Http\Controllers\Admin\HomeController::class,'issue_ticket_receipt'])->name('ticket.receipt');
 
     });

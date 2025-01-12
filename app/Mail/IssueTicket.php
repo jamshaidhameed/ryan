@@ -38,7 +38,7 @@ class IssueTicket extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.enquire-submitted-mail.',with:['enquire' => $this->enquire],
+            markdown: 'emails.enquire-submitted-mail',with:['enquire' => $this->enquire],
         );
     }
 

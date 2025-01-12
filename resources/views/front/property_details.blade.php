@@ -85,9 +85,9 @@
                         <li class="nav-item">
                             <a class="nav-link" id="5-tab" data-toggle="tab" href="#5" role="tab" aria-controls="5" aria-selected="true">Location</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" id="6-tab" data-toggle="tab" href="#6" role="tab" aria-controls="6" aria-selected="true">Related Properties</a>
-                        </li>
+                        </li> -->
                     </ul>
                     <div class="tab-content" id="carTabContent">
                         <div class="tab-pane fade active show" id="one" role="tabpanel" aria-labelledby="one-tab">
@@ -188,7 +188,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade " id="6" role="tabpanel" aria-labelledby="6-tab">
+                        <!-- <div class="tab-pane fade " id="6" role="tabpanel" aria-labelledby="6-tab">
                             <div class="related-properties">
                                 <h3 class="heading-3">Related Properties</h3>
                                 <div class="row">
@@ -316,7 +316,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <!-- Amenities box start -->
@@ -423,7 +423,7 @@
                     </div>
                 </div>
                 <!-- Comments section start -->
-                <div class="comments-section mb-60">
+                <!-- <div class="comments-section mb-60">
                     <h3 class="heading-3">Comments Section</h3>
                     <ul class="comments">
                         <li>
@@ -509,9 +509,9 @@
                             </div>
                         </li>
                     </ul>
-                </div>
+                </div> -->
                 <!-- Contact 3 start -->
-                <div class="contact-3">
+                <!-- <div class="contact-3">
                     <h3 class="heading-3">Leave a Comment</h3>
                     <div class="container">
                         <div class="row">
@@ -551,7 +551,7 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="col-lg-4 col-md-12">
                 <div class="sidebar mbl">

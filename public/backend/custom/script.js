@@ -313,3 +313,15 @@ $(document).on("click", ".btn-landlord-invoice-pay", function (e) {
     },
   });
 });
+
+//Issue Ticket Cost
+$(document).on("click", ".btn-issue-invoice-pay", function (e) {
+  e.preventDefault();
+
+  var id = $(this).data("id");
+  $(".issue-ticket-pay-modal")
+    .find("form")
+    .find('input[name="ticket_id"]')
+    .val(id);
+  $(".issue-ticket-pay-modal").modal("show");
+});

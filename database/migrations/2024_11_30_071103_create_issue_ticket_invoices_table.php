@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('issue_ticket_id');
             $table->float('cost');
             $table->boolean('paid')->default(false);
-            $table->text('remark');
-            $table->unsignedBigInteger('paid_by');
+            $table->text('remark')->nullable();
+            $table->unsignedBigInteger('paid_by')->nullable();
             $table->timestamps();
         });
     }

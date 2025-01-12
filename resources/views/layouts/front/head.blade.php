@@ -29,10 +29,10 @@
                 <ul class="top-social-media pull-right">
                     @if(empty(Auth::user()->first_name))
                     <li>
-                        <a href="{{ route('login')}}" class="sign-in"><i class="fa fa-sign-in"></i>Login </a>
+                        <a href="{{ route('login')}}" class="sign-in"><i class="fa fa-sign-in" style="margin-right:10px;"></i>Login </a>
                     </li>
                     <li>
-                        <a href="{{ route('register') }}" class="sign-in"><i class="fa fa-user"></i> Register</a>
+                        <a href="{{ route('register') }}" class="sign-in"><i class="fa fa-user" style="margin-right:10px;"></i> Register</a>
                     </li>
                     @else 
                         @php $route = route(Auth::user()->role.".dashboard"); @endphp
@@ -41,7 +41,7 @@
                      </li>
 
                      <li>
-                        <a class="ign-in" href="{{  route('logout') }}" role="menuitem"onclick="event.preventDefault();document.getElementById('logout-form').submit();"> <li class="fa fa-logout"></li>
+                        <a class="ign-in" href="{{  route('logout') }}" role="menuitem"onclick="event.preventDefault();document.getElementById('logout-form').submit();"> <i class="fa fa-logout" style="margin-right:10px;"></i>
                         {{ __('Logout') }}
                             </a>
 

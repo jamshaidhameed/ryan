@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('technician.layouts.master')
 @section('title')
  Issue Ticket
 @endsection
@@ -7,25 +7,22 @@
     strong {
         font-weight: bold;
     }
+    .modal-header .close {
+        padding: 15px;
+        margin: -15px -489px 0px auto;
+    }
  </style>
 @endsection
 @section('content')
 <div class="page">
-  <div class="page-header">
-        <h1 class="page-title">{{ ucfirst(env('business_title'))}}</h1>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">Admin Dashboard</li>
-          <li class="breadcrumb-item"><a href="#">Properties Details</a></li>
-          <li class="breadcrumb-item active">Issue Ticket</li>
-        </ol>
-    </div>
+
  <div class="page-content container-fluid">
    <!-- row -->
     <div class="row">
         <!-- Start First Column -->
         <div class="col col-md-5">
             <div class="card border border-primary"">
-                <div class="card-block">
+                <div class="card-body">
                     <p class="card-title"><strong>Issue Ticket Status</strong></p>
                     
                     <div class="card-text">
@@ -75,7 +72,7 @@
                                         @if(!empty($issue_invoice) && $issue_invoice->paid == 0)
                                          <a class="btn btn-primary btn-sm btn-issue-invoice-pay" href="" data-id="{{ $issue_invoice->id }}">Pay</a>
                                          @elseif(!empty($issue_invoice) && $issue_invoice->paid == 1) 
-                                         <a class="btn btn-primary btn-sm" href="{{ route('admin.ticket.receipt',$issue_invoice->id) }}" target="_blank">Get Receipt</a>
+                                         <a class="btn btn-primary btn-sm" href="{{ route('technision.issue.receipt.download',$issue_invoice->id) }}" target="_blank">Get Receipt</a>
                                         @endif
 
                                     </td>
@@ -108,7 +105,7 @@
         <div class="col col-md-7">
             <!-- first Card Start -->
              <div class="card border border-primary">
-                <div class="card-block">
+                <div class="card-body">
                     <p class="card-title">
                         <strong>
                         {{ ucwords($issue_ticket->title)}}
@@ -123,23 +120,20 @@
              <!-- First card End -->
               <!-- Second Card Start -->
                <div class="card border border-primary">
-                <div class="card-block">
+                <div class="card-body">
                     <p class="card-title">
                         <strong>
                         Resolved Description
                         <hr>
                         </strong>
-                        @if(empty($issue_ticket->assigned_to))
-                          <div class="d-flex justify-content-end" style="margin-top: -56px;">
-                                <a href="" data-id="{{ $issue_ticket->id }}"  type="button" class="btn btn-primary btn-sm assign-technical-person">Assign Technical person</a>
+                        @if($issue_ticket->status != 'resolved')
+                         <div class="d-flex justify-content-end" style="margin-top: -67px;">
+                            <div class="d-flex justify-content-between">
+                             
+                               <a href="{{ route('technision.issue.resolve.option',$issue_ticket->id) }}" class="btn btn-sm btn-primary">Resolve</a>
+                             
                             </div>
-                        @elseif($issue_ticket->status != 'resolved') 
-                         <div class="d-flex justify-content-end" style="margin-top: -56px;">
-                                <div class="d-flex justify-content-between">
-                                    <a href="" data-id="{{ $issue_ticket->id }}"  type="button" class="btn btn-primary btn-sm assign-technical-person mr-5">Chanage Technical person</a>
-                                <a href="{{ route('admin.issue.ticket.resolve',$issue_ticket->id) }}" class="btn btn-sm btn-primary">Resolve</a>
-                                </div>
-                            </div>
+                        </div>
                         @endif
                     </p>
                     <div class="card-text">
@@ -162,52 +156,6 @@
  </div>
 <!-- End of Page Content -->
 
-<!-- Modal Starts Here -->
- <div class="modal fade assign-technision" id="examplePositionCenter" aria-hidden="true" aria-labelledby="examplePositionCenter" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-simple modal-center">
-        <form  class="form-horizontal" id="exampleConstraintsForm" action="{{ route('admin.ticket.assign') }}" method="post" >
-            @csrf
-            <input type="hidden" name="ticket_id" value="">
-            <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                    </button>
-                        <h4 class="modal-title">Issue Ticket</h4>
-                        </div>
-                   <div class="modal-body">
-                       <div class="row">
-                        <div class="col col-md-6">
-                            <div class="form-group">
-                                <label for="" class="form-control-label">Assign To</label>
-                                <select name="technision" id="" class="form-control" data-fv-notempty="true">
-                                    <option value="">Please Choose</option>
-                                    @foreach($tichenisions as $technision)
-                                      <option value="{{ $technision->id}}">{{ $technision->first_name." ".$technision->last_name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col col-md-6">
-                            <div class="form-group">
-                                <label for="" class="form-control-label">Priority</label>
-                                <select name="priority" id="" class="form-control" data-fv-notempty="true">
-                                    <option value="low">Low</option>
-                                    <option value="high">High</option>
-                                </select>
-                            </div>
-                        </div>
-                       </div>
-                    </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Assign</button>
-                </div>
-            </div>
-            </div>
-        </form>
-</div>
- <!-- Modal Ends Here -->
 
  <!-- Pay Modal Starts Here -->
 <div class="modal fade issue-ticket-pay-modal" id="examplePositionTop" aria-hidden="true" aria-labelledby="examplePositionTop" role="dialog" tabindex="-1">
@@ -217,10 +165,10 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
         </button>
-         Issue Ticket Payment
+        <span style="text-align: left;margin-right: 319px;"> Issue Ticket Payment</span>
         </h4>
         </div>
-        <form class="form-horizontal" id="exampleConstraintsForm" autocomplete="off" action="{{ route('admin.issue.ticket.pay') }}" method="post">
+        <form class="form-horizontal" id="exampleConstraintsForm" autocomplete="off" action="{{ route('technision.issue.invoice.pay') }}" method="post">
          @csrf 
          <input type="hidden" name="ticket_id" value="">
          <div class="modal-body">

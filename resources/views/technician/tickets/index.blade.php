@@ -51,9 +51,11 @@
                                 <td>{{ $ticket->title}}</td>
                                 <td>{{ $ticket->title}}</td>
                                 <td>{!! html_entity_decode($ticket->description) !!}</td>
-                                <td>{{ $ticket->priority}}</td>
-                                <td>{{ $ticket->status}}</td>
-                                <td></td>
+                                <td>{{ ucwords($ticket->priority)}}</td>
+                                <td>{{ ucwords($ticket->status)}}</td>
+                                <td>
+                                    <a href="{{ route('technision.issue.show',$ticket->id) }}" class="btn btn-primary btn-outline btn-sm"> <i class="fa fa-eye"></i> View</a>
+                                </td>
                              </tr>
                             @endforeach
                         </tbody>

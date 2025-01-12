@@ -7,8 +7,8 @@
     .tb-contract{
         border: none;
     }
-    .tb-contract tbody tr td {
-        border-bottom:1px dotted gray;
+    .tb-contract,.tb-contract tbody tr td {
+        border: 2px dotted gray;
     }
     .btn {
         margin-bottom:5px;

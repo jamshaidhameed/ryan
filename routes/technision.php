@@ -8,6 +8,12 @@ Route::middleware(['auth','url_redirect', 'redirect_if_not_authenticated'])
         Route::get('/dashboard',[App\Http\Controllers\Technician\HomeController::class,'index'])->name('dashboard');
         Route::post('/update/profile',[App\Http\Controllers\Technician\HomeController::class,'update_profile'])->name('update.profile');
         Route::get('/issue/tickets',[App\Http\Controllers\Technician\HomeController::class,'issue_tickets'])->name('issue.tickets');
-        Route::get('/issue/ticket/edit/{id}',[App\Http\Controllers\Technician\HomeController::class,'edit_ticket'])->name('issue.ticket.edit');
+        Route::get('/issue/show/{id}',[App\Http\Controllers\Technician\HomeController::class,'view_issue'])->name('issue.show');
+        Route::get('/issue/resolve/option/{id}',[App\Http\Controllers\Technician\HomeController::class,'issue_resolve_option'])->name('issue.resolve.option');
+        Route::get('/issue/show/{id}',[App\Http\Controllers\Technician\HomeController::class,'view_issue'])->name('issue.show');
+        Route::post('/issue/resolve',[App\Http\Controllers\Technician\HomeController::class,'resolve_issue'])->name('issue.resolve');
+        Route::post('/issue/pay',[App\Http\Controllers\Technician\HomeController::class,'issue_invoice_pay'])->name('issue.invoice.pay');
+
+        Route::get('/issue/receipt/download/{id}',[App\Http\Controllers\Technician\HomeController::class,'download_issue_receipt'])->name('issue.receipt.download');
 
     });
