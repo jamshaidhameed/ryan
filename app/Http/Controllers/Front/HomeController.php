@@ -161,7 +161,7 @@ class HomeController extends Controller
 
         $properties = Properties::query();
 
-        if (!empty($_GET['postalcode']) || !empty($_GET['province']) || !empty($_GET['property_type']) || !empty($_GET['bedrooms']) || !empty($_GET['bathrooms']) || !empty($_GET['price']) || !empty($_GET['sortBy'])) {
+        if (!empty($_GET['postalcode']) || !empty($_GET['province']) || !empty($_GET['property_type']) || !empty($_GET['bedrooms']) || !empty($_GET['bathrooms']) || !empty($_GET['price']) || !empty($_GET['sortBy']) || !empty($_GET['type'])) {
 
             if (!empty($_GET['postalcode'])) {
             
@@ -206,6 +206,13 @@ class HomeController extends Controller
                 if ($sort == 'priceDesc') {
                     $properties = $properties->where(['status' => 1])->orderBy('price', 'DESC')->paginate(9);
                 }
+            }
+
+            if (!empty($_GET['type'])) {
+                
+                $type = $_GET['type'];
+
+                $properties = $properties->where(['status' => 1,'property_type_id' => $type])->paginate(9);
             }
             
         }else{

@@ -55,7 +55,7 @@ class HomeController extends Controller
 
         session()->flash('success','Property Status updated successfully');
 
-        return redirect()->route('admin.properties');
+        return redirect()->back();
     }
 
     //Property Details 
@@ -65,18 +65,22 @@ class HomeController extends Controller
         $landlord_contract = LandlordContracts::orderBy('id','desc')->where(['property_id' => $property->id,'terminated_on' => null,'expired_at' => ' > '. date('Y-m-d')])->first();
         $tenant_contract = TenantContracts::orderBy('id','desc')->where(['expired_at' => ' > '. date('Y-m-d')])->first();
 
-        $t_contracts = DB::select("SELECT * FROM `tenant_contracts` WHERE expired_at >= '".date('Y-m-d')."' AND property_id = ".$property->id);
+        $t_contracts = DB::select("SELECT * FROM `tenant_contracts` WHERE property_id = ".$property->id." AND (expired_at >= '".date('Y-m-d')."' AND terminated_on IS NULL)");
 
         if (count($t_contracts) > 0) {
            $tenant_contract = $t_contracts[0]; 
 
+        }else {
+             $tenant_contract =null;
         }
 
-        $l_contracts = DB::select("SELECT * FROM `landlord_contracts` WHERE expired_at >= '".date('Y-m-d')."' AND property_id = ".$property->id);
+        $l_contracts = DB::select("SELECT * FROM `landlord_contracts` WHERE expired_at >= '".date('Y-m-d')."' AND property_id = ".$property->id." AND terminated_on IS NULL");
 
         if (count($l_contracts) > 0) {
             
             $landlord_contract = $l_contracts[0];
+        }else {
+             $landlord_contract =null;
         }
         
         return view('admin.properties.detail',compact('property','landlord_contract','tenant_contract'));
@@ -982,7 +986,7 @@ class HomeController extends Controller
     //Landlord Invoices Json
     public function landlord_invoices($b_id){
 
-        $invoices = Invoices::where('tenant_contract_id',$b_id)->get();
+        $invoices = Invoices::where(['tenant_contract_id' => $b_id,'invoice_type' => 'landlord invoice'])->get();
 
         $invoice_list = array();
 
@@ -1132,6 +1136,60 @@ class HomeController extends Controller
         ]);
 
         return $pdf->download('Issue-Ticket-Invoice-'.$ticket->id.'.pdf');
+    }
+
+    //Terminate Tenant Contract 
+    public function terminate_tenant_contract(Request $request){
+
+        $request->validate(
+            [
+                'termination_reason' => 'required',
+                'e_id' => 'required',
+            ]
+            );
+
+        TenantContracts::where('id',$request->e_id)->update(
+            [
+                'terminated_by' => Auth::user()->id,
+                'terminated_on' => date('Y-m-d H:i:s'),
+                'termination_reason' => $request->termination_reason
+            ]
+            );
+
+        $tenant_contract = TenantContracts::find($request->e_id);
+
+        $property = Properties::find($tenant_contract->property_id);
+
+        session()->flash('success','Tenant Contract Successfuly Terminated');
+
+        return redirect()->route('admin.property.details',$property->slug);
+    }
+
+    public function landlord_tenant_contract(Request $request){
+
+        $request->validate(
+            [
+                'termination_reason' => 'required',
+                'e_id' => 'required',
+            ]
+            );
+
+        LandlordContracts::where('id',$request->e_id)->update(
+            [
+                'terminated_by' => Auth::user()->id,
+                'terminated_on' => date('Y-m-d H:i:s'),
+                'termination_reason' => $request->termination_reason
+            ]
+            );
+
+        $tenant_contract = LandlordContracts::find($request->e_id);
+
+        
+
+        session()->flash('success','Landlord Contract Successfuly Terminated');
+
+        return redirect()->back();
+
     }
     
 }

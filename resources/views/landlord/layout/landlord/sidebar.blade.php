@@ -21,20 +21,20 @@
                                     <i class="flaticon-heart-shape-outline"></i>Favorited Properties
                                 </a>
                             </li> -->
-                            <li>
-                                <a href="{{ route('landlord.booking.enquiries') }}"  class="{{ Route::currentRouteName() == 'landlord.booking.enquiries'  ? 'active' : ''}}">
-                                    <i class="flaticon-file"></i>Booking Enquiries
+                            <!-- <li>
+                                <a href="{{ route('landlord.booked.properties') }}"  class="{{ Route::currentRouteName() == 'landlord.booked.properties'  ? 'active' : ''}}">
+                                    <i class="flaticon-file"></i>Booked Properties
                                 </a>
-                            </li>
+                            </li> -->
                             <li>
-                                <a href="change-password.html">
+                                <a href="{{ route('landlord.password.change') }}" class="{{ Route::currentRouteName() == 'landlord.password.change'  ? 'active' : ''}}">
                                     <i class="flaticon-locked-padlock"></i>Change Password
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="index.html" class="border-bto2">
                                     <i class="flaticon-logout"></i>Log Out
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>

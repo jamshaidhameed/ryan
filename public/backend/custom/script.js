@@ -325,3 +325,24 @@ $(document).on("click", ".btn-issue-invoice-pay", function (e) {
     .val(id);
   $(".issue-ticket-pay-modal").modal("show");
 });
+
+//Terminate Tenant Contract
+$(document).on("click", ".btn-tenant-terminate", function (e) {
+  e.preventDefault();
+  debugger;
+  var id = $(this).data("id");
+
+  $(".tenant-terminate").find("form").find('input[name="e_id"]').val(id);
+  $(".tenant-terminate").modal("show");
+});
+
+//Terminate Landlord Contract
+
+$(document).on("click", ".btn-landlord-terminate", function (e) {
+  e.preventDefault();
+  debugger;
+  var id = $(this).data("id");
+
+  $(".landlord-terminate").find("form").find('input[name="e_id"]').val(id);
+  $(".landlord-terminate").modal("show");
+});

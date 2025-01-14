@@ -18,12 +18,12 @@
             <button type="button" class="btn btn-floating btn-sm btn-warning">
               <i class="icon wb-shopping-cart"></i>
             </button>
-            <span class="ml-15 font-weight-400">Total Employees</span>
+            <span class="ml-15 font-weight-400">Total Properties</span>
             <div class="content-text text-center mb-0">
               <i class="text-danger icon wb-triangle-up font-size-20">
             </i>
-              <span class="font-size-40 font-weight-100">0</span>
-              <p class="blue-grey-400 font-weight-100 m-0" > <a href="">More</a> </p>
+              <span class="font-size-40 font-weight-100">{{ \App\Models\Properties::where('status',1)->get()->count()}}</span>
+              <p class="blue-grey-400 font-weight-100 m-0" > <a href="{{ route('admin.properties') }}">More</a> </p>
 
             </div>
           </div>
@@ -35,12 +35,12 @@
             <button type="button" class="btn btn-floating btn-sm btn-danger">
               <i class="icon fa-mortar-board"></i>
             </button>
-            <span class="ml-15 font-weight-400">Total Departments</span>
+            <span class="ml-15 font-weight-400">Total Tenants</span>
             <div class="content-text text-center mb-0">
               <i class="text-success icon wb-triangle-down font-size-20">
             </i>
-              <span class="font-size-40 font-weight-100">0</span>
-                <p class="blue-grey-400 font-weight-100 m-0" > <a href="">More</a> </p>
+              <span class="font-size-40 font-weight-100">{{ \App\Models\User::where('role','tenant')->get()->count()}}</span>
+                <p class="blue-grey-400 font-weight-100 m-0" > <a href="{{ route('admin.tenant.list') }}">More</a> </p>
             </div>
           </div>
         </div>
@@ -51,12 +51,12 @@
             <button type="button" class="btn btn-floating btn-sm btn-success">
               <i class="icon wb-book"></i>
             </button>
-            <span class="ml-15 font-weight-400">Total Faculties</span>
+            <span class="ml-15 font-weight-400">Total Landlords</span>
             <div class="content-text text-center mb-0">
               <i class="text-danger icon wb-triangle-up font-size-20">
             </i>
-              <span class="font-size-40 font-weight-100">0</span>
-              <p class="blue-grey-400 font-weight-100 m-0" > <a href="">More</a> </p>
+              <span class="font-size-40 font-weight-100">{{ \App\Models\User::where('role','landlords')->get()->count()}}</span>
+              <p class="blue-grey-400 font-weight-100 m-0" > <a href="{{ route('admin.landlord.list') }}">More</a> </p>
             </div>
           </div>
         </div>
@@ -67,12 +67,12 @@
             <button type="button" class="btn btn-floating btn-sm btn-primary">
               <i class="icon wb-user"></i>
             </button>
-            <span class="ml-15 font-weight-400">Total Students</span>
+            <span class="ml-15 font-weight-400">Total Technicians</span>
             <div class="content-text text-center mb-0">
               <i class="text-danger icon wb-triangle-up font-size-20">
             </i>
-              <span class="font-size-40 font-weight-100">0</span>
-              <p class="blue-grey-400 font-weight-100 m-0" > <a href="">More</a> </p>
+              <span class="font-size-40 font-weight-100">{{ \App\Models\User::where('role','technision')->get()->count()}}</span>
+              <p class="blue-grey-400 font-weight-100 m-0" > <a href="{{ route('admin.technision.list') }}">More</a> </p>
             </div>
           </div>
         </div>

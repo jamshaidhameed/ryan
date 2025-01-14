@@ -110,7 +110,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <img src="assets/img/floor-plans.png" alt="floor-plans" class="img-fluid">
+                                <img src="{{ asset('front/assets/img/floor-plans.png') }}" alt="floor-plans" class="img-fluid">
                             </div>
                         </div>
                         <div class="tab-pane fade " id="three" role="tabpanel" aria-labelledby="three-tab">
@@ -614,52 +614,41 @@
                     </div>
                     <!-- Categories start -->
                     <div class="widget categories">
-                        <h5 class="sidebar-title">Categories</h5>
+                        <h5 class="sidebar-title">Property Types</h5>
                         <ul>
-                            <li><a href="#">Apartments<span>(12)</span></a></li>
-                            <li><a href="#">Houses<span>(8)</span></a></li>
-                            <li><a href="#">Family Houses<span>(23)</span></a></li>
-                            <li><a href="#">Offices<span>(5)</span></a></li>
-                            <li><a href="#">Villas<span>(63)</span></a></li>
-                            <li><a href="#">Other<span>(7)</span></a></li>
+                            @php $types = \App\Models\PropertyTypes::orderBy('name','asc')->where('status',1)->with('properties')->get();
+                            @endphp
+
+                            @foreach($types as $type)
+
+                             @php 
+                              $type_url = "&type=".$type->id;
+                              $property_url = route('properties.list',$type_url);
+                             @endphp
+                            <li><a href="{{ $property_url }}">{{$type->name}}<span>({{ count($type->properties) }})</span></a></li>
+                            @endforeach
+                            
+                            
                         </ul>
                     </div>
                     <!-- Recent posts start -->
                     <div class="widget recent-posts">
                         <h5 class="sidebar-title">Recent Properties</h5>
+                        @php $recent_properties = \App\Models\Properties::orderBy('id','desc')->where('status',1)->limit(3)->get(); @endphp
+                        @foreach($recent_properties as $property)
                         <div class="media mb-4">
-                            <a href="properties-details.html">
-                                <img src="assets/img/property/01.jpg" alt="sub-property">
+                            <a href="{{ route('property.details',$property->slug) }}">
+                                @php $image = !empty($property->property_image) ? explode(",",$property->property_image)[0] : '';@endphp 
+                                <img src="{{ asset('upload/property/'.$image) }}" alt="sub-property">
                             </a>
                             <div class="media-body align-self-center">
                                 <h5>
-                                    <a href="properties-details.html">Beautiful Single Home</a>
+                                    <a href="{{ route('property.details',$property->slug) }}">{{ $property->title_en}}</a>
                                 </h5>
-                                <p>Feb 27, 2020 | &euro;1045,000</p>
+                               <p>{{ date_format(date_create($property->created_at),'M d, Y ') }} | &euro;{{ number_format($property->price,2) }}</p>
                             </div>
                         </div>
-                        <div class="media mb-4">
-                            <a href="properties-details.html">
-                                <img src="assets/img/property/02.jpg" alt="sub-property-2">
-                            </a>
-                            <div class="media-body align-self-center">
-                                <h5>
-                                    <a href="properties-details.html">Sweet Family Home</a>
-                                </h5>
-                                <p>Mar 14, 2020 | &euro;944,000</p>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <a href="properties-details.html">
-                                <img src="assets/img/property/03.jpg" alt="sub-property-3">
-                            </a>
-                            <div class="media-body align-self-center">
-                                <h5>
-                                    <a href="properties-details.html">Real Luxury Villa</a>
-                                </h5>
-                                <p>Apr 14, 2020 | &euro;1420,000</p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <!-- Social list start -->
                     <div class="social-list widget clearfix">
@@ -683,7 +672,7 @@
                         </div>
                     </div>
                     <!-- Financing calculator  start -->
-                    <div class="contact-3 financing-calculator widget-3">
+                    <!-- <div class="contact-3 financing-calculator widget-3">
                         <h5 class="sidebar-title">Mortgage Calculator</h5>
                         <form action="#" method="GET" enctype="multipart/form-data">
                             <div class="form-group">
@@ -706,7 +695,7 @@
                                 <button type="submit" class="btn btn-4 btn-block">Cauculate</button>
                             </div>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

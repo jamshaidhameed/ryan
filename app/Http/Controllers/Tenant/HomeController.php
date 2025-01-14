@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Models\Provinces; 
@@ -233,5 +234,35 @@ class HomeController extends Controller
 
             return redirect()->route('tenant.booking.property.complaints',$request->prop_id);
     }
-    
+     
+    //Change Password 
+    public function change_password(){
+
+        return view('tenant.change-password');
+    }
+    public function change_password_post(Request $request){
+
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'nullable|required_with:password_confirmation|string|confirmed'
+            
+        ]);
+
+        $landlord = User::find(Auth::user()->id);
+
+        if(!Hash::check($request->current_password,$landlord->password)){
+
+            return back()->withErrors(['current_password' => 'Your Current Password is Incorrect'])->withInput();
+        }
+
+        $landlord->password = Hash::make($request->password);
+        $landlord->save();
+
+
+        session()->flash('success','Your Password has been successfully changed');
+
+        return redirect()->back();
+
+
+    }
 }

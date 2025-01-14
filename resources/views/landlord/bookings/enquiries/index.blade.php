@@ -1,28 +1,30 @@
 @extends('landlord.layout.landlord') 
 @section('title')
- Booking Enquiries
+ My Booking Enquiries
 @endsection
 @section('style')
 <style>
-    #province_id {
-        width: 100%; /* Adjust as per your layout */
-        padding: 8px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        background-color: #fff;
-        display: inline-block;
-    }
+    .btn-xs {
+    padding: .072rem .358rem;
+    font-size: .858rem;
+    line-height: 1.5;
+    border-radius: .143rem;
+}
+
+.modal-header .close {
+    padding: 15px;
+    margin: -15px -15px -15px auto;
+}
 </style>
 @endsection
 @section('content')
 <div class="sub-banner">
     <div class="container">
         <div class="breadcrumb-area">
-            <h1>Booking Enquiries</h1>
+            <h1>{{ __('My Booking Enquiries') }}</h1>
             <ul class="breadcrumbs">
-                <li><a href="{{ route('landlord.dashboard') }}">{{ __('Home')}}</a></li>
-                <li class="{{ Route::currentRouteName() == 'landlord.dashboard' ? 'active' : ''}}">{{ __('Booking Enquiries') }}</li>
+                <li><a href="{{ route('tenant.dashboard') }}">{{ __('Home') }}</a></li>
+                <li class="{{ Route::currentRouteName() == 'tenant.properties' ? 'active' : ''}}">{{ __('My Booking Enquiries') }} </li>
             </ul>
         </div>
     </div>
@@ -37,80 +39,72 @@
                 </div>
             </div>
             <div class="col-lg-8 col-md-12 col-sm-12">
-                <div class="my-address contact-2">
+                @if(session()->has('success'))
+                    <div class="alert alert-success">
+                        {{ session()->get('success')}}
+                    </div>
+                @endif
+                <div class="my-properties">
                     
-                    <h3 class="heading-3">{{ __('Booking Enquiries')}}</h3>
-                    @if(session()->has('success'))
-                        <div class="alert alert-success">
-                            {{ session()->get('success')}}
-                        </div>
-                    @endif
-                    <table class="table table-bordered">
+                  <table class="manage-table">
                         <thead>
-                            <tr>
-                                <th class="text-center">S.No</th>
-                                <th class="text-center">Enquiry No</th>
-                                <th class="text-left">Property</th>
-                                <th class="text-left">Tenant</th>
-                                <th class="text-center">Admin Uploaded File</th>
-                                <th class="text-center">My Uploaded File</th>
-                                <th class="text-center">Status</th>
-                                <th></th>
-                            </tr>
+                        <tr>
+                            <th>My Properties</th>
+                            <th></th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
                         </thead>
-                        <tbody>
-                            @foreach($my_enquiries as $enquiry)
-                             <tr>
-                                <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $enquiry->enquiry_no }}</td>
-                                <td class="text-left">{{ $enquiry->property }}</td>
-                                <td class="text-left">{{ $enquiry->tenant}}</td>
-                                <td class="text-center">
-                                    @if(!empty($enquiry->landlord_file_name))
-                                    <a type="button" href="{{ asset('upload/booking/'.$enquiry->landlord_file_name) }}" class="btn btn-info btn-outline btn-sm"><i class="fa fa-download"></i></a>
-                                    @endif
-                                </td>
-                                <td class="text-center">
-                                    @if(!empty($enquiry->landlord_uploaded_file))
-                                    <a type="button" href="{{ asset('upload/booking/'.$enquiry->landlord_uploaded_file) }}" class="btn btn-info btn-outline btn-sm"><i class="fa fa-download"></i></a>
-                                    @endif
-                                </td>
-                                <td class="text-center">
-                                @if($enquiry->status == 'approved')
-                                  <span class="badge badge-success">Approved</span>
-                                @elseif($enquiry->status == 'notapproved')
-                                  <span class="badge badge-warning">Not Approved</span>
-                                @elseif($enquiry->status == 'started')
-                                <span class="badge badge-info">Started</span>
-                                @elseif($enquiry->status == 'end')
-                                <span class="badge badge-danger">Ended</span>
-                                @endif
-                                </td>
-                                <td>
-                                <button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">Actions <span class="caret"></span></button>
-                                <div class="dropdown-menu" aria-labelledby="exampleIconDropdown1" role="menu">
-                                 @if($enquiry->status != 'started')
-                                    <a type="button" class="dropdown-item btn btn-primary btn-outline upload"
-                                        id="{{ $enquiry->id }}" href="{{ $enquiry->id }}">
-                                        <i class="fa fa-file" aria-hidden="true" style="font-size: 15px;margin-right:5px;"></i>Upload File</a>
-                                 @else 
-                                 <a target="_blank" type="button" class="dropdown-item btn btn-danger btn-outline"
-                                    id="delete-type" href="{{ route('landlord.invoices.list',$enquiry->id) }}">
-                                    <i class="fa fa-eye" aria-hidden="true" style="font-size: 15px;margin-right:5px;"></i>Invoices</a>
-                                @endif
-                                    
-                                </div>
-                                </td>
-                             </tr>
-                            @endforeach
+                        <tbody class="responsive-table">
+                        @foreach($property_list as $property)
+                          <tr>
+                            <td class="listing-photoo">
+                                @php $single_image = "";
+                                  if(!empty($property->property_image)){
+                                    $single_image = explode(",",$property->property_image)[0];
+                                  }
+                                @endphp
+                                <img alt="{{$property->title_en}}" src="{{ asset('upload/property/'.$single_image) }}" class="img-fluid">
+                            </td>
+                            <td class="title-container">
+                                <h5><a href="#">{{ $property->title_en }}</a></h5>
+                                <h6><span>${{ number_format($property->price,2) }}</span> / monthly</h6>
+                                <p><i class="flaticon-facebook-placeholder-for-locate-places-on-maps"></i> {{ $property->street_address}} </p>
+                            </td>
+                            <td class="date">
+                                {{ $property->created_at->diffForHumans()}}
+                            </td>
+                            <td class="action">
+                                <ul>
+                                    <li>
+                                        <a href="{{ route('landlord.properties.edit',$property->id) }}"><i class="fa fa-pencil"></i> {{ __('Edit') }}</a>
+                                    </li>
+                                    <!-- <li>
+                                        <a href="#"><i class="fa  fa-eye-slash"></i> Hide</a>
+                                    </li> -->
+                                    <li>
+                                        <a href="{{ route('landlord.properties.delete',$property->id) }}" onclick="return confirm(`{{__('Are you Sure to Delete the Record ?')}}`);" class="delete"><i class="fa fa-remove"></i> Delete</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
+                    <div class="pagination-box text-center">
+                        <nav aria-label="Page navigation example">
+                            {{ $property_list->appends($_GET)->links('vendor.pagination.custom')}}
+                        </nav>
+                    </div>
                 </div>
+
+                
+                
+                
             </div>
         </div>
     </div>
 </div>
-
 <div class="modal fade book-d file-upload" id="modal-info">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -120,14 +114,16 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form action="{{ route('landlord.upload.file') }}" method="post"  enctype="multipart/form-data">
+            <form action="{{ route('tenant.upload.file') }}" method="post"  enctype="multipart/form-data">
                 @csrf 
                 @method('PATCH')
              <input type="hidden" name="e_id" value="">
             <div class="modal-body">
               <div class="form-group">
+                <a href="" class="link">Donwload Contract</a>
                 <label for="" class="form-control-label">Upload File</label>
-                <input type="file" name="landlord_uploaded_file" id="" class="form-control" required>
+                <input type="file" name="tenant_uploaded_file" id="" class="form-control" required>
+                <p class="text-danger"></p>
               </div>
             </div>
             <div class="modal-footer justify-content-end">
@@ -143,14 +139,42 @@
       <!-- /.modal -->
 @endsection
 @section('script')
+<!-- <script>
+    $(document).ready(function(){
+        $('.table').dataTable();
+    });
+</script> -->
 <script>
-$(document).on('click','.upload',function(e){
+    $(document).on('click','.contract-btn',function(e){
 
-    e.preventDefault();
-    debugger;
-    var id = $(this).attr('href');
+        e.preventDefault();
+        debugger;
+        var href = $(this).attr('href'),
+            file_link = '',
+            id = '',
+            signed = '',
+            arr = href.split(',');
+
+         if (arr[0]) {
+            id = arr[0];
+         }
+
+         if (arr[1]) {
+            file_link = arr[1];
+         }
+
+         if (arr[2]) {
+            signed = arr[2];
+         }
+
         $('.file-upload').find('form').find('input[name="e_id"]').val(id);
-    $('.file-upload').modal();
-});
+        $('.file-upload').find('form').find('.link').attr('href',file_link);
+        if (signed == 1) {
+        $('.file-upload').find('form').find('.text-danger').text('Contract Already Signed Donwload to View');
+        $('.file-upload').find('input[name="tenant_uploaded_file"]').prop('disabled', true);
+        $('.file-upload').find('form').find('.btn-primary').prop('disabled', true);
+        }
+        $('.file-upload').modal();
+    });
 </script>
 @endsection

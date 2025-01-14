@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Landlord;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Provinces;
@@ -12,6 +14,7 @@ use App\Models\Properties;
 use App\Models\BookingEnquiries;
 use App\Models\Invoices;
 use App\Mail\PropertyAddMail;
+use App\Models\LandlordContracts;
 use Auth;
 use File; 
 
@@ -367,39 +370,68 @@ class HomeController extends Controller
         return view('landlord.bookings.enquiries.index',compact('my_enquiries'));
     }
 
-    //Upload File for the Enquiry
-    public function upload_file_for_enquiry(Request $request){
-
-        
-        $file = $request->landlord_uploaded_file;
-
-        $enquiry = BookingEnquiries::find($request->e_id);
-
-        if (!empty($file)) {
-            
-            $new_name = rand().'.'.$file->getClientOriginalExtension();
-            if(File::exists(public_path('upload/booking/').$enquiry->landlord_uploaded_file)) {
-                File::delete(public_path('upload/booking/').$enquiry->landlord_uploaded_file);
-            }
-            $file->move(public_path('upload/booking'),$new_name);
-
-            $enquiry->landlord_uploaded_file = $new_name;
-        }
-
-        $enquiry->save();
-
-        session()->flash('success','File Uploaded Successfully');
-
-        return redirect()->route('landlord.booking.enquiries');
-    }
+    
     //Invoices
 
     public function invoices_list($e_id){
         
         $enquiry = BookingEnquiries::where('id',$e_id)->first();
 
-        $invoices = Invoices::where('enquiry_id', $e_id)->with('property')->get();
+        $invoices = Invoices::where(['tenant_contract_id' =>  $e_id,'invoice_type' => 'landlord invoice'])->with('property')->get();
 
         return view('landlord.bookings.invoices.index',compact('invoices','enquiry'));
+    }
+
+    //Change Password 
+    public function change_password(){
+
+        return view('landlord.change-password');
+    }
+    public function change_password_post(Request $request){
+
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'nullable|required_with:password_confirmation|string|confirmed'
+            
+        ]);
+
+        $landlord = User::find(Auth::user()->id);
+
+        if(!Hash::check($request->current_password,$landlord->password)){
+
+            return back()->withErrors(['current_password' => 'Your Current Password is Incorrect'])->withInput();
+        }
+
+        $landlord->password = Hash::make($request->password);
+        $landlord->save();
+
+
+        session()->flash('success','Your Password has been successfully changed');
+
+        return redirect()->back();
+
+
+    }
+
+   public function upload_file_for_enquiry(Request $request){
+        $file = $request->tenant_uploaded_file;
+
+        $contract = LandlordContracts::find($request->e_id);
+
+        $file_name = rand().'.'.$file->getClientOriginalExtension();
+
+        if(File::exists(public_path('upload/booking/').$contract->link)) {
+                File::delete(public_path('upload/booking/').$contract->link);
+            }
+
+         $file->move(public_path('upload/booking'),$file_name);
+
+         $contract->signed_at = date('Y-m-d H:i:s');
+
+         $contract->save();
+
+        session()->flash('success','File Uploaded Successfully');
+
+        return redirect()->route('landlord.properties');
     }
 }

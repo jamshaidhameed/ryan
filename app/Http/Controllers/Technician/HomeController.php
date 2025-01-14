@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Technician;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\User;
@@ -186,7 +187,36 @@ class HomeController extends Controller
 
         return $pdf->download('Issue-Ticket-Invoice-'.$ticket->id.'.pdf');
     }
-    public function change_password(Request $request){
+    //Change Password 
+    public function change_password(){
+
+        return view('technician.password_change');
+    }
+    public function change_password_post(Request $request){
+
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'nullable|required_with:password_confirmation|string|confirmed'
+            
+        ]);
+
+        $landlord = User::find(Auth::user()->id);
+
+        if(!Hash::check($request->current_password,$landlord->password)){
+
+            return back()->withErrors(['current_password' => 'Your Current Password is Incorrect'])->withInput();
+        }
+
+        $landlord->password = Hash::make($request->password);
+        $landlord->save();
+
+
+        session()->flash('success','Your Password has been successfully changed');
+
+        return redirect()->back();
+
 
     }
+
+
 }

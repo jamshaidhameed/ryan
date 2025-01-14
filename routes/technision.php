@@ -16,4 +16,7 @@ Route::middleware(['auth','url_redirect', 'redirect_if_not_authenticated'])
 
         Route::get('/issue/receipt/download/{id}',[App\Http\Controllers\Technician\HomeController::class,'download_issue_receipt'])->name('issue.receipt.download');
 
+     Route::get('/password/change',[App\Http\Controllers\Technician\HomeController::class,'change_password'])->name('password.change');
+     Route::post('/password/change/post',[App\Http\Controllers\Technician\HomeController::class,'change_password_post'])->name('password.change.post');
+
     });

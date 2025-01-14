@@ -45,9 +45,9 @@
                         <p>{{ $property->street_address}}</p>
                         <div class="d-flex justify-content-end mb-2">
                         @if($property->status == 1)
-                         <a href="" class="btn btn-warning float-right"><i class="icon wb-rubber"></i>Un Publish</a>
+                         <a href="{{ route('admin.properties.approve',[$property->id,0]) }}" class="btn btn-warning float-right" onClick="return confirm(`{{ __ ('Are you sure to Un Publish the property ? ')}}`);"><i class="icon wb-rubber"></i>Un Publish</a>
                         @else 
-                         <a href="" class="btn btn-success float-right"><i class="icon wb-check-circle"></i>Publish</a>
+                         <a href="{{ route('admin.properties.approve',[$property->id,1]) }}" class="btn btn-success float-right" onClick="return confirm(`{{ __ ('Are you sure to Publish the property ? ')}}`);"><i class="icon wb-check-circle"></i>Publish</a>
                         @endif
                         </div>
                         </div>
@@ -127,7 +127,7 @@
                                    <a href="{{ route('admin.landlord.invoices',$landlord_contract->id) }}" class="btn btn-primary btn-outline landlord-invoices">Invoices</a>
                                 </div>
                                 <div class="col col-md-4">
-                                  <a href="" class="btn btn-primary btn-outline">Terminate Contract</a>
+                                  <a href="" class="btn btn-primary btn-outline btn-landlord-terminate" data-id="{{ $landlord_contract->id}}">Terminate Contract</a>
                                 </div>
                                 
                             </div>
@@ -208,7 +208,7 @@
                                    <a href="" class="btn btn-primary btn-outline">Commission Details</a>
                                 </div>
                                 <div class="col col-md-3"><a href="{{ route('admin.property.enquiries',$property->id) }}" class="btn btn-primary btn-outline tenant-quries">Tenant Quries</a> <br>
-                                  <a href="" class="btn btn-primary btn-outline">Terminate Contract</a>
+                                  <a href="" class="btn btn-primary btn-outline btn-tenant-terminate"  data-id="{{ $tenant_contract->id}}">Terminate Contract</a>
                                 </div>
                                 <div class="col col-md-3">
                                     <a href="" class="btn btn-primary btn-outline">Inspections</a>
@@ -453,7 +453,69 @@
         </div>
     </div>
 </div>
-   <!-- End Landlord Invoices -->
+<!-- End Landlord Invoices -->
+
+<!-- Tenant Contract Termination -->
+ <div class="modal fade tenant-terminate" id="examplePositionTop" aria-hidden="true" aria-labelledby="examplePositionTop" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-top">
+    <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+         Tenant Contract Termination
+        </h4>
+        </div>
+        <form class="form-horizontal" id="exampleConstraintsForm" autocomplete="off" action="{{ route('admin.tenant.contract.terminate') }}" method="post">
+         @csrf 
+         <input type="hidden" name="e_id" value="">
+         <div class="modal-body">
+           <div class="form-group">
+            <label for="" class="form-control-label">Termination Reason</label>
+            <textarea name="termination_reason" id="" class="form-control" data-fv-notempty="true"></textarea>
+           </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Terminate</button>
+        </div>
+        </form>
+        
+    </div>
+    </div>
+</div>
+ <!-- End Tenant -->
+
+ <!-- Landlord Contract Termination -->
+  <div class="modal fade landlord-terminate" id="examplePositionTop" aria-hidden="true" aria-labelledby="examplePositionTop" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-top">
+    <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+         Landlord Contract Termination
+        </h4>
+        </div>
+        <form class="form-horizontal" id="exampleConstraintsForm" autocomplete="off" action="{{ route('admin.landlord.contract.terminate') }}" method="post">
+         @csrf 
+         <input type="hidden" name="e_id" value="">
+         <div class="modal-body">
+           <div class="form-group">
+            <label for="" class="form-control-label">Termination Reason</label>
+            <textarea name="termination_reason" id="" class="form-control" data-fv-notempty="true"></textarea>
+           </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Terminate</button>
+        </div>
+        </form>
+        
+    </div>
+    </div>
+</div>
+ <!-- End Landlord -->
 @endsection
 @section('script')
 <script src="{{ asset('backend/custom/script.js') }}"></script>

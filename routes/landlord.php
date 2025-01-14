@@ -23,4 +23,11 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
      //Booking Invoices 
      Route::get('/booking/invoices/{e_id}',[App\Http\Controllers\Landlord\HomeController::class,'invoices_list'])->name('invoices.list');
 
+     Route::get('/password/change',[App\Http\Controllers\Landlord\HomeController::class,'change_password'])->name('password.change');
+     Route::post('/password/change/post',[App\Http\Controllers\Landlord\HomeController::class,'change_password_post'])->name('password.change.post');
+
+     Route::get('/booked/properties',[App\Http\Controllers\Landlord\HomeController::class,'booked_properties'])->name('booked.properties');
+
+     Route::patch('/upload/file',[App\Http\Controllers\Landlord\HomeController::class,'upload_file_for_enquiry'])->name('upload.file');
+
     });

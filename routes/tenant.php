@@ -22,4 +22,7 @@ Route::middleware(['auth','url_redirect', 'redirect_if_not_authenticated'])
       //Single Tenant Contract 
       Route::get('/booking/tenant/contract/{id}',[App\Http\Controllers\Tenant\HomeController::class,'single_tenant_contract'])->name('single.tenant.contract');
 
+      Route::get('/password/change',[App\Http\Controllers\Tenant\HomeController::class,'change_password'])->name('change.password');
+     Route::post('/password/change/post',[App\Http\Controllers\Tenant\HomeController::class,'change_password_post'])->name('password.change.post');
+
     });

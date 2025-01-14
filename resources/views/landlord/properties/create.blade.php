@@ -8,6 +8,26 @@
 @endsection
 @section('style')
 <link rel="stylesheet" href="{{ asset('summernote/summernote.css')}}">
+<style>
+        /* Customize Summernote Toolbar Font */
+        .note-toolbar {
+            font-family: 'Arial', sans-serif; /* Change font family */
+            font-size: 14px;                 /* Adjust font size */
+        }
+
+        /* Optionally customize button font */
+        .note-btn {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+
+
+        input:focus, select:focus {
+            border: 2px solid #1547d6; /* Green border */
+            background-color: #1547d6; /* Light green background */
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Subtle glow effect */
+        }
+    </style>
 @endsection
 @section('content')
 <div class="sub-banner">
@@ -32,7 +52,7 @@
             </div>
             <div class="col-lg-9 col-md-12 col-sm-12">
                 <div class="my-properties">
-                    <form action="{{ isset($property) ? route('landlord.properties.update',$property->id) : route('landlord.properties.store') }}" method="post" enctype="multipart/form-data">
+               <form action="{{ isset($property) ? route('landlord.properties.update',$property->id) : route('landlord.properties.store') }}" method="post" enctype="multipart/form-data" autocomplete="off" id="horizontalForm">
                         @csrf
                         <div class="my-address contact-2">
                      <div class="col-md-12">
@@ -50,7 +70,7 @@
                             <!-- First Column Start -->
                              <div class="form-group">
                                 <label for="" class="form-control-label">{{ __('Price (in mons.)') }} <sup><span class="text-danger">*</span></sup></label>
-                                <input type="number" name="price" id="price" class="form-control" value="{{ isset($property) ? $property->price : old('price') }}">
+                                <input type="number" name="price" id="price" class="form-control" value="{{ isset($property) ? $property->price : old('price') }}" min="0">
                              </div>
                              <div class="form-group">
                                 <label for="" class="form-control-label">{{ __('Province') }}</label>
@@ -75,15 +95,15 @@
                              </div>
                              <div class="form-group">
                                 <label for="" class="form-control-label">{{ __('Bathrooms') }} </label>
-                                <input type="number" name="bathrooms" id="" class="form-control" value="{{ isset($property) ? $property->bathrooms : old('bathrooms') }}">
+                                <input type="number" name="bathrooms" id="" class="form-control" value="{{ isset($property) ? $property->bathrooms : old('bathrooms') }}" min="0">
                              </div>
                              <div class="form-group">
                                 <label for="" class="form-control-label">{{ __('Garages') }} </label>
-                                <input type="number" name="garages" id="" class="form-control" value="{{ isset($property) ? $property->bathrooms : old('bathrooms') }}">
+                                <input type="number" name="garages" id="" class="form-control" value="{{ isset($property) ? $property->bathrooms : old('bathrooms') }}" min="0">
                              </div>
                              <div class="form-group">
                                 <label for="" class="form-control-label">{{ __('Toilets') }} </label>
-                                <input type="number" name="toilets" id="" class="form-control" value="{{ isset($property) ? $property->toilets : old('toilets') }}">
+                                <input type="number" name="toilets" id="" class="form-control" value="{{ isset($property) ? $property->toilets : old('toilets') }}" min="0">
                              </div>
                              <!-- First Column End -->
                         </div>
@@ -108,19 +128,19 @@
                              </div>
                              <div class="form-group">
                                 <label for="" class="form-control-label">{{ __('Contract Period (in mons)') }} <sup><span class="text-danger">*</span></sup></label>
-                                <input type="number" name="contract_period" id="" class="form-control" value="{{ isset($property) ? $property->contract_period : old('contract_period') }}">
+                                <input type="number" name="contract_period" id="" class="form-control" value="{{ isset($property) ? $property->contract_period : old('contract_period') }}" min="0">
                              </div>
                              <div class="form-group">
                                 <label for="" class="form-control-label">{{ __('Bedrooms') }}</label>
-                                <input type="number" name="bedrooms" id="" class="form-control" value="{{ isset($property) ? $property->bedrooms : old('bedrooms') }}">
+                                <input type="number" name="bedrooms" id="" class="form-control" value="{{ isset($property) ? $property->bedrooms : old('bedrooms') }}" min="0">
                              </div>
                              <div class="form-group">
                                 <label for="" class="form-control-label">{{ __('Kitchens') }}</label>
-                                <input type="number" name="kitchens" id="" class="form-control" value="{{ isset($property) ? $property->kitchens : old('kitchens') }}">
+                                <input type="number" name="kitchens" id="" class="form-control" value="{{ isset($property) ? $property->kitchens : old('kitchens') }}" min="0">
                              </div>
                                <div class="form-group">
                                 <label for="" class="form-control-label">{{ __('Parkings') }}</label>
-                                <input type="number" name="parkings" id="" class="form-control" value="{{ isset($property) ? $property->parkings : old('parkings') }}">
+                                <input type="number" name="parkings" id="" class="form-control" value="{{ isset($property) ? $property->parkings : old('parkings') }}" min="0">
                              </div>
                              <div class="form-group">
                                 <label for="" class="form-control-label">{{ __('Video Link') }}</label>
@@ -190,7 +210,34 @@
 <script src="{{ asset('summernote/summernote.js')}}"></script>
 <script>
 $(document).ready(function(){
-    $('.summernote').summernote();
+    $('.summernote').summernote({
+      height: 200, // Set editor height
+         toolbar: [
+            ['style', ['bold', 'italic', 'underline']], // Style options
+            ['para', ['ul', 'ol', 'paragraph']],       // Paragraph options
+            ['insert', ['link', 'picture']],          // Insert options
+         ]
+    });
 });
 </script>
+
+ <!-- <script>
+   $(document).ready(function () {
+      const fields = $("#horizontalForm input,select"); // Select all input fields in the form
+
+      fields.on("keydown", function (e) {
+            if (e.key === "Tab") {
+               e.preventDefault(); // Prevent the default tab behavior
+
+               const currentIndex = fields.index(this); // Get the index of the current input
+               const nextIndex = e.shiftKey 
+                  ? (currentIndex - 1 + fields.length) % fields.length // Navigate backward with Shift+Tab
+                  : (currentIndex + 1) % fields.length; // Navigate forward
+
+               fields.eq(nextIndex).focus(); // Focus the next input field
+            }
+      });
+   });
+   </script> -->
+
 @endsection

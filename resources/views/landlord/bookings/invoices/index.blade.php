@@ -51,9 +51,8 @@
                     @foreach($invoices as $invoice)
                      <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
-                        <td class="text-center">{{ date_format(date_create($invoice->from_date),'d-M-y').' / '.date_format(date_create($invoice->till_date),'d-M-y') }}</td>
+                        <td class="text-center">{{ date_format(date_create($invoice->from_date),'M-y').' / '.date_format(date_create($invoice->till_date),'M-y') }}</td>
                         <td class="text-center">{{ number_format($invoice->amount,2) }}</td>
-                        <td class="text-center">{{ number_format($invoice->commision,2) }}</td>
                         <td class="text-center">
                             @if($invoice->status == 'paid')
                              <span class="badge badge-success font-weight-100">Paid</span> <br>

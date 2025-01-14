@@ -101,4 +101,10 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
        Route::post('/issue/ticket/pay',[App\Http\Controllers\Admin\HomeController::class,'issue_ticket_payment'])->name('issue.ticket.pay');
        Route::get('/issue/ticket/receipt/{id}',[App\Http\Controllers\Admin\HomeController::class,'issue_ticket_receipt'])->name('ticket.receipt');
 
+       //Contract Termination 
+
+       Route::post('/tenant/contract/terminate',[App\Http\Controllers\Admin\HomeController::class,'terminate_tenant_contract'])->name('tenant.contract.terminate'); 
+
+       Route::post('/lanldord/contract/terminate',[App\Http\Controllers\Admin\HomeController::class,'landlord_tenant_contract'])->name('landlord.contract.terminate');
+
     });

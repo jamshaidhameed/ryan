@@ -23,7 +23,7 @@
                             </li> -->
                            
                             <li>
-                                <a href="change-password.html">
+                                <a href="{{ route('tenant.change.password') }}"   class="{{ Route::currentRouteName() == 'tenant.change.password' ? 'active' : ''}}">
                                     <i class="flaticon-locked-padlock"></i>Change Password
                                 </a>
                             </li>

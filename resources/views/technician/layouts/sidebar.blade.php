@@ -23,14 +23,14 @@
         </li> -->
        
         <li>
-            <a href="change-password.html">
+            <a href="{{ route('technision.password.change') }}" class="{{ Route::currentRouteName() == 'technision.password.change' ? 'active' : ''}}">
                 <i class="flaticon-locked-padlock"></i>Change Password
             </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="index.html" class="border-bto2">
                 <i class="flaticon-logout"></i>Log Out
             </a>
-        </li>
+        </li> -->
     </ul>
 </div>
