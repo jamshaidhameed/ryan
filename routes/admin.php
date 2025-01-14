@@ -107,4 +107,11 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
 
        Route::post('/lanldord/contract/terminate',[App\Http\Controllers\Admin\HomeController::class,'landlord_tenant_contract'])->name('landlord.contract.terminate');
 
+       //Commision Paid
+
+       Route::post('tenant/booking/commision/pay',[App\Http\Controllers\Admin\HomeController::class,'pay_commision_amount'])->name('commission.pay');
+
+       //Admin list
+       Route::get('/admin/list',[App\Http\Controllers\Admin\HomeController::class,'admin_list'])->name('admin.list');
+
     });

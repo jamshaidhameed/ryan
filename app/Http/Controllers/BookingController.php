@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\BookingEnquiries;
 use App\Models\Properties;
@@ -12,6 +13,7 @@ use App\Mail\InterestedProperty;
 use Session;
 use Auth;
 use URL;
+use Redirect;
 
 class BookingController extends Controller
 {
@@ -48,13 +50,21 @@ class BookingController extends Controller
                 );
             // Email To Admins
 
-            foreach ($$admins as $ad) {
+            foreach ($admins as $ad) {
                 
                 Mail::to($ad->email)->send(new InterestedProperty($property_info));
             }
             session()->flash('success', 'Booking Enquiry has been created successfully');
             return redirect()->route('tenant.booking.enquiries');
         }else{
+
+            $user_exist = DB::select("SELECT * FROM `users` WHERE email = '".$request->email."' AND role != 'tenant'");
+
+            if (count($user_exist) > 0 ) {
+                
+                return Redirect::back()->withErrors(__('Sorry ! through this email address you can not place booking enquiry. please use other email'))->withInput();
+                exit();
+            }
 
             $old_data = User::where('email',$request->email)->first();
             $user_id = 0;
@@ -91,7 +101,7 @@ class BookingController extends Controller
 
         // Email To Admins
 
-        foreach ($$admins as $ad) {
+        foreach ($admins as $ad) {
             
             Mail::to($ad->email)->send(new InterestedProperty($property_info));
         }

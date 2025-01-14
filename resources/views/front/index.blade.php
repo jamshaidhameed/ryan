@@ -421,10 +421,10 @@ Rayan Rent and Co
                     <div class="detail">
                         <div class="heading">
                             <h3>
-                                <a href="properties-details.html">{{ $latest->title_en }}</a>
+                                <a href="{{ route('property.details',$latest->slug) }}">{{ $latest->title_en }}</a>
                             </h3>
                             <div class="location">
-                                <a href="properties-details.html">
+                                <a href="{{ route('property.details',$latest->slug) }}">
                                     <i class="flaticon-facebook-placeholder-for-locate-places-on-maps">{{ $latest->street_address }}
                                     </i>
                                 </a>

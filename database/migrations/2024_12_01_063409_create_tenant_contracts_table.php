@@ -25,7 +25,7 @@ return new class extends Migration
             $table->timestamp('verified_at')->nullable();
             $table->float('commission_amount');
             $table->timestamp('commission_paid_at')->nullable();
-            $table->timestamp('commission_verified_by')->nullable();
+            $table->unsignedBigInteger('commission_verified_by')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('contract_verified_by')->nullable();
             $table->integer('persons')->default('1');

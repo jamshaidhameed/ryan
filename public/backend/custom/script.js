@@ -4,7 +4,7 @@ $(document).on("click", ".tenant-quries", function (e) {
 
   var url = $(this).attr("href"),
     html_content = "",
-    selected = "";
+    selected = $(this).data("selected");
 
   $.ajax({
     url: url,
@@ -12,7 +12,7 @@ $(document).on("click", ".tenant-quries", function (e) {
     dataType: "json",
     success: function (data) {
       if (data) {
-        selected = data.selected;
+        // selected = data.selected;
 
         $.each(data.all, function () {
           var row = this;
@@ -38,10 +38,10 @@ $(document).on("click", ".tenant-quries", function (e) {
               '<td><span class="badge badge-success font-weight-100">Registered</span></td>';
           }
 
-          if (selected && selected.id == row.id) {
+          if (selected == 1) {
             html_content +=
               '<td><a type="button" class="btn btn-primary btn-sm btn-outline disabled" href="">Choose</a></td>';
-          } else if (!selected) {
+          } else if (selected == 0) {
             html_content +=
               '<td><a type="button" class="btn btn-primary btn-sm btn-outline btn-choose" data-property="' +
               row.property_id +
@@ -50,16 +50,17 @@ $(document).on("click", ".tenant-quries", function (e) {
               '" data-eid="' +
               row.id +
               '" href="" data-dismiss="modal">Choose</a></td>';
-          } else {
-            html_content +=
-              '<td><a type="button" class="btn btn-primary btn-sm btn-outline disabled" data-property="' +
-              row.property_id +
-              '" data-tenant="' +
-              row.tenant_id +
-              '" data-eid="' +
-              row.id +
-              '" href="" data-dismiss="modal">Choose</a></td>';
           }
+          // else {
+          //   html_content +=
+          //     '<td><a type="button" class="btn btn-primary btn-sm btn-outline disabled" data-property="' +
+          //     row.property_id +
+          //     '" data-tenant="' +
+          //     row.tenant_id +
+          //     '" data-eid="' +
+          //     row.id +
+          //     '" href="" data-dismiss="modal">Choose</a></td>';
+          // }
 
           $(".tent-modal").find("table tbody").empty();
           $(".tent-modal").find("table tbody").html(html_content);
@@ -345,4 +346,36 @@ $(document).on("click", ".btn-landlord-terminate", function (e) {
 
   $(".landlord-terminate").find("form").find('input[name="e_id"]').val(id);
   $(".landlord-terminate").modal("show");
+});
+
+//Commision Details
+$(document).on("click", ".btn-commision-details", function (e) {
+  e.preventDefault();
+  var id = $(this).data("id"),
+    verified = $(this).data("verified"),
+    amount = $(this).data("amount");
+  $(".commision-details").find("form").find('input[name="e_id"]').val(id);
+  $(".commision-details").find("form").find('input[name="amount"]').val(amount);
+  if (verified == "yes") {
+    $(".commision-details")
+      .find("form")
+      .find('input[name="amount"]')
+      .prop("disabled", true);
+    $(".commision-details")
+      .find("form")
+      .find("#payment-status")
+      .html('<span class="badge badge-success font-weight-100">Paid</span>');
+    $(".commision-details")
+      .find("form")
+      .find(".btn-commision")
+      .text("Already paid")
+      .prop("disabled", true);
+  } else {
+    $(".commision-details")
+      .find("form")
+      .find("#payment-status")
+      .html('<span class="badge badge-danger font-weight-100">Not paid</span>');
+    $(".commision-details").find("form").find(".btn-commision").text("Pay");
+  }
+  $(".commision-details").modal("show");
 });

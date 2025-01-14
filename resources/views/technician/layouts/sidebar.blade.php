@@ -1,7 +1,7 @@
    <div class="header clearfix">
     <h2>{{ Auth::user()->first_name." ".Auth::user()->last_name }}</h2>
     <h4>Technician</h4>
-    <img src="{{ !empty(Auth::user()->photo) ? asset('upload/landlord/'.Auth::user()->photo) : asset('upload/no_image.png') }}" alt="avatar" class="img-fluid profile-img">
+    <img src="{{ !empty(Auth::user()->photo) ? asset('upload/technician/'.Auth::user()->photo) : asset('upload/no_image.png') }}" alt="avatar" class="img-fluid profile-img">
 </div>
 <!-- Detail -->
 <div class="detail clearfix">

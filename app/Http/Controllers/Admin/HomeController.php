@@ -254,7 +254,20 @@ class HomeController extends Controller
 
         $enquiry = BookingEnquiries::where('id',$id)->with(['tenant','property'])->first();
 
-        $landlord_contract = LandlordContracts::orderBy('id','desc')->where(['property_id' => $enquiry->property->id,'terminated_on' => null,'expired_at' => ' < '. date('Y-m-d')])->first();
+        // $landlord_contract = LandlordContracts::orderBy('id','desc')->where(['property_id' => $enquiry->property->id,'terminated_on' => null,'expired_at' => ' < '. date('Y-m-d')])->first();
+
+        $l_contracts = DB::select("SELECT * FROM `landlord_contracts` WHERE expired_at >= '".date('Y-m-d')."' AND property_id = ".$enquiry->property_id." AND terminated_on IS NULL");
+
+        $landlord_contract = null;
+
+        if (count($l_contracts) > 0) {
+            
+            $landlord_contract = $l_contracts[0];
+        }else {
+             $landlord_contract =null;
+        }
+
+
 
         return response()->json(['enquiry' => $enquiry,'landlord_contract' => $landlord_contract]);
     }
@@ -313,6 +326,13 @@ class HomeController extends Controller
 
          $contract_code = '';
 
+         $commission_verified_by = null;
+
+         if (!empty($commision_paid_at)) {
+            
+            $commission_verified_by = Auth::user()->id;
+         }
+
          do{
                 $v_code = rand(10000000,12345678);
                 $contract_code = $v_code;
@@ -333,7 +353,7 @@ class HomeController extends Controller
                     'expired_at' => $next_four_months->format('Y-m-t H:i:s'),
                     'commission_amount' => $request->commission_amount,
                     'commission_paid_at' => $commision_paid_at,
-                    'commission_verified_by' => !empty($commision_paid_at) ? Auth::user()->id : null,
+                    'commission_verified_by' => $commission_verified_by,
                     'created_by' => Auth::user()->id,
                     'persons' => $request->persons
                 ]
@@ -442,6 +462,29 @@ class HomeController extends Controller
     }
     public function update_type(Request $request,string $id){
 
+         $request->validate(
+            [
+                'name' => 'required',
+                'status' => 'required',
+            ]
+            );
+
+            $slug = Str::slug($request->name);
+
+            $if_exist = PropertyTypes::where('name',$request->name)->first();
+            if (!empty($if_exist)) {
+                return Redirect::back()->withErrors('Sorry Property Type with the given name already exists')->withInput();
+            }
+
+             PropertyTypes::where('id',$id)->update(
+            [
+                'name' => $request->name,
+                'slug' => $slug,
+                'status' => $request->status
+            ]
+            );
+        session()->flash('success','Property Type Added Successfully');
+        return redirect()->route('admin.property.types.list');
     }
     public function delete_type($id){
 
@@ -1135,7 +1178,9 @@ class HomeController extends Controller
             'chroot' => public_path()
         ]);
 
-        return $pdf->download('Issue-Ticket-Invoice-'.$ticket->id.'.pdf');
+        $ticket_no = rand(10000000,12345678).date('Y-m-d H:i:s');
+
+        return $pdf->download('Issue-Ticket-Invoice-'.$ticket_no.'.pdf');
     }
 
     //Terminate Tenant Contract 
@@ -1190,6 +1235,41 @@ class HomeController extends Controller
 
         return redirect()->back();
 
+    }
+
+    public function pay_commision_amount(Request $request){
+
+       $request->validate(
+        [
+            'e_id' => 'required',
+            'amount' => 'required',
+        ]
+        );
+
+        $tenant_contract = TenantContracts::find($request->e_id);
+
+        if (!empty($tenant_contract)) {
+            
+            $tenant_contract->commission_paid_at = date('Y-m-d H:i:s');
+            $tenant_contract->commission_verified_by = Auth::user()->id;
+            $tenant_contract->save();
+            $property = Properties::find($tenant_contract->property_id);
+            session()->flash('success','Commision Amount Paid Successfully');
+            if (!empty($property)) {
+               
+                return redirect()->route('admin.property.details',$property->slug);
+
+            }
+        }
+    }
+
+    //Admin list
+
+    public function admin_list(){
+
+        $admin_list = User::where('role','admin')->get();
+
+        return view('admin.admin_list',compact('admin_list'));
     }
     
 }

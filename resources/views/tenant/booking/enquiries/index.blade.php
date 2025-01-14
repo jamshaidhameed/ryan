@@ -72,10 +72,17 @@
                                 <p><i class="flaticon-facebook-placeholder-for-locate-places-on-maps"></i> {{ $enquiry->property->street_address}} </p>
                             </td>
                             <td class="date">
-                                @if($enquiry->status == 1)
-                                 <span class="badge badge-danger font-weight-100">Verified</span>
-                                @else
-                                 <span class="badge badge-danger font-weight-100">Not Verified</span>
+
+                                @php $expiry = date_format(date_create($enquiry->expired_at),'Y-m-d'); @endphp
+
+                                @if(date('Y-m-d') > $expiry && empty($enquiry->terminated_on))
+                                  <span class="badge badge-danger font-weight-100">Expired</span>
+                                @elseif(!empty($enquiry->terminated_on))
+                                 <span class="badge badge-danger font-weight-100">Terminated</span>
+                                @else 
+
+                                <span class="badge badge-success font-weight-100">Active</span>
+
                                 @endif
 
                             </td>
@@ -93,12 +100,16 @@
                                     </a>
                                         
                                     </li>
+                                    @php $expiry = date_format(date_create($enquiry->expired_at),'Y-m-d'); @endphp
+
+                                    @if(date('Y-m-d') < $expiry && empty($enquiry->terminated_on))
                                     <li>
                                         <a target="_blank" href="{{ route('tenant.booking.invoices',$enquiry->id)}}" class="delete"><i class="fa fa-eye"></i> Invoices</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('tenant.booking.property.complaints',$enquiry->id) }}" class="delete"><i class="fa fa-eye"></i> Complaints </a>
                                     </li>
+                                   @endif
                                 </ul>
                             </td>
                         </tr>

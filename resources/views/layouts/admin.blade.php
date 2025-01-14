@@ -340,6 +340,16 @@
                  
               </a>
             </li>
+            <!-- Admin List -->
+             <li class="site-menu-item {{ Route::currentRouteName() == 'admin.admin.list' ? 'active' : ''}}">
+                <a href="{{ route('admin.admin.list') }}">
+                  <!-- <i class="site-menu-icon wb-users" aria-hidden="true"></i> -->
+                   <i class="icon fa-user-secret" aria-hidden="true" style="font-size: 15px;margin-right:10px;"></i>
+                  <span class="site-menu-title">Admin List</span>
+                 
+              </a>
+            </li>
+             <!-- End Admin List -->
           </ul>
           <!--  -->
         </div>

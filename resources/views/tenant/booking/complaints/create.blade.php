@@ -55,7 +55,16 @@ Issue Ticket
                             <div class="col col-md-6">
                                 <div class="form-group">
                                     <label for="" class="form-control-label">Property</label>
-                                    @php $property = \App\Models\Properties::find($e_id); @endphp
+                                    @php 
+                                       $tenant_contract = \App\Models\TenantContracts::find($e_id);
+                                        $property = null;
+                                        if(!empty($tenant_contract)){
+
+                                            $property = \App\Models\Properties::find($tenant_contract->property_id); 
+                                            
+                                        }
+                                    @endphp
+                                       
                                     <select name="property_id" id="" class="form-control" data-fv-notempty="true">
                                         <option value="{{ $property->id }}">{{ $property->title_en }}</option>
                                     </select>

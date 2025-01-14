@@ -310,7 +310,6 @@ class HomeController extends Controller
                 'postcode' => $request->postcode,
                 'city' => $request->city,
                 'street_address' => $request->street_address,
-                'status' => 0,
                 'features' => !empty($request->features) && count($request->features) > 0 ? implode(",",$request->features) : '',
                 'available_from' => !empty($request->available_from) ? date_format(date_create($request->available_from),'Y-m-d') : '',
                 'area' => $request->area,

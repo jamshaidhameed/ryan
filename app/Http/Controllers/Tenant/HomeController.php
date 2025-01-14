@@ -158,7 +158,7 @@ class HomeController extends Controller
         
         $enquiry = BookingEnquiries::where('id',$e_id)->first();
 
-        $invoices = Invoices::where('enquiry_id', $e_id)->with('property')->get();
+        $invoices = Invoices::where(['tenant_contract_id' =>  $e_id,'invoice_type' => 'tenant invoice'])->with('property')->get();
 
         return view('tenant.booking.invoices.index',compact('enquiry','invoices'));
     }

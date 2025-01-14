@@ -582,24 +582,35 @@
                     </div>
                     <div class="widget search-area advanced-search as">
                         <h5>{{ __('Booking Form') }}</h5>
+                         @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="list-group">
+                            @foreach($errors->all() as $error)
+                                <li class="list-group-item text-danger">
+                                    {{ $error }}
+                                </li>
+                            @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         <form action="{{ route('property.book') }}" method="post">
                             @csrf 
                             <input type="hidden" name="property_id" value="{{ $property_info->id }}">
                             <div class="form-group">
                                 <label for="" class="form-control-label">{{ __('First Name') }}</label>
-                                <input type="text" class="form-control" name="first_name" value="{{ !empty(Auth::user()->first_name) && Auth::user()->role == 'tenant' ? Auth::user()->first_name : '' }}" placeholder="{{ __('Enter Your First Name') }}">
+                                <input type="text" class="form-control" name="first_name" value="{{ !empty(Auth::user()->first_name) && Auth::user()->role == 'tenant' ? Auth::user()->first_name : old('first_name') }}" placeholder="{{ __('Enter Your First Name') }}">
                             </div>
                              <div class="form-group">
                                 <label for="" class="form-control-label">{{ __('Last Name') }}</label>
-                                <input type="text" class="form-control" name="last_name" value="{{ !empty(Auth::user()->first_name) && Auth::user()->role == 'tenant' ? Auth::user()->last_name : '' }}" placeholder="{{ __('Enter Your Last Name') }}">
+                                <input type="text" class="form-control" name="last_name" value="{{ !empty(Auth::user()->first_name) && Auth::user()->role == 'tenant' ? Auth::user()->last_name : old('last_name') }}" placeholder="{{ __('Enter Your Last Name') }}">
                             </div>
                             <div class="form-group">
                                 <label for="" class="form-control-label">{{ __('Email') }}</label>
-                                <input type="email" class="form-control" name="email" value="{{ !empty(Auth::user()->email) && Auth::user()->role == 'tenant' ? Auth::user()->email : '' }}" placeholder="{{ __('Enter Your Email Address') }}">
+                                <input type="email" class="form-control" name="email" value="{{ !empty(Auth::user()->email) && Auth::user()->role == 'tenant' ? Auth::user()->email : old('email') }}" placeholder="{{ __('Enter Your Email Address') }}">
                             </div>
                             <div class="form-group">
                                 <label for="" class="form-control-label">{{ __('Telephone Number') }}</label>
-                                <input type="text" class="form-control" name="phone" value="{{ !empty(Auth::user()->phone) && Auth::user()->role == 'tenant' ? Auth::user()->phone : '' }}" placeholder="{{ __('Enter Your Telephone Number') }}">
+                                <input type="text" class="form-control" name="phone" value="{{ !empty(Auth::user()->phone) && Auth::user()->role == 'tenant' ? Auth::user()->phone : old('phone')}}" placeholder="{{ __('Enter Your Telephone Number') }}">
                             </div>
                             <div class="form-group">
                                 <label for="" class="form-control-label">{{ __('Enquiry Message') }}</label>

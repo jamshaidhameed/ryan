@@ -55,7 +55,7 @@
             <div class="content-text text-center mb-0">
               <i class="text-danger icon wb-triangle-up font-size-20">
             </i>
-              <span class="font-size-40 font-weight-100">{{ \App\Models\User::where('role','landlords')->get()->count()}}</span>
+              <span class="font-size-40 font-weight-100">{{ \App\Models\User::where('role','landlord')->get()->count()}}</span>
               <p class="blue-grey-400 font-weight-100 m-0" > <a href="{{ route('admin.landlord.list') }}">More</a> </p>
             </div>
           </div>
@@ -112,7 +112,7 @@
       <!-- End Third Left -->
 
       <!-- Third Right -->
-      <!-- <div class="col-lg-4" id="ecommerceRevenue">
+      <div class="col-lg-12" id="ecommerceRevenue">
         <div class="card card-shadow text-center pt-10">
           <h3 class="card-header card-header-transparent blue-grey-700 font-size-14 mt-0">REVENUE</h3>
           <div class="card-block bg-white">
@@ -143,9 +143,9 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
       <!-- End Third Right -->
-      <!-- End Third Row -->
+      <!-- End Third Row-->
       <div class="row">
        
         

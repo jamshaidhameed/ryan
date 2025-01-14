@@ -42,6 +42,7 @@
                     <th class="text-center">Landlord</th>
                     <th class="text-center">Period</th>
                     <th class="text-center">Expired At</th>
+                    <th class="text-center">Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,6 +64,20 @@
                     <td class="text-center">{{ $rented->contract_period}}</td>
                     <td class="text-center">
                         {{ date_format(date_create($rented->expired_at),'d/m/Y') }}
+                    </td>
+                    <td>
+                      @php $expired_at =date_format(date_create($rented->expired_at),'Y-m-d');
+                      @endphp
+
+                      @if(date('Y-m-d') > $expired_at && empty($rented->terminated_on))
+                        <span class="badge badge-danger font-weight-100">Expired</span>
+                      @elseif(!empty($rented->terminated_on))
+                        <span class="badge badge-danger font-weight-100">Terminated</span>
+                      @else 
+
+                      <span class="badge badge-success font-weight-100">Active</span>
+
+                      @endif
                     </td>
                     
                  </tr>

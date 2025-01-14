@@ -49,7 +49,7 @@
                                 <td class="text-center">{{ $issue->issue_code}}</td>
                                 <td class="text-center">{{ $issue->title}}</td>
                                 <td class="text-center"></td>
-                                <td class="text-center">{{ $issue->status}}</td>
+                                <td class="text-center">{{ ucwords($issue->status)}}</td>
                              </tr>
                             @endforeach
                         </tbody>

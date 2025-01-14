@@ -26,17 +26,17 @@ class RedirectIfNotAuthenticated
         $current_route_name_prefix = $current_route_name_exploded[ 0 ];
 
         if ( $user_role == 'admin' ) {
-            if ( $current_route_name_prefix == "landlord" ) {
+            if ( $current_route_name_prefix == "landlord" || $current_route_name_prefix == "tenant" || $current_route_name_prefix == "technision" ) {
                 return redirect()->route( "admin.dashboard" );
             }
 
         } else if ( $user_role == 'landlord' ) {
-            if ( $current_route_name_prefix == "admin" ) {
+            if ( $current_route_name_prefix == "admin" || $current_route_name_prefix == "tenant" || $current_route_name_prefix == "technision") {
                 return redirect()->route( "landlord.dashboard" );
             }
 
         } else if ( $user_role == 'tenant' ) {
-            if ( $current_route_name_prefix == "admin" || $current_route_name_prefix == "landlord" ) {
+            if ( $current_route_name_prefix == "admin" || $current_route_name_prefix == "landlord" || $current_route_name_prefix == "technision" ) {
                 return redirect()->route( "tenant.dashboard" );
             }
         }else if( $user_role == 'technision'){

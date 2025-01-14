@@ -185,7 +185,9 @@ class HomeController extends Controller
             'chroot' => public_path()
         ]);
 
-        return $pdf->download('Issue-Ticket-Invoice-'.$ticket->id.'.pdf');
+        $ticket_no = rand(10000000,12345678).date('Y-m-d H:i:s');
+
+        return $pdf->download('Issue-Ticket-Invoice-'.$ticket_no.'.pdf');
     }
     //Change Password 
     public function change_password(){

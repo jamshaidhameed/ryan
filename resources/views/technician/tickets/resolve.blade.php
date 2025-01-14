@@ -92,7 +92,7 @@
                 </div>
                 <!-- Resolve Row End -->
             <div class="col-lg-12">
-                <div class="send-btn">
+                <div class="send-btn"> 
                     <button type="submit" class="btn btn-4">Save</button>
                 </div>
             </div>
@@ -104,7 +104,14 @@
 <script src="{{ asset('summernote/summernote.js')}}"></script>
 <script>
  $(document).ready(function() {
-     $('.summernote').summernote();
+     $('.summernote').summernote({
+      height: 300, // Set editor height
+         toolbar: [
+            ['style', ['bold', 'italic', 'underline']], // Style options
+            ['para', ['ul', 'ol', 'paragraph']],       // Paragraph options
+            ['insert', ['link', 'picture']],          // Insert options
+         ]
+    });
  });
 </script>
 @endsection

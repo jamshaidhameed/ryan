@@ -205,9 +205,9 @@
                                    <a href="{{ route('admin.issue.tickets',$tenant_contract->id)}}" class="btn btn-primary btn-outline">Issue Tickets</a>
                                 </div>
                                 <div class="col col-md-3"><a href="{{ route('admin.booking.tenant.invoices',$tenant_contract->id) }}" class="btn btn-primary btn-outline btn-invoices">Invoices</a> <br>
-                                   <a href="" class="btn btn-primary btn-outline">Commission Details</a>
+                                   <a href="" class="btn btn-primary btn-outline btn-commision-details" data-verified="{{ !empty($tenant_contract->commission_verified_by) ? 'yes' : 'no' }}" data-id="{{ $tenant_contract->id }}" data-amount="{{ $tenant_contract->commission_amount}}">Commission Details</a>
                                 </div>
-                                <div class="col col-md-3"><a href="{{ route('admin.property.enquiries',$property->id) }}" class="btn btn-primary btn-outline tenant-quries">Tenant Quries</a> <br>
+                                <div class="col col-md-3"><a href="{{ route('admin.property.enquiries',$property->id) }}" class="btn btn-primary btn-outline tenant-quries" data-selected="1">Tenant Quries</a> <br>
                                   <a href="" class="btn btn-primary btn-outline btn-tenant-terminate"  data-id="{{ $tenant_contract->id}}">Terminate Contract</a>
                                 </div>
                                 <div class="col col-md-3">
@@ -215,7 +215,7 @@
                                 </div>
                             </div>
                             @else 
-                            <p>No active contract found! <a href="{{ route('admin.property.enquiries',$property->id) }}" class="tenant-quries">View Tenant Quries</a></p>
+                            <p>No active contract found! <a href="{{ route('admin.property.enquiries',$property->id) }}" class="tenant-quries" data-selected="0">View Tenant Quries</a></p>
                             @endif
                             
                          </div>
@@ -516,6 +516,38 @@
     </div>
 </div>
  <!-- End Landlord -->
+
+<!-- Commision Detail -->
+ <div class="modal fade commision-details" id="examplePositionTop" aria-hidden="true" aria-labelledby="examplePositionTop" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-top">
+    <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+         Commission Details
+        </h4>
+        </div>
+        <form class="form-horizontal" id="exampleConstraintsForm" autocomplete="off" action="{{ route('admin.commission.pay') }}" method="post">
+         @csrf 
+         <input type="hidden" name="e_id" value="">
+         <div class="modal-body">
+           <div class="form-group">
+            <label for="" class="form-control-label">Commission Amount</label>
+             <input type="number" name="amount" id="" class="form-control" min="0" value="" data-fv-notempty="true">
+           </div>
+           <label for="" class="form-control-label">Payment Status: <span id="payment-status"></span></label>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary btn-commision">Pay</button>
+        </div>
+        </form>
+        
+    </div>
+    </div>
+</div>
+ <!-- End Commision Detail -->
 @endsection
 @section('script')
 <script src="{{ asset('backend/custom/script.js') }}"></script>
