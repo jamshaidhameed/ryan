@@ -42,6 +42,12 @@
                 <div class="form-inner">
                     <img src="{{ asset('front/assets/img/logo.png') }}" alt="logo" width="150">
                     <h3>Sign Into Your Account</h3>
+
+                     @if(session()->has('success'))
+                    <div class="alert alert-success mt-6">
+                        {{ session()->get('success')}}
+                    </div>
+                    @endif
                     @if($errors->any())
                         <div class="alert alert-danger">
                             <ul class="list-group">

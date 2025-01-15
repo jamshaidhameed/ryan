@@ -76,7 +76,7 @@
                             <!-- <a type="button" class="dropdown-item btn btn-danger btn-outline"
                             id="delete-category" href="">
                             <i class="icon fa-trash-o" aria-hidden="true" style="font-size: 15px;"></i>Delete</a> -->
-                            <a type="button" target="_blank" href="" class="dropdown-item btn btn-primary btn-outline"><i class="icon fa-eye" aria-hidden="true" style="font-size: 15px;"></i>Details</a>
+                            <a type="button" target="_blank" href="{{ route('admin.property.details',$property->slug) }}" class="dropdown-item btn btn-primary btn-outline"><i class="icon fa-eye" aria-hidden="true" style="font-size: 15px;"></i>Details</a>
                         </div>
                     </td>
                  </tr>

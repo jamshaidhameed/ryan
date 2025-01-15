@@ -83,17 +83,23 @@ class RegisterController extends Controller
             Auth::logout();
         }
 
+         Auth::logout();
+
         session( [ "user_role" => $user->role ] );
 
         $user_role = $user->role;
 
-         if ( $user_role == 'landlord' ) {
+        session()->flash('success','Your Account has been successfully Created. Please log in in to your account.');
 
-            return redirect()->route( "landlord.dashboard" );
+        return redirect()->route('login');
 
-        } else if ( $user_role == 'tenant' ) {
+        //  if ( $user_role == 'landlord' ) {
 
-             return redirect()->route( "tenant.dashboard" );
-        }
+        //     return redirect()->route( "landlord.dashboard" );
+
+        // } else if ( $user_role == 'tenant' ) {
+
+        //      return redirect()->route( "tenant.dashboard" );
+        // }
     }
 }

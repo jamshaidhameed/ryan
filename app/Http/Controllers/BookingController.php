@@ -107,10 +107,15 @@ class BookingController extends Controller
         }
         session()->flash('success', 'Booking Enquiry has been created successfully');
 
-        return redirect()->back();
+        return redirect()->route('booking.success');
             
 
         }
 
+    }
+
+    public function booking_success(){
+
+        return view('front.success_message');
     }
 }

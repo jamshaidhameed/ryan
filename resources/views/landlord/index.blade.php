@@ -184,7 +184,6 @@
  <script>
     $(document).on('change','select[name="country_id"]  ',function(e){
         e.preventDefault();
-        debugger;
         var id = $(this).val(),
             contents = '';
         if (!id) {

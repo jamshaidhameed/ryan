@@ -22,6 +22,13 @@ class HomeController extends Controller
             return redirect()->back()->withErrors('Sorry no record Found');
         }
 
+        if (!empty($property_info->youtube_url)) {
+            # code...convertToEmbedUrl
+
+            $url = $property_info->youtube_url;
+            $property_info->youtube_url = self::convertToEmbedUrl($url);
+        }
+
         return view('front.property_details',compact('property_info'));
     }
 
@@ -224,5 +231,30 @@ class HomeController extends Controller
         return view('front.property_list',compact('properties'));
 
     }
+
+    function convertToEmbedUrl($url){
+    // Parse the URL
+    $parsedUrl = parse_url($url);
+
+    // Check if it's a YouTube URL
+    if (isset($parsedUrl['host']) && strpos($parsedUrl['host'], 'youtube.com') !== false) {
+        // Parse query parameters
+        parse_str($parsedUrl['query'], $queryParams);
+
+        if (isset($queryParams['v'])) {
+            // Build and return the embed URL
+            return 'https://www.youtube.com/embed/' . $queryParams['v'];
+        }
+    }
+
+    // Check if it's a shortened YouTube URL
+    if (isset($parsedUrl['host']) && strpos($parsedUrl['host'], 'youtu.be') !== false) {
+        // Extract the video ID from the path
+        return 'https://www.youtube.com/embed' . $parsedUrl['path'];
+    }
+
+    // Return the original URL if it's not a YouTube link
+    return $url;
+}
 }
  
