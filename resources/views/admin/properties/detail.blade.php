@@ -30,6 +30,11 @@
       </div>
 
     <div class="page-content container-fluid">
+         @if(session()->has('success'))
+        <div class="alert alert-success mt-6">
+            {{ session()->get('success')}}
+        </div>
+        @endif
         <div class="row">
             <!-- First Column -->
             <div class="col col-md-4">

@@ -418,7 +418,7 @@ class HomeController extends Controller
 
         BookingEnquiries::where('id',$request->e_id)->update(['status'  => 'selected']);
 
-        session()->flash('success', 'Tenant Contract Created Successfully');
+        session()->flash('success', 'New Tenant Contract Started Successfully');
 
         return redirect()->route('admin.property.details',$property_info->slug);
     }
@@ -894,7 +894,7 @@ class HomeController extends Controller
 
             }
 
-        session()->flash('success', 'Invoices have been Generated Successfully');
+        session()->flash('success', 'New Tenant Contract has been started successfully');
 
         return redirect()->route('admin.booking.enquiry.invoices',$request->e_id);
 
