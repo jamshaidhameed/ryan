@@ -40,6 +40,23 @@
                 <div class="my-address contact-2">
                     @php $user = Auth::user(); @endphp
                     <h3 class="heading-3">{{ __('Profile Details')}}</h3>
+                     @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="list-group">
+                            @foreach($errors->all() as $error)
+                                <li class="list-group-item text-danger">
+                                    {{ $error }}
+                                </li>
+                            @endforeach
+                            </ul>
+                        </div>
+                        @endif
+
+                        @if(session()->has('success'))
+                        <div class="alert alert-success mt-6">
+                            {{ session()->get('success')}}
+                        </div>
+                        @endif
                     <form action="{{ route('tenant.update.profile') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">

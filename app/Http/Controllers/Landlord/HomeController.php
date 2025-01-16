@@ -35,7 +35,7 @@ class HomeController extends Controller
     }
     public function update_profile(Request $request){
         
-        $validator = Validator::make($request->all(), [
+         $request->validate([
                 'first_name' =>'required|string|max:255',
                 'last_name' =>'required|string|max:255',
                 'gender' => 'required',
@@ -49,35 +49,28 @@ class HomeController extends Controller
                 'street_address' => 'nullable|string|max:255'
             ]
             );
-            if ($validator->fails()) {
-                return redirect()->back([
-                    'status' => false,
-                    'message' => 'Validation errors',
-                    'errors' => $validator->errors(),
-                ], 422);
-            }
+            // if ($validator->fails()) {
+            //     return redirect()->back([
+            //         'status' => false,
+            //         'message' => 'Validation errors',
+            //         'errors' => $validator->errors(),
+            //     ], 422);
+            // }
      
-    
-    
-        
-
-
-     echo   $image = $request->file;
-     exit;
+      $image = $request->file;
 
         $landlord = User::find(Auth::user()->id);
         $new_name = '';
 
         if ($image != NULL) {
 
-        $new_name = rand().'.'.$image->getClientOriginalExtension();
-echo public_path('upload/landlord');
-exit;
-        $image->move(public_path('upload/landlord'),$new_name);
+            $new_name = rand().'.'.$image->getClientOriginalExtension();
+            
+            $image->move(public_path('upload/landlord'),$new_name);
 
-        if(File::exists(public_path('upload/landlord/').$landlord->image)) {
-            File::delete(public_path('upload/landlord/').$landlord->image);
-        }
+            if(File::exists(public_path('upload/landlord/').$landlord->image)) {
+                File::delete(public_path('upload/landlord/').$landlord->image);
+            }
 
 
         }else{
