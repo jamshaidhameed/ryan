@@ -17,6 +17,7 @@ use App\Mail\PropertyAddMail;
 use App\Models\LandlordContracts;
 use Auth;
 use File; 
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -33,8 +34,8 @@ class HomeController extends Controller
         return response()->json(Provinces::where('country_id',$country_id)->get());
     }
     public function update_profile(Request $request){
-        $request->validate(
-            [
+        
+        $validator = Validator::make($request->all(), [
                 'first_name' =>'required|string|max:255',
                 'last_name' =>'required|string|max:255',
                 'gender' => 'required',
@@ -48,7 +49,21 @@ class HomeController extends Controller
                 'street_address' => 'nullable|string|max:255'
             ]
             );
-        $image = $request->file;
+            if ($validator->fails()) {
+                return redirect()->back([
+                    'status' => false,
+                    'message' => 'Validation errors',
+                    'errors' => $validator->errors(),
+                ], 422);
+            }
+     
+    
+    
+        
+
+
+     echo   $image = $request->file;
+     exit;
 
         $landlord = User::find(Auth::user()->id);
         $new_name = '';
@@ -56,7 +71,8 @@ class HomeController extends Controller
         if ($image != NULL) {
 
         $new_name = rand().'.'.$image->getClientOriginalExtension();
-
+echo public_path('upload/landlord');
+exit;
         $image->move(public_path('upload/landlord'),$new_name);
 
         if(File::exists(public_path('upload/landlord/').$landlord->image)) {

@@ -194,7 +194,7 @@
 
         $.ajax({
             type: 'get',
-            url: "/landlord/provinces/json/" + id,
+            url: "{{url('/landlord/provinces/json')}}" + "/" + id,
             dataType:'json',
             success:function(data){
                 if (data) {
