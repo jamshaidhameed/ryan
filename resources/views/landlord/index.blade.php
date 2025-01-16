@@ -204,7 +204,6 @@
         var id = $(this).val(),
             contents = '';
         if (!id) {
-            // $('select[name="province_id"]').empty();
              $('#province_id').empty();
             return this;
         }

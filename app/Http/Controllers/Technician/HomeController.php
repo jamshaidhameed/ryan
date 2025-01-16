@@ -9,6 +9,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\User;
 use App\Models\IssueTickets;
 use App\Models\IssueTicketInvoices;
+use App\Models\Provinces;
 use Auth;
 use File;
 use Redirect;
@@ -18,6 +19,9 @@ class HomeController extends Controller
     public function index(){
 
         return view('technician.index');
+    }
+    public function provinces_json($country_id){
+        return response()->json(Provinces::where('country_id',$country_id)->get());
     }
 
     public function update_profile(Request $request){

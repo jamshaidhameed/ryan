@@ -201,18 +201,16 @@
  <script>
     $(document).on('change','select[name="country_id"]  ',function(e){
         e.preventDefault();
-        debugger;
         var id = $(this).val(),
             contents = '';
         if (!id) {
-            // $('select[name="province_id"]').empty();
              $('#province_id').empty();
             return this;
         }
 
         $.ajax({
             type: 'get',
-            url: "/tenant/provinces/json/" + id,
+            url: "{{url('/tenant/provinces/json')}}/" + id,
             dataType:'json',
             success:function(data){
                 if (data) {
