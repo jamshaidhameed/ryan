@@ -386,3 +386,20 @@ $(document).on("click", ".btn-commision-details", function (e) {
   }
   $(".commision-details").modal("show");
 });
+
+//View Reason
+
+$(document).on("click", ".reason-btn", function (e) {
+  e.preventDefault();
+  var resean = $(this).data("resean"),
+    terminated_on = $(this).data("terminatedon");
+  $(".terminate-reason")
+    .find(".reason-text")
+    .html(
+      resean +
+        '<br> <span class="badge badge-success font-weight-100">' +
+        terminated_on +
+        "</span>"
+    );
+  $(".terminate-reason").modal("show");
+});

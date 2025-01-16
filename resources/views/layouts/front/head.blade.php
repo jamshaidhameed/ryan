@@ -10,14 +10,28 @@
                     <a href="tel:info@ryanrent.com"><i class="fa fa-envelope"></i>info@ryanrent.com</a>
                     <div class="dropdown d-inline">
                         <a data-mdb-dropdown-init class="dropdown-toggle pb-3" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                            <i class="flag-united-kingdom flag m-0"></i> </a>
+
+                           @if(\Illuminate\Support\Facades\App::getLocale() == 'en')
+                            <i class="flag-united-kingdom flag m-0"></i>
+                           @else 
+                            <i class="flag-netherlands flag"></i>
+                           @endif
+                        </a>
                     
                         <ul class="dropdown-menu" aria-labelledby="Dropdown">
                             <li>
-                                <a class="dropdown-item" href="#"><i class="flag-united-kingdom flag"></i>English <i class="fa fa-check text-success ms-2"></i></a>
+                                <a class="dropdown-item" href="{{ route('lang.change','en') }}"><i class="flag-united-kingdom flag"></i>English 
+                                @if(\Illuminate\Support\Facades\App::getLocale() == 'en')
+                                <i class="fa fa-check text-success ms-2"></i>
+                                @endif
+                            </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#"><i class="flag-netherlands flag"></i>Nederlands</a>
+                                <a class="dropdown-item" href="{{ route('lang.change','nl')  }}"><i class="flag-netherlands flag"></i>Nederlands
+                             @if(\Illuminate\Support\Facades\App::getLocale() == 'nl')
+                                <i class="fa fa-check text-success ms-2"></i>
+                                @endif
+                            </a>
                             </li>
         
                         </ul>

@@ -1,6 +1,6 @@
 @extends('layouts.front')
 @section('title')
-Rayan Rent and Co
+ @lang('titles.site')
 @endsection
 @section('content')
 <!-- Banner start -->

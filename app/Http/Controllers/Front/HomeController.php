@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use App\Models\Properties;
 
@@ -13,7 +14,20 @@ class HomeController extends Controller
 
         $featured_images = DB::select("SELECT feature_image FROM `properties` ORDER BY id DESC LIMIT 3");
         $latest_properties = Properties::where('status',1)->with('type')->orderBy('id','desc')->get(); 
+
+        // App::setLocale('nl');
+        // return App::getLocale();
+
         return view('front.index',compact('featured_images','latest_properties'));
+    }
+
+    public function change_lang($lang){
+
+        App::setLocale($lang);
+
+        // return App::getLocale();
+
+        return redirect()->back();
     }
     public function property_details($slug){
         $property_info = Properties::where('slug',$slug)->first();
@@ -22,12 +36,12 @@ class HomeController extends Controller
             return redirect()->back()->withErrors('Sorry no record Found');
         }
 
-        if (!empty($property_info->youtube_url)) {
-            # code...convertToEmbedUrl
+        // if (!empty($property_info->youtube_url)) {
+        //     # code...convertToEmbedUrl
 
-            $url = $property_info->youtube_url;
-            $property_info->youtube_url = self::convertToEmbedUrl($url);
-        }
+        //     $url = $property_info->youtube_url;
+        //     $property_info->youtube_url = self::convertToEmbedUrl($url);
+        // }
 
         return view('front.property_details',compact('property_info'));
     }

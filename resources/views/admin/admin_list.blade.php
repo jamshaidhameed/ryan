@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 @section('title')
-  Admin User List
+ Users List
 @endsection
 @section('content')
- 
+  
 <!-- Page -->
 <div class="page">
   <div class="page-header">
         <h1 class="page-title">{{ ucfirst(env('business_title'))}}</h1>
         <ol class="breadcrumb">
           <li class="breadcrumb-item">Admin Dashboard</li>
-          <li class="breadcrumb-item"><a href="#">Admin User </a></li>
+          <li class="breadcrumb-item"><a href="#">Users </a></li>
           <li class="breadcrumb-item active">list</li>
         </ol>
         
@@ -19,7 +19,7 @@
   <div class="page-content container-fluid">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title">Admin User List</h3>
+          <h3 class="panel-title"> Users List</h3>
         </div>
         <div class="panel-body mt-5">
               
@@ -40,7 +40,9 @@
                     <th>Name</th>
                     <th>Email </th>
                     <th>Gender</th>
+                    <th>Role</th>
                     <th class="text-center">Status</th>
+                    <th class="text-center"></th>
                 </tr>
             </thead>
             <tbody>

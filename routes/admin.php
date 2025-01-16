@@ -46,12 +46,12 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
 
         Route::get('/province/json/{id}',[App\Http\Controllers\Admin\HomeController::class,'province_json'])->name('province.json');
         //Technision CURD Operation
-        Route::get('/technisions/list',[App\Http\Controllers\Admin\HomeController::class,'technision_list'])->name('technision.list');
-        Route::get('/technisions/create',[App\Http\Controllers\Admin\HomeController::class,'technision_create'])->name('technision.create');
-        Route::post('/technisions/store',[App\Http\Controllers\Admin\HomeController::class,'technision_store'])->name('technision.store');
-        Route::get('/technisions/edit/{id}',[App\Http\Controllers\Admin\HomeController::class,'technision_edit'])->name('technision.edit');
-        Route::post('/technisions/update/{id}',[App\Http\Controllers\Admin\HomeController::class,'technision_update'])->name('technision.update');
-        Route::post('/technisions/delete/{id}',[App\Http\Controllers\Admin\HomeController::class,'technision_delete'])->name('technision.delete');
+        Route::get('/user/list',[App\Http\Controllers\Admin\HomeController::class,'technision_list'])->name('user.list');
+        Route::get('/user/create',[App\Http\Controllers\Admin\HomeController::class,'technision_create'])->name('user.create');
+        Route::post('/user/store',[App\Http\Controllers\Admin\HomeController::class,'technision_store'])->name('user.store');
+        Route::get('/user/edit/{id}',[App\Http\Controllers\Admin\HomeController::class,'technision_edit'])->name('user.edit');
+        Route::post('/user/update/{id}',[App\Http\Controllers\Admin\HomeController::class,'technision_update'])->name('technision.update');
+        Route::post('/user/delete/{id}',[App\Http\Controllers\Admin\HomeController::class,'technision_delete'])->name('user.delete');
         //Province CURD
         Route::get('/province/list',[App\Http\Controllers\Admin\HomeController::class,'province_list'])->name('province.list');
         Route::get('/province/create',[App\Http\Controllers\Admin\HomeController::class,'province_create'])->name('province.create');
@@ -72,7 +72,6 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
         Route::get('/booking/enquiries',[App\Http\Controllers\Admin\HomeController::class,'booking_enquiries'])->name('booking.enquiries');
         Route::patch('/booking/enquiry/update',[App\Http\Controllers\Admin\HomeController::class,'update_booking_enquiry'])->name('booking.enquiry.update');
         Route::get('/booking/tenant/account/active/{e_id}',[App\Http\Controllers\Admin\HomeController::class,'active_tenant_account'])->name('account.active');
-        Route::get('/booking/generate/contract/file/{e_id}/{for}',[App\Http\Controllers\Admin\HomeController::class,'generate_contract_files'])->name('generate.contract.file');
         //Start Contract
         Route::post('booking/start/contract',[App\Http\Controllers\Admin\HomeController::class,'start_contract'])->name('start.contract');
         //Booking Enquiry Invoices 
@@ -113,5 +112,14 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
 
        //Admin list
        Route::get('/admin/list',[App\Http\Controllers\Admin\HomeController::class,'admin_list'])->name('admin.list');
+
+       //Edit Property 
+       Route::get('property/edit/{id}',[App\Http\Controllers\Admin\HomeController::class,'edit_property'])->name('property.edit');
+       Route::post('property/update/{id}',[App\Http\Controllers\Admin\HomeController::class,'update_property'])->name('property.update');
+
+       //All Landlord Contracts 
+        Route::get('/landlord/contracts/all/{id}',[App\Http\Controllers\Admin\HomeController::class,'all_landlord_contract'])->name('landlord.contracts');
+        //All Tenant Contracts 
+        Route::get('/tenant/contracts/all/{id}',[App\Http\Controllers\Admin\HomeController::class,'all_tenant_contract'])->name('tenant.contracts');
 
     });
