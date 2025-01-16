@@ -79,7 +79,8 @@ $(document).on("click", ".btn-choose", function (e) {
 
   var property_id = $(this).data("property"),
     tenant_id = $(this).data("tenant"),
-    e_id = $(this).data("eid");
+    e_id = $(this).data("eid"),
+    getproperty_url = $(this).data("getpropertyurl");
   $(".tent-contract").find("form").find('input[name="e_id"]').val(e_id);
   $(".tent-contract")
     .find("form")
@@ -91,7 +92,7 @@ $(document).on("click", ".btn-choose", function (e) {
     .val(tenant_id);
 
   $.ajax({
-    url: "/admin/property/enquiry/" + e_id,
+    url: getproperty_url + "/" + e_id,
     type: "get",
     dataType: "json",
     success: function (data) {
@@ -134,7 +135,8 @@ $(document).on("click", ".btn-choose", function (e) {
 $(document).on("click", ".btn-invoices", function (e) {
   e.preventDefault();
   var url = $(this).attr("href"),
-    html_content = "";
+    html_content = "",
+    payment_url = $(this).data("paymentroute");
 
   $.ajax({
     type: "get",
@@ -158,7 +160,9 @@ $(document).on("click", ".btn-invoices", function (e) {
               '<td><span class="badge badge-success  font-weight-100">Paid</span></td><td><button class="btn btn-primary btn-outline disabled">Pay</button></td>';
           } else {
             html_content +=
-              '<td><span class="badge badge-danger  font-weight-100">Not Paid</span></td><td><a type="button" href="/admin/booking/tenant/invoices/pay/' +
+              '<td><span class="badge badge-danger  font-weight-100">Not Paid</span></td><td><a type="button" href="' +
+              payment_url +
+              "/" +
               row.id +
               '" class="btn btn-primary btn-outline btn-pay-invoice" onClick="return confirm(`Are you Sure to Pay this Invoice ? `)" >Pay</a></td>';
           }
@@ -242,7 +246,8 @@ $(document).on("click", ".landlord-invoices", function (e) {
   e.preventDefault();
 
   var url = $(this).attr("href"),
-    html_data = "";
+    html_data = "",
+    payment_url = $(this).data("paymentroute");
 
   $.ajax({
     type: "get",
@@ -266,7 +271,9 @@ $(document).on("click", ".landlord-invoices", function (e) {
               '<td><span class="badge badge-success  font-weight-100">Paid</span></td><td><button class="btn btn-primary btn-outline disabled">Pay</button></td>';
           } else {
             html_data +=
-              '<td><span class="badge badge-danger  font-weight-100">Not Paid</span></td><td><a type="button" href="/admin/landlord/invoice/pay/' +
+              '<td><span class="badge badge-danger  font-weight-100">Not Paid</span></td><td><a type="button" href="' +
+              payment_url +
+              "/" +
               row.id +
               '" class="btn btn-primary btn-outline btn-landlord-invoice-pay" onClick="return confirm(`Are you Sure to Pay this Invoice ? `)" >Pay</a></td>';
           }
@@ -341,6 +348,7 @@ $(document).on("click", ".btn-tenant-terminate", function (e) {
 
 $(document).on("click", ".btn-landlord-terminate", function (e) {
   e.preventDefault();
+
   var id = $(this).data("id");
 
   $(".landlord-terminate").find("form").find('input[name="e_id"]').val(id);

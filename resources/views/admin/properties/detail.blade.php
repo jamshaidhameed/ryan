@@ -129,7 +129,7 @@
                                 </div>
                                 <div class="col col-md-4">
                                     
-                                   <a href="{{ route('admin.landlord.invoices',$landlord_contract->id) }}" class="btn btn-primary btn-outline landlord-invoices">Invoices</a>
+                                   <a href="{{ route('admin.landlord.invoices',$landlord_contract->id) }}" class="btn btn-primary btn-outline landlord-invoices" data-paymentroute="{{ url('/admin/landlord/invoice/pay/')}}">Invoices</a>
                                 </div>
                                 <div class="col col-md-4">
                                   <a href="" class="btn btn-primary btn-outline btn-landlord-terminate" data-id="{{ $landlord_contract->id}}">Terminate Contract</a>
@@ -209,10 +209,10 @@
                                 <div class="col col-md-3"><a href="{{ asset('upload/booking/'.$tenant_contract->link) }}" class="btn btn-primary btn-outline">Download Contract</a> <br>
                                    <a href="{{ route('admin.issue.tickets',$tenant_contract->id)}}" class="btn btn-primary btn-outline">Issue Tickets</a>
                                 </div>
-                                <div class="col col-md-3"><a href="{{ route('admin.booking.tenant.invoices',$tenant_contract->id) }}" class="btn btn-primary btn-outline btn-invoices">Invoices</a> <br>
+                                <div class="col col-md-3"><a href="{{ route('admin.booking.tenant.invoices',$tenant_contract->id) }}" class="btn btn-primary btn-outline btn-invoices" data-paymentroute="{{ url('/admin/booking/tenant/invoices/pay/')}}">Invoices</a> <br>
                                    <a href="" class="btn btn-primary btn-outline btn-commision-details" data-verified="{{ !empty($tenant_contract->commission_verified_by) ? 'yes' : 'no' }}" data-id="{{ $tenant_contract->id }}" data-amount="{{ $tenant_contract->commission_amount}}">Commission Details</a>
                                 </div>
-                                <div class="col col-md-3"><a href="{{ route('admin.property.enquiries',$property->id) }}" class="btn btn-primary btn-outline tenant-quries" data-selected="1">Tenant Quries</a> <br>
+                                <div class="col col-md-3"><a href="{{ route('admin.property.enquiries',$property->id) }}" class="btn btn-primary btn-outline tenant-quries" data-selected="1" data-getpropertyurl="{{ url('/admin/property/enquiry/') }}">Tenant Quries</a> <br>
                                   <a href="" class="btn btn-primary btn-outline btn-tenant-terminate"  data-id="{{ $tenant_contract->id}}">Terminate Contract</a>
                                 </div>
                                 <div class="col col-md-3">

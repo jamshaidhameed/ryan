@@ -6,6 +6,7 @@ Route::middleware(['auth','url_redirect', 'redirect_if_not_authenticated'])
     ->group(function () {    
 
         Route::get('/dashboard',[App\Http\Controllers\Technician\HomeController::class,'index'])->name('dashboard');
+        Route::get('/provinces/json/{country_id}',[App\Http\Controllers\Technician\HomeController::class,'provinces_json'])->name('provinces.json');
         Route::post('/update/profile',[App\Http\Controllers\Technician\HomeController::class,'update_profile'])->name('update.profile');
         Route::get('/issue/tickets',[App\Http\Controllers\Technician\HomeController::class,'issue_tickets'])->name('issue.tickets');
         Route::get('/issue/show/{id}',[App\Http\Controllers\Technician\HomeController::class,'view_issue'])->name('issue.show');

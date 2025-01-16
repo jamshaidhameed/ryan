@@ -168,7 +168,7 @@
                                         {{ old('street_address')}}
                                         @endif
                                     </textarea>
-                                </div>
+                                </div> 
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -182,4 +182,56 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script>
+    $(document).ready(function(){
+        $('#province_id').parent().find('a').hide();
+        $('#province_id').show();
+    })
+</script>
+ <script>
+    $(document).on('change','select[name="country_id"]  ',function(e){
+        e.preventDefault();
+        var id = $(this).val(),
+            contents = '';
+        if (!id) {
+             $('#province_id').empty();
+            return this;
+        }
+
+        $.ajax({
+            type: 'get',
+            url: "{{url('/technision/provinces/json')}}/" + id,
+            dataType:'json',
+            success:function(data){
+                if (data) {
+                    contents += '<option value=""> Please Choose</option>';
+                }else {
+                    $('#province_id').empty(); 
+                }
+                $.each(data,function(k){
+                    contents += '<option value="'+this.id+'">'+this.name+'</option>';
+                });
+                   $('#province_id').empty();
+                const select = document.getElementById("province_id");
+
+                const option = document.createElement("option");
+                option.value = "";
+                option.textContent = "Please Choose";
+                select.appendChild(option);
+
+                data.forEach(province => {
+                    const option = document.createElement("option");
+                    option.value = province.id;
+                    option.textContent = province.name;
+                    select.appendChild(option);
+                });
+
+                $('#province_id').parent().find('a').hide();
+                $('#province_id').show();
+            }
+        })
+    });
+ </script>
 @endsection
