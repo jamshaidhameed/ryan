@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('postcode')->nullable();
             $table->string('street_address')->nullable();
-            $table->enum('role',['admin','landlord','tenant','technision'])->default('tenant');
+            $table->enum('role',['admin','landlord','tenant','technision','sub admin','plumber'])->default('tenant');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();

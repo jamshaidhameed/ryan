@@ -54,6 +54,7 @@
                         @else 
                          <a href="{{ route('admin.properties.approve',[$property->id,1]) }}" class="btn btn-success float-right" onClick="return confirm(`{{ __ ('Are you sure to Publish the property ? ')}}`);"><i class="icon wb-check-circle"></i>Publish</a>
                         @endif
+                        <a href="{{ route('admin.property.edit',$property->id) }}" class="btn btn-success" style="margin-left:5px;"><i class="icon wb-pencil"></i>Edit</a>
                         </div>
                         </div>
                     </div>
@@ -68,7 +69,7 @@
                         <div class="card-title text-center">
                             <strong>Landlord Contract</strong> 
                             <div class="d-flex justify-content-end">
-                                <a href="" style="margin-top: -22px;">All Contracts</a>
+                                <a target="_blank" href="{{ route('admin.landlord.contracts',$property->id) }}" style="margin-top: -22px;">All Contracts</a>
                             </div>
                         </div>
                         
@@ -149,7 +150,7 @@
                         <div class="cart-title text-center">
                             <strong>Tenant Contract</strong>
                             <div class="d-flex justify-content-end">
-                                <a href="" style="margin-top: -22px;">All Contracts</a>
+                                <a target="_blank" href="{{ route('admin.tenant.contracts',$property->id) }}" style="margin-top: -22px;">All Contracts</a>
                             </div>
                         </div>
                         <hr>

@@ -62,6 +62,7 @@ class HomeController extends Controller
     public function property_details($slug){
 
         $property = Properties::where('slug',$slug)->with(['landlord','type'])->first();
+
         $landlord_contract = LandlordContracts::orderBy('id','desc')->where(['property_id' => $property->id,'terminated_on' => null,'expired_at' => ' > '. date('Y-m-d')])->first();
         $tenant_contract = TenantContracts::orderBy('id','desc')->where(['expired_at' => ' > '. date('Y-m-d')])->first();
 
@@ -199,7 +200,7 @@ class HomeController extends Controller
                 'link' => $file_name,
                 'price' => $request->price,
                 'start_from' => date_format(date_create($request->start_from),'Y-m-d'),
-                'contract_period' => $contract_period,
+                'contract_period' => $request->contract_period,
                 'expired_at' => $next_four_months->format('Y-m-t H:i:s'),
                 'created_by' => Auth::user()->id,
                 ]
@@ -547,9 +548,9 @@ class HomeController extends Controller
         ]
         );
 
-      session()->flash('success', 'Technision Data Stored Successfully');
+      session()->flash('success', 'User Data Stored Successfully');
 
-      return redirect()->route('admin.technision.list');
+      return redirect()->route('admin.user.list');
     }
     public function technision_edit($id){
 
@@ -598,9 +599,9 @@ class HomeController extends Controller
         ]
         );
 
-      session()->flash('success', 'Technision Data Updated Successfully');
+      session()->flash('success', 'User Data Updated Successfully');
 
-      return redirect()->route('admin.technision.list');
+      return redirect()->route('admin.user.list');
     }
     public function technision_delete($id){
 
@@ -608,14 +609,14 @@ class HomeController extends Controller
 
         if (empty($user_info)) {
 
-            session()->flash('errors','the technision record is no longer exist');
-            return redirect()->route('admin.technision.list');
+            session()->flash('errors','the User record is no longer exist');
+            return redirect()->route('admin.user.list');
         }
 
        $user_info->delete();
 
-       session()->flash('success','Technision Data Deleted Successfully');
-       return redirect()->route('admin.technision.list');
+       session()->flash('success','User Data Deleted Successfully');
+       return redirect()->route('admin.user.list');
     }
 
     //Province CURD
@@ -806,25 +807,6 @@ class HomeController extends Controller
 
     }
 
-    //Active Account 
-    public function active_tenant_account($e_id){
-
-        $enquiry = BookingEnquiries::find($e_id);
-
-        $tenant = User::find($enquiry->tenant_id);
-
-        $password = Str::random(8);
-
-        $tenant->status = "1";
-        $tenant->password = Hash::make($password);
-        $tenant->save();
-
-        session()->flash('success', 'Tenant Account has been successfully activated'.$password);
-
-        return redirect()->route('admin.booking.enquiries');
-        
-    }
-
     //Start Contract 
     public function start_contract(Request $request){
 
@@ -941,42 +923,6 @@ class HomeController extends Controller
 
       return redirect()->route('admin.booking.enquiry.invoices',$invoice->enquiry_id);
     }
-
-
-    //Generate Contract Files  For Landlord and Tenant 
-
-    public function generate_contract_files($e_id,$for){
-
-        $booking_enquiry = BookingEnquiries::where('id',$e_id)->with(['property','tenant'])->first();
-        $property = null;
-
-        if (!empty($booking_enquiry)) {
-          
-            $property = $booking_enquiry->property;
-
-        }
-        $company_name = env('Business_Title');
-        $tenant_name = !empty($booking_enquiry->tenant) ? $booking_enquiry->tenant->first_name." ".$booking_enquiry->tenant->last_name : '';
-        $todays_date = date('F d, Y ');
-        $contract_officer = 'Anis';
-
-        $property_owner = !empty(User::where('id',$property->user_id)->first()) ? User::where('id',$property->user_id)->first()->first_name." ".User::where('id',$property->user_id)->first()->last_name : '';
-
-        if ($for == 'tenant') {
-            // return view('admin.bookings.enquiries.contract_files.tenant-contracts',compact('company_name','tenant_name','property','todays_date','contract_officer'));
-
-            $pdf = Pdf::loadView('admin.bookings.enquiries.contract_files.tenant-contracts',compact('company_name','tenant_name','property','todays_date','contract_officer'))->setOption('isHtml5arserEnabled',true)->setOption('isPhpEnabled',true)->setOptions([
-            'tempDir' => public_path(),
-            'chroot' => public_path()
-        ]);
-
-            return $pdf->download('Tenant-Contract.pdf');
-
-        }else{
-            return view('admin.bookings.enquiries.contract_files.landlord-contracts',compact('todays_date','property_owner','company_name','property'));
-        }
-    }
-
     //Issue Tickets 
 
     public function issue_tickets($b_id){
@@ -1021,7 +967,9 @@ class HomeController extends Controller
 
     public function rented_properties(){
 
-        $tenant_contracts = TenantContracts::orderBy('id','desc')->with(['tenant','property'])->get();
+        // $tenant_contracts = TenantContracts::orderBy('id','desc')->with(['tenant','property'])->get();
+
+        $tenant_contracts = DB::select("SELECT tc.*,p.title_en,p.title_nl,p.slug,CONCAT(t.first_name,' ',t.last_name) as tenant,p.street_address as location,CONCAT(l.first_name,' ',l.last_name) as landlord  FROM `tenant_contracts` tc JOIN properties p ON tc.property_id = p.id JOIN users t ON tc.user_id = t.id JOIN users l ON p.user_id = l.id WHERE  (tc.expired_at >= '".date('Y-m-d')."' AND tc.terminated_on IS NULL)");
 
         return view('admin.properties.rented',compact('tenant_contracts'));
     }
@@ -1272,4 +1220,127 @@ class HomeController extends Controller
         return view('admin.admin_list',compact('admin_list'));
     }
     
+    //Edit Property 
+
+    public function edit_property($id){
+
+        $property = Properties::find($id);
+
+        return view('admin.properties.edit_property',compact('property'));
+    }
+    public function update_property(Request $request,string $id){
+
+        $request->validate(
+            [
+              'title_en' => 'required|string|max:255',
+                'title_nl' => 'required|string|max:255',
+                'price' => 'required',
+                'property_type_id' => 'required',
+                'street_address' => 'required',
+                'city' => 'required',
+                'postcode' => 'required',
+                'contract_period' => 'required'  
+            ]
+            );
+        $property_info = Properties::find($id);
+        
+        $property_images = $request->property_images;
+        $features = $request->features;
+        $feature_images = $request->feature_images;
+
+        // Generating Slug 
+        $slug = Str::slug($request->title_en);
+
+        $if_exist = Properties::where('slug',$slug)->get();
+
+        if (count($if_exist) > 0) {
+            $slug = $slug.'-'.Str::random(4);
+        }
+
+        $property_images_arr = array();
+        $feature_images_arr = array();
+        // Uploading Property Images
+         if (!empty($property_images) && count($property_images) > 0) {
+            
+            foreach ($property_images as $image) {
+
+                $new_name = rand().'.'.$image->getClientOriginalExtension();
+                
+                $image->move(public_path('upload/property'),$new_name);
+                array_push($property_images_arr,$new_name);
+            }
+         }else{
+            $property_images_arr = explode(",",$property_info->property_image);
+         }
+        // 
+
+        //uploading Feature Images
+
+        if (!empty($feature_images) && count($feature_images) > 0) {
+            
+           foreach ($feature_images as $image) {
+              $new_name = rand().'.'.$image->getClientOriginalExtension();
+                
+                $image->move(public_path('upload/property/feature'),$new_name);
+                array_push($feature_images_arr,$new_name);
+           }
+        }else{
+            $feature_images_arr = explode(",",$property_info->feature_image);
+         }
+
+        
+
+
+
+        Properties::where('id',$id)->update(
+            [
+                'title_en' => $request->title_en,
+                'description_en' => $request->description_en,
+                'slug' => $slug,
+                'property_code' => $slug,
+                'price' => $request->price,
+                'contract_period' => $request->contract_period,
+                'property_type_id' => $request->property_type_id,
+                'province_id' => $request->province_id,
+                'postcode' => $request->postcode,
+                'city' => $request->city,
+                'street_address' => $request->street_address,
+                'features' => !empty($request->features) && count($request->features) > 0 ? implode(",",$request->features) : '',
+                'available_from' => !empty($request->available_from) ? date_format(date_create($request->available_from),'Y-m-d') : '',
+                'area' => $request->area,
+                'bedrooms' => $request->bedrooms,
+                'bathrooms' => $request->bathrooms,
+                'kitchens' => $request->kitchens,
+                'garages' => $request->garages,
+                'parkings' => $request->parkings,
+                'toilets' => $request->toilets,
+                'title_nl' => $request->title_nl,
+                'description_nl' => $request->description_nl,
+                'feature_image' => !empty($feature_images_arr) && count($feature_images_arr) > 0 ? implode(",",$feature_images_arr) : $property_info->feature_image,
+                'property_image' => !empty($property_images_arr) && count($property_images_arr) > 0 ? implode(",",$property_images_arr) : $property_info->property_image,
+                'youtube_url' => $request->youtube_url
+            ]
+            );
+
+            $property = Properties::find($id);
+
+        session()->flash('success','Property Updated Successfully');
+
+        return redirect()->route('admin.property.details',$property->slug);
+    }
+
+    public function all_landlord_contract($id){
+
+      $landlord_contracts = LandlordContracts::contracts_by_property($id);
+      $property = Properties::find($id);
+
+      return view('admin.landlord_contracts',compact('landlord_contracts','property'));
+    }
+    public function all_tenant_contract($id){
+
+        $tenant_contracts = TenantContracts ::where('property_id',$id)->with(['tenant','property'])->orderBy('id','desc')->get();
+        $property = Properties::find($id);
+
+        return view('admin.tenant_contract',compact('tenant_contracts','property'));
+    }
 }

@@ -12,6 +12,10 @@ class LandlordContracts extends Model
     public function property(){
         return $this->belongsTo(Properties::class,'property_id','id');
     }
+    public static function contracts_by_property($id){
+
+        return DB::select("SELECT lc.* FROM `landlord_contracts` lc JOIN properties prop ON lc.property_id = prop.id WHERE prop.id = ".$id." Order By lc.id DESC");
+    }
 
     public static function landlord_contract_list ($id ){
 

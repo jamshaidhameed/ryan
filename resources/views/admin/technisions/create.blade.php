@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('title')
   @if(isset($technision))
-    Update Technision
+    Update User
    @else 
-   Create New Technision
+   Create New User
   @endif
 @endsection
 @section('style')
@@ -20,9 +20,9 @@
           <li class="breadcrumb-item"><a href="">Technisions</a></li>
           <li class="breadcrumb-item active">
             @if(isset($technision))
-            Update Technision
+            Update User
             @else 
-             Create New Technision
+             Create New User
             @endif 
           </li>
         </ol>
@@ -34,9 +34,9 @@
         <div class="panel-heading">
           <h3 class="panel-title">
           @if(isset($technision))
-            Update Technision
+            Update User
             @else 
-             Create New Technision
+             Create New User
             @endif  
           </h3>
         </div>
@@ -52,7 +52,7 @@
               </ul>
           </div>
           @endif
-        <form class="form-horizontal" id="exampleConstraintsForm" autocomplete="off" action="{{ isset($technision) ? route('admin.technision.update',$technision->id) : route('admin.technision.store')}}" method="POST" enctype="multipart/form-data">
+        <form class="form-horizontal" id="exampleConstraintsForm" autocomplete="off" action="{{ isset($technision) ? route('admin.user.update',$technision->id) : route('admin.user.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             
             <div class="row">
@@ -111,6 +111,8 @@
                 <select name="role" id="" class="form-control" data-fv-notempty="true">
                   <option value="">Please Choose</option>
                   <option value="technision" @if(isset($technision) && $technision->role == 'technision' || (!empty(old('technision')) && old('technision') == 'technision')) selected @endif>Technision</option>
+                  <option value="sub admin" @if(isset($technision) && $technision->role == 'sub admin' || (!empty(old('role')) && old('role') == 'sub admin')) selected @endif>Sub Admin</option>
+                  <option value="plumber" @if(isset($technision) && $technision->role == 'plumber' || (!empty(old('role')) && old('role') == 'plumber')) selected @endif>Plumber</option>
                 </select>
               </div>
                 <div class="form-group">
@@ -192,7 +194,7 @@
          html_content = '';
      $.ajax({
       type:'get',
-      url:'/admin/province/json/'+country_id,
+      url:'{{ url("/admin/province/json") }}/'+country_id,
       dataType:'json',
       success:function(data){
         if (data) {

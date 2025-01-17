@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-  Technisions List
+  Users List
 @endsection
 @section('content')
  
@@ -10,7 +10,7 @@
         <h1 class="page-title">{{ ucfirst(env('business_title'))}}</h1>
         <ol class="breadcrumb">
           <li class="breadcrumb-item">Admin Dashboard</li>
-          <li class="breadcrumb-item"><a href="#">Technisions </a></li>
+          <li class="breadcrumb-item"><a href="#">Users </a></li>
           <li class="breadcrumb-item active">list</li>
         </ol>
         
@@ -19,7 +19,7 @@
   <div class="page-content container-fluid">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title">Technisions List</h3>
+          <h3 class="panel-title">Users List</h3>
         </div>
         <div class="panel-body mt-5">
               
@@ -31,7 +31,7 @@
         @endif
         
           <div class="d-flex justify-content-end mb-2">
-            <a href="{{ route('admin.technision.create') }}" class="btn btn-primary float-right"><i class="icon wb-plus-circle"></i>Add</a>
+            <a href="{{ route('admin.user.create') }}" class="btn btn-primary float-right"><i class="icon wb-plus-circle"></i>Add</a>
         </div>
         
           
@@ -42,6 +42,7 @@
                     <th class="text-center">S.No</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th class="text-center">Role</th>
                     <th>Phone</th>
                     <th class="text-center">Country</th>
                     <th class="text-center">Province</th>
@@ -52,11 +53,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(\App\Models\User::where('role','technision')->with(['country','province'])->get() as $user)
+                @foreach(\App\Models\User::wherein('role',['admin','technision','sub admin','plumber'])->with(['country','province'])->get() as $user)
                  <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td class="text-left">{{ $user->first_name.' '.$user->last_name}}</td>
                     <td class="text-left">{{ $user->email }}</td>
+                    <td class="text-left"><span class="badge badge-info font-weight-100">{{ ucwords($user->role) }}</span></td>
                     <td class="text-left">{{ $user->phone }}</td>
                     <td class="text-center">{{ !empty($user->country->name) ? $user->country->name : ''}}</td>
                     <td class="text-center">{{ !empty($user->province->name) ? $user->province->name : ''}}</td>
@@ -74,10 +76,10 @@
                         <div class="dropdown-menu" aria-labelledby="exampleIconDropdown1" role="menu">
                         
                             <a type="button" class="dropdown-item btn btn-primary btn-outline"
-                                id="" href="{{ route('admin.technision.edit',$user->id)}}">
+                                id="" href="{{ route('admin.user.edit',$user->id)}}">
                                 <i class="icon fa-pencil" aria-hidden="true" style="font-size: 15px;"></i>Edit</a>
                             <a type="button" class="dropdown-item btn btn-danger btn-outline"
-                            id="delete-type" href="{{ route('admin.technision.delete',$user->id)}}">
+                            id="delete-type" href="{{ route('admin.user.delete',$user->id)}}">
                             <i class="icon fa-trash-o" aria-hidden="true" style="font-size: 15px;"></i>Delete</a>
                         </div>
                     </td>
@@ -95,10 +97,10 @@
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">×</span>
                         </button>
-                           <h4 class="modal-title">Delete Technision</h4>
+                           <h4 class="modal-title">Delete User</h4>
                            </div>
                             <div class="modal-body">
-                        <p class="text-danger">Are you Sure to Delete the Technision ?</p>
+                        <p class="text-danger">Are you Sure to Delete the User ?</p>
                       </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

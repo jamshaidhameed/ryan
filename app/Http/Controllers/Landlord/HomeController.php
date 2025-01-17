@@ -301,8 +301,6 @@ class HomeController extends Controller
            }
         }
 
-        
-
 
 
         Properties::where('id',$id)->update(
@@ -310,7 +308,6 @@ class HomeController extends Controller
                 'title_en' => $request->title_en,
                 'description_en' => $request->description_en,
                 'slug' => $slug,
-                'property_code' => $slug,
                 'price' => $request->price,
                 'contract_period' => $request->contract_period,
                 'property_type_id' => $request->property_type_id,

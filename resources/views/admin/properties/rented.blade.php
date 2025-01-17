@@ -49,17 +49,13 @@
                 @foreach($tenant_contracts as $rented)
                  <tr>
                     <td class="text-center">
-                        <a href="{{ route('admin.property.details',!empty($rented->property) ? $rented->property->slug : 'NA') }}">#{{ $rented->contract_code}}</a>
+                        <a href="{{ route('admin.property.details',$rented->slug) }}">#{{ $rented->contract_code}}</a>
                     </td>
-                    <td class="text-left">{{ !empty($rented->property) ? $rented->property->title_en : ''}}</a></td>
-                    <td class="text-left">{{ !empty($rented->property) ? $rented->property->street_address : ''}}</td>
-                    <td class="text-center">{{ !empty($rented->tenant->first_name) ? $rented->tenant->first_name." ".$rented->tenant->last_name : '' }}</td>
+                    <td class="text-left">{{ $rented->title_en }}</a></td>
+                    <td class="text-left">{{ $rented->location }}</td>
+                    <td class="text-center">{{ $rented->tenant }}</td>
                     <td class="text-center">
-                        @if(!empty($rented->property->user_id))
-                            @php $landlord = \App\Models\User::find($rented->property->user_id); @endphp
-
-                           {{ !empty($landlord) ? $landlord->first_name." ".$landlord->last_name : ''}}
-                        @endif
+                        {{ $rented->landlord}}
                     </td>
                     <td class="text-center">{{ $rented->contract_period}}</td>
                     <td class="text-center">

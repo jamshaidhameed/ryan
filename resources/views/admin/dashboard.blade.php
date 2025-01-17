@@ -72,7 +72,7 @@
               <i class="text-danger icon wb-triangle-up font-size-20">
             </i>
               <span class="font-size-40 font-weight-100">{{ \App\Models\User::where('role','technision')->get()->count()}}</span>
-              <p class="blue-grey-400 font-weight-100 m-0" > <a href="{{ route('admin.technision.list') }}">More</a> </p>
+              <p class="blue-grey-400 font-weight-100 m-0" > <a href="{{ route('admin.user.list') }}">More</a> </p>
             </div>
           </div>
         </div>
