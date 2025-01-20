@@ -14,8 +14,13 @@ return new class extends Migration
         Schema::create('inspection_contents', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('inspection_id');
-            $table->longtext('content');
+            $table->string('title')->nullable;
+            $table->string('name')->nullable();
+            $table->string('value')->nullable();
+            $table->text('comment')->nullable();
             $table->boolean('completed')->default(false);
+            $table->string('inspected_date')->nullable();
+            $table->string('united_homes')->nullable();
             $table->timestamps();
         });
     }

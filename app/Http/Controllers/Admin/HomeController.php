@@ -20,6 +20,7 @@ use App\Models\LandlordContracts;
 use App\Models\TenantContracts;
 use App\Models\IssueTickets;
 Use App\Models\IssueTicketInvoices;
+use App\Models\Inspections;
 use App\Mail\TenantContract;
 use App\Mail\UserRegister;
 use App\Mail\LandlordInvoicePaid;
@@ -1342,5 +1343,129 @@ class HomeController extends Controller
         $property = Properties::find($id);
 
         return view('admin.tenant_contract',compact('tenant_contracts','property'));
+    }
+
+    //Inspections 
+
+    public function inspections($id){
+
+        // $data = $request->all();
+        // // return $data;
+        // $property = Properties::find($data['property']);
+
+        // if (!empty($_GET['type']) && $_GET['type'] != 'all_inspection') {
+            
+        //     if ($_GET['type'] == 'pre_inspection') {
+        //         $inspections = Inspections::where(['inspectionable_id' => $_GET['property'],'inspection_type' => 'Pre Inspection'])->get();
+        //     }else if($_GET['type'] == 'regular_inspection'){
+        //         $inspections = Inspections::where(['inspectionable_id' => $_GET['property'],'inspection_type' => 'Regular Inspection'])->get();
+        //     }else if($_GET['type'] == 'end_inspection'){
+        //         $inspections = Inspections::where(['inspectionable_id' => $_GET['property'],'inspection_type' => 'Post Inspection'])->get();
+        //     }
+
+        // }else{
+            $inspections = Inspections::where(['inspectionable_id' => $id])->get();
+        // }
+        
+        $tenant_contract = TenantContracts::where('id',$id)->with(['tenant','property'])->first();
+
+        return view('admin.inspection.index',compact('inspections','tenant_contract'));
+    }
+    public function store_inspection(Request $request){
+
+        $request->validate(
+            [
+                'id' => 'required',
+                'inspection_type' => 'required',
+                'inspection_date' => 'required',
+                'inspected_by' => 'required',
+                'inspection_notes' => 'nullable'
+            ]
+            );
+
+         $inspection_code = '';
+
+         do{
+                $v_code = rand(10000000,12345678);
+                $inspection_code = $v_code;
+
+                $exist = Inspections::where('inspection_code',$inspection_code)->get();
+
+            }while(count($exist) !=0);
+
+        Inspections::create(
+            [
+                'inspectionable_id' => $request->id,
+                'inspectionable_type' => $request->inspectionable_type,
+                'inspection_code' => $inspection_code,
+                'inspection_type' => $request->inspection_type,
+                'inspection_date' => date_format(date_create($request->inspection_date),'Y-m-d H:i:s'),
+                'inspection_notes' => $request->inspection_notes,
+                'inspected_by' => $request->inspected_by
+            ]
+            );
+
+        session()->flash('success','Inspection Created Successfully');
+
+
+        return redirect()->route('admin.inspections.list',$request->id);
+    }
+    public function inspection_update(Request $request,string $id){
+        $request->validate(
+            [
+                'id' => 'required',
+                'inspection_type' => 'required',
+                'inspection_date' => 'required',
+                'inspected_by' => 'required',
+                'inspection_notes' => 'nullable'
+            ]
+            );
+
+        Inspections::where('id',$id)->update(
+            [
+                'inspectionable_id' => $request->id,
+                'inspectionable_type' => $request->inspectionable_type,
+                'inspection_type' => $request->inspection_type,
+                'inspection_date' => date_format(date_create($request->inspection_date),'Y-m-d H:i:s'),
+                'inspection_notes' => $request->inspection_notes,
+                'inspected_by' => $request->inspected_by
+            ]
+            );
+
+        session()->flash('success','Inspection Updated Successfully');
+         return redirect()->route('admin.inspections.list',$id);
+        
+        return redirect($inspection_url);
+    }
+    public function inspection_delete($id){
+
+         
+        $inspection = Inspections::find($id);
+
+        $property_id = $inspection->inspectionable_id;
+
+        $inspection->delete();
+
+        session()->flash('success','Inspection Deleted Successfully');
+
+        $type_url = "&property=".$property_id;
+        $inspection_url = route('admin.inspections.list',$type_url);
+
+        return redirect($inspection_url);
+    }
+
+    //View Inspection Contents 
+    public function inspection_content($id){
+
+        $inspection = Inspections::find($id);
+
+        if (empty($inspection)) {
+            
+            return redirect()->back()->withErrors('Sorry no Inspection Record Found');
+        }
+
+        $tenant_contract = TenantContracts::where('id',$inspection->inspectionable_id)->with('tenant','property')->first();
+        
+        return view('admin.inspection.detail',compact('inspection','tenant_contract'));
     }
 }

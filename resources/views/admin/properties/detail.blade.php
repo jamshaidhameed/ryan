@@ -217,7 +217,8 @@
                                   <a href="" class="btn btn-primary btn-outline btn-tenant-terminate"  data-id="{{ $tenant_contract->id}}">Terminate Contract</a>
                                 </div>
                                 <div class="col col-md-3">
-                                    <a href="" class="btn btn-primary btn-outline">Inspections</a>
+                                     
+                                    <a target="_blank" href="{{ route('admin.inspections.list',$tenant_contract->id) }}" class="btn btn-primary btn-outline">Inspections</a>
                                 </div>
                             </div>
                             @else 

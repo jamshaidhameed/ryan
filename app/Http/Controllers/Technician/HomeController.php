@@ -4,12 +4,17 @@ namespace App\Http\Controllers\Technician;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\User;
 use App\Models\IssueTickets;
 use App\Models\IssueTicketInvoices;
 use App\Models\Provinces;
+use App\Models\Inspections;
+use App\Models\TenantContracts;
+use App\Models\InspectionContents;
+use App\Models\InspectionFiles;
 use Auth;
 use File;
 use Redirect;
@@ -220,8 +225,117 @@ class HomeController extends Controller
         session()->flash('success','Your Password has been successfully changed');
 
         return redirect()->back();
+    }
+
+    // Inspection List
+
+    public function inspection_list(){
+
+        $inspections_list = Inspections::orderBy('id','desc')->where('inspected_by',Auth::user()->id)->get();
+
+        return view('technician.inspector.index',compact('inspections_list'));
+    }
+
+    public function inspect($id){
+
+        $inspection = Inspections::where('id',$id)->with('inspector')->first();
+        $tenant_contract = TenantContracts::where('id',$inspection->inspectionable_id)->with(['tenant','property'])->first();
+
+        return view('technician.inspector.inspection',compact('inspection','tenant_contract'));
+    }
+
+    //Electric Meter Form Submit
+
+    public function inspection_form_submit(Request $request){
+        
+        $request->validate(
+            [
+                'title' => 'required',
+                'insp_id' => 'required',
+            ]
+            );
+
+        $title = $request->title;
+        $names = $request->name;
+        $values = $request->value;
+        $comments = $request->comment;
+        $images = $request->images;
+        $inspection_dates = $request->inspection_date;
+        $united_homes = $request->united_homes;
+
+        $check_values = collect($values);
+        $check_values->filter()->isEmpty();
+
+        if (empty($names) || empty($values)) {
+            
+            return response()->json(['success' => false,'message' => 'Please fill the Form Completely']);
+        }
+
+        
+
+        if (!empty($images) && count($images) > 0) {
+
+            $if_images_exist = InspectionFiles::where(['inspection_id' => $request->insp_id,'title' => $request->title])->get();
+
+            if (count($if_images_exist) > 0) {
+                
+                foreach ($if_images_exist as $ime) {
+                
+                if(File::exists(public_path('upload/inspection/').$ime->file_url)) {
+                    File::delete(public_path('upload/inspection/').$ime->file_url);
+                }
+              }
+
+              InspectionFiles::where(['inspection_id' => $request->insp_id,'title' => $request->title])->delete();
+            }
 
 
+            
+           foreach ($images as $img) {
+                
+                $new_name = rand().'.'.$img->getClientOriginalExtension();
+
+                $img->move(public_path('upload/inspection'),$new_name);
+
+                InspectionFiles::create(
+                    [
+                        'inspection_id' => $request->insp_id,
+                        'file_url' => $new_name,
+                        'title' => $request->title
+                    ]
+                    );
+           }
+        }
+
+         $if_exist = InspectionContents:: where(['inspection_id' => $request->insp_id,'title' => $request->title])->get();
+         
+            if (count($if_exist) > 0) {
+                
+                InspectionContents:: where(['inspection_id' => $request->insp_id,'title' => $request->title])->delete();
+                
+            }
+        
+        foreach ($names as $key => $name) {
+            
+            $value = !empty($values[$key]) ? $values[$key] : '';
+            $comment = !empty($comments[$key]) ? $comments[$key] : '';
+            $inspection_date = !empty($inspection_dates[$key]) ? date_format(date_create($inspection_dates[$key]),'Y-m-d') : '';
+            $united_home = !empty($united_homes[$key]) ? $united_homes[$key] : '';
+
+            InspectionContents::create(
+                [
+                    'inspection_id' => $request->insp_id,
+                    'title' => $request->title,
+                    'name' => $name,
+                    'value' => $value,
+                    'comment' => $comment,
+                    'inspected_date' => $inspection_date,
+                    'united_homes' => $united_home
+                ]
+                );
+        }
+
+        return response()->json(['success' => true,'message' => 'Inspection Stored Successfully']);
     }
 
 

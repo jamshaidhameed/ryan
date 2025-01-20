@@ -191,7 +191,7 @@ class HomeController extends Controller
 
             if (!empty($_GET['province']) ) {
                 
-                $properties = $properties->where('province_id',$_GET['province'])->where(['status' => 1])->paginate(9);
+                $properties = $properties->where(['province_id' => $_GET['province'],'status' => 1])->paginate(9);
             }
 
             if (!empty($_GET['property_type'])) {

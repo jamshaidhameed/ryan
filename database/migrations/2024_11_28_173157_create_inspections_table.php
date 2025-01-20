@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('inspections', function (Blueprint $table) {
             $table->id();
-              $table->unsignedBigInteger('inspectionable_id');
-            $table->string('inspectionable_type');
-            $table->string('inspection_code');
-            $table->string('inspection_type');
-            $table->date('inspection_date');
-            $table->text('inspection_notes');
-            $table->boolean('is_ready');
-            $table->unsignedBigInteger('inspected_by');
-            $table->unsignedBigInteger('parent_id');
-            $table->integer('total_persons');
+            $table->unsignedBigInteger('inspectionable_id')->nullable();
+            $table->string('inspectionable_type')->nullable();
+            $table->string('inspection_code')->nullable();
+            $table->string('inspection_type')->nullable();
+            $table->date('inspection_date')->nullable();
+            $table->text('inspection_notes')->nullable();
+            $table->boolean('is_ready')->default(false);
+            $table->unsignedBigInteger('inspected_by')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->integer('total_persons')->nullable();
             $table->timestamps();
         });
     }

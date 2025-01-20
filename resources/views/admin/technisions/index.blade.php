@@ -53,7 +53,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(\App\Models\User::wherein('role',['admin','technision','sub admin','plumber'])->with(['country','province'])->get() as $user)
+                @foreach(\App\Models\User::wherein('role',['admin','technision','sub admin','plumber','inspector'])->with(['country','province'])->get() as $user)
                  <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td class="text-left">{{ $user->first_name.' '.$user->last_name}}</td>

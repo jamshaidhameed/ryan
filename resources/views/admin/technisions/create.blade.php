@@ -113,6 +113,7 @@
                   <option value="technision" @if(isset($technision) && $technision->role == 'technision' || (!empty(old('technision')) && old('technision') == 'technision')) selected @endif>Technision</option>
                   <option value="sub admin" @if(isset($technision) && $technision->role == 'sub admin' || (!empty(old('role')) && old('role') == 'sub admin')) selected @endif>Sub Admin</option>
                   <option value="plumber" @if(isset($technision) && $technision->role == 'plumber' || (!empty(old('role')) && old('role') == 'plumber')) selected @endif>Plumber</option>
+                  <option value="inspector" @if(isset($technision) && $technision->role == 'inspector' || (!empty(old('role')) && old('role') == 'inspector')) selected @endif>Inspector</option>
                 </select>
               </div>
                 <div class="form-group">
