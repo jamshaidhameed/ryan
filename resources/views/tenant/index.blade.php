@@ -115,28 +115,15 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label for="">{{ __('Country') }}</label>
-                                    <select name="country_id" id="" class="form-control">
-                                        <option value="">Please Choose</option>
-                                        @foreach(\App\Models\Countries::orderBy('name','ASC')->get() as $country)
-                                        <option value="{{ $country->id }}" @if(!empty($user->country_id) && $user->country_id == $country->id || (!empty(old('country_id')) && old('country_id') == $country->id)) selected @endif>{{ $country->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
                          <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     @php $province = !empty($user->province_id) ? \App\Models\Provinces::find($user->province_id) : null; @endphp
                                     <label for="">{{ __('Province') }}</label>
                                     <select name="province_id" id="province_id">
-                                        @if(!empty($province))
-                                         <option value="{{ $province->id }}">{{ $province->name }}</option>
-                                        @endif
+                                        @foreach(\App\Models\Provinces::orderBy('name','ASC')->get() as $province)
+                                          <option value="{{ $province->id}}" @if(!empty($user->province_id) && $user->province_id == $province->id) selected @endif>{{ $province->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

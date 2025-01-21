@@ -1,4 +1,4 @@
 <?php
 return [
-    "site" => 'Rayan Rent and Co'
+    "site" => 'Rayan Rent and Co',
 ];

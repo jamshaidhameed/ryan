@@ -143,25 +143,18 @@
                 <div class="col col-md-8">
                   <div class="form-group">
                     <label for="" class="form-control-label">Street Address</label>
-                    <textarea name="street_address"  id="summernote" data-plugin="summernote">
-                      @if(isset($technision))
-                      {{ $technision->street_address}}
-                      @elseif(!empty(old('street_address')))
-                       {{ old('street_address') }}
-                      @endif
-                    </textarea>
+                    <textarea name="street_address" id="" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="" class="form-control-label">Status</label>
+                    <select name="status" id="" class="form-control" data-fv-notempty="true">
+                      <option value="">Please Choose</option>
+                      <option value="1" @if(isset($technision) && $technision->status == 1 || (!empty(old('status')) && old('status') == 1)) selected @endif>Active</option>
+                      <option value="0" @if(isset($technision) && $technision->status == 0 || (!empty(old('status')) && old('status') == 0)) selected @endif>In Active</option>
+                    </select>
                   </div>
                 </div>
-                <div class="col col-md-4">
-                  <div class="form-group" style="margin-top: 164px;">
-                <label for="" class="form-control-label">Status</label>
-                <select name="status" id="" class="form-control" data-fv-notempty="true">
-                  <option value="">Please Choose</option>
-                  <option value="1" @if(isset($technision) && $technision->status == 1 || (!empty(old('status')) && old('status') == 1)) selected @endif>Active</option>
-                  <option value="0" @if(isset($technision) && $technision->status == 0 || (!empty(old('status')) && old('status') == 0)) selected @endif>In Active</option>
-                </select>
-              </div>
-                </div>
+
               </div>
              <!-- End Second Row -->
             <div class="form-group float-left">

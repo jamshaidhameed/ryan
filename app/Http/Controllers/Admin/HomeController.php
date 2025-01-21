@@ -21,6 +21,7 @@ use App\Models\TenantContracts;
 use App\Models\IssueTickets;
 Use App\Models\IssueTicketInvoices;
 use App\Models\Inspections;
+use App\Models\cms;
 use App\Mail\TenantContract;
 use App\Mail\UserRegister;
 use App\Mail\LandlordInvoicePaid;
@@ -1467,5 +1468,93 @@ class HomeController extends Controller
         $tenant_contract = TenantContracts::where('id',$inspection->inspectionable_id)->with('tenant','property')->first();
         
         return view('admin.inspection.detail',compact('inspection','tenant_contract'));
+    }
+
+    // CMS Pages CURD 
+    public function cms_pages_index(){
+
+        return view('admin.cms.index');
+    }
+    public function cms_pages_create(){
+        return view('admin.cms.create');
+    }
+    public function cms_pages_store(Request $request){
+
+        $request->validate(
+            [
+                'title' => 'required',
+                'content_en' => 'required',
+                'content_nl' => 'required',
+                'show_on' => 'required',
+                'status' => 'required',
+            ]
+            );
+        $slug = Str::slug($request->title);
+
+        $if_exist = cms::where('slug',$slug)->get();
+        if (count($if_exist) > 0) {
+            
+             $slug = $slug.'-'.Str::random(4);
+        }
+
+        cms::create(
+            [
+                'title' => $request->title,
+                'slug' => $slug,
+                'content_en' => $request->content_en,
+                'content_nl' => $request->content_nl,
+                'show_on' => $request->show_on,
+                'status' => $request->status
+            ]
+            );
+
+        session()->flash('success','CMS Page Created Successfully');
+
+        return redirect()->route('admin.cms.pages.list');
+    }
+    public function cms_pages_edit($id){
+
+        return view('admin.cms.create')->with('cms',cms::find($id));
+    }
+    public function cms_pages_update(Request $request,string $id){
+         $request->validate(
+            [
+                'title' => 'required',
+                'content_en' => 'required',
+                'content_nl' => 'required',
+                'show_on' => 'required',
+                'status' => 'required',
+            ]
+            );
+
+            $slug = Str::slug($request->title);
+
+            $if_exist = cms::where('slug',$slug)->get();
+            if (count($if_exist) > 0) {
+                
+                $slug = $slug.'-'.Str::random(4);
+            }
+        cms::where('id',$id)->update(
+            [
+                'title' => $request->title,
+                'slug' => $slug,
+                'content_en' => $request->content_en,
+                'content_nl' => $request->content_nl,
+                'show_on' => $request->show_on,
+                'status' => $request->status
+            ]
+            );
+
+        session()->flash('success','CMS Page Updated Successfully');
+
+        return redirect()->route('admin.cms.pages.list');
+    }
+    public function cms_pages_delete($id){
+
+        cms::where('id',$id)->delete();
+
+        session()->flash('success','CMS Page Deleted Successfully');
+
+        return redirect()->route('admin.cms.pages.list');
     }
 }
