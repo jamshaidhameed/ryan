@@ -20,4 +20,10 @@ Route::middleware(['auth','url_redirect', 'redirect_if_not_authenticated'])
      Route::get('/password/change',[App\Http\Controllers\Technician\HomeController::class,'change_password'])->name('password.change');
      Route::post('/password/change/post',[App\Http\Controllers\Technician\HomeController::class,'change_password_post'])->name('password.change.post');
 
+     //Inspection List
+
+     Route::get('/inspection_list',[App\Http\Controllers\Technician\HomeController::class,'inspection_list'])->name('inspection.list');
+     Route::get('/inspection/{id}',[App\Http\Controllers\Technician\HomeController::class,'inspect'])->name('take.inspections');
+     Route::post('inspection/form',[App\Http\Controllers\Technician\HomeController::class,'inspection_form_submit'])->name('inspection.form.submit');
+
     });

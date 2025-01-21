@@ -403,3 +403,45 @@ $(document).on("click", ".reason-btn", function (e) {
     );
   $(".terminate-reason").modal("show");
 });
+
+//Create Inspection
+$(document).on("click", ".btn-store-inspection", function (e) {
+  e.preventDefault();
+  var url = $(this).attr("href");
+  $(".create-inspection-modal").find("form").attr("action", url);
+  $(".create-inspection-modal").modal("show");
+});
+
+//Update Inspection
+$(document).on("click", ".btn-update-inspection", function (e) {
+  e.preventDefault();
+  var url = $(this).attr("href"),
+    type = $(this).data("insptype"),
+    assing_to = $(this).data("assignto"),
+    inspection_date = $(this).data("insdate"),
+    note = $(this).data("note");
+  $(".create-inspection-modal").find("form").attr("action", url);
+  $(".create-inspection-modal")
+    .find("form")
+    .find(".modal-title")
+    .text("Update Inspection");
+  $(".create-inspection-modal")
+    .find("form")
+    .find('select[name="inspection_type"]')
+    .val(type);
+  $(".create-inspection-modal")
+    .find("form")
+    .find('input[name="inspection_date"]')
+    .val(inspection_date);
+  $(".create-inspection-modal")
+    .find("form")
+    .find('select[name="inspected_by"]')
+    .val(assing_to);
+  $(".create-inspection-modal")
+    .find("form")
+    .find('textarea[name="inspection_notes"]')
+    .val(note);
+  $(".create-inspection-modal").find("form").find(".btn-save").text("Update");
+  $(".create-inspection-modal").find(".modal-title").text("Update Inspection");
+  $(".create-inspection-modal").modal("show");
+});

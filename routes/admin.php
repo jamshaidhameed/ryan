@@ -122,4 +122,12 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
         //All Tenant Contracts 
         Route::get('/tenant/contracts/all/{id}',[App\Http\Controllers\Admin\HomeController::class,'all_tenant_contract'])->name('tenant.contracts');
 
+        //Inspections 
+        Route::get('inspections/list/{id}',[App\Http\Controllers\Admin\HomeController::class,'inspections'])->name('inspections.list');
+        Route::post('inspections/store',[App\Http\Controllers\Admin\HomeController::class,'store_inspection'])->name('inspections.store');
+        Route::post('inspections/update/{id}',[App\Http\Controllers\Admin\HomeController::class,'inspection_update'])->name('inspections.update');
+        Route::get('/inspection/delete/{id}',[App\Http\Controllers\Admin\HomeController::class,'inspection_delete'])->name('landlord.delete');
+        //Inspection Contents 
+        Route::get('/inspection/contents/{id}',[App\Http\Controllers\Admin\HomeController::class,'inspection_content'])->name('inspection.contents');
+
     });

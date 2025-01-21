@@ -71,7 +71,7 @@ class LoginController extends Controller
                 return Redirect::to($url)->with('success','Successfully logged in');
             }       
             return redirect()->intended( route("tenant.dashboard") );
-        }else if ( $user_role == 'technision' ) {
+        }else if ( $user_role == 'technision' || $user_role == 'plumber' || $user_role == 'inspector') {
             return redirect()->intended( route("technision.dashboard") );
         }
 

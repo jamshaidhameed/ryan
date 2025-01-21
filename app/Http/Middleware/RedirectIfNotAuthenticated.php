@@ -39,7 +39,7 @@ class RedirectIfNotAuthenticated
             if ( $current_route_name_prefix == "admin" || $current_route_name_prefix == "landlord" || $current_route_name_prefix == "technision" ) {
                 return redirect()->route( "tenant.dashboard" );
             }
-        }else if( $user_role == 'technision'){
+        }else if( $user_role == 'technision' || $user_role == 'plumber' || $user_role == 'inspector'){
 
             if ( $current_route_name_prefix == "admin" || $current_route_name_prefix == "landlord"  || $current_route_name_prefix == "tenant" ) {
                 return redirect()->route( "technision.dashboard" );

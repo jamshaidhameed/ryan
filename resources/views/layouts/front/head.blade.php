@@ -49,7 +49,19 @@
                         <a href="{{ route('register') }}" class="sign-in"><i class="fa fa-user" style="margin-right:10px;"></i> Register</a>
                     </li>
                     @else 
-                        @php $route = route(Auth::user()->role.".dashboard"); @endphp
+                        @php 
+                        
+                        $route = '' ;
+                        if(Auth::user()->role != 'inspector' && Auth::user()->role != 'plumber') {
+                             
+                            $route = route(Auth::user()->role.".dashboard"); 
+                        }else{
+
+                            $route = route("technision.dashboard"); 
+                        }
+                        
+                        
+                        @endphp
                      <li>
                         <a href="{{ $route }}" class="sign-in"><i class="fa fa-dashboard" style="margin-right: 6px;"></i>Dashboard </a>
                      </li>
