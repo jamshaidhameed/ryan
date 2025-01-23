@@ -325,19 +325,19 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-6">
                             <ul>
-                                <li><span><i class="flaticon-bed"></i> 3 Beds</span></li>
-                                <li><span><i class="flaticon-bath"></i> 2 Bathroom</span></li>
+                                <li><span><i class="flaticon-bed"></i> {{ $property_info->bedrooms}} Beds</span></li>
+                                <li><span><i class="flaticon-bath"></i> {{ $property_info->bathrooms}} Bathroom</span></li>
                             </ul>
                         </div>
                         <div class="col-md-4 col-sm-6">
                             <ul>
-                                <li><span><i class="flaticon-car-repair"></i> 1 Garage</span></li>
-                                <li><span><i class="flaticon-balcony-and-door"></i>1 Balcony</span></li>
+                                <li><span><i class="flaticon-car-repair"></i> {{ $property_info->garages }} Garage</span></li>
+                                <li><span><i class="flaticon-balcony-and-door"></i> Balcony</span></li>
                             </ul>
                         </div>
                         <div class="col-md-4 col-sm-6">
                             <ul>
-                                <li><span><i class="flaticon-square-layouting-with-black-square-in-east-area"></i> 4800 sq ft</span></li>
+                                <li><span><i class="flaticon-square-layouting-with-black-square-in-east-area"></i> {{ $property_info->area }} sq ft</span></li>
                                 <li><span><i class="flaticon-monitor"></i> TV</span></li>
                             </ul>
                         </div>

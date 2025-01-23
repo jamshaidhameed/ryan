@@ -130,4 +130,12 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
         //Inspection Contents 
         Route::get('/inspection/contents/{id}',[App\Http\Controllers\Admin\HomeController::class,'inspection_content'])->name('inspection.contents');
 
+        //CMS CURD 
+        Route::get('/cms/pages/list',[App\Http\Controllers\Admin\HomeController::class,'cms_pages_index'])->name('cms.pages.list');
+        Route::get('/cms/pages/create',[App\Http\Controllers\Admin\HomeController::class,'cms_pages_create'])->name('cms.pages.create');
+        Route::post('/cms/pages/post',[App\Http\Controllers\Admin\HomeController::class,'cms_pages_store'])->name('cms.pages.post');
+        Route::get('/cms/pages/edit/{id}',[App\Http\Controllers\Admin\HomeController::class,'cms_pages_edit'])->name('cms.pages.edit');
+        Route::post('/cms/pages/update/{id}',[App\Http\Controllers\Admin\HomeController::class,'cms_pages_update'])->name('cms.pages.update');
+        Route::post('/cms/pages/delete/{id}',[App\Http\Controllers\Admin\HomeController::class,'cms_pages_delete'])->name('cms.pages.delete');
+
     });

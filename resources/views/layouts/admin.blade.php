@@ -308,6 +308,14 @@
                  
               </a>
             </li>
+             <li class="site-menu-item   {{ Route::currentRouteName() == 'admin.cms.pages.list' || Route::currentRouteName() == 'admin.cms.pages.create' || Route::currentRouteName() == 'admin.cms.pages.edit' ? 'active' : ''}}">
+                <a href="{{ route('admin.cms.pages.list') }}">
+                  <!-- <i class="site-menu-icon wb-users" aria-hidden="true"></i> -->
+                   <i class="icon fa-user-secret" aria-hidden="true" style="font-size: 15px;margin-right:10px;"></i>
+                  <span class="site-menu-title">CMS Pages</span>
+                 
+              </a>
+            </li>
              <!-- End Admin List -->
           </ul>
           <!--  -->

@@ -445,3 +445,12 @@ $(document).on("click", ".btn-update-inspection", function (e) {
   $(".create-inspection-modal").find(".modal-title").text("Update Inspection");
   $(".create-inspection-modal").modal("show");
 });
+
+// CMS page Delete
+$(document).on("click", ".delete-cms", function (e) {
+  e.preventDefault();
+  var url = $(this).attr("href");
+
+  $(".cms-delete").find("form").attr("action", url);
+  $(".cms-delete").modal("show");
+});

@@ -26,17 +26,19 @@
                     </h4>
                     <ul class="links">
                         <li>
-                            <a href="#"><i class="fa fa-angle-right"></i>Home</a>
+                            <a href="{{ url('/') }}"><i class="fa fa-angle-right"></i>Home</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-angle-right"></i>About us</a>
+                            <a href="{{ route('properties.list') }}"><i class="fa fa-angle-right"></i>Properties</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-angle-right"></i>Properties</a>
+                            <a href="{{ route('contact.us') }}"><i class="fa fa-angle-right"></i>Contact Us</a>
                         </li>
+                        @foreach(\App\Models\cms::where('show_on','footer')->get() as $page)
                         <li>
-                            <a href="#"><i class="fa fa-angle-right"></i>Contact Us</a>
+                            <a href="{{ route('cms.page',$page->slug) }}"><i class="fa fa-angle-right"></i>{{ucwords( $page->title) }}</a>
                         </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

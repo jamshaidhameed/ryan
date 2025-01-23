@@ -103,29 +103,32 @@
                     </button>
                     <div class="navbar-collapse collapse w-100" id="navbar">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown active">
+                            <li class="nav-item dropdown {{ Route::currentRouteName() == 'home' ? 'active' : ''}}">
                                 <a class="nav-link dropdown-toggle" href="{{ route('home')}}" >
                                     Home
                                 </a>
                                 
                             </li>
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown {{ Route::currentRouteName() == 'properties.list' ? 'active' : ''}}">
                                 <a class="nav-link dropdown-toggle" href="{{ route('properties.list') }}">
                                     Properties
                                 </a>
                                 
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" >
-                                    About Us
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#">
+                            <li class="nav-item dropdown {{ Route::currentRouteName() == 'contact.us' ? 'active' : ''}}">
+                                <a class="nav-link dropdown-toggle" href="{{ route('contact.us') }}">
                                     Contact Us
                                 </a>
 
                             </li>
+                            @foreach(\App\Models\cms::where('show_on','header')->get() as $page)
+                            
+                            <li class="nav-item dropdown {{ Route::currentRouteName() == route('cms.page',$page->slug) ? 'active' : ''}}">
+                                <a class="nav-link dropdown-toggle" href="{{ route('cms.page',$page->slug) }}" >
+                                    {{ ucwords($page->title)}}
+                                </a>
+                            </li>
+                            @endforeach
 
                             <li class="nav-item dropdown">
                                 <a href="#full-page-search" class="nav-link">

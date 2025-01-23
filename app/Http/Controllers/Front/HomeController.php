@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use App\Models\Properties;
+use App\Models\cms;
 
 class HomeController extends Controller
 {
@@ -246,29 +247,12 @@ class HomeController extends Controller
 
     }
 
-    function convertToEmbedUrl($url){
-    // Parse the URL
-    $parsedUrl = parse_url($url);
+  function contact_us(){
 
-    // Check if it's a YouTube URL
-    if (isset($parsedUrl['host']) && strpos($parsedUrl['host'], 'youtube.com') !== false) {
-        // Parse query parameters
-        parse_str($parsedUrl['query'], $queryParams);
-
-        if (isset($queryParams['v'])) {
-            // Build and return the embed URL
-            return 'https://www.youtube.com/embed/' . $queryParams['v'];
-        }
-    }
-
-    // Check if it's a shortened YouTube URL
-    if (isset($parsedUrl['host']) && strpos($parsedUrl['host'], 'youtu.be') !== false) {
-        // Extract the video ID from the path
-        return 'https://www.youtube.com/embed' . $parsedUrl['path'];
-    }
-
-    // Return the original URL if it's not a YouTube link
-    return $url;
-}
+    return view('front.contact_us');
+  }
+  function cms_page($slug){
+     return view('front.cms_page')->with('cms_page',cms::where('slug',$slug)->first());
+  }
 }
  
