@@ -42,6 +42,7 @@
                     <th class="text-center">Price</th>
                     <th>Landlord</th>
                     <th class="text-center">Status</th>
+                    <th class="text-center">Featured</th>
                     <th></th>
                 </tr>
             </thead>
@@ -59,6 +60,13 @@
                           <span class="badge badge-success font-weight-100">Published</span>
                         @else 
                         <span class="badge badge-warning font-weight-100">Not Published</span>
+                        @endif
+                    </td>
+                    <td class="text-center">
+                        @if($property->featured == 1)
+                          <span class="badge badge-success font-weight-100">Yes</span>
+                        @else 
+                        <span class="badge badge-warning font-weight-100">No</span>
                         @endif
                     </td>
                     <td>

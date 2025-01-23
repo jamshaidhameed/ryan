@@ -1291,8 +1291,10 @@ class HomeController extends Controller
          }
 
         
-
-
+         if ($request->featured == 1) {
+             
+             Properties::where('featured' ,1)->update(['featured' => 0]);
+         }
 
         Properties::where('id',$id)->update(
             [
@@ -1316,6 +1318,7 @@ class HomeController extends Controller
                 'garages' => $request->garages,
                 'parkings' => $request->parkings,
                 'toilets' => $request->toilets,
+                'featured' => $request->featured,
                 'title_nl' => $request->title_nl,
                 'description_nl' => $request->description_nl,
                 'feature_image' => !empty($feature_images_arr) && count($feature_images_arr) > 0 ? implode(",",$feature_images_arr) : $property_info->feature_image,

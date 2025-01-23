@@ -454,3 +454,426 @@ $(document).on("click", ".delete-cms", function (e) {
   $(".cms-delete").find("form").attr("action", url);
   $(".cms-delete").modal("show");
 });
+
+//View First Images on Inspection Form
+$(document).on("click", ".first-btn-view", function (e) {
+  e.preventDefault();
+
+  $(".first-images").modal("show");
+});
+
+//Select Images
+$(document).on("click", ".btn-select-images", function (e) {
+  e.preventDefault();
+  var images = "",
+    btn = $(this);
+  let checked = $(".tbl-first-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  btn.closest('input[name="selected_images[]"]').val(images);
+  $(".first-images").modal("hide");
+});
+
+//Second Form Select
+$(document).on("click", ".second-btn-view", function (e) {
+  e.preventDefault();
+
+  $(".second-images").modal("show");
+});
+
+//Select Images
+$(document).on("click", ".btn-second-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+  let checked = $(".tbl-second-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#second-images").val(images);
+  $(".second-images").modal("hide");
+});
+
+//Third Form Select
+$(document).on("click", ".third-btn-view", function (e) {
+  e.preventDefault();
+
+  $(".third-images").modal("show");
+});
+
+//Select Images
+$(document).on("click", ".btn-third-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-third-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#thid-images").val(images);
+  $(".third-images").modal("hide");
+});
+
+// Fourth Form
+
+//Third Form Select
+$(document).on("click", ".fourth-btn-view", function (e) {
+  e.preventDefault();
+
+  $(".fourth-images").modal("show");
+});
+
+//Select Images
+$(document).on("click", ".btn-fourth-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-fourth-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#fourth-images").val(images);
+  $(".fourth-images").modal("hide");
+});
+
+//FIfth Form
+$(document).on("click", ".fourth-btn-view", function (e) {
+  e.preventDefault();
+
+  $(".fourth-images").modal("show");
+});
+
+//Select Images
+$(document).on("click", ".fifth-btn-view", function (e) {
+  $(".fifth-images").modal("show");
+});
+$(document).on("click", ".btn-fifth-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-fifth-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#fifth-images").val(images);
+  $(".fifth-images").modal("hide");
+});
+
+// Sixth Form
+$(document).on("click", ".sixth-btn-view", function (e) {
+  e.preventDefault();
+
+  $(".sixth-images").modal("show");
+});
+
+//Select Images
+$(document).on("click", ".sixth-btn-view", function (e) {
+  $(".sixth-images").modal("show");
+});
+$(document).on("click", ".btn-sixth-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-sixth-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#sixth-images").val(images);
+  $(".sixth-images").modal("hide");
+});
+
+//Select Images
+$(document).on("click", ".seventh-btn-view", function (e) {
+  $(".seventh-images").modal("show");
+});
+$(document).on("click", ".btn-seventh-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-seventh-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#seventh-images").val(images);
+  $(".seventh-images").modal("hide");
+});
+
+// Eight Form Modal
+$(document).on("click", ".eight-btn-view", function (e) {
+  $(".eight-images").modal("show");
+});
+$(document).on("click", ".btn-eight-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-eight-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#eight-images").val(images);
+  $(".eight-images").modal("hide");
+});
+
+// Ninth Images Upload
+$(document).on("click", ".ninth-btn-view", function (e) {
+  $(".ninth-images").modal("show");
+});
+$(document).on("click", ".btn-ninth-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-ninth-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#ninth-images").val(images);
+  $(".ninth-images").modal("hide");
+});
+// Tenth Images Upload
+$(document).on("click", ".tenth-btn-view", function (e) {
+  $(".tenth-images").modal("show");
+});
+$(document).on("click", ".btn-tenth-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-tenth-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#tenth-images").val(images);
+  $(".tenth-images").modal("hide");
+});
+// Twelth Images Upload
+$(document).on("click", ".twelth-btn-view", function (e) {
+  $(".twelth-images").modal("show");
+});
+$(document).on("click", ".btn-twelth-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-twelth-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#twelth-images").val(images);
+  $(".twelth-images").modal("hide");
+});
+// Thirteenth Images Upload
+$(document).on("click", ".thirteen-btn-view", function (e) {
+  $(".thirteen-images").modal("show");
+});
+$(document).on("click", ".btn-thirteen-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-thirteen-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#thirteen-images").val(images);
+  $(".thirteen-images").modal("hide");
+});
+// Fourteenth Images Upload
+$(document).on("click", ".fourteen-btn-view", function (e) {
+  $(".fourteen-images").modal("show");
+});
+$(document).on("click", ".btn-fourteen-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-fourteen-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#fourteen-images").val(images);
+  $(".fourteen-images").modal("hide");
+});
+
+// Fifteen Images Upload
+$(document).on("click", ".fifteen-btn-view", function (e) {
+  $(".fifteen-images").modal("show");
+});
+$(document).on("click", ".btn-fifteen-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-fifteen-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#fifteen-images").val(images);
+  $(".fifteen-images").modal("hide");
+});
+// Sixteen Images Upload
+$(document).on("click", ".sixteen-btn-view", function (e) {
+  $(".sixteen-images").modal("show");
+});
+$(document).on("click", ".btn-sixteen-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-sixteen-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#sixteen-images").val(images);
+  $(".sixteen-images").modal("hide");
+});
+// Seventeen Images Upload
+$(document).on("click", ".seventeen-btn-view", function (e) {
+  $(".seventeen-images").modal("show");
+});
+$(document).on("click", ".btn-seventeen-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-seventeen-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#seventeen-images").val(images);
+  $(".seventeen-images").modal("hide");
+});
+
+// Eighteen Images Upload
+$(document).on("click", ".eighteen-btn-view", function (e) {
+  $(".eighteen-images").modal("show");
+});
+$(document).on("click", ".btn-eighteen-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-eighteen-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#eighteen-images").val(images);
+  $(".eighteen-images").modal("hide");
+});
+
+// Nineteen Images Upload
+$(document).on("click", ".ninteen-btn-view", function (e) {
+  $(".ninteen-images").modal("show");
+});
+$(document).on("click", ".btn-ninteen-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-ninteen-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#ninteen-images").val(images);
+  $(".ninteen-images").modal("hide");
+});
+// Twenty Images Upload
+$(document).on("click", ".twenty-btn-view", function (e) {
+  $(".twenty-images").modal("show");
+});
+$(document).on("click", ".btn-twenty-select-images", function (e) {
+  e.preventDefault();
+  var images = "";
+
+  let checked = $(".tbl-twenty-images tbody").find(
+    'input[type="checkbox"]:checked'
+  );
+  let values = checked
+    .map(function () {
+      return $(this).val();
+    })
+    .get();
+  images = values.join(",");
+  $("#twenty-images").val(images);
+  $(".twenty-images").modal("hide");
+});
