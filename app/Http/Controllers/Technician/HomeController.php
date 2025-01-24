@@ -261,6 +261,7 @@ class HomeController extends Controller
         $images = $request->images;
         $inspection_dates = $request->inspection_date;
         $united_homes = $request->united_homes;
+        $selected_images = $request->selected_images;
 
         $check_values = collect($values);
         $check_values->filter()->isEmpty();
@@ -270,7 +271,23 @@ class HomeController extends Controller
             return response()->json(['success' => false,'message' => 'Please fill the Form Completely']);
         }
 
-        
+        //Selected Images Insert 
+
+        if (!empty($selected_images)) {
+            $selected_arr = explode(',',$selected_images);
+
+            foreach ($selected_arr as $sr) {
+                
+                InspectionFiles::create(
+                    [
+                        'inspection_id' => $request->insp_id,
+                        'file_url' => $sr,
+                        'title' => $request->title
+                    ]
+                    );
+            }
+
+        }
 
         if (!empty($images) && count($images) > 0) {
 

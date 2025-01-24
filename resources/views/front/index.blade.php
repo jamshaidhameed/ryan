@@ -1,3 +1,4 @@
+
 @extends('layouts.front')
 @section('title')
  @lang('titles.site')
@@ -247,17 +248,16 @@
                     <div id="propertiesDetailsSlider" class="carousel properties-details-sliders slide">
                         <!-- main slider carousel items -->
                         <div class="carousel-inner">
+                            @php $featured_property = \App\Models\Properties::where('featured',1)->first(); @endphp
                             @if(count($featured_images) > 0)
                              @php $count = 0; @endphp
-                             @foreach($featured_images as $feature)
-                               @php $images = explode(",", $feature->feature_image); @endphp
+                               @php $images = !empty($featured_property) ? explode(",", $featured_property->property_image) : array(); @endphp
                                @foreach($images as $image)
                                 <div class="{{$count == 0 ? 'active ' : ''}}item carousel-item" data-slide-number="{{ $count}}">
-                                    <img src="{{ asset('upload/property/feature/'.$image) }}" class="img-fluid" alt="property-box-6">
+                                    <img src="{{ asset('upload/property/'.$image) }}" class="img-fluid" alt="property-box-6">
                                 </div>
                                  @php $count += 1; @endphp
                                 @endforeach
-                            @endforeach
                             <a class="carousel-control left" href="#propertiesDetailsSlider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
                             <a class="carousel-control right" href="#propertiesDetailsSlider" data-slide="next"><i class="fa fa-angle-right"></i></a>
                             @endif
@@ -266,27 +266,33 @@
                 </div>
                 <div class="col-lg-6 col-pad align-self-center">
                     <div class="info">
+                        
                         <h3>
-                            <a href="properties-details.html">Find Your Dream House</a>
+                            @if(!empty($featured_property))
+                            <a href="{{ route('property.details',$featured_property->slug) }}">{{ $featured_property->title_en }}</a>
+                            @endif
                         </h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus tincidunt aliquam. Aliquam gravida massa at sem vulputate interdum et vel eros. Maecenas eros.</p>
+                            @if(!empty($featured_property))
+                                @php 
+                                $short_des = html_entity_decode($featured_property->description_en);
+                                @endphp
+                                
+
+                            @endif
                         <div class="row">
-                            @php $property_features_count = \App\Models\PropertyFeatures::where('status',1)->get()->count();
-                                 $per_column_count = 0 ;
-                                 $last_id = 0; 
-                                 if($property_features_count > 3){
-                                    $per_column_count = round($property_features_count / 3);
-                                 } 
-                                 
-                             @endphp
+                            
                             <div class="col-md-4 col-sm-4">
                                 <ul>
-                                    @foreach(\App\Models\PropertyFeatures::where('status',1)->get() as $feat)
+                                    @if(!empty($featured_property))
+                                    @php $property_features = explode(',',$featured_property->features); @endphp
+                                    @foreach($property_features as $pf)
+                                    @php $feat = \App\Models\PropertyFeatures::find($pf); @endphp
                                     <li>
                                         <!-- <i class="flaticon-bed"></i>  -->
                                         {{ $feat->title }}</li>
                                     <!-- <li><i class="flaticon-bath"></i> 2 Bathrooms</li> -->
                                     @endforeach
+                                    @endif
                                 </ul>
                             </div>
                             <!-- <div class="col-md-4 col-sm-4">

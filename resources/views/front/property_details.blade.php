@@ -110,7 +110,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <img src="{{ asset('front/assets/img/floor-plans.png') }}" alt="floor-plans" class="img-fluid">
+                                
                             </div>
                         </div>
                         <div class="tab-pane fade " id="three" role="tabpanel" aria-labelledby="three-tab">

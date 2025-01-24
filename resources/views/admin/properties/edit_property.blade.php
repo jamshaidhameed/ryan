@@ -74,7 +74,7 @@
                     <input type="number" name="price" id="price" class="form-control" value="{{ isset($property) ? $property->price : old('price') }}" min="0" data-fv-notempty="true">
                     </div>
                     <div class="form-group">
-                    <label for="" class="form-control-label"><sup class="text-danger">*</sup>{{ __('Province') }}</label>
+                    <label for="" class="form-control-label">{{ __('Province') }}<sup><span class="text-danger">*</span></sup></label>
                     <select name="province_id" id="province_id" class="form-control" data-fv-notempty="true">
                             <option value="">{{ __('Please Choose') }}</option>
                             @foreach(\App\Models\Provinces::all() as $province)
@@ -106,12 +106,19 @@
                     <label for="" class="form-control-label">{{ __('Toilets') }}<sup><span class="text-danger">*</span></sup> </label>
                     <input type="number" name="toilets" id="" class="form-control" value="{{ isset($property) ? $property->toilets : old('toilets') }}" min="0" data-fv-notempty="true">
                     </div>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">Is Featured</label>
+                        <select name="featured" id="" class="form-control">
+                            <option value="0" @if(isset($property) && $property->featured == 0) selected @endif>No</option>
+                            <option value="1" @if(isset($property) && $property->featured == 1) selected @endif>Yes</option>
+                        </select>
+                    </div>
                  </div>
                 <!-- End First Column -->
                 <!-- Second Column Start -->
                  <div class="col col-md-6">
                     <div class="form-group">
-                    <label for="" class="form-control-label">{{ __('Property Type') }}<sup><span class="text-danger">*</span></sup> <sup><span class="text-danger">*</span></sup></label>
+                    <label for="" class="form-control-label">{{ __('Property Type') }}<sup><span class="text-danger">*</span></sup></label>
                     <select name="property_type_id" id="property_type_id" class="form-control" data-fv-notempty="true">
                             <option value="">{{ __('Please Choose') }}</option>
                         @foreach(\App\Models\PropertyTypes::where('status',1)->get() as $type)
