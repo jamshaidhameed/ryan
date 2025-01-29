@@ -493,7 +493,7 @@ $(document).on("click", ".btn-select-images", function (e) {
     })
     .get();
   images = values.join(",");
-  btn.closest('input[name="selected_images[]"]').val(images);
+  $("#first").val(images);
   $(".first-images").modal("hide");
 });
 

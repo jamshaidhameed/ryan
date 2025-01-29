@@ -300,7 +300,7 @@
                                 </tbody>
                             </table>
                             <div class="d-flex justify-content-end">
-                                <input type="hidden" name="selected_images[]" >
+                                <input type="hidden" name="selected_images" value="" id="first">
                                 @if(count($image_array) > 0)
                                 
                                  <button class="btn btn-default first-btn-view mr-4">Choose from Existing Images</button>
@@ -452,7 +452,7 @@
                                 </tbody>
                             </table>
                             <div class="d-flex justify-content-end">
-                                <input type="hidden" id="second-images" name="selected_images[]" >
+                                <input type="hidden" id="second-images" name="selected_images" >
                                 @php $images = !empty($old_inspection) ? \App\Models\InspectionFiles::where(['inspection_id' => $old_inspection->id,'title' => 'Key Management'])->get() : array();
                                     $image_array = array();
                                 @endphp
@@ -653,7 +653,7 @@
                                 @foreach($images as $img)
                                     @php array_push($image_array,$img->file_url); @endphp
                                 @endforeach
-                                <input type="hidden" id="thid-images" name="selected_images[]" >
+                                <input type="hidden" id="thid-images" name="selected_images" >
                                 @if(count($image_array) > 0)
                                 
                                  <button class="btn btn-default third-btn-view mr-4">Choose from Existing Images</button>
@@ -848,7 +848,7 @@
                                 @foreach($images as $img)
                                     @php array_push($image_array,$img->file_url); @endphp
                                 @endforeach
-                                <input type="hidden" id="fourth-images" name="selected_images[]" >
+                                <input type="hidden" id="fourth-images" name="selected_images" >
                                 @if(count($image_array) > 0)
                                 
                                  <button class="btn btn-default fourth-btn-view mr-4">Choose from Existing Images</button>
@@ -1047,7 +1047,7 @@
                                 @foreach($images as $img)
                                     @php array_push($image_array,$img->file_url); @endphp
                                 @endforeach
-                                <input type="hidden" id="fifth-images" name="selected_images[]" value="">
+                                <input type="hidden" id="fifth-images" name="selected_images" value="">
                                 @if(count($image_array) > 0)
                                 
                                  <button type="button" class="btn btn-default fifth-btn-view mr-4">Choose from Existing Images</button>
@@ -1242,7 +1242,7 @@
                                 @foreach($images as $img)
                                     @php array_push($image_array,$img->file_url); @endphp
                                 @endforeach
-                                <input type="hidden" id="sixth-images" name="selected_images[]" value="">
+                                <input type="hidden" id="sixth-images" name="selected_images" value="">
                                 @if(count($image_array) > 0)
                                 
                                  <button type="button" class="btn btn-default sixth-btn-view mr-4">Choose from Existing Images</button>
@@ -1425,7 +1425,7 @@
                                 @foreach($images as $img)
                                     @php array_push($image_array,$img->file_url); @endphp
                                 @endforeach
-                                <input type="hidden" id="seventh-images" name="selected_images[]" value="">
+                                <input type="hidden" id="seventh-images" name="selected_images" value="">
                                 @if(count($image_array) > 0)
                                 
                                  <button type="button" class="btn btn-default seventh-btn-view mr-4">Choose from Existing Images</button>
@@ -1623,7 +1623,7 @@
                                     @foreach($images as $img)
                                         @php array_push($image_array,$img->file_url); @endphp
                                     @endforeach
-                                    <input type="hidden" id="eight-images" name="selected_images[]" value="">
+                                    <input type="hidden" id="eight-images" name="selected_images" value="">
                                     @if(count($image_array) > 0)
                                     
                                     <button type="button" class="btn btn-default eight-btn-view mr-4">Choose from Existing Images</button>
@@ -1806,7 +1806,7 @@
                                     @foreach($images as $img)
                                         @php array_push($image_array,$img->file_url); @endphp
                                     @endforeach
-                                    <input type="hidden" id="ninth-images" name="selected_images[]" value="">
+                                    <input type="hidden" id="ninth-images" name="selected_images" value="">
                                     @if(count($image_array) > 0)
                                     
                                     <button type="button" class="btn btn-default ninth-btn-view mr-4">Choose from Existing Images</button>
@@ -2001,7 +2001,7 @@
                                     @foreach($images as $img)
                                         @php array_push($image_array,$img->file_url); @endphp
                                     @endforeach
-                                    <input type="hidden" id="tenth-images" name="selected_images[]" value="">
+                                    <input type="hidden" id="tenth-images" name="selected_images" value="">
                                     @if(count($image_array) > 0)
                                     
                                     <button type="button" class="btn btn-default tenth-btn-view mr-4">Choose from Existing Images</button>
@@ -2185,7 +2185,7 @@
                                     @foreach($images as $img)
                                         @php array_push($image_array,$img->file_url); @endphp
                                     @endforeach
-                                    <input type="hidden" id="eleventh-images" name="selected_images[]" value="">
+                                    <input type="hidden" id="eleventh-images" name="selected_images" value="">
                                     @if(count($image_array) > 0)
                                     
                                     <button type="button" class="btn btn-default eleventh-btn-view mr-4">Choose from Existing Images</button>
@@ -2378,7 +2378,7 @@
                                     @foreach($images as $img)
                                         @php array_push($image_array,$img->file_url); @endphp
                                     @endforeach
-                                    <input type="hidden" id="twelth-images" name="selected_images[]" value="">
+                                    <input type="hidden" id="twelth-images" name="selected_images" value="">
                                     @if(count($image_array) > 0)
                                     
                                     <button type="button" class="btn btn-default twelth-btn-view mr-4">Choose from Existing Images</button>
@@ -2562,7 +2562,7 @@
                                     @foreach($images as $img)
                                         @php array_push($image_array,$img->file_url); @endphp
                                     @endforeach
-                                    <input type="hidden" id="thirteen-images" name="selected_images[]" value="">
+                                    <input type="hidden" id="thirteen-images" name="selected_images" value="">
                                     @if(count($image_array) > 0)
                                     
                                     <button type="button" class="btn btn-default thirteen-btn-view mr-4">Choose from Existing Images</button>
@@ -2690,7 +2690,7 @@
                                     @foreach($images as $img)
                                         @php array_push($image_array,$img->file_url); @endphp
                                     @endforeach
-                                    <input type="hidden" id="fourteen-images" name="selected_images[]" value="">
+                                    <input type="hidden" id="fourteen-images" name="selected_images" value="">
                                     @if(count($image_array) > 0)
                                     
                                     <button type="button" class="btn btn-default fourteen-btn-view mr-4">Choose from Existing Images</button>
@@ -2814,7 +2814,7 @@
                                     @foreach($images as $img)
                                         @php array_push($image_array,$img->file_url); @endphp
                                     @endforeach
-                                    <input type="hidden" id="fifteen-images" name="selected_images[]" value="">
+                                    <input type="hidden" id="fifteen-images" name="selected_images" value="">
                                     @if(count($image_array) > 0)
                                     
                                     <button type="button" class="btn btn-default fifteen-btn-view mr-4">Choose from Existing Images</button>
@@ -3000,7 +3000,7 @@
                                     @foreach($images as $img)
                                         @php array_push($image_array,$img->file_url); @endphp
                                     @endforeach
-                                    <input type="hidden" id="sixteen-images" name="selected_images[]" value="">
+                                    <input type="hidden" id="sixteen-images" name="selected_images" value="">
                                     @if(count($image_array) > 0)
                                     
                                     <button type="button" class="btn btn-default sixteen-btn-view mr-4">Choose from Existing Images</button>
@@ -3186,7 +3186,7 @@
                                 @foreach($images as $img)
                                     @php array_push($image_array,$img->file_url); @endphp
                                 @endforeach
-                                <input type="hidden" id="seventeen-images" name="selected_images[]" value="">
+                                <input type="hidden" id="seventeen-images" name="selected_images" value="">
                                 @if(count($image_array) > 0)
                                 
                                 <button type="button" class="btn btn-default seventeen-btn-view mr-4">Choose from Existing Images</button>
@@ -3343,7 +3343,7 @@
                                     @foreach($images as $img)
                                         @php array_push($image_array,$img->file_url); @endphp
                                     @endforeach
-                                    <input type="hidden" id="eighteen-images" name="selected_images[]" value="">
+                                    <input type="hidden" id="eighteen-images" name="selected_images" value="">
                                     @if(count($image_array) > 0)
                                     
                                     <button type="button" class="btn btn-default eighteen-btn-view mr-4">Choose from Existing Images</button>
@@ -3525,7 +3525,7 @@
                                     @foreach($images as $img)
                                         @php array_push($image_array,$img->file_url); @endphp
                                     @endforeach
-                                    <input type="hidden" id="ninteen-images" name="selected_images[]" value="">
+                                    <input type="hidden" id="ninteen-images" name="selected_images" value="">
                                     @if(count($image_array) > 0)
                                     
                                     <button type="button" class="btn btn-default ninteen-btn-view mr-4">Choose from Existing Images</button>
@@ -3757,7 +3757,7 @@
                                     @foreach($images as $img)
                                         @php array_push($image_array,$img->file_url); @endphp
                                     @endforeach
-                                    <input type="hidden" id="twenty-images" name="selected_images[]" value="">
+                                    <input type="hidden" id="twenty-images" name="selected_images" value="">
                                     @if(count($image_array) > 0)
                                     
                                     <button type="button" class="btn btn-default twenty-btn-view mr-4">Choose from Existing Images</button>
@@ -3880,7 +3880,7 @@
                                     @foreach($images as $img)
                                         @php array_push($image_array,$img->file_url); @endphp
                                     @endforeach
-                                    <input type="hidden" id="twentyone-images" name="selected_images[]" value="">
+                                    <input type="hidden" id="twentyone-images" name="selected_images" value="">
                                     @if(count($image_array) > 0)
                                     
                                     <button type="button" class="btn btn-default twentyone-btn-view mr-4">Choose from Existing Images</button>
