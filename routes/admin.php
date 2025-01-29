@@ -137,5 +137,9 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
         Route::get('/cms/pages/edit/{id}',[App\Http\Controllers\Admin\HomeController::class,'cms_pages_edit'])->name('cms.pages.edit');
         Route::post('/cms/pages/update/{id}',[App\Http\Controllers\Admin\HomeController::class,'cms_pages_update'])->name('cms.pages.update');
         Route::post('/cms/pages/delete/{id}',[App\Http\Controllers\Admin\HomeController::class,'cms_pages_delete'])->name('cms.pages.delete');
+        
+
+        //Remove Property Image
+          Route::post('remov/image/',[App\Http\Controllers\Admin\HomeController::class,'remove_property_image'])->name('property.remove.image');
 
     });

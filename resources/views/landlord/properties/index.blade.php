@@ -124,7 +124,7 @@
              <input type="hidden" name="e_id" value="">
             <div class="modal-body">
               <div class="form-group">
-                <a href="" class="link">Donwload Contract</a>
+                <a href="" class="link" target="_blank">Donwload Contract</a> <br>
                 <label for="" class="form-control-label">Upload File</label>
                 <input type="file" name="tenant_uploaded_file" id="" class="form-control" required>
                 <p class="text-danger"></p>

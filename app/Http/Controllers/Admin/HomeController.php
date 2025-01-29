@@ -1560,4 +1560,25 @@ class HomeController extends Controller
 
         return redirect()->route('admin.cms.pages.list');
     }
+
+    public function remove_property_image(Request $request){
+
+        $property = Properties::find($request->id);
+
+        if (empty($property)) {
+            
+            return response()->json(['success' => false,'sorry no property found']);
+        }
+
+        $newString = str_replace($request->img.",", '', $property->property_image);
+
+         if(File::exists(public_path('upload/property/').$request->img)) {
+                File::delete(public_path('upload/property/').$request->img);
+            }
+
+      $property->property_image = $newString;
+      $property->save();
+
+      return response()->json(['success' => true,'Image Removed']);
+    }
 }

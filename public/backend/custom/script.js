@@ -4,7 +4,8 @@ $(document).on("click", ".tenant-quries", function (e) {
 
   var url = $(this).attr("href"),
     html_content = "",
-    selected = $(this).data("selected");
+    selected = $(this).data("selected"),
+    getpropertyurl = $("input[name='getpropertyurl']").val();
 
   $.ajax({
     url: url,
@@ -49,6 +50,8 @@ $(document).on("click", ".tenant-quries", function (e) {
               row.tenant_id +
               '" data-eid="' +
               row.id +
+              '" data-getpropertyurl="' +
+              getpropertyurl +
               '" href="" data-dismiss="modal">Choose</a></td>';
           }
           // else {
@@ -80,7 +83,21 @@ $(document).on("click", ".btn-choose", function (e) {
   var property_id = $(this).data("property"),
     tenant_id = $(this).data("tenant"),
     e_id = $(this).data("eid"),
-    getproperty_url = $(this).data("getpropertyurl");
+    getproperty_url = $(this).data("getpropertyurl"),
+    contract_period = $('input[name="contract_period"]').val(),
+    start_from = $('input[name="start_from"]').val(),
+    price = $('input[name="price"]').val();
+
+  // $(".tent-contract")
+  //   .find("form")
+  //   .find('input[name="contract_period"]')
+  //   .val(contract_period);
+  // $(".tent-contract").find("form").find('input[name="price"]').val(price);
+  // $(".tent-contract")
+  //   .find("form")
+  //   .find('input[name="start_from"]')
+  //   .val(start_from);
+
   $(".tent-contract").find("form").find('input[name="e_id"]').val(e_id);
   $(".tent-contract")
     .find("form")
@@ -876,4 +893,35 @@ $(document).on("click", ".btn-twenty-select-images", function (e) {
   images = values.join(",");
   $("#twenty-images").val(images);
   $(".twenty-images").modal("hide");
+});
+
+//Remove Image
+
+$(document).on("click", ".btn-r-img", function (e) {
+  e.preventDefault();
+
+  if (!confirm("Are you Sure to delete the Image ? ")) {
+    return this;
+  }
+  var url = $(this).data("removelink"),
+    img_name = $(this).data("id"),
+    prop_id = $(this).data("propid"),
+    token = $('input[name="csrf"]').val(),
+    btn = $(this);
+
+  $.ajax({
+    type: "post",
+    url: url,
+    dataType: "json",
+    data: {
+      _token: token,
+      id: prop_id,
+      img: img_name,
+    },
+    success: function (data) {
+      if (data.success) {
+        btn.parent().parent().hide();
+      }
+    },
+  });
 });

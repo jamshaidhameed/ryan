@@ -16,6 +16,27 @@
             font-family: 'Courier New', monospace;
             font-size: 12px;
         }
+         .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: red;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
     </style>
 @endsection
 @section('content')
@@ -195,11 +216,43 @@
                 @endforeach
             </div>
             <div class="form-group">
-                <label for="" class="form-control-label">{{ __('Feature Image') }} <sup><span class="text-danger">*</span></sup> </label>
-                <input type="file" name="feature_images[]" id="" accept="image|jpg|png|jpeg|gif" multiple="true" class="form-control">
+                 @php $feature_images = isset($property) && !empty($property->feature_image) ? explode(",",$property->feature_image) : array();
+                      $property_images = isset($property) && !empty($property->property_image) ? explode(",",$property->property_image) : array(); 
+                @endphp
+                @if(count($feature_images) > 0)
+                    <label for="" class="form-control-label">Existing Feature Images</label>
+                    <div class="row gallery">
+
+                    @for($i = 0;  $i < count($feature_images); $i++)
+                    <div class="col-md-3 col-sm-6 mb-3">
+                            <img src="{{ asset('upload/property/feature/'.$feature_images[$i]) }}" class="img-fluid rounded">
+                    </div>
+                    @endfor
+                    </div>
+                @endif
+                <label for="" class="form-control-label">{{ isset($property) && count($feature_images) > 0 ? 'Upload New Feature Image' : 'Feature Image'}} 
+                 @if(empty($feature_images))    
+                <sup><span class="text-danger">*</span></sup> 
+                @endif 
+              </label>
+                <input type="file" name="feature_images[]" id="" accept="image/*"  class="form-control">
             </div>
             <div class="form-group">
-                <label for="" class="form-control-label">{{ __('Property Images') }}</label>
+                @if(count($property_images) > 0)
+                    <label for="" class="form-control-label">Existing Property Images</label>
+                    <div class="row gallery">
+
+                    @for($i = 0;  $i < count($property_images); $i++)
+                    <div class="col-md-3 col-sm-6 mb-3">
+                        <div class=" image-container">
+                            <button class="close-btn btn-r-img" data-removelink="{{ url('admin/remov/image/') }}" data-id="{{ $property_images[$i] }}" data-propid="{{ $property->id }}">&times;</button>
+                            <img src="{{ asset('upload/property/'.$property_images[$i]) }}" class="img-fluid rounded">
+                        </div>
+                    </div>
+                    @endfor
+                    </div>
+                @endif
+                <label for="" class="form-control-label">{{ isset($property) && count($property_images) > 0 ? 'Upload New Property Image' : 'Property Image'}}</label>
                 <input type="file" name="property_images[]" id="" accept="image|jpg|png|jpeg|gif" multiple="true" class="form-control">
             </div>
             <div class="form-group">
@@ -214,9 +267,11 @@
     </div>
   </div>
 </div>
+<input type="hidden" name="csrf" value="{{ csrf_token() }}">
 <!-- End Page -->
 @endsection
 @section('script')
+<script src="{{ asset('backend/custom/script.js')}}"></script>
 <script src="{{ asset('summernote/summernote.js')}}"></script>
 <script>
 $(document).ready(function(){
