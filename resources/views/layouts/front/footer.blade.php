@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                 <div class="footer-item">
-                    <h4>Contact Us</h4>
+                    <h4>{{ __('titles.contact_us') }}</h4>
                     <ul class="contact-info">
                         <li>
                             <i class="flaticon-facebook-placeholder-for-locate-places-on-maps"></i>Energieweg 22C, 3133EC Vlaardingen
@@ -26,13 +26,13 @@
                     </h4>
                     <ul class="links">
                         <li>
-                            <a href="{{ url('/') }}"><i class="fa fa-angle-right"></i>Home</a>
+                            <a href="{{ url('/') }}"><i class="fa fa-angle-right"></i>{{ __('titles.home') }}</a>
                         </li>
                         <li>
-                            <a href="{{ route('properties.list') }}"><i class="fa fa-angle-right"></i>Properties</a>
+                            <a href="{{ route('properties.list') }}"><i class="fa fa-angle-right"></i>{{ __('titles.properties') }}</a>
                         </li>
                         <li>
-                            <a href="{{ route('contact.us') }}"><i class="fa fa-angle-right"></i>Contact Us</a>
+                            <a href="{{ route('contact.us') }}"><i class="fa fa-angle-right"></i>{{ __('titles.contact_us') }}</a>
                         </li>
                         @foreach(\App\Models\cms::where('show_on','footer')->get() as $page)
                         <li>
@@ -87,7 +87,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-12">
-                    <p class="copy">© 2024 <a href="#">RyanRent.nl</a> All Rights Reserved.</p>
+                    <p class="copy">© 2024 <a href="#">RyanRent.nl</a> {{ __('titles.all_right_reserve') }}</p>
                 </div>
                 
             </div>

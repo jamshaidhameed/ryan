@@ -16,5 +16,20 @@ return [
     'bathrooms' => 'Badkamers',
     'search' => 'Zoekopdracht',
     'featured_properties' => 'Uitgelichte eigenschappen',
-    'read_more' => 'Lees meer'
+    'read_more' => 'Lees meer',
+    'read_more.' => 'Lees meer...',
+    'featured_property' => 'Uitgelichte eigenschappen',
+    'what_are_you_looking_for' => 'Waar bent u naar op zoek?',
+    'apartment_clean' => 'Appartementen Schoon',
+    'Houses' => 'Huizen',
+    'support_24_7' => 'Support 24/7',
+    'Commercial' => 'Ondersteuning 24/7',
+    'more_details' => 'Meer details',
+    'recent_properties' => 'Recente eigendommen',
+    'for_rent' => 'Te huur',
+    'out_testimonial' => 'Onze getuigenis',
+    'contact_us' => 'Neem contact met ons op',
+    'all_right_reserve' => 'Alle rechten voorbehouden.',
+    'find_your_amazing_home' => 'Vind uw geweldige huis',
+    'find_your_dearm_home' => 'Vind uw droomhuis in een paar klikken.'
 ];

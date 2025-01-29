@@ -15,5 +15,20 @@ return [
     'bathrooms' => 'Bathrooms',
     'search' => 'Search',
     'featured_properties' => 'Featured Properties',
-    'read_more' => 'Read More'
+    'read_more' => 'Read More',
+    'read_more.' => 'Read more...',
+    'featured_property' => 'Featured Properties',
+    'what_are_you_looking_for' => 'What Are you Looking For?',
+    'apartment_clean' => 'Apartments Clean',
+    'Houses' => 'Houses',
+    'support_24_7' => 'Support 24/7',
+    'Commercial' => 'Commercial',
+    'more_details' => 'More Details',
+    'recent_properties' => 'Recent Properties',
+    'for_rent' => 'For Rent',
+    'out_testimonial' => 'Our Testimonial',
+    'contact_us' => 'Contact Us',
+    'all_right_reserve' => 'All Rights Reserved.',
+    'find_your_amazing_home' => 'Find your amazing home',
+    'find_your_dearm_home' => ' Find your dream home just in the few clicks.'
 ];

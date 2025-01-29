@@ -9,3 +9,6 @@ Route::get('page/{slug}',[App\Http\Controllers\Front\HomeController::class,'cms_
 
 Route::get('property/list',[App\Http\Controllers\Front\HomeController::class,'properties_list'])->name('properties.list');
 Route::get('booking/success',[App\Http\Controllers\BookingController::class,'booking_success'])->name('booking.success');
+
+
+Route::post('/contact/use/post',[App\Http\Controllers\Front\HomeController::class,'contact_us_post'])->name('contact.use.post');
