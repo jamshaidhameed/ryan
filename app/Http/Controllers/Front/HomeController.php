@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Properties;
 use App\Models\cms;
+use App\Models\User;
+use App\Mail\GeneralMail;
 
 class HomeController extends Controller
 {
@@ -258,6 +261,37 @@ class HomeController extends Controller
   function contact_us(){
 
     return view('front.contact_us');
+  }
+  //
+  public function contact_us_post(Request $request){
+
+    $request->validate(
+        [
+            'name' => 'required',
+            'email' => 'required',
+        ]
+        );
+
+        $message = '<p>'.$request->message;
+        
+        $mail_subject = "New Contact Us Mail";
+
+        // $receiver,$subject,$message
+
+        Mail::to( $request->email )->send(new GeneralMail($request->name,"Message Received","<p>Thank you for contacting us. You will get the required informations soon.</p>"));
+
+        $admins = User::where('role','admin')->get();
+
+        foreach($admins as $admin){
+
+            Mail::to( $admin->email )->send(new GeneralMail($admin->first_name." ".$admin->last_name,$mail_subject,$message)); 
+        }
+
+
+
+       session()->flash('success','Your Message has been successfully sent');
+
+       return redirect()->back();
   }
   function cms_page($slug){
      return view('front.cms_page')->with('cms_page',cms::where('slug',$slug)->first());

@@ -1,7 +1,7 @@
 
 @extends('layouts.front')
 @section('title')
- @lang('titles.site')
+  {{ __('titles.site')}}
 @endsection
 @section('content')
 <!-- Banner start -->
@@ -14,15 +14,15 @@
                     <div class="carousel-content container">
                         <div class="text-center">
                             <div id="typed-strings">
-                                <p>Find your amazing home</p>
+                                <p>{{ __('titles.find_your_amazing_home')}}</p>
                             </div>
                             <h1 class="typed-text">&nbsp;
                                 <span id="typed"></span>
                             </h1>
                             <p class="text-p" data-animation="animated fadeInUp delay-10s">
-                                Find your dream home just in the few clicks.
+                               {{ __('titles.find_your_dearm_home') }}
                             </p>
-                            <a data-animation="animated fadeInUp delay-10s" href="#" class="btn-5">Read More</a>
+                            <a data-animation="animated fadeInUp delay-10s" href="#" class="btn-5">{{ __('titles.read_more') }}</a>
                         </div>
                     </div>
                 </div>
@@ -239,7 +239,7 @@
 <div class="featured-properties content-area-19">
     <div class="container">
         <div class="main-title">
-            <h1>Featured Properties</h1>
+            <h1>{{ __('titles.featured_property') }}</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
         </div>
         @if(!empty($featured_property))
@@ -299,7 +299,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <a href="{{ !empty($featured_property) ? route('property.details',$featured_property->slug) : '' }}" class="btn btn-4">Read more</a>
+                        <a href="{{ !empty($featured_property) ? route('property.details',$featured_property->slug) : '' }}" class="btn btn-4">{{ __('titles.read_more') }}</a>
                     </div>
                 </div>
             </div>
@@ -313,7 +313,7 @@
 <div class="services-3 content-area-20 bg-white">
     <div class="container">
         <div class="main-title">
-            <h1>What Are you Looking For?</h1>
+            <h1>{{ __('titles.what_are_you_looking_for')}}</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
         </div>
         <div class="row">
@@ -324,10 +324,10 @@
                     </div>
                     <div class="detail">
                         <h5>
-                            <a href="#">Apartments Clean</a>
+                            <a href="#">{{ __('titles.apartment_clean') }}</a>
                         </h5>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        <a href="#" class="read-more">Read more...</a>
+                        <a href="#" class="read-more">{{ __('titles.read_more.') }}</a>
                     </div>
                 </div>
             </div>
@@ -338,10 +338,10 @@
                     </div>
                     <div class="detail">
                         <h5>
-                            <a href="#">Houses</a>
+                            <a href="#">{{ __('titles.Houses') }}</a>
                         </h5>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        <a href="#" class="read-more">Read more...</a>
+                        <a href="#" class="read-more">{{ __('titles.read_more.') }}</a>
                     </div>
                 </div>
             </div>
@@ -352,10 +352,10 @@
                     </div>
                     <div class="detail">
                         <h5>
-                            <a href="#">Support 24/7</a>
+                            <a href="#">{{ __('titles.support_24_7') }}</a>
                         </h5>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        <a href="#" class="read-more">Read more...</a>
+                        <a href="#" class="read-more">{{ __('titles.read_more.') }}</a>
                     </div>
                 </div>
             </div>
@@ -366,15 +366,15 @@
                     </div>
                     <div class="detail">
                         <h5>
-                            <a href="#">Commercial</a>
+                            <a href="#">{{ __('titles.Commercial') }}</a>
                         </h5>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        <a href="#" class="read-more">Read more...</a>
+                        <a href="#" class="read-more">{{ __('titles.read_more.') }}</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-12 text-center">
-                <a data-animation="animated fadeInUp delay-10s" href="#" class="btn-5">More Details</a>
+                <a data-animation="animated fadeInUp delay-10s" href="#" class="btn-5">{{ __('titles.more_details') }}</a>
             </div>
         </div>
     </div>
@@ -385,7 +385,7 @@
 <div class="recent-properties content-area-2">
     <div class="container">
         <div class="main-title">
-            <h1>Recent Properties</h1>
+            <h1>{{ __('titles.recent_properties') }}</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
         </div>
         <div class="row">

@@ -24,7 +24,13 @@
             <h1>@lang('titles.contactus')</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
         </div>
-        <form action="#" method="GET" enctype="multipart/form-data">
+        @if(session()->has('success'))
+        <div class="alert alert-success mt-6">
+            {{ session()->get('success')}}
+        </div>
+        @endif
+        <form action="{{ route('contact.use.post') }}" method="post" enctype="multipart/form-data">
+            @csrf
             <div class="row">
                 <div class="col-lg-7 col-md-12">
                     <div class="form-section">

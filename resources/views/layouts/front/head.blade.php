@@ -11,7 +11,7 @@
                     <div class="dropdown d-inline">
                         <a data-mdb-dropdown-init class="dropdown-toggle pb-3" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
 
-                           @if(\Illuminate\Support\Facades\App::getLocale() == 'en')
+                           @if(\Illuminate\Support\Facades\App::isLocale('en'))
                             <i class="flag-united-kingdom flag m-0"></i>
                            @else 
                             <i class="flag-netherlands flag"></i>
@@ -20,15 +20,15 @@
                     
                         <ul class="dropdown-menu" aria-labelledby="Dropdown">
                             <li>
-                                <a class="dropdown-item" href=""><i class="flag-united-kingdom flag"></i>English 
-                                @if(\Illuminate\Support\Facades\App::getLocale() == 'en')
+                                <a class="dropdown-item" href="{{ url('greeting/en')}}"><i class="flag-united-kingdom flag"></i>English 
+                                @if(\Illuminate\Support\Facades\App::isLocale('en'))
                                 <i class="fa fa-check text-success ms-2"></i>
                                 @endif
                             </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href=""><i class="flag-netherlands flag"></i>Nederlands
-                             @if(\Illuminate\Support\Facades\App::getLocale() == 'nl')
+                                <a class="dropdown-item" href="{{ url('greeting/nl')}}"><i class="flag-netherlands flag"></i>Nederlands
+                             @if(\Illuminate\Support\Facades\App::isLocale('nl'))
                                 <i class="fa fa-check text-success ms-2"></i>
                                 @endif
                             </a>

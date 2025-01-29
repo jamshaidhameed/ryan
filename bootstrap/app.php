@@ -12,9 +12,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-          $middleware->alias([
+         $middleware->web(append:[
+            \App\Http\Middleware\SetLocale::class,
+        ]);  
+        $middleware->alias([
             'redirect_if_not_authenticated' => App\Http\Middleware\RedirectIfNotAuthenticated::class,
             'url_redirect' => App\Http\Middleware\UrlRedirect::class,
+            'set_locale' => App\Http\Middleware\SetLocale::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

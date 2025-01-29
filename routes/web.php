@@ -5,21 +5,27 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', [App\Http\Controllers\Front\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\Front\HomeController::class, 'index'])->name('home')->middleware('set_locale');
+Auth::routes();
+//Changing Languages 
+Route::get('/greeting/{locale}', function (string $locale) {
+    if (! in_array($locale, ['en', 'nl'])) {
+        abort(400);
+    }
 
-// Route::get('/{locale}', function ($locale) {
-//     session(['locale' => $locale]);
-//     App::setLocale($locale);
-//     return redirect()->back();
-// })->name('lang.change');
+    session(['locale' => $locale]);
+ 
+    \Illuminate\Support\Facades\App::setLocale($locale);
 
-// Auth::routes(['register' => false]);
- Auth::routes();
 
+    return redirect()->back();
+
+});
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Booking Routes 
 Route::post('/booking',[App\Http\Controllers\BookingController::class,'book_property'])->name('property.book');
+
 
 
 require __DIR__.'/front.php';
