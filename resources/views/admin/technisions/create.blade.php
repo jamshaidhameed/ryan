@@ -76,15 +76,6 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="" class="form-control-label">Country</label>
-                <select name="country" id="" class="form-control" data-fv-notempty="true">
-                  <option value="">Please Choose</option>
-                  @foreach(\App\Models\Countries::all() as $country)
-                   <option value="{{ $country->id}}" @if(isset($technision) && $technision->country_id == $country->id) selected @endif>{{ $country->name }}</option>
-                  @endforeach
-                </select>
-              </div>
-              <div class="form-group">
                 <label for="" class="form-control-label">City</label>
                 <input type="text" name="city" id="" class="form-control" data-fv-notempty="true" value="{{ isset($technision) ? $technision->city : old('city') }}">
               </div>
@@ -94,6 +85,10 @@
                 <input type="password" name="password" id="" class="form-control" data-fv-notempty="true">
               </div>
               @endif
+               <div class="form-group">
+                <label for="" class="form-control-label">Postal Code</label>
+                <input type="text" name="postcode" id="" class="form-control" data-fv-notempty="true" value="{{ isset($technision) ? $technision->postcode : old('postcode') }}">
+              </div>
                 <!-- End First Column -->
               </div>
               <div class="col col-md-6">
@@ -103,7 +98,7 @@
                   <input type="text" name="last_name" id="" class="form-control" data-fv-notempty="true" value="{{ isset($technision) ? $technision->last_name : old('last_name') }}">
               </div>
                 <div class="form-group">
-                <label for="" class="form-control-label">phone</label>
+                <label for="" class="form-control-label">Phone</label>
                 <input type="text" name="phone" id="" class="form-control" data-fv-notempty="true" value="{{ isset($technision) ? $technision->phone : old('phone')}}">
               </div>
               <div class="form-group">
@@ -119,14 +114,11 @@
                 <div class="form-group">
                   <label for="" class="form-control-label">Province</label>
                   <select name="province" id="" class="form-control" data-fv-notempty="true">
-                    @if(isset($province))
+                    <option value="">Please Choose</option>
+                    @foreach(\App\Models\Provinces::all() as $province)
                       <option value="{{ $province->id }}">{{ $province->name }}</option>
-                    @endif
+                    @endforeach
                   </select>
-              </div>
-              <div class="form-group">
-                <label for="" class="form-control-label">Postal Code</label>
-                <input type="text" name="postcode" id="" class="form-control" data-fv-notempty="true" value="{{ isset($technision) ? $technision->postcode : old('postcode') }}">
               </div>
               @if(!isset($technision))
               <div class="form-group">
@@ -134,6 +126,7 @@
                 <input type="password" name="password_confirmation" id="" class="form-control" data-fv-notempty="true">
               </div>
               @endif
+             
                  <!-- End Second Column -->
               </div>
             </div>
