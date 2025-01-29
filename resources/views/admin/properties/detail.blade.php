@@ -41,6 +41,9 @@
                 <div class="card border border-primary">
                     <div class="card-block">
                         <h3 class="card-title">{{ $property->title_en }}</h3>
+                        <input type="hidden" name="contract_period" value="{{ $property->contract_period }}">
+                        <input type="hidden" name="start_from" value="{{ $property->available_from }}">
+                        <input type="hidden" name="price" value="{{ $property->price }}">
                         <div class="card-text">
 
                         @php $property_image = !empty($property->property_image) ? explode(",",$property->property_image)[0] : ''; @endphp
@@ -156,6 +159,7 @@
                         <hr>
                         <!-- Cart Body -->
                          <div class="card-text">
+                            <input type="hidden" name="getpropertyurl" value="{{ url('/admin/property/enquiry/') }}">
                             @if(!empty($tenant_contract))
 
                             <table class="table table-bordered tb-contract">

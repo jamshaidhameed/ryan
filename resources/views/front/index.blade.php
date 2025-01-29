@@ -53,7 +53,7 @@
                             <div class="col-6 col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <select class="selectpicker search-fields" name="postal_code">
-                                        <option value="">Postal Code</option>
+                                        <option value="">@lang('titles.postal_code')</option>
                                         @php $postal_codes  = \App\Models\Properties::orderBy('postcode','asc')->select('postcode')->distinct()->get(); @endphp
 
                                         @foreach($postal_codes as $postcode)
@@ -65,7 +65,7 @@
                             <div class="col-6 col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <select class="selectpicker search-fields" name="province">
-                                        <option value="">Location</option>
+                                        <option value="">@lang('titles.location')</option>
                                         @foreach(\App\Models\Provinces::all() as $province)
                                          <option value="{{ $province->id }}">{{ $province->name}}</option>
                                         @endforeach
@@ -75,7 +75,7 @@
                             <div class="col-6 col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <select class="selectpicker search-fields" name="property_type">
-                                        <option value="">Property Types</option>
+                                        <option value="">@lang('titles.property_types')</option>
                                         @foreach(\App\Models\PropertyTypes::orderBy('name','asc')->get() as $type)
                                          <option value="{{ $type->id }}">{{ $type->name}}</option>
                                         @endforeach
@@ -87,7 +87,7 @@
                             <div class="col-6 col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <select class="selectpicker search-fields" name="bedrooms">
-                                        <option value="">Bedrooms</option>
+                                        <option value="">@lang('titles.bedrooms')</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -103,7 +103,7 @@
                             <div class="col-6 col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <select class="selectpicker search-fields" name="bathrooms">
-                                        <option value="">Bathrooms</option>
+                                        <option value="">@lang('titles.bathrooms')</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -121,7 +121,7 @@
                             </div>
                             <div class="col-6 col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <button class="btn-4 btn btn-block" type="submit">Search</button>
+                                    <button class="btn-4 btn btn-block" type="submit">@lang('titles.search')</button>
                                 </div>
                             </div>
                         </div>
@@ -242,25 +242,28 @@
             <h1>Featured Properties</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
         </div>
+        @if(!empty($featured_property))
         <div class="col-lg-12">
             <div class="row property-box-6">
                 <div class="col-lg-6 col-pad">
                     <div id="propertiesDetailsSlider" class="carousel properties-details-sliders slide">
                         <!-- main slider carousel items -->
                         <div class="carousel-inner">
-                            @php $featured_property = \App\Models\Properties::where('featured',1)->first(); @endphp
-                            @if(count($featured_images) > 0)
-                             @php $count = 0; @endphp
-                               @php $images = !empty($featured_property) ? explode(",", $featured_property->property_image) : array(); @endphp
-                               @foreach($images as $image)
-                                <div class="{{$count == 0 ? 'active ' : ''}}item carousel-item" data-slide-number="{{ $count}}">
-                                    <img src="{{ asset('upload/property/'.$image) }}" class="img-fluid" alt="property-box-6">
-                                </div>
-                                 @php $count += 1; @endphp
-                                @endforeach
+                                @php $count = 0; @endphp
+                               @php $images = !empty($featured_property) ? explode(",", $featured_property->property_image) : array();
+                               @endphp
+                               
+                               @if(count($images) > 0)
+                                @foreach($images as $image)
+                                    <div class="{{$count == 0 ? 'active ' : ''}}item carousel-item" data-slide-number="{{ $count}}">
+                                        <img src="{{ asset('upload/property/'.$image) }}" class="img-fluid" alt="property-box-6">
+                                    </div>
+                                    @php $count += 1; @endphp
+                                    @endforeach
+                               @endif
                             <a class="carousel-control left" href="#propertiesDetailsSlider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
                             <a class="carousel-control right" href="#propertiesDetailsSlider" data-slide="next"><i class="fa fa-angle-right"></i></a>
-                            @endif
+                           
                         </div>
                     </div>
                 </div>
@@ -273,47 +276,35 @@
                             @endif
                         </h3>
                             @if(!empty($featured_property))
-                                @php 
-                                $short_des = html_entity_decode($featured_property->description_en);
-                                @endphp
                                 
+                                <p>{{ $featured_property->description_en }} </p>
 
                             @endif
                         <div class="row">
-                            
                             <div class="col-md-4 col-sm-4">
                                 <ul>
-                                    @if(!empty($featured_property))
-                                    @php $property_features = explode(',',$featured_property->features); @endphp
-                                    @foreach($property_features as $pf)
-                                    @php $feat = \App\Models\PropertyFeatures::find($pf); @endphp
-                                    <li>
-                                        <!-- <i class="flaticon-bed"></i>  -->
-                                        {{ $feat->title }}</li>
-                                    <!-- <li><i class="flaticon-bath"></i> 2 Bathrooms</li> -->
-                                    @endforeach
-                                    @endif
-                                </ul>
-                            </div>
-                            <!-- <div class="col-md-4 col-sm-4">
-                                <ul>
-                                    <li><i class="flaticon-square-layouting-with-black-square-in-east-area"></i> Sq Ft:3400</li>
-                                    <li><i class="flaticon-car-repair"></i> 1 Garage</li>
+                                    <li><i class="flaticon-bed"></i> {{ $featured_property->bedrooms}} Bedrooms</li>
+                                    <li><i class="flaticon-bath"></i> {{ $featured_property->bathrooms}} Bathrooms</li>
                                 </ul>
                             </div>
                             <div class="col-md-4 col-sm-4">
                                 <ul>
-                                    <li><i class="flaticon-balcony-and-door"></i>1 Balcony</li>
-                                    <li><i class="flaticon-monitor"></i>TV</li>
+                                    <li><i class="flaticon-square-layouting-with-black-square-in-east-area"></i> Sq Ft:{{ $featured_property->area}}</li>
+                                    <li><i class="flaticon-car-repair"></i> {{ $featured_property->garages}} Garage</li>
                                 </ul>
-                            </div> -->
-
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <ul>
+                                    <li><i class="flaticon-balcony-and-door"></i>{{ $featured_property->parkings}} Parkings</li>
+                                </ul>
+                            </div>
                         </div>
-                        <a href="{{ route('properties.list') }}" class="btn btn-4">Read more</a>
+                        <a href="{{ !empty($featured_property) ? route('property.details',$featured_property->slug) : '' }}" class="btn btn-4">Read more</a>
                     </div>
                 </div>
             </div>
         </div>
+        @endif
     </div>
 </div>
 <!-- Featured properties end -->
@@ -333,10 +324,10 @@
                     </div>
                     <div class="detail">
                         <h5>
-                            <a href="services.html">Apartments Clean</a>
+                            <a href="#">Apartments Clean</a>
                         </h5>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        <a href="services.html" class="read-more">Read more...</a>
+                        <a href="#" class="read-more">Read more...</a>
                     </div>
                 </div>
             </div>
@@ -347,10 +338,10 @@
                     </div>
                     <div class="detail">
                         <h5>
-                            <a href="services.html">Houses</a>
+                            <a href="#">Houses</a>
                         </h5>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        <a href="services.html" class="read-more">Read more...</a>
+                        <a href="#" class="read-more">Read more...</a>
                     </div>
                 </div>
             </div>
@@ -361,10 +352,10 @@
                     </div>
                     <div class="detail">
                         <h5>
-                            <a href="services.html">Support 24/7</a>
+                            <a href="#">Support 24/7</a>
                         </h5>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        <a href="services.html" class="read-more">Read more...</a>
+                        <a href="#" class="read-more">Read more...</a>
                     </div>
                 </div>
             </div>
@@ -375,15 +366,15 @@
                     </div>
                     <div class="detail">
                         <h5>
-                            <a href="services.html">Commercial</a>
+                            <a href="#">Commercial</a>
                         </h5>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        <a href="services.html" class="read-more">Read more...</a>
+                        <a href="#" class="read-more">Read more...</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-12 text-center">
-                <a data-animation="animated fadeInUp delay-10s" href="services.html" class="btn-5">More Details</a>
+                <a data-animation="animated fadeInUp delay-10s" href="#" class="btn-5">More Details</a>
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Properties;
 use App\Models\cms;
 
@@ -15,11 +16,18 @@ class HomeController extends Controller
 
         $featured_images = DB::select("SELECT feature_image FROM `properties` ORDER BY id DESC LIMIT 3");
         $latest_properties = Properties::where('status',1)->with('type')->orderBy('id','desc')->get(); 
+        $featured_property = Properties::where('featured',1)->first();
 
+        if (!empty($featured_property)) {
+           
+            $description = (string) html_entity_decode($featured_property->description_en, ENT_QUOTES, 'UTF-8');
+            $limit = Str::limit(strip_tags($description), 200);
+			$featured_property->description_en = $limit;
+        }
         // App::setLocale('nl');
         // return App::getLocale();
 
-        return view('front.index',compact('featured_images','latest_properties'));
+        return view('front.index',compact('featured_images','latest_properties','featured_property'));
     }
 
     public function change_lang($lang){

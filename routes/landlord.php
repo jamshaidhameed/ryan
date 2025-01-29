@@ -30,4 +30,6 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
 
      Route::patch('/upload/file',[App\Http\Controllers\Landlord\HomeController::class,'upload_file_for_enquiry'])->name('upload.file');
 
+     Route::post('remov/image/',[App\Http\Controllers\Landlord\HomeController::class,'remove_property_image'])->name('property.remove.image');
+
     });

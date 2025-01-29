@@ -20,14 +20,14 @@
                     
                         <ul class="dropdown-menu" aria-labelledby="Dropdown">
                             <li>
-                                <a class="dropdown-item" href="{{ route('lang.change','en') }}"><i class="flag-united-kingdom flag"></i>English 
+                                <a class="dropdown-item" href=""><i class="flag-united-kingdom flag"></i>English 
                                 @if(\Illuminate\Support\Facades\App::getLocale() == 'en')
                                 <i class="fa fa-check text-success ms-2"></i>
                                 @endif
                             </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('lang.change','nl')  }}"><i class="flag-netherlands flag"></i>Nederlands
+                                <a class="dropdown-item" href=""><i class="flag-netherlands flag"></i>Nederlands
                              @if(\Illuminate\Support\Facades\App::getLocale() == 'nl')
                                 <i class="fa fa-check text-success ms-2"></i>
                                 @endif
@@ -63,12 +63,12 @@
                         
                         @endphp
                      <li>
-                        <a href="{{ $route }}" class="sign-in"><i class="fa fa-dashboard" style="margin-right: 6px;"></i>Dashboard </a>
+                        <a href="{{ $route }}" class="sign-in"><i class="fa fa-dashboard" style="margin-right: 6px;"></i>@lang('titles.dashboard') </a>
                      </li>
 
                      <li>
                         <a class="ign-in" href="{{  route('logout') }}" role="menuitem"onclick="event.preventDefault();document.getElementById('logout-form').submit();"> <i class="fa fa-logout" style="margin-right:10px;"></i>
-                        {{ __('Logout') }}
+                        @lang('titles.logout')
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -105,19 +105,19 @@
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown {{ Route::currentRouteName() == 'home' ? 'active' : ''}}">
                                 <a class="nav-link dropdown-toggle" href="{{ route('home')}}" >
-                                    Home
+                                    @lang('titles.home')
                                 </a>
                                 
                             </li>
                             <li class="nav-item dropdown {{ Route::currentRouteName() == 'properties.list' ? 'active' : ''}}">
                                 <a class="nav-link dropdown-toggle" href="{{ route('properties.list') }}">
-                                    Properties
+                                    @lang('titles.properties')
                                 </a>
                                 
                             </li>
                             <li class="nav-item dropdown {{ Route::currentRouteName() == 'contact.us' ? 'active' : ''}}">
                                 <a class="nav-link dropdown-toggle" href="{{ route('contact.us') }}">
-                                    Contact Us
+                                    @lang('titles.contactus')
                                 </a>
 
                             </li>

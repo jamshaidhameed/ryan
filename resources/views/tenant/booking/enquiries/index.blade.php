@@ -90,7 +90,7 @@
                                 <ul>
                                     <li>
                                         
-                                        <a href="{{ $enquiry->id}},{{ asset('upload/booking/'.$enquiry->link) }},{{ !empty($enquiry->signed_at) ? '1' : '0' }}" data-id="{{ $enquiry->id}}" data-file="" class="contract-btn" tooltip="Download Contract">
+                                        <a href="{{ $enquiry->id}},{{ asset('upload/booking/'.$enquiry->link) }},{{ !empty($enquiry->signed_at) ? '1' : '0' }}" data-id="{{ $enquiry->id}}" data-file="" class="contract-btn" tooltip="Download Contract" target="_blank>
                                         @if(!empty($enquiry->link))    
                                         <i class="fa fa-download"></i> 
                                        @else 
@@ -144,7 +144,7 @@
              <input type="hidden" name="e_id" value="">
             <div class="modal-body">
               <div class="form-group">
-                <a href="" class="link">Donwload Contract</a>
+                <a href="" class="link" target="_blank">Donwload Contract</a> <br>
                 <label for="" class="form-control-label">Upload File</label>
                 <input type="file" name="tenant_uploaded_file" id="" class="form-control" required>
                 <p class="text-danger"></p>

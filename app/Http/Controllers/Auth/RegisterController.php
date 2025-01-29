@@ -7,7 +7,9 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
+use App\Mail\RegisteredMail;
 use Auth;
 
 class RegisterController extends Controller
@@ -90,6 +92,12 @@ class RegisterController extends Controller
         $user_role = $user->role;
 
         session()->flash('success','Your Account has been successfully Created. Please log in in to your account.');
+
+        //Send Mail 
+
+          Mail::to($user->email)->send(new RegisteredMail($user));
+
+
 
         return redirect()->route('login');
 

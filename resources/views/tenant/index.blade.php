@@ -1,4 +1,4 @@
-@extends('tenant.layouts.Tenant') 
+@extends('tenant.layouts.tenant') 
 @section('title')
  Update Your Profile
 @endsection
@@ -156,13 +156,14 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="">{{ __('Street Address') }}</label>
-                                    <textarea wrap="on" class="form-control" name="street_address" placeholder="">
+                                    {{-- <textarea wrap="on" class="form-control" name="street_address" placeholder="">
                                         @if(!empty($user->street_address))
                                          {{ $user->street_address}}
                                         @else 
                                         {{ old('street_address')}}
                                         @endif
-                                    </textarea>
+                                    </textarea> --}}
+                                    <input type="text" name="street_address" id="" class="form-control" value="{{ !empty($user->street_address) ? $user->street_address : old('street_address') }}">
                                 </div>
                             </div>
                         </div>

@@ -13,6 +13,11 @@
         background-color: #fff;
         display: inline-block;
     }
+    textarea {
+    text-align: left;
+    direction: ltr; /* Ensures left-to-right text direction */
+    width: 100%;
+}
 </style>
 @endsection
 @section('content')
@@ -156,14 +161,16 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="">{{ __('Street Address') }}</label>
-                                    <textarea wrap="on" class="form-control" name="street_address" placeholder="" required>
+                                    <label for="">{{ __('Street Address') }}</label> <br>
+                                    {{-- <textarea id="address" name="street_address" placeholder="" required>
                                         @if(!empty($user->street_address))
-                                         {{ $user->street_address}}
+                                         {{ trim($user->street_address)}}
                                         @else 
-                                        {{ old('street_address')}}
+                                        {{ trim(old('street_address'))}}
                                         @endif
-                                    </textarea>
+                                    </textarea> --}}
+
+                                    <input type="text" name="street_address" id="" class="form-control" value="{{ !empty($user->street_address) ? $user->street_address : old('street_address')}}">
                                 </div>
                             </div>
                         </div>
@@ -184,7 +191,8 @@
     $(document).ready(function(){
         $('#province_id').parent().find('a').hide();
         $('#province_id').show();
-    })
+        removeTextAreaWhiteSpace();
+    });
 </script>
  <script>
     $(document).on('change','select[name="country_id"]  ',function(e){

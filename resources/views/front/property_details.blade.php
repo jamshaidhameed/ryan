@@ -42,10 +42,22 @@
                     </div>
                     <!-- main slider carousel items -->
                     <div class="carousel-inner">
-                        @php $images = !empty($property_info->property_image) ? explode(",",$property_info->property_image) : array(); @endphp
-                        @foreach($images as $img)
+                        @php $images = !empty($property_info->property_image) ? explode(",",$property_info->property_image) : array(); 
+                             $featured_images =  !empty($property_info->feature_image) ? explode(",",$property_info->feature_image) : array(); 
+                        @endphp
+                         @foreach($featured_images as $img)
                         <div class="{{ $loop->iteration == 1 ? 'active' : ''}} item carousel-item" data-slide-number="{{ $loop->iteration }}">
+                            <img src="{{ asset('upload/property/feature/'.$img)}}" class="img-fluid" alt="{{ $property_info->title_en}}">
+                        </div>
+                        @endforeach
+                        @foreach($images as $img)
+                        <div class="item carousel-item" data-slide-number="{{ $loop->iteration }}">
                             <img src="{{ asset('upload/property/'.$img)}}" class="img-fluid" alt="{{ $property_info->title_en}}">
+                        </div>
+                        @endforeach
+                        @foreach($featured_images as $img)
+                        <div class="item carousel-item" data-slide-number="{{ $loop->iteration }}">
+                            <img src="{{ asset('upload/property/feature/'.$img)}}" class="img-fluid" alt="{{ $property_info->title_en}}">
                         </div>
                         @endforeach
                         <a class="carousel-control left" href="#propertiesDetailsSlider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
@@ -60,6 +72,14 @@
                             </a>
                      </li>
                      @endforeach
+                     @foreach($featured_images as $img) 
+                     <li class="list-inline-item">
+                            <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#propertiesDetailsSlider">
+                                <img src="{{ asset('upload/property/feature/'.$img) }}" class="img-fluid" alt="{{ $property_info->title_en}}">
+                            </a>
+                     </li>
+                     @endforeach
+
                     </ul>
                 </div>
                 <!-- Search area start -->

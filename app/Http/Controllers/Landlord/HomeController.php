@@ -88,7 +88,7 @@ class HomeController extends Controller
                 'postcode' => $request->postcode,
                 'phone' => $request->phone,
                 'city' => $request->city,
-                'street_address' => $request->street_address,
+                'street_address' => $normalizedText = preg_replace('/\s+/', ' ', trim($request->street_address)),
                 'email' => $request->email,
                 'photo' => $new_name
                 
@@ -437,5 +437,27 @@ class HomeController extends Controller
         session()->flash('success','File Uploaded Successfully');
 
         return redirect()->route('landlord.properties');
+    }
+
+    public function remove_property_image(Request $request){
+
+        $property = Properties::find($request->id);
+
+        if (empty($property)) {
+            
+            return response()->json(['success' => false,'sorry no property found']);
+        }
+
+        if(File::exists(public_path('upload/property/').$request->img)) {
+                File::delete(public_path('upload/property/').$request->img);
+            }
+
+        $newString = str_replace($request->img.",", '', $property->property_image);
+
+      $property->property_image = $newString;
+      $property->save();
+
+      return response()->json(['success' => true,'Image Removed']);
+
     }
 }
