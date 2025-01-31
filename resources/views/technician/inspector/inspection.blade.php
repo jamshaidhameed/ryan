@@ -211,8 +211,8 @@
                         </tbody>
                      </table>
                      <!-- End Table -->
-                      @php $old_inspection = \App\Models\Inspections::where('inspectionable_id',$inspection->inspectionable_id)->orderBy('id','DESC')->first();
-                         
+                      @php  $inspect = \Illuminate\Support\Facades\DB::select("SELECT * FROM `inspections` WHERE id < ".$inspection->id." ORDER BY id DESC LIMIT 1;");
+                         $old_inspection = count($inspect) > 0 ? $inspect[0] : null;
                       @endphp
                       <!-- First Form -->
                        <form action="{{ route('technision.inspection.form.submit') }}" class="post-form" method="post"  enctype="multipart/form-data">

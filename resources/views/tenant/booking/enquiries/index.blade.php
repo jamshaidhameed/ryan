@@ -1,6 +1,6 @@
 @extends('tenant.layouts.Tenant') 
 @section('title')
- My Booking Enquiries
+  {{ __('titles.my_booking_enquiries') }}
 @endsection
 @section('style')
 <style>
@@ -21,10 +21,10 @@
 <div class="sub-banner">
     <div class="container">
         <div class="breadcrumb-area">
-            <h1>{{ __('My Booking Enquiries') }}</h1>
+            <h1>{{ __('titles.my_booking_enquiries') }}</h1>
             <ul class="breadcrumbs">
-                <li><a href="{{ route('tenant.dashboard') }}">{{ __('Home') }}</a></li>
-                <li class="{{ Route::currentRouteName() == 'tenant.properties' ? 'active' : ''}}">{{ __('My Booking Enquiries') }} </li>
+                <li><a href="{{ route('tenant.dashboard') }}">{{ __('titles.home') }}</a></li>
+                <li class="{{ Route::currentRouteName() == 'tenant.properties' ? 'active' : ''}}">{{ __('titles.my_booking_enquiries') }} </li>
             </ul>
         </div>
     </div>
@@ -49,10 +49,10 @@
                    <table class="manage-table">
                         <thead>
                         <tr>
-                            <th>Booked Property</th>
+                            <th>{{ __('titles.booked_property') }}</th>
                             <th></th>
-                            <th class="text-left">Booking Status</th>
-                            <th class="text-center">Actions</th>
+                            <th class="text-left">{{ __('titles.booking_status') }}</th>
+                            <th class="text-center">{{ __('titles.actions') }}</th>
                         </tr>
                         </thead>
                         <tbody class="responsive-table">
@@ -96,7 +96,7 @@
                                        @else 
                                          <i class="fa fa-upload"></i>
                                        @endif
-                                        {{ __('Contract') }}
+                                        {{ __('titles.contract') }}
                                     </a>
                                         
                                     </li>
@@ -104,10 +104,10 @@
 
                                     @if(date('Y-m-d') < $expiry && empty($enquiry->terminated_on))
                                     <li>
-                                        <a target="_blank" href="{{ route('tenant.booking.invoices',$enquiry->id)}}" class="delete"><i class="fa fa-eye"></i> Invoices</a>
+                                        <a target="_blank" href="{{ route('tenant.booking.invoices',$enquiry->id)}}" class="delete"><i class="fa fa-eye"></i> {{ __('titles.invoices') }}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('tenant.booking.property.complaints',$enquiry->id) }}" class="delete"><i class="fa fa-eye"></i> Complaints </a>
+                                        <a href="{{ route('tenant.booking.property.complaints',$enquiry->id) }}" class="delete"><i class="fa fa-eye"></i> {{ __('titles.complaints') }} </a>
                                     </li>
                                    @endif
                                 </ul>
@@ -133,7 +133,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Upload File</h4>
+              <h4 class="modal-title">{{ __('titles.upload_file') }}</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -144,15 +144,15 @@
              <input type="hidden" name="e_id" value="">
             <div class="modal-body">
               <div class="form-group">
-                <a href="" class="link" target="_blank">Donwload Contract</a> <br>
-                <label for="" class="form-control-label">Upload File</label>
+                <a href="" class="link" target="_blank">{{ __('titles.download_contract') }}</a> <br>
+                <label for="" class="form-control-label">{{ __('titles.upload_file') }}</label>
                 <input type="file" name="tenant_uploaded_file" id="" class="form-control" required>
                 <p class="text-danger"></p>
               </div>
             </div>
             <div class="modal-footer justify-content-end">
-              <button type="button" class="btn btn-warning btn-outline-light" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary btn-outline-light">Upload</button>
+              <button type="button" class="btn btn-warning btn-outline-light" data-dismiss="modal">{{ __('titles.close') }}</button>
+              <button type="submit" class="btn btn-primary btn-outline-light">{{ __('titles.upload') }}</button>
             </div>
           </div>
           </form>

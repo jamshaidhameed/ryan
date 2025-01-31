@@ -1,15 +1,15 @@
 @extends('technician.layouts.master') 
 @section('title')
- Issue Tickets
+ {{ __('titles.issue_ticket') }}
 @endsection
 @section('content')
 <div class="sub-banner">
     <div class="container">
         <div class="breadcrumb-area">
-            <h1>My Profile</h1>
+            <h1> {{ __('titles.issue_ticket') }}</h1>
             <ul class="breadcrumbs">
-                <li><a href="{{ route('landlord.dashboard') }}">{{ __('Home')}}</a></li>
-                <li class="">{{ __('Issue Tickets') }}</li>
+                <li><a href="{{ route('landlord.dashboard') }}">{{ __('titles.home')}}</a></li>
+                <li class=""> {{ __('titles.issue_ticket') }}</li>
             </ul>
         </div>
     </div>
@@ -26,20 +26,20 @@
             <div class="col-lg-8 col-md-12 col-sm-12">
                 <div class="my-address contact-2">
                     @php $user = Auth::user(); @endphp
-                    <h3 class="heading-3">{{ __('Issue Tickets')}}</h3>
+                    <h3 class="heading-3"> {{ __('titles.issue_ticket') }}</h3>
                     <!-- Table Start -->
                      <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="text-center">Issue No</th>
-                                <th class="text-center">Issue Type</th>
-                                <th class="text-left">Property</th>
-                                <th class="text-left">Address</th>
-                                <th class="text-left">Issue Title</th>
-                                <th class="text-left">Description</th>
-                                <th class="text-center">Priority</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-center">Action</th>
+                                <th class="text-center">{{ __('titles.issue_code') }}</th>
+                                <th class="text-center">{{ __('titles.issue_ticket_type') }}</th>
+                                <th class="text-left">{{ __('titles.property') }}</th>
+                                <th class="text-left">{{ __('titles.address') }}</th>
+                                <th class="text-left">{{ __('titles.issue_title') }}</th>
+                                <th class="text-left">{{ __('titles.description') }}</th>
+                                <th class="text-center">{{ __('titles.priority') }}</th>
+                                <th class="text-center">{{ __('titles.status') }}</th>
+                                <th class="text-center">{{ __('titles.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,7 +54,7 @@
                                 <td>{{ ucwords($ticket->priority)}}</td>
                                 <td>{{ ucwords($ticket->status)}}</td>
                                 <td>
-                                    <a href="{{ route('technision.issue.show',$ticket->id) }}" class="btn btn-primary btn-outline btn-sm"> <i class="fa fa-eye"></i> View</a>
+                                    <a href="{{ route('technision.issue.show',$ticket->id) }}" class="btn btn-primary btn-outline btn-sm"> <i class="fa fa-eye"></i> {{ __('titles.view') }}</a>
                                 </td>
                              </tr>
                             @endforeach

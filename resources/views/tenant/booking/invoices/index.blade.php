@@ -1,6 +1,6 @@
 @extends('tenant.layouts.Tenant') 
 @section('title')
- Invoices
+ {{ __('titles.invoices') }}
 @endsection
 @section('style')
 <style>
@@ -21,10 +21,10 @@
 <div class="sub-banner">
     <div class="container">
         <div class="breadcrumb-area">
-            <h1>{{ __('Invoices') }}</h1>
+            <h1>{{ __('titles.invoices') }}</h1>
             <ul class="breadcrumbs">
-                <li><a href="{{ route('tenant.dashboard') }}">{{ __('Home') }}</a></li>
-                <li class="{{ Route::currentRouteName() == 'tenant.properties' ? 'active' : ''}}">{{ __('Invoices') }} </li>
+                <li><a href="{{ route('tenant.dashboard') }}">{{ __('titles.home') }}</a></li>
+                <li class="{{ Route::currentRouteName() == 'tenant.properties' ? 'active' : ''}}">{{ __('titles.invoices') }} </li>
             </ul>
         </div>
     </div>
@@ -46,18 +46,18 @@
                 @endif
                 <div class="my-properties">
 
-                 <h4> Invoices of the Booking No. <span class="text-info">{{ $enquiry->enquiry_no}}</span> <br>  <br>
-                      Property : <span class="text-info">{{ $enquiry->property->title_en }}</span>
+                 <h4> {{ __('titles.invoices_of_the_booking') }} <span class="text-info">{{ $enquiry->enquiry_no}}</span> <br>  <br>
+                      {{ __('titles.property') }} : <span class="text-info">{{ $enquiry->property->title_en }}</span>
                 </h4>
                 <br> <br>
 
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th class="text-center">S.No</th>
-                            <th class="text-center">Month</th>
-                            <th class="text-center">Invoice Amount</th>
-                            <th class="text-center">Status</th>
+                            <th class="text-center">{{ __('titles.s_no') }}</th>
+                            <th class="text-center">{{ __('titles.month') }}</th>
+                            <th class="text-center">{{ __('titles.invoice_amount') }}</th>
+                            <th class="text-center">{{ __('titles.status') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,7 +94,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Upload File</h4>
+              <h4 class="modal-title">{{ __('titles.upload_file') }}</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -105,13 +105,13 @@
              <input type="hidden" name="e_id" value="">
             <div class="modal-body">
               <div class="form-group">
-                <label for="" class="form-control-label">Upload File</label>
+                <label for="" class="form-control-label">{{ __('titles.upload_file') }}</label>
                 <input type="file" name="tenant_uploaded_file" id="" class="form-control" required>
               </div>
             </div>
             <div class="modal-footer justify-content-end">
-              <button type="button" class="btn btn-warning btn-outline-light" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary btn-outline-light">Upload</button>
+              <button type="button" class="btn btn-warning btn-outline-light" data-dismiss="modal">{{ __('titles.s_no') }}Close</button>
+              <button type="submit" class="btn btn-primary btn-outline-light">{{ __('titles.upload') }}</button>
             </div>
           </div>
           </form>

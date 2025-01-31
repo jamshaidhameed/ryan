@@ -8,12 +8,12 @@
                         <ul>
                             <li>
                                 <a href="{{ route('tenant.dashboard') }}" class="{{ Route::currentRouteName() == 'tenant.dashboard' ? 'active' : ''}}">
-                                    <i class="{{ route('tenant.dashboard') }}"></i>{{ __('Profile')}}
+                                    <i class="{{ route('tenant.dashboard') }}"></i>{{ __('titles.profile')}}
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('tenant.booking.enquiries') }}"  class="{{ Route::currentRouteName() == 'tenant.booking.enquiries' ? 'active' : ''}}">
-                                    <i class="flaticon-house"></i>{{ __('Booked Properties')}}
+                                    <i class="flaticon-house"></i>{{ __('titles.booked_properties')}}
                                 </a>
                             </li>
                             <!-- <li>
@@ -24,7 +24,7 @@
                            
                             <li>
                                 <a href="{{ route('tenant.change.password') }}"   class="{{ Route::currentRouteName() == 'tenant.change.password' ? 'active' : ''}}">
-                                    <i class="flaticon-locked-padlock"></i>Change Password
+                                    <i class="flaticon-locked-padlock"></i>{{ __('titles.change_password') }}
                                 </a>
                             </li>
                             <!-- <li>

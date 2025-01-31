@@ -41,7 +41,7 @@
             <div class="col-lg-6 align-self-center pad-0 form-section">
                 <div class="form-inner">
                     <img src="{{ asset('front/assets/img/logo.png') }}" alt="logo" width="150">
-                    <h3>Sign Into Your Account</h3>
+                    <h3>{{ __('titles.sign_in_to_account') }}</h3>
 
                      @if(session()->has('success'))
                     <div class="alert alert-success mt-6">
@@ -62,7 +62,7 @@
                     <form action="{{ route('login')}}" method="POST">
                         @csrf
                         <div class="form-group form-box">
-                            <input type="email" name="email" class="input-text @error('email') is-invalid @enderror" placeholder="{{ __('Email Address') }}" value="{{ old('email') }}">
+                            <input type="email" name="email" class="input-text @error('email') is-invalid @enderror" placeholder="{{ __('titles.email_address') }}" value="{{ old('email') }}">
                             <i class="flaticon-mail-2"></i>
                              @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -71,7 +71,7 @@
                             @enderror
                         </div>
                         <div class="form-group form-box">
-                            <input type="password" name="password" class="input-text @error('password') is-invalid @enderror" placeholder="{{ __('Password') }}">
+                            <input type="password" name="password" class="input-text @error('password') is-invalid @enderror" placeholder="{{ __('titles.password') }}">
                             <i class="flaticon-password"></i>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -87,11 +87,11 @@
                                 </label>
                             </div>
                              @if (Route::has('password.request'))
-                               <a href="{{ route('password.request') }}" class="forgot-password">{{ __('Forgot Your Password?') }}</a>
+                               <a href="{{ route('password.request') }}" class="forgot-password">{{ __('titles.forgot_password') }}</a>
                             @endif
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-4 btn-block" style="background-color: #f26928;">{{ __('Login') }}</button>
+                            <button type="submit" class="btn btn-4 btn-block" style="background-color: #f26928;">{{ __('titles.login') }}</button>
                         </div>
 
                         <!-- <div class="extra-login form-group clearfix">
@@ -105,7 +105,7 @@
                         </ul> -->
                     </form>
                     <div class="clearfix"></div>
-                    <p>Don't have an account? <a href="{{ route('register') }}" class="thembo"> Register here</a></p>
+                    <p>{{ __('titles.dont_have_account') }} <a href="{{ route('register') }}" class="thembo"> {{ __('titles.register_here') }}</a></p>
                 </div>
             </div>
             <div class="col-lg-6 bg-color-15 pad-0 none-992 bg-img">

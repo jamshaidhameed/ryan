@@ -1,6 +1,6 @@
 @extends('landlord.layout.landlord') 
 @section('title')
- Invoices List
+  {{ __('titles.invoices_list') }}
 @endsection
 @section('style')
 
@@ -9,10 +9,10 @@
 <div class="sub-banner">
     <div class="container">
         <div class="breadcrumb-area">
-            <h1>Invoices List</h1>
+            <h1>{{ __('titles.invoices_list') }}</h1>
             <ul class="breadcrumbs">
-                <li><a href="{{ route('landlord.dashboard') }}">{{ __('Home')}}</a></li>
-                <li class="{{ Route::currentRouteName() == 'landlord.dashboard' ? 'active' : ''}}">{{ __('Invoices List') }}</li>
+                <li><a href="{{ route('landlord.dashboard') }}">{{ __('home')}}</a></li>
+                <li class="{{ Route::currentRouteName() == 'landlord.dashboard' ? 'active' : ''}}">{{ __('titles.invoices_list') }}</li>
             </ul>
         </div>
     </div>
@@ -33,18 +33,18 @@
                             {{ session()->get('success')}}
                         </div>
                     @endif
-                    <h4> Invoices of the Booking No. <span class="text-info">{{ $enquiry->enquiry_no}}</span> <br>  <br>
-                      Property : <span class="text-info">{{ $enquiry->property->title_en }}</span>
+                    <h4> {{ __('titles.invoices_of_the_booking') }} <span class="text-info">{{ $enquiry->enquiry_no}}</span> <br>  <br>
+                      {{ __('titles.property') }} : <span class="text-info">{{ $enquiry->property->title_en }}</span>
                 </h4>
                 <br> <br>
 
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th class="text-center">S.No</th>
-                            <th class="text-center">Month</th>
-                            <th class="text-center">Invoice Amount</th>
-                            <th class="text-center">Status</th>
+                            <th class="text-center">{{ __('titles.s_no') }}</th>
+                            <th class="text-center">{{ __('titles.month') }}</th>
+                            <th class="text-center">{{ __('titles.invoice_amount') }}</th>
+                            <th class="text-center">{{ __('titles.status') }}</th>
                         </tr>
                     </thead>
                     <tbody>
