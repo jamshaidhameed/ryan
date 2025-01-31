@@ -42,8 +42,8 @@
             <div class="col-lg-6 align-self-center pad-0 form-section">
                 <div class="form-inner">
                     <img src="{{ asset('front/assets/img/logo.png') }}" alt="logo" width="150">
-                    <h3>Register Account</h3>
-                    <p>Get Your Free Account Now</p>
+                    <h3>{{ __('titles.register_account') }}</h3>
+                    <p>{{ __('titles.get_your_free_account') }}</p>
                     @if($errors->any())
                         <div class="alert alert-danger">
                             <ul class="list-group">
@@ -60,33 +60,33 @@
                        
                          <div class="form-group">
                             
-                            <input type="text" name="first_name" id="" class="input-text form-control" value="{{ old('first_name') }}" placeholder="{{ __('First Name')}}" data-fv-notempty="true">
+                            <input type="text" name="first_name" id="" class="input-text form-control" value="{{ old('first_name') }}" placeholder="{{ __('titles.first_name')}}" data-fv-notempty="true">
                          </div>
                          <div class="form-group">
                             
-                            <input type="text" name="last_name" id="" class="input-text form-control" value="{{ old('last_name') }}" placeholder="{{ __('Last Name')}}">
+                            <input type="text" name="last_name" id="" class="input-text form-control" value="{{ old('last_name') }}" placeholder="{{ __('titles.last_name')}}">
                          </div>
                          <div class="form-group">
                             
-                            <input type="email" name="email" id="" class="input-text form-control" value="{{ old('email') }}" placeholder="{{ __('Email')}}">
+                            <input type="email" name="email" id="" class="input-text form-control" value="{{ old('email') }}" placeholder="{{ __('titles.email')}}">
                          </div>
                          <div class="form-group">
                             <select name="user_type" id="" class="form-control input-text">
-                                <option value="">I am </option>
+                                <option value="">{{ __('titles.i_am') }} </option>
                                 <option value="landlord" @if(!empty(old('user_type')) && old('user_type') == 'landlord')selected @endif>Landlord</option>
                                 <option value="tenant" @if(!empty(old('user_type')) && old('user_type') == 'tenant')selected @endif>Tenant</option>
                             </select>
                          </div>
                          <div class="form-group">
                             
-                            <input type="password" name="password" id="" class="input-text form-control" value="{{ old('password') }}" placeholder="{{ __('Password')}}">
+                            <input type="password" name="password" id="" class="input-text form-control" value="{{ old('password') }}" placeholder="{{ __('titles.password')}}">
                          </div>
                          <div class="form-group">
                             
-                            <input type="password" name="password_confirmation" id="" class="input-text form-control" value="{{ old('password_confirmation') }}" placeholder="{{ __('Confirm Password')}}">
+                            <input type="password" name="password_confirmation" id="" class="input-text form-control" value="{{ old('password_confirmation') }}" placeholder="{{ __('titles.confirm_password')}}">
                          </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-4 btn-block" style="background-color: #f26928;">{{ __('Register') }}</button>
+                            <button type="submit" class="btn btn-4 btn-block" style="background-color: #f26928;">{{ __('titles.register') }}</button>
                         </div>
 
                         <!-- <div class="extra-login form-group clearfix">

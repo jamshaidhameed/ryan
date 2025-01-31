@@ -1,15 +1,15 @@
 @extends('layouts.front')
 @section('title')
-Properties List
+{{ __('titles.properties_list') }}
 @endsection
 @section('content')
 <div class="sub-banner">
     <div class="container">
         <div class="breadcrumb-area">
-            <h1>Properties List</h1>
+            <h1>{{ __('titles.properties_list')}}</h1>
             <ul class="breadcrumbs">
-                <li><a href="{{ route('home') }}">Home</a></li>
-                <li class="active">Properties</li>
+                <li><a href="{{ route('home') }}">{{ __('titles.home') }}</a></li>
+                <li class="active">{{ __('titles.properties') }}</li>
             </ul>
         </div>
     </div>
@@ -26,7 +26,7 @@ Properties List
                             <i class="fa fa-caret-right icon-design"></i>
                             <i class="fa fa-th-large"></i>
                         </span>
-                        <span class="heading">Properties</span>
+                        <span class="heading">{{ __('titles.properties') }}</span>
                     </h4>
                 </div>
                 <div class="col-xl-8 col-lg-7 col-md-7 col-sm-7 col-9">
@@ -38,8 +38,8 @@ Properties List
                         @csrf
                          <div class="search-area">
                             <select class="selectpicker search-fields" name="sortBy" onChange="this.form.submit()">
-                                <option value="priceDesc" @if(!empty($_GET['sortBy']) && $_GET['sortBy'] == 'priceDesc') selected @endif>High to Low</option>
-                                <option value= "priceAsc" @if(!empty($_GET['sortBy']) && $_GET['sortBy'] == 'priceAsc') selected @endif>Low to High</option>
+                                <option value="priceDesc" @if(!empty($_GET['sortBy']) && $_GET['sortBy'] == 'priceDesc') selected @endif>{{ __('titles.height_to_low') }}</option>
+                                <option value= "priceAsc" @if(!empty($_GET['sortBy']) && $_GET['sortBy'] == 'priceAsc') selected @endif>{{ __('titles.low_to_high') }}</option>
                             </select>
                     </div>
                     </form>
@@ -49,7 +49,7 @@ Properties List
         </div>
         <div class="subtitle">
             @if(count($properties) > 0)
-             {{ count($properties)}} Result Found
+             {{ count($properties)}} {{ __('titles.result_found') }}
             @else 
             No Property Found 
             @endif

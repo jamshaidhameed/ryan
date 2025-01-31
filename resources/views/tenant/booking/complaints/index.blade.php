@@ -1,6 +1,6 @@
 @extends('tenant.layouts.Tenant') 
 @section('title')
- Complaints List
+ {{ __('titles.complaints_list') }}
 @endsection
 @section('style')
 @endsection
@@ -8,10 +8,10 @@
 <div class="sub-banner">
     <div class="container">
         <div class="breadcrumb-area">
-            <h1>Complaints List</h1>
+            <h1>{{ __('titles.complaints_list') }}</h1>
             <ul class="breadcrumbs">
-                <li><a href="{{ route('tenant.dashboard') }}">{{ __('Home')}}</a></li>
-                <li class="{{ Route::currentRouteName() == 'tenant.dashboard' ? 'active' : ''}}">{{ __('Complaint') }}</li>
+                <li><a href="{{ route('tenant.dashboard') }}">{{ __('titles.home')}}</a></li>
+                <li class="{{ Route::currentRouteName() == 'tenant.dashboard' ? 'active' : ''}}">{{ __('titles.complaints_list') }}</li>
             </ul>
         </div>
     </div>
@@ -28,19 +28,19 @@
             <div class="col-lg-8 col-md-12 col-sm-12">
                 <div class="my-address contact-2">
                     <h3 class="heading-3">
-                        Complaints List
+                       {{ __('titles.complaints_list') }}
                     </h3>
                     <div class="d-flex justify-content-end">
-                        <a href="{{ route('tenant.complaints.create',$e_id) }}" class="btn btn-primary mt-5"><i class="fa fa-plus-circle" style="margin-right:10px;"></i>{{ __('Add')}}</a>
+                        <a href="{{ route('tenant.complaints.create',$e_id) }}" class="btn btn-primary mt-5"><i class="fa fa-plus-circle" style="margin-right:10px;"></i>{{ __('titles.add')}}</a>
                     </div>
                     <br>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="text-center">Issue Code</th>
-                                <th class="text-center">Title</th>
-                                <th class="text-center">Assigned To</th>
-                                <th class="text-center">Status</th>
+                                <th class="text-center">{{__('titles.issue_code') }}</th>
+                                <th class="text-center">{{ __('titles.title') }}</th>
+                                <th class="text-center">{{ __('titles.assign_to') }}</th>
+                                <th class="text-center">{{ __('titles.status') }}</th>
                             </tr>
                         </thead>
                         <tbody>

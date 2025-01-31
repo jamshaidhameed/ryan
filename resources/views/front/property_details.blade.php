@@ -8,8 +8,8 @@
         <div class="breadcrumb-area">
             <h1>{{ $property_info->title_en}}</h1>
             <ul class="breadcrumbs">
-                <li><a href="{{ route('home') }}">Home</a></li>
-                <li class="active">Properties</li>
+                <li><a href="{{ route('home') }}">{{ __('titles.home') }}</a></li>
+                <li class="active">{{ __('titles.properties') }}</li>
             </ul>
         </div>
     </div>
@@ -51,7 +51,7 @@
                         </div>
                         @endforeach
                         @foreach($images as $img)
-                        <div class="item carousel-item" data-slide-number="{{ $loop->iteration }}">
+                        <div class="{{ count($featured_images) == 0 && $loop->iteration == 1 ? 'active' : ''}} item carousel-item" data-slide-number="{{ $loop->iteration }}">
                             <img src="{{ asset('upload/property/'.$img)}}" class="img-fluid" alt="{{ $property_info->title_en}}">
                         </div>
                         @endforeach
@@ -91,19 +91,19 @@
                 <div class="tabbing tabbing-box mb-60">
                     <ul class="nav nav-tabs" id="carTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active show" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="one" aria-selected="false">Description</a>
+                            <a class="nav-link active show" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="one" aria-selected="false">{{ __('titles.description') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="two" aria-selected="false">Floor Plans</a>
+                            <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="two" aria-selected="false">{{ __('titles.floor_plans') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="three" aria-selected="true">Details</a>
+                            <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="three" aria-selected="true">{{ __('titles.details') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="4-tab" data-toggle="tab" href="#4" role="tab" aria-controls="4" aria-selected="true">Video</a>
+                            <a class="nav-link" id="4-tab" data-toggle="tab" href="#4" role="tab" aria-controls="4" aria-selected="true">{{ __('titles.video') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="5-tab" data-toggle="tab" href="#5" role="tab" aria-controls="5" aria-selected="true">Location</a>
+                            <a class="nav-link" id="5-tab" data-toggle="tab" href="#5" role="tab" aria-controls="5" aria-selected="true">{{ __('titles.location') }}</a>
                         </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link" id="6-tab" data-toggle="tab" href="#6" role="tab" aria-controls="6" aria-selected="true">Related Properties</a>
@@ -111,17 +111,17 @@
                     </ul>
                     <div class="tab-content" id="carTabContent">
                         <div class="tab-pane fade active show" id="one" role="tabpanel" aria-labelledby="one-tab">
-                            <h3 class="heading-3">{{ __('Property Description')}}</h3>
+                            <h3 class="heading-3">{{ __('titles.property_description')}}</h3>
                            {!! html_entity_decode($property_info->description_en) !!}
                         </div>
                         <div class="tab-pane fade" id="two" role="tabpanel" aria-labelledby="two-tab">
                             <div class="floor-plans mb-60">
-                                <h3 class="heading-3">Floor Plans</h3>
+                                <h3 class="heading-3">{{ __('titles.floor_plans') }}</h3>
                                 <table>
                                     <tbody><tr>
-                                        <td><strong>Size</strong></td>
-                                        <td><strong>Rooms</strong></td>
-                                        <td><strong>Bathrooms</strong></td>
+                                        <td><strong>{{ __('titles.size') }}</strong></td>
+                                        <td><strong>{{ __('titles.rooms') }}</strong></td>
+                                        <td><strong>{{ __('titles.bathrooms') }}</strong></td>
                                     </tr>
                                     <tr>
                                         <td>{{ $property_info->area}}</td>
@@ -135,21 +135,21 @@
                         </div>
                         <div class="tab-pane fade " id="three" role="tabpanel" aria-labelledby="three-tab">
                             <div class="property-details">
-                                <h3 class="heading-3">Property Details</h3>
+                                <h3 class="heading-3">{{ __('titles.property_details') }}</h3>
                                 <div class="row">
                                     <div class="col-md-4 col-sm-6">
                                         <ul>
                                             <li>
-                                                <strong>Property Id:</strong>{{ $property_info->id }}
+                                                <strong>{{__('titles.property_code')}}:</strong>{{ $property_info->property_code }}
                                             </li>
                                             <li>
-                                                <strong>Price:</strong>&euro;{{ number_format($property_info->price,2)}}/ Month
+                                                <strong>{{ __('titles.price') }}:</strong>&euro;{{ number_format($property_info->price,2)}}/ {{__('titles.month')}}
                                             </li>
                                             <li>
-                                                <strong>Property Type:</strong>{{ !empty($property_info->type->name) ? $property_info->type->name : ""}}
+                                                <strong>{{ __('titles.property_type') }}:</strong>{{ !empty($property_info->type->name) ? $property_info->type->name : ""}}
                                             </li>
                                             <li>
-                                                <strong>Bathrooms:</strong>{{ $property_info->bathrooms}}
+                                                <strong>{{ __('titles.bathrooms') }}:</strong>{{ $property_info->bathrooms}}
                                             </li>
                                         </ul>
                                     </div>
@@ -159,35 +159,35 @@
                                                 <strong>Property Lot Size:</strong>ft2
                                             </li> -->
                                             <li>
-                                                <strong>Land area:</strong>{{ $property_info->area }} ft2
+                                                <strong>{{ __('titles.land_area') }}:</strong>{{ $property_info->area }} ft2
                                             </li>
                                             <li>
-                                                <strong>Year Built:</strong>{{ date_format(date_create($property_info->created_at),'Y') }}
+                                                <strong>{{ __('titles.year_built') }}:</strong>{{ date_format(date_create($property_info->created_at),'Y') }}
                                             </li>
                                             <li>
-                                                <strong>Available From:</strong>{{ date_format(date_create($property_info->available_from),'Y')}}
+                                                <strong>{{ __('titles.available_from') }}:</strong>{{ date_format(date_create($property_info->available_from),'Y')}}
                                             </li>
                                             <li>
-                                                <strong>Garages:</strong>{{ $property_info->garages}}
+                                                <strong>{{ __('titles.garage') }}:</strong>{{ $property_info->garages}}
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="col-md-4 col-sm-6">
                                         <ul>
-                                            <li>
+                                            {{-- <li>
                                                 <strong>Sold:</strong>Yes
-                                            </li>
+                                            </li> --}}
                                             <li>
                                                 <strong>City:</strong>{{ $property_info->city }}
                                             </li>
                                             <li>
-                                                <strong>Parking:</strong>{{ $property_info->parking != 0 ? 'Yes' : 'No'}}
+                                                <strong>{{ __('titles.parking') }}:</strong>{{ $property_info->parking != 0 ? 'Yes' : 'No'}}
                                             </li>
                                             <li>
-                                                <strong>Property Owner:</strong>{{ !empty($property_info->landlord->first_name) ? $property_info->landlord->first_name.' '.$property_info->landlord->last_name : '' }}
+                                                <strong>{{ __('titles.property_owner') }}:</strong>{{ !empty($property_info->landlord->first_name) ? $property_info->landlord->first_name.' '.$property_info->landlord->last_name : '' }}
                                             </li>
                                             <li>
-                                                <strong>Zip Code: </strong>2451
+                                                <strong>{{ __('titles.zip_code') }}: </strong>2451
                                             </li>
                                         </ul>
                                     </div>
@@ -196,13 +196,13 @@
                         </div>
                         <div class="tab-pane fade " id="4" role="tabpanel" aria-labelledby="4-tab">
                             <div class="property-video">
-                                <h3 class="heading-3">Property Vedio</h3>
+                                <h3 class="heading-3">{{ __('titles.property_video') }}</h3>
                                 <iframe src="{{ $property_info->youtube_url}}" allowfullscreen></iframe>
                             </div>
                         </div>
                         <div class="tab-pane fade " id="5" role="tabpanel" aria-labelledby="5-tab">
                             <div class="section location">
-                                <h3 class="heading-3">Property Location</h3>
+                                <h3 class="heading-3">{{ __('titles.property_location') }}</h3>
                                 <div class="map">
                                     <div id="contactMap" class="contact-map"></div>
                                 </div>
@@ -341,17 +341,17 @@
                 </div>
                 <!-- Amenities box start -->
                 <div class="amenities-box mb-45">
-                    <h3 class="heading-3">Condition</h3>
+                    <h3 class="heading-3">{{ __('titles.condition') }}</h3>
                     <div class="row">
                         <div class="col-md-4 col-sm-6">
                             <ul>
-                                <li><span><i class="flaticon-bed"></i> {{ $property_info->bedrooms}} Beds</span></li>
-                                <li><span><i class="flaticon-bath"></i> {{ $property_info->bathrooms}} Bathroom</span></li>
+                                <li><span><i class="flaticon-bed"></i> {{ $property_info->bedrooms}} {{ __('titles.bedrooms') }}</span></li>
+                                <li><span><i class="flaticon-bath"></i> {{ $property_info->bathrooms}} {{ __('titles.bathrooms') }}</span></li>
                             </ul>
                         </div>
                         <div class="col-md-4 col-sm-6">
                             <ul>
-                                <li><span><i class="flaticon-car-repair"></i> {{ $property_info->garages }} Garage</span></li>
+                                <li><span><i class="flaticon-car-repair"></i> {{ $property_info->garages }} {{ __('titles.garage') }}</span></li>
                                 <li><span><i class="flaticon-balcony-and-door"></i> Balcony</span></li>
                             </ul>
                         </div>
@@ -364,26 +364,26 @@
                     </div>
                 </div>
                 <!-- Features opions start -->
-                <div class="features-opions mb-45">
-                    <h3 class="heading-3">Features</h3>
+                {{-- <div class="features-opions mb-45">
+                    <h3 class="heading-3">{{ __('titles.features') }}</h3>
                     <div class="row">
                         <div class="col-md-4 col-sm-6">
                             <ul>
                                 <li>
                                     <i class="flaticon-air-conditioner"></i>
-                                    Air conditioning
+                                    {{ __('titles.air_conditioning') }}
                                 </li>
                                 <li>
                                     <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                    Wifi
+                                   {{ __('titles.wiffi') }}
                                 </li>
                                 <li>
                                     <i class="flaticon-swimmer"></i>
-                                    Swimming Pool
+                                    {{ __('titles.swiming_pool') }}
                                 </li>
                                 <li>
                                     <i class="flaticon-bed"></i>
-                                    Double Bed
+                                    {{ __('titles.double_bed') }}
                                 </li>
                                 <li>
                                     <i class="flaticon-balcony-and-door"></i>
@@ -441,7 +441,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- Comments section start -->
                 <!-- <div class="comments-section mb-60">
                     <h3 class="heading-3">Comments Section</h3>
@@ -577,7 +577,7 @@
                 <div class="sidebar mbl">
                     <!-- Search area start -->
                     <div class="widget search-area advanced-search as">
-                        <h5 class="sidebar-title">{{ __('Additional Features') }}</h5>
+                        <h5 class="sidebar-title">{{ __('titles.additonal_feature') }}</h5>
                         @php $featreus = !empty($property_info->features) ? explode(",",$property_info->features) : array(); @endphp
 
                         <table>
@@ -617,35 +617,35 @@
                             @csrf 
                             <input type="hidden" name="property_id" value="{{ $property_info->id }}">
                             <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('First Name') }}</label>
-                                <input type="text" class="form-control" name="first_name" value="{{ !empty(Auth::user()->first_name) && Auth::user()->role == 'tenant' ? Auth::user()->first_name : old('first_name') }}" placeholder="{{ __('Enter Your First Name') }}">
+                                <label for="" class="form-control-label">{{ __('titles.first_name') }}</label>
+                                <input type="text" class="form-control" name="first_name" value="{{ !empty(Auth::user()->first_name) && Auth::user()->role == 'tenant' ? Auth::user()->first_name : old('first_name') }}" placeholder="{{ __('titles.enter_your_first_name') }}">
                             </div>
                              <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Last Name') }}</label>
-                                <input type="text" class="form-control" name="last_name" value="{{ !empty(Auth::user()->first_name) && Auth::user()->role == 'tenant' ? Auth::user()->last_name : old('last_name') }}" placeholder="{{ __('Enter Your Last Name') }}">
+                                <label for="" class="form-control-label">{{ __('titles.last_name') }}</label>
+                                <input type="text" class="form-control" name="last_name" value="{{ !empty(Auth::user()->first_name) && Auth::user()->role == 'tenant' ? Auth::user()->last_name : old('last_name') }}" placeholder="{{ __('titles.enter_your_last_name') }}">
                             </div>
                             <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Email') }}</label>
-                                <input type="email" class="form-control" name="email" value="{{ !empty(Auth::user()->email) && Auth::user()->role == 'tenant' ? Auth::user()->email : old('email') }}" placeholder="{{ __('Enter Your Email Address') }}">
+                                <label for="" class="form-control-label">{{ __('titles.email') }}</label>
+                                <input type="email" class="form-control" name="email" value="{{ !empty(Auth::user()->email) && Auth::user()->role == 'tenant' ? Auth::user()->email : old('email') }}" placeholder="{{ __('titles.enter_your_email') }}">
                             </div>
                             <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Telephone Number') }}</label>
-                                <input type="text" class="form-control" name="phone" value="{{ !empty(Auth::user()->phone) && Auth::user()->role == 'tenant' ? Auth::user()->phone : old('phone')}}" placeholder="{{ __('Enter Your Telephone Number') }}">
+                                <label for="" class="form-control-label">{{ __('titles.telephone_no') }}</label>
+                                <input type="text" class="form-control" name="phone" value="{{ !empty(Auth::user()->phone) && Auth::user()->role == 'tenant' ? Auth::user()->phone : old('phone')}}" placeholder="{{ __('titles.enter_your_telephone') }}">
                             </div>
                             <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Enquiry Message') }}</label>
+                                <label for="" class="form-control-label">{{ __('titles.enquiry_message') }}</label>
                                 <textarea name="message" id="" class="form-control">
                                     {{ old('message') }}
                                 </textarea>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary" style="width: 100%;">{{ __('I am Interested') }}</button>
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">{{ __('titles.i_am_interested') }}</button>
                             </div>
                         </form>
                     </div>
                     <!-- Categories start -->
                     <div class="widget categories">
-                        <h5 class="sidebar-title">Property Types</h5>
+                        <h5 class="sidebar-title">{{ __('titles.property_types') }}</h5>
                         <ul>
                             @php $types = \App\Models\PropertyTypes::orderBy('name','asc')->where('status',1)->with('properties')->get();
                             @endphp
@@ -664,7 +664,7 @@
                     </div>
                     <!-- Recent posts start -->
                     <div class="widget recent-posts">
-                        <h5 class="sidebar-title">Recent Properties</h5>
+                        <h5 class="sidebar-title">{{ __('titles.recent_properties') }}</h5>
                         @php $recent_properties = \App\Models\Properties::orderBy('id','desc')->where('status',1)->limit(3)->get(); @endphp
                         @foreach($recent_properties as $property)
                         <div class="media mb-4">
@@ -683,7 +683,7 @@
                     </div>
                     <!-- Social list start -->
                     <div class="social-list widget clearfix">
-                        <h5 class="sidebar-title">Follow Us</h5>
+                        <h5 class="sidebar-title">{{ __('titles.follow_us') }}</h5>
                         <ul>
                             <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
@@ -697,7 +697,7 @@
                         <div class="media">
                             <i class="fa fa-mobile"></i>
                             <div class="media-body  align-self-center">
-                                <h5 class="mt-0">Helping Center</h5>
+                                <h5 class="mt-0">{{ __('titles.helping_center') }}</h5>
                                 <h4><a href="tel:+0477-85x6-552">+01 7X0 555 8X22</a></h4>
                             </div>
                         </div>
