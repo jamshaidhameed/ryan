@@ -95,7 +95,7 @@ class HomeController extends Controller
             ]
             );
 
-            session()->flash('success',__('titles.profile_updated_message'));
+            session()->flash('success','Profile Updated Successfully');
 
         return redirect()->route('landlord.dashboard');
         
@@ -234,7 +234,7 @@ class HomeController extends Controller
                 Mail::to($ad->email)->send(new PropertyAddMail(Auth::user()->first_name." ".Auth::user()->last_name,$property));
             }
 
-        session()->flash('success',__('titles.property_created_msg') );
+        session()->flash('success','Property Created Successfully');
 
         return redirect()->route('landlord.properties');
 
@@ -332,7 +332,7 @@ class HomeController extends Controller
             ]
             );
 
-        session()->flash('success', __('titles.property_updated_message'));
+        session()->flash('success','Property Updated Successfully');
 
         return redirect()->route('landlord.properties');
     }
@@ -360,7 +360,7 @@ class HomeController extends Controller
 
         $property_info->delete();
 
-        session()->flash('success',__('titles.property_deleted_message'));
+        session()->flash('success','Property Deleted Successfully');
 
         return redirect()->route('landlord.properties');
     }
@@ -410,7 +410,7 @@ class HomeController extends Controller
         $landlord->save();
 
 
-        session()->flash('success',__('titles.password_change_message'));
+        session()->flash('success','Your Password has been successfully changed');
 
         return redirect()->back();
 
@@ -434,7 +434,7 @@ class HomeController extends Controller
 
          $contract->save();
 
-        session()->flash('success',__('titles.file_upload_message'));
+        session()->flash('success','File Uploaded Successfully');
 
         return redirect()->route('landlord.properties');
     }
@@ -445,7 +445,7 @@ class HomeController extends Controller
 
         if (empty($property)) {
             
-            return response()->json(['success' => false,__('titles.no_property_found_msg')]);
+            return response()->json(['success' => false,'sorry no property found']);
         }
 
         if(File::exists(public_path('upload/property/').$request->img)) {
