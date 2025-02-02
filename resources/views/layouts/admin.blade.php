@@ -135,7 +135,7 @@
         <!-- Navbar Toolbar Right -->
 
         <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" data-animation="scale-up"
                 aria-expanded="false" role="button">
                 <span class="flag-icon flag-icon-us"></span>
@@ -152,7 +152,7 @@
                 <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
                 <span class="flag-icon flag-icon-nl"></span> Dutch</a>
             </div>
-            </li>
+            </li> --}}
           <li class="nav-item dropdown">
             <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
               data-animation="scale-up" role="button">

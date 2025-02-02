@@ -181,7 +181,7 @@ $(document).on("click", ".btn-invoices", function (e) {
               payment_url +
               "/" +
               row.id +
-              '" class="btn btn-primary btn-outline btn-pay-invoice" onClick="return confirm(`Are you Sure to Pay this Invoice ? `)" >Pay</a></td>';
+              '" class="btn btn-primary btn-outline btn-pay-invoice">Pay</a></td>';
           }
           html_content += "</tr>";
         });
@@ -198,6 +198,10 @@ $(document).on("click", ".btn-invoices", function (e) {
 
 $(document).on("click", ".btn-pay-invoice", function (e) {
   e.preventDefault();
+
+  if (!confirm("Are you sure you want to pay this amount ?")) {
+    return this;
+  }
   var url = $(this).attr("href");
 
   $.ajax({
@@ -292,7 +296,7 @@ $(document).on("click", ".landlord-invoices", function (e) {
               payment_url +
               "/" +
               row.id +
-              '" class="btn btn-primary btn-outline btn-landlord-invoice-pay" onClick="return confirm(`Are you Sure to Pay this Invoice ? `)" >Pay</a></td>';
+              '" class="btn btn-primary btn-outline btn-landlord-invoice-pay">Pay</a></td>';
           }
           html_data += "</tr>";
         });
@@ -309,6 +313,10 @@ $(document).on("click", ".landlord-invoices", function (e) {
 //Click on Landlord Invoice Pay
 $(document).on("click", ".btn-landlord-invoice-pay", function (e) {
   e.preventDefault();
+
+  if (!confirm("Are you sure you want to pay this invoice?")) {
+    return this;
+  }
   var url = $(this).attr("href");
 
   $.ajax({
