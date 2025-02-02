@@ -8,13 +8,13 @@
     <ul>
         <li>
             <a href="{{ route('technision.dashboard') }}" class="{{ Route::currentRouteName() == 'technision.dashboard' ? 'active' : ''}}">
-                <i class="{{ route('technision.dashboard') }}"></i>{{ __('Profile')}}
+                <i class="{{ route('technision.dashboard') }}"></i>{{ __('titles.profile')}}
             </a>
         </li>
         @if(Auth::user()->role == 'technision' || Auth::user()->role == 'plumber')
         <li>
             <a href="{{ route('technision.issue.tickets') }}"  class="{{ Route::currentRouteName() == 'technision.issue.tickets' || Route::currentRouteName() == 'technision.issue.tickets' || Route::currentRouteName() == 'technision.issue.ticket.edit'  ? 'active' : ''}}">
-                <i class="flaticon-house"></i>{{ __('Issue Tickets')}}
+                <i class="flaticon-house"></i>{{ __('titles.issue_ticket')}}
             </a>
         </li>
         @endif
@@ -29,7 +29,7 @@
        
         <li>
             <a href="{{ route('technision.password.change') }}" class="{{ Route::currentRouteName() == 'technision.password.change' ? 'active' : ''}}">
-                <i class="flaticon-locked-padlock"></i>Change Password
+                <i class="flaticon-locked-padlock"></i>{{ __('titles.change_password') }}
             </a>
         </li>
         <!-- <li>

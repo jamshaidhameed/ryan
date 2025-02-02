@@ -8,12 +8,12 @@
                         <ul>
                             <li>
                                 <a href="{{ route('landlord.dashboard') }}" class="{{ Route::currentRouteName() == 'landlord.dashboard' ? 'active' : ''}}">
-                                    <i class="{{ route('landlord.dashboard') }}"></i>{{ __('Profile')}}
+                                    <i class="{{ route('landlord.dashboard') }}"></i>{{ __('titles.profile')}}
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('landlord.properties') }}"  class="{{ Route::currentRouteName() == 'landlord.properties' || Route::currentRouteName() == 'landlord.properties.add' || Route::currentRouteName() == 'landlord.properties.edit'  ? 'active' : ''}}">
-                                    <i class="flaticon-house"></i>{{ __('My Properties')}}
+                                    <i class="flaticon-house"></i>{{ __('titles.my_properties')}}
                                 </a>
                             </li>
                             <!-- <li>
@@ -28,7 +28,7 @@
                             </li> -->
                             <li>
                                 <a href="{{ route('landlord.password.change') }}" class="{{ Route::currentRouteName() == 'landlord.password.change'  ? 'active' : ''}}">
-                                    <i class="flaticon-locked-padlock"></i>Change Password
+                                    <i class="flaticon-locked-padlock"></i>{{ __('titles.change_password') }}
                                 </a>
                             </li>
                             <!-- <li>

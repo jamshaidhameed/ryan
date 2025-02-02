@@ -51,7 +51,7 @@
                         <img src="{{ asset('upload/property/'.$property_image) }}" alt="" class="img-rounded img-bordered img-bordered-primary" style="width: 338px;"> <br>
                         <h4 class="text-primary">Price : {{ number_format($property->price,2) }}</h4>
                         <p>{{ $property->street_address}}</p>
-                        <div class="d-flex justify-content-end mb-2">
+                        <div class="d-flex justify-content-start mb-2">
                         @if($property->status == 1)
                          <a href="{{ route('admin.properties.approve',[$property->id,0]) }}" class="btn btn-warning float-right" onClick="return confirm(`{{ __ ('Are you sure to Un Publish the property ? ')}}`);"><i class="icon wb-rubber"></i>Un Publish</a>
                         @else 
@@ -129,14 +129,11 @@
                             </table>
                              
                              <div class="row">
-                                <div class="col col-md-4"><a href="{{ asset('upload/booking/'.$landlord_contract->link) }}" class="btn btn-primary btn-outline">Download Contract</a> 
-                                </div>
-                                <div class="col col-md-4">
-                                    
-                                   <a href="{{ route('admin.landlord.invoices',$landlord_contract->id) }}" class="btn btn-primary btn-outline landlord-invoices" data-paymentroute="{{ url('/admin/landlord/invoice/pay/')}}">Invoices</a>
-                                </div>
-                                <div class="col col-md-4">
-                                  <a href="" class="btn btn-primary btn-outline btn-landlord-terminate" data-id="{{ $landlord_contract->id}}">Terminate Contract</a>
+                                <div class="col">
+                                    <a href="{{ asset('upload/booking/'.$landlord_contract->link) }}" class="">Download Contract</a><span class="line-space">|</span> 
+                                    <a href="{{ route('admin.landlord.invoices',$landlord_contract->id) }}" class="landlord-invoices" data-paymentroute="{{ url('/admin/landlord/invoice/pay/')}}">Invoices</a> <span class="line-space">|</span> 
+                                    <a href="" class="btn-landlord-terminate" data-id="{{ $landlord_contract->id}}">Terminate Contract</a>
+                                
                                 </div>
                                 
                             </div>
@@ -211,19 +208,19 @@
                             </table>
                              
                              <div class="row">
-                                <div class="col col-md-3"><a href="{{ asset('upload/booking/'.$tenant_contract->link) }}" class="btn btn-primary btn-outline">Download Contract</a> <br>
-                                   <a href="{{ route('admin.issue.tickets',$tenant_contract->id)}}" class="btn btn-primary btn-outline">Issue Tickets</a>
+                                <div class="col">
+                                    <a href="{{ asset('upload/booking/'.$tenant_contract->link) }}" class="">Download Contract</a> <span class="line-space">|</span> 
+                                   <a href="{{ route('admin.issue.tickets',$tenant_contract->id)}}" class="">Issue Tickets</a><span class="line-space">|</span> 
+                                   <a href="{{ route('admin.booking.tenant.invoices',$tenant_contract->id) }}" class="btn-invoices" data-paymentroute="{{ url('/admin/booking/tenant/invoices/pay/')}}">Invoices</a><span class="line-space">|</span> 
+                                   <a href="" class="btn-commision-details" data-verified="{{ !empty($tenant_contract->commission_verified_by) ? 'yes' : 'no' }}" data-id="{{ $tenant_contract->id }}" data-amount="{{ $tenant_contract->commission_amount}}">Commission Details</a><span class="line-space">|</span> 
+
+                                   <a href="{{ route('admin.property.enquiries',$property->id) }}" class="tenant-quries" data-selected="1" data-getpropertyurl="{{ url('/admin/property/enquiry/') }}">Tenant Quries</a><span class="line-space">|</span> 
+
+                                   <a href="" class="btn-tenant-terminate"  data-id="{{ $tenant_contract->id}}">Terminate Contract</a><span class="line-space">|</span> 
+
+                                   <a target="_blank" href="{{ route('admin.inspections.list',$tenant_contract->id) }}" class="">Inspections</a>
                                 </div>
-                                <div class="col col-md-3"><a href="{{ route('admin.booking.tenant.invoices',$tenant_contract->id) }}" class="btn btn-primary btn-outline btn-invoices" data-paymentroute="{{ url('/admin/booking/tenant/invoices/pay/')}}">Invoices</a> <br>
-                                   <a href="" class="btn btn-primary btn-outline btn-commision-details" data-verified="{{ !empty($tenant_contract->commission_verified_by) ? 'yes' : 'no' }}" data-id="{{ $tenant_contract->id }}" data-amount="{{ $tenant_contract->commission_amount}}">Commission Details</a>
-                                </div>
-                                <div class="col col-md-3"><a href="{{ route('admin.property.enquiries',$property->id) }}" class="btn btn-primary btn-outline tenant-quries" data-selected="1" data-getpropertyurl="{{ url('/admin/property/enquiry/') }}">Tenant Quries</a> <br>
-                                  <a href="" class="btn btn-primary btn-outline btn-tenant-terminate"  data-id="{{ $tenant_contract->id}}">Terminate Contract</a>
-                                </div>
-                                <div class="col col-md-3">
-                                     
-                                    <a target="_blank" href="{{ route('admin.inspections.list',$tenant_contract->id) }}" class="btn btn-primary btn-outline">Inspections</a>
-                                </div>
+                                
                             </div>
                             @else 
                             <p>No active contract found! <a href="{{ route('admin.property.enquiries',$property->id) }}" class="tenant-quries" data-selected="0">View Tenant Quries</a></p>

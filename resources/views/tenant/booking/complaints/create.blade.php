@@ -1,6 +1,6 @@
 @extends('tenant.layouts.Tenant') 
 @section('title')
-Issue Ticket
+{{ __('titles.issue_ticket') }}
 @endsection
 @section('style')
 <link href="{{ asset('summernote/summernote-lite.min.css') }}" rel="stylesheet">
@@ -10,13 +10,13 @@ Issue Ticket
     <div class="container">
         <div class="breadcrumb-area">
             <h1>@if(isset($complaint))
-                Update Your Complaint 
+                {{ __('titles.update_complaint') }}
                 @else 
-                Add New Complaint 
+                {{ __('titles.add_new_complaint') }}
                 @endif</h1>
             <ul class="breadcrumbs">
-                <li><a href="{{ route('tenant.dashboard') }}">{{ __('Home')}}</a></li>
-                <li class="{{ Route::currentRouteName() == 'tenant.dashboard' ? 'active' : ''}}">{{ __('Complaint') }}</li>
+                <li><a href="{{ route('tenant.dashboard') }}">{{ __('titles.home')}}</a></li>
+                <li class="{{ Route::currentRouteName() == 'tenant.dashboard' ? 'active' : ''}}">{{ __('titles.complaints') }}</li>
             </ul>
         </div>
     </div>
@@ -33,7 +33,7 @@ Issue Ticket
             <div class="col-lg-8 col-md-12 col-sm-12">
                 <div class="my-address contact-2">
                     <h3 class="heading-3">
-                        Issue Ticket
+                       {{ __('titles.issue_ticket') }}
                     </h3>
                     <form action="{{ route('tenant.complaints.store') }}" method="post" enctype="multipart/form-data" autocomplete="off">
                         @csrf
@@ -54,7 +54,7 @@ Issue Ticket
                         <div class="row">
                             <div class="col col-md-6">
                                 <div class="form-group">
-                                    <label for="" class="form-control-label">Property</label>
+                                    <label for="" class="form-control-label">{{ __('titles.property') }}</label>
                                     @php 
                                        $tenant_contract = \App\Models\TenantContracts::find($e_id);
                                         $property = null;
@@ -72,10 +72,10 @@ Issue Ticket
                             </div>
                             <div class="col col-md-6">
                                 <div class="form-group">
-                                    <label for="" class="form-control-label">Issue Ticket Type</label>
+                                    <label for="" class="form-control-label">{{ __('titles.issue_ticket_type') }}</label>
                                    
                                     <select name="issue_type" id="" class="form-control" data-fv-notempty="true">
-                                        <option value="">Please Choose</option>
+                                        <option value="">{{ __('titles.please_choose') }}</option>
                                         <option value="Furniture">Furniture</option>
                                         <option value="Plumber">Plumber</option>
                                     </select>
@@ -84,32 +84,32 @@ Issue Ticket
                         </div>
 
                         <div class="form-group">
-                            <label for="" class="form-control-label">Issue Title</label>
+                            <label for="" class="form-control-label">{{ __('titles.issue_title') }}</label>
                             <input type="text" name="title" id="" class="form-control">
                         </div>
 
                         <div class="form-group">
-                            <label for="" class="form-control-label">Description</label>
+                            <label for="" class="form-control-label">{{ __('titles.description') }}</label>
                             <textarea name="description" id="summernote"></textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="" class="form-control-label">Priority</label>
+                            <label for="" class="form-control-label">{{ __('titles.priority') }}</label>
                             <select name="priority" id="" class="form-control">
-                                <option value="">Please Choose</option>
+                                <option value="">{{ __('titles.please_choose') }}</option>
                                 <option value="low">Low</option>
                                 <option value="high">High</option>
                             </select>
                         </div>
 
                        <div class="form-group">
-                         <label for="">{{ __('Photo Upload')}}</label>
-                        <input type="file" name="file" id="" class="form-control" placeholder="Upload Photo">
+                         <label for="">{{ __('titles.upload_photo')}}</label>
+                        <input type="file" name="file" id="" class="form-control" placeholder="{{ __('titles.upload_photo')}}">
                        </div>
                         
                         
                        <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Add Now</button>
+                        <button type="submit" class="btn btn-primary">{{ __('titles.add_now') }}</button>
                        </div>
                     </form>
                 </div>

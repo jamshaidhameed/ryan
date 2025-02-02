@@ -1,6 +1,6 @@
 @extends('landlord.layout.landlord') 
 @section('title')
- Properties List
+  {{ __('titles.properties_list') }}
 @endsection
 @section('style')
 
@@ -9,10 +9,10 @@
 <div class="sub-banner">
     <div class="container">
         <div class="breadcrumb-area">
-            <h1>{{ __('My Properties') }}</h1>
+            <h1>{{ __('titles.my_properties') }}</h1>
             <ul class="breadcrumbs">
-                <li><a href="{{ route('landlord.dashboard') }}">{{ __('Home') }}</a></li>
-                <li class="{{ Route::currentRouteName() == 'landlord.properties' ? 'active' : ''}}">{{ __('My Properties') }} </li>
+                <li><a href="{{ route('landlord.dashboard') }}">{{ __('titles.home') }}</a></li>
+                <li class="{{ Route::currentRouteName() == 'landlord.properties' ? 'active' : ''}}">{{ __('titles.my_properties') }} </li>
             </ul>
         </div>
     </div>
@@ -34,16 +34,16 @@
                 @endif
                 <div class="my-properties">
                     <div class="d-flex justify-content-end mb-6">
-                        <a href="{{ route('landlord.properties.add') }}" class="btn btn-primary"><i class="fa fa-plus-circle" style="margin-right:10px;"></i>{{ __('Add')}}</a>
+                        <a href="{{ route('landlord.properties.add') }}" class="btn btn-primary"><i class="fa fa-plus-circle" style="margin-right:10px;"></i>{{ __('titles.add')}}</a>
                     </div>
                     <br> 
                     <table class="manage-table">
                         <thead>
                         <tr>
-                            <th>My Properties</th>
+                            <th>{{ __('titles.my_properties') }}</th>
                             <th></th>
-                            <th>Date</th>
-                            <th>Actions</th>
+                            <th>{{ __('titles.date') }}</th>
+                            <th>{{ __('titles.actions') }}</th>
                         </tr>
                         </thead>
                         <tbody class="responsive-table">
@@ -69,23 +69,23 @@
                             <td class="action">
                                 <ul>
                                     <li>
-                                        <a href="{{ route('landlord.properties.edit',$property->id) }}"><i class="fa fa-pencil"></i> {{ __('Edit') }}</a>
+                                        <a href="{{ route('landlord.properties.edit',$property->id) }}"><i class="fa fa-pencil"></i> {{ __('titles.edit') }}</a>
                                     </li>
                                     <!-- <li>
                                         <a href="#"><i class="fa  fa-eye-slash"></i> Hide</a>
                                     </li> -->
                                     <li>
-                                        <a href="{{ route('landlord.properties.delete',$property->id) }}" onclick="return confirm(`{{__('Are you Sure to Delete the Record ?')}}`);" class="delete"><i class="fa fa-remove"></i> Delete</a>
+                                        <a href="{{ route('landlord.properties.delete',$property->id) }}" onclick="return confirm(`{{__('titles.are_you_sure_to_delete')}}`);" class="delete"><i class="fa fa-remove"></i> {{ __("titles.delete") }}</a>
                                     </li>
                                    @if(!empty($landlord_contract))
                                       <li>
                                         <a href="{{ $landlord_contract->id}},{{ asset('upload/booking/'.$landlord_contract->link) }},{{ !empty($landlord_contract->signed_at) ? '1' : '0' }}" class="contract-btn">
-                                            <i class="fa fa-upload"> Contract</i>
+                                            <i class="fa fa-upload"> {{ __('titles.contract') }}</i>
                                         </a>
                                       </li>
                                        <li>
                                         <a href="{{ route('landlord.invoices.list',$landlord_contract->id) }}">
-                                            <i class="fa fa-money"> Invoices</i>
+                                            <i class="fa fa-money"> {{__('titles.invoices') }}</i>
                                         </a>
                                       </li>
                                    @endif
@@ -113,7 +113,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Upload File</h4>
+              <h4 class="modal-title">{{ __('titles.upload_file') }}</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -124,15 +124,15 @@
              <input type="hidden" name="e_id" value="">
             <div class="modal-body">
               <div class="form-group">
-                <a href="" class="link" target="_blank">Donwload Contract</a> <br>
-                <label for="" class="form-control-label">Upload File</label>
+                <a href="" class="link" target="_blank">{{ __('titles.download_contract') }}</a> <br>
+                <label for="" class="form-control-label">{{ __('titles.upload_file') }}</label>
                 <input type="file" name="tenant_uploaded_file" id="" class="form-control" required>
                 <p class="text-danger"></p>
               </div>
             </div>
             <div class="modal-footer justify-content-end">
-              <button type="button" class="btn btn-warning btn-outline-light" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary btn-outline-light">Upload</button>
+              <button type="button" class="btn btn-warning btn-outline-light" data-dismiss="modal">{{ __('titles.close') }}</button>
+              <button type="submit" class="btn btn-primary btn-outline-light">{{ __('titles.upload') }}</button>
             </div>
           </div>
           </form>

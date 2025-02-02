@@ -1,9 +1,9 @@
 @extends('landlord.layout.landlord') 
 @section('title')
  @if(isset($property))
-   {{ __('Update Property')}}
+   {{ __('titles.update_property')}}
  @else 
- {{ __('Add New Property') }}
+ {{ __('titles.add_new_property') }}
  @endif
 @endsection
 @section('style')
@@ -57,10 +57,10 @@
 <div class="sub-banner">
     <div class="container">
         <div class="breadcrumb-area">
-            <h1>{{ __('My Properties') }}</h1>
+            <h1>{{ __('titles.my_properties') }}</h1>
             <ul class="breadcrumbs">
-                <li><a href="{{ route('landlord.dashboard') }}">{{ __('Home') }}</a></li>
-                <li class="{{ Route::currentRouteName() == 'landlord.properties' ? 'active' : ''}}">{{ __('My Properties') }} </li>
+                <li><a href="{{ route('landlord.dashboard') }}">{{ __('titles.home') }}</a></li>
+                <li class="{{ Route::currentRouteName() == 'landlord.properties' ? 'active' : ''}}">{{ __('titles.my_properties') }} </li>
             </ul>
         </div>
     </div>
@@ -92,11 +92,11 @@
                         <div class="my-address contact-2">
                      <div class="col-md-12">
                         <div class="form-group">
-                            <label for="" class="form-control-label">{{ __('Property Title[EN]') }} <sup><span class="text-danger">*</span></sup></label>
+                            <label for="" class="form-control-label">{{ __('titles.title_en') }} <sup><span class="text-danger">*</span></sup></label>
                             <input type="text" name="title_en" id="title_en" class="form-control" value="{{ isset($property) ? $property->title_en : old('title_en') }}" required>
                         </div>
                         <div class="form-group">
-                            <label for="" class="form-control-label">{{ __('Property Title[NL]') }} <sup><span class="text-danger">*</span></sup></label>
+                            <label for="" class="form-control-label">{{ __('titles.title_nl') }} <sup><span class="text-danger">*</span></sup></label>
                             <input type="text" name="title_nl" id="title_nl" class="form-control" value="{{ isset($property) ? $property->title_nl : old('title_nl') }}" required>
                         </div>
                      </div>
@@ -104,40 +104,40 @@
                         <div class="col col-md-6">
                             <!-- First Column Start -->
                              <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Price (in mons.)') }} <sup><span class="text-danger">*</span></sup></label>
+                                <label for="" class="form-control-label">{{ __('titles.price_in_mons') }} <sup><span class="text-danger">*</span></sup></label>
                                 <input type="number" name="price" id="price" class="form-control" value="{{ isset($property) ? $property->price : old('price') }}" min="0" required>
                              </div>
                              <div class="form-group">
-                                <label for="" class="form-control-label"><sup class="text-danger">*</sup>{{ __('Province') }}</label>
+                                <label for="" class="form-control-label"><sup class="text-danger">*</sup>{{ __('titles.province') }}</label>
                                 <select name="province_id" id="province_id" class="form-control" required>
-                                     <option value="">{{ __('Please Choose') }}</option>
+                                     <option value="">{{ __('titles.please_choose') }}</option>
                                      @foreach(\App\Models\Provinces::all() as $province)
                                        <option value="{{ $province->id }}" @if(isset($property) && $property->province_id == $province->id || ( !empty(old('province_id')) && old('province_id') == $province->id ) ) selected @endif>{{ $province->name}}</option>
                                      @endforeach
                                 </select>
                              </div>
                               <div class="form-group" required>
-                                <label for="" class="form-control-label">{{ __('City') }} <sup><span class="text-danger">*</span></sup></label>
+                                <label for="" class="form-control-label">{{ __('titles.city') }} <sup><span class="text-danger">*</span></sup></label>
                                 <input type="text" name="city" id="" class="form-control" value="{{ isset($property) ? $property->city : old('city') }}" required>
                              </div>
                              <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Available From') }} <sup><span class="text-danger">*</span></sup></label>
+                                <label for="" class="form-control-label">{{ __('titles.available_from') }} <sup><span class="text-danger">*</span></sup></label>
                                 <input type="date" name="available_from" id="" class="form-control" value="{{ isset($property) ? $property->available_from : old('available_from') }}" required>
                              </div>
                              <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Area') }} <sup><span class="text-danger">*</span></sup></label>
+                                <label for="" class="form-control-label">{{ __('titles.area') }} <sup><span class="text-danger">*</span></sup></label>
                                 <input type="text" name="area" id="" class="form-control" value="{{ isset($property) ? $property->area : old('area') }}" required>
                              </div>
                              <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Bathrooms') }} <sup><span class="text-danger">*</span></sup></label>
+                                <label for="" class="form-control-label">{{ __('titles.bathrooms') }} <sup><span class="text-danger">*</span></sup></label>
                                 <input type="number" name="bathrooms" id="" class="form-control" value="{{ isset($property) ? $property->bathrooms : old('bathrooms') }}" min="0" required>
                              </div>
                              <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Garages') }} <sup><span class="text-danger">*</span></sup> </label>
+                                <label for="" class="form-control-label">{{ __('titles.garage') }} <sup><span class="text-danger">*</span></sup> </label>
                                 <input type="number" name="garages" id="" class="form-control" value="{{ isset($property) ? $property->bathrooms : old('bathrooms') }}" min="0" required>
                              </div>
                              <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Toilets') }}<sup><span class="text-danger">*</span></sup> </label>
+                                <label for="" class="form-control-label">{{ __('titles.toilet') }}<sup><span class="text-danger">*</span></sup> </label>
                                 <input type="number" name="toilets" id="" class="form-control" value="{{ isset($property) ? $property->toilets : old('toilets') }}" min="0" required>
                              </div>
                              <!-- First Column End -->
@@ -145,40 +145,40 @@
                         <div class="col col-md-6">
                             <!-- Second Column Start -->
                              <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Property Type') }}<sup><span class="text-danger">*</span></sup> <sup><span class="text-danger">*</span></sup></label>
+                                <label for="" class="form-control-label">{{ __('titles.property_type') }}<span class="text-danger">*</span></sup></label>
                                 <select name="property_type_id" id="property_type_id" class="form-control" required>
-                                     <option value="">{{ __('Please Choose') }}</option>
+                                     <option value="">{{ __('titles.please_choose') }}</option>
                                     @foreach(\App\Models\PropertyTypes::where('status',1)->get() as $type)
                                     <option value="{{ $type->id }}" @if(isset($property) && $type->id == $property->property_type_id || (!empty(old('property_type_id')) && old('property_type_id') == $type->id) ) selected @endif>{{ $type->name }}</option>
                                     @endforeach
                                 </select>
                              </div>
                              <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Address') }} <sup><span class="text-danger">*</span></sup></label>
+                                <label for="" class="form-control-label">{{ __('titles.address') }} <sup><span class="text-danger">*</span></sup></label>
                                 <input type="text" name="street_address" id="" class="form-control" value="{{ isset($property) ? $property->street_address : old('street_address') }}"  required>
                              </div>
                              <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Postal Code') }} <sup><span class="text-danger">*</span></sup></label>
+                                <label for="" class="form-control-label">{{ __('titles.postal_code') }} <sup><span class="text-danger">*</span></sup></label>
                                 <input type="text" name="postcode" id="" class="form-control" value="{{ isset($property) ? $property->postcode : old('postcode') }}" required>
                              </div>
                              <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Contract Period (in mons)') }} <sup><span class="text-danger">*</span></sup></label>
+                                <label for="" class="form-control-label">{{ __('titles.contract_period') }} <sup><span class="text-danger">*</span></sup></label>
                                 <input type="number" name="contract_period" id="" class="form-control" value="{{ isset($property) ? $property->contract_period : old('contract_period') }}" min="0" required>
                              </div>
                              <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Bedrooms') }} <sup><span class="text-danger">*</span></sup></label>
+                                <label for="" class="form-control-label">{{ __('titles.bedrooms') }} <sup><span class="text-danger">*</span></sup></label>
                                 <input type="number" name="bedrooms" id="" class="form-control" value="{{ isset($property) ? $property->bedrooms : old('bedrooms') }}" min="0" required>
                              </div>
                              <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Kitchens') }} <sup><span class="text-danger">*</span></sup></label>
+                                <label for="" class="form-control-label">{{ __('titles.kitchen') }} <sup><span class="text-danger">*</span></sup></label>
                                 <input type="number" name="kitchens" id="" class="form-control" value="{{ isset($property) ? $property->kitchens : old('kitchens') }}" min="0" required>
                              </div>
                                <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Parkings') }} <sup><span class="text-danger">*</span></sup></label>
+                                <label for="" class="form-control-label">{{ __('titles.parking') }} <sup><span class="text-danger">*</span></sup></label>
                                 <input type="number" name="parkings" id="" class="form-control" value="{{ isset($property) ? $property->parkings : old('parkings') }}" min="0" required>
                              </div>
                              <div class="form-group">
-                                <label for="" class="form-control-label">{{ __('Youtube Video Link') }}</label>
+                                <label for="" class="form-control-label">{{ __('titles.youtube_link') }}</label>
                                 <input type="text" name="youtube_url" id="" class="form-control" value="{{ isset($property) ? $property->youtube_url : old('youtube_url') }}">
                              </div>
                              <!-- Second Column End -->
@@ -186,7 +186,7 @@
                      </div>
                      </div>
                      <div class="form-group">
-                        <label for="" class="form-control-label">{{ __('Description [EN]') }}</label>
+                        <label for="" class="form-control-label">{{ __('titles.descript_en') }}</label>
                         <textarea class="summernote" id="" name="description_en">
                             @if(isset($property))
                               {{ $property->description_en }}
@@ -196,7 +196,7 @@
                         </textarea>
                      </div>
                      <div class="form-group">
-                        <label for="" class="form-control-label">{{ __('Description [NL]') }}</label>
+                        <label for="" class="form-control-label">{{ __('titles.description_nl') }}</label>
                         <textarea class="summernote" id="" name="description_nl">
                             @if(isset($property))
                               {{ $property->description_nl }}
@@ -210,7 +210,7 @@
                          @if(!empty($property->features))
                            @php $prop_features = explode(",", $property->features);@endphp
                          @endif
-                        <label for="" class="form-control-label">{{ __('Property Features') }}</label> <br>
+                        <label for="" class="form-control-label">{{ __('titles.property_feature') }}</label> <br>
                         @foreach(\App\Models\PropertyFeatures::where('status',1)->get() as $feature)
                          <input type="checkbox" name="features[]" id="" value="{{ $feature->id}}" 
                          @foreach($prop_features as $f)
@@ -226,7 +226,7 @@
                              $property_images = isset($property) && !empty($property->property_image) ? explode(",",$property->property_image) : array(); 
                         @endphp
                         @if(count($feature_images) > 0)
-                         <label for="" class="form-control-label">Existing Feature</label>
+                         <label for="" class="form-control-label">{{ __('titles.existing_feature') }}</label>
                          <div class="row gallery">
 
                           @for($i = 0;  $i < count($feature_images); $i++)
@@ -236,7 +236,7 @@
                           @endfor
                          </div>
                         @endif
-                        <label for="" class="form-control-label">{{ count($feature_images) > 0 ? 'Upload New Feature Image' : 'Feature Image'}}
+                        <label for="" class="form-control-label">{{ count($feature_images) > 0 ? __('titles.upload_new_feature')  : 'Feature Image'}}
                          @if(!isset($property))
                          <sup><span class="text-danger">*</span></sup>
                          @endif   
@@ -246,7 +246,7 @@
                      </div>
                      <div class="form-group">
                         @if(count($property_images) > 0)
-                         <label for="" class="form-control-label">Existing Property Images</label>
+                         <label for="" class="form-control-label">{{ __('titles.existing_property_image') }}</label>
                          <div class="row gallery">
 
                           @for($i = 0;  $i < count($property_images); $i++)
@@ -260,12 +260,12 @@
                           @endfor
                          </div>
                         @endif
-                        <label for="" class="form-control-label">{{ __('Property Images') }}</label>
+                        <label for="" class="form-control-label">{{ __('titles.property_images') }}</label>
                         <input type="file" name="property_images[]" id="" accept="image|jpg|png|jpeg|gif" multiple="true" class="form-control">
                      </div>
                       <div class="col-lg-12">
                             <div class="send-btn">
-                                <button type="submit" class="btn btn-4">@if(isset($property)) {{__('Update Property')}} @else {{ __('Add new Property') }} @endif</button>
+                                <button type="submit" class="btn btn-4">@if(isset($property)) {{__('titles.update_property')}} @else {{ __('titles.add_new_property') }} @endif</button>
                             </div>
                         </div>
                     </form>

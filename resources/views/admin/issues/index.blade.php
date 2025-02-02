@@ -32,7 +32,7 @@
         
           
          <!-- Start -->
-          <table class="table table-bordered">
+          <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th class="text-center">Issue Code</th>

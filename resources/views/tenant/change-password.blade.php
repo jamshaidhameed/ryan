@@ -1,15 +1,15 @@
 @extends('tenant.layouts.Tenant') 
 @section('title')
-Change Password
+ {{ __('titles.password_change')}}
 @endsection 
 @section('content')
 <div class="sub-banner">
     <div class="container">
         <div class="breadcrumb-area">
-            <h1>{{ __('Change Password') }}</h1>
+            <h1>{{ __('titles.password_change')}}</h1>
             <ul class="breadcrumbs">
-                <li><a href="{{ route('landlord.dashboard') }}">{{ __('Home') }}</a></li>
-                <li class="{{ Route::currentRouteName() == 'landlord.properties' ? 'active' : ''}}">{{ __('Change Password') }} </li>
+                <li><a href="{{ route('landlord.dashboard') }}">{{ __('titles.home') }}</a></li>
+                <li class="{{ Route::currentRouteName() == 'landlord.properties' ? 'active' : ''}}">{{ __('titles.password_change')}} </li>
             </ul>
         </div>
     </div>
@@ -46,20 +46,20 @@ Change Password
                     @csrf
                     <div class="my-address contact-2">
                       <div class="form-group">
-                        <label for="" class="form-control-label">Current Password </label>
+                        <label for="" class="form-control-label">{{ __('titles.current_password')}} </label>
                         <input type="password" name="current_password" id="" class="form-control" value="">
                      </div>
                      <div class="form-group">
-                        <label for="" class="form-control-label">New Password </label>
+                        <label for="" class="form-control-label">{{ __('titles.new_password')}} </label>
                         <input type="password" name="password" id="" class="form-control" value="">
                      </div>
                      <div class="form-group">
-                        <label for="" class="form-control-label">Confirm Password </label>
+                        <label for="" class="form-control-label">{{ __('titles.confirm_password')}} </label>
                         <input type="password" name="password_confirmation" id="" class="form-control" value="">
                      </div>
                       <div class="col-lg-12">
                             <div class="send-btn">
-                                <button type="submit" class="btn btn-4">Change your Password</button>
+                                <button type="submit" class="btn btn-4">{{ __('titles.change_your_password')}}</button>
                             </div>
                         </div>
                     </div>
