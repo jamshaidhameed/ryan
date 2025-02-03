@@ -84,7 +84,7 @@ class HomeController extends Controller
             ]
             );
 
-            session()->flash('success',__('titles.profile_updated_message'));
+            session()->flash('success','Profile Updated Successfully');
 
         return redirect()->route('tenant.dashboard');
     }
@@ -147,7 +147,7 @@ class HomeController extends Controller
 
         // $enquiry->save();
 
-        session()->flash('success',__('titles.file_upload_message') );
+        session()->flash('success','File Uploaded Successfully');
 
         return redirect()->route('tenant.booking.enquiries');
     }
@@ -229,7 +229,7 @@ class HomeController extends Controller
 
             
 
-            session()->flash('success',__('titles.issue_ticket_added') );
+            session()->flash('success','Issue Ticket Added Successfully');
 
             return redirect()->route('tenant.booking.property.complaints',$request->prop_id);
     }
@@ -251,14 +251,14 @@ class HomeController extends Controller
 
         if(!Hash::check($request->current_password,$landlord->password)){
 
-            return back()->withErrors(['current_password' => __('titles.your_current_password_incorrect') ])->withInput();
+            return back()->withErrors(['current_password' => 'Your Current Password is Incorrect'])->withInput();
         }
 
         $landlord->password = Hash::make($request->password);
         $landlord->save();
 
 
-        session()->flash('success',__('titles.password_change_message') );
+        session()->flash('success','Your Password has been successfully changed');
 
         return redirect()->back();
 

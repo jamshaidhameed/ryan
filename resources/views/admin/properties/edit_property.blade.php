@@ -256,7 +256,7 @@
                 <input type="file" name="property_images[]" id="" accept="image|jpg|png|jpeg|gif" multiple="true" class="form-control">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-outline">Update</button>
+                <button type="submit" class="btn btn-warning">Update</button>
             </div>
           </form>
           <!-- End -->

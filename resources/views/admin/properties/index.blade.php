@@ -32,10 +32,10 @@
         
           
          <!-- Start -->
-          <table class="table table-bordered">
+          <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th class="text-center">Code</th>
+                    <th class="text-left">Code</th>
                     <th>Title (eng)</th>
                     <th>Title (nl)</th>
                     <th>Type</th>
@@ -49,11 +49,11 @@
             <tbody>
                 @foreach(\App\Models\Properties::with(['landlord','type'])->get() as $property)
                  <tr>
-                    <td class="text-center">#{{ $property->property_code}}</td>
+                    <td class="text-left">#{{ $property->property_code}}</td>
                     <td class="text-left"><a href="{{ route('admin.property.details',$property->slug) }}">{{ $property->title_en}}</a></td>
                     <td class="text-left">{{ $property->title_nl }}</td>
                     <td class="text-left">{{ !empty($property->type->name) ? $property->type->name : '' }}</td>
-                    <td class="text-center">{{ number_format($property->price,2) }}</td>
+                    <td class="text-right">{{ number_format($property->price,2) }}</td>
                     <td class="text-left">{{ !empty($property->landlord->first_name) ? $property->landlord->first_name.' '.$property->landlord->last_name : ''}}</td>
                     <td class="text-center">
                         @if($property->status == 1)

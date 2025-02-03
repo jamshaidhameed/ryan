@@ -20,8 +20,11 @@
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">Property Type List</h3>
+          <div class="add-btn mb-2">
+            <a href="{{ route('admin.property.types.create') }}" class="btn btn-primary float-right"><i class="icon wb-plus-circle"></i>Add</a>
         </div>
-        <div class="panel-body mt-5">
+        </div>
+        <div class="panel-body">
               
         <!--  -->
         @if(session()->has('success'))
@@ -30,13 +33,11 @@
         </div>
         @endif
         
-          <div class="d-flex justify-content-end mb-2">
-            <a href="{{ route('admin.property.types.create') }}" class="btn btn-primary float-right"><i class="icon wb-plus-circle"></i>Add</a>
-        </div>
+          
         
           
          <!-- Start -->
-          <table class="table table-bordered">
+          <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th class="text-center">S.No</th>

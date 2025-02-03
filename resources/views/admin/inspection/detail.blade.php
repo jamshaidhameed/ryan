@@ -46,9 +46,9 @@
             </div>
             <!-- Card Text Start -->
              <div class="card-text">
-                 <h4>{{ strtoupper('Property: '.$tenant_contract->property->title_en)}}</h4>
-                 <p><strong>General</strong></p>
-                 <table class="table">
+                 <h4><strong>{{ strtoupper('Property: '.$tenant_contract->property->title_en)}}</strong></h4>
+                 <p class="font-weight-bold">General</p>
+                 <table class="table table-striped table-hover mb-50">
                         <tbody>
                             <tr>
                                 <td>Tenant</td>
@@ -97,10 +97,10 @@
                         </tbody>
                      </table>
                    <!-- First Section Start -->
-                    <table class="table">
+                    <table class="table table-striped table-hover mb-50">
                             <tbody>
                                 <tr>
-                                    <th colspan="2">Electric Meter</th>
+                                    <th  class="font-weight-bold" colspan="2">Electric Meter</th>
                                 </tr>
                                 <tr>
                                     <td class="width-48">Electra 1 / Electra 2</td>
@@ -165,10 +165,10 @@
                         </table>
                     <!-- End First Section -->
                      <!-- Section Section -->
-                      <table class="table">
+                      <table class="table table-striped table-hover mb-50">
                         <tbody>
                             <tr>
-                                <th colspan="2">Key Management</th>
+                                <th class="font-weight-bold" colspan="2">Key Management</th>
                             </tr>
                             <tr>
                                 <td class="width-48">Number of keys received in total number</td>
@@ -240,10 +240,10 @@
                     </table>
                      <!-- End Section -->
                       <!-- Start Third Section -->
-                       <table class="table">
+                       <table class="table table-striped table-hover mb-50">
                         <tbody>
                             <tr>
-                                <th colspan="2">Entrance / Hallway</th>
+                                <th class="font-weight-bold" colspan="2">Entrance / Hallway</th>
                             </tr>
                             <tr>
                                 <td class="width-48">General Impression tided up /cleaned up</td>
@@ -314,10 +314,10 @@
                     </table>
                        <!-- End Third Section -->
                         <!-- Fourth Section Start -->
-                          <table class="table">
+                          <table class="table table-striped table-hover mb-50">
                                 <tbody>
                                     <tr>
-                                        <th colspan="2">Living/Room 1</th>
+                                        <th class="font-weight-bold" colspan="2">Living/Room 1</th>
                                     </tr>
                                     <tr>
                                         <td class="width-48">General Impression tided up /cleaned up</td>
@@ -386,12 +386,12 @@
                             </table>
                         <!-- End Fourth Section -->
                          <!-- Fifth Section -->
-                          <table class="table">
+                          <table class="table table-striped table-hover mb-50">
                             <tbody>
                                 <tr>
-                                    <th style="width: 44rem;">Living/Room 1 Inventory</th>
-                                    <th>number damage</th>
-                                    <th>united homes number</th>
+                                    <th class="font-weight-bold" style="width: 44rem;">Living/Room 1 Inventory</th>
+                                    <th class="font-weight-bold">number damage</th>
+                                    <th class="font-weight-bold">united homes number</th>
                                 </tr>
                                 <tr>
                                     <td class="width-48">Dining Chairs</td>
@@ -506,10 +506,10 @@
                             </table>
                           <!-- End Fifth Section -->
                            <!-- sixth Section -->
-                            <table class="table">
+                            <table class="table table-striped table-hover mb-50">
                                     <tbody>
                                         <tr>
-                                            <th colspan="3">
+                                            <th class="font-weight-bold" colspan="3">
                                                 Bedroom 1
                                             </th>
                                         </tr>
@@ -597,12 +597,12 @@
                                 </table>
                             <!-- End Section Section -->
                              <!-- Seventh Section -->
-                              <table class="table">
+                              <table class="table table-striped table-hover mb-50">
                                 <tbody>
                                     <tr>
-                                        <th style="width: 44rem;">Bedroom 1 Inventory</th>
-                                        <th>number damage</th>
-                                        <th>united homes number</th>
+                                        <th class="font-weight-bold" style="width: 44rem;">Bedroom 1 Inventory</th>
+                                        <th class="font-weight-bold">number damage</th>
+                                        <th class="font-weight-bold">united homes number</th>
                                     </tr>
                                     <tr>
                                         <td class="width-48"> Bed</td>
@@ -704,10 +704,10 @@
                              </table>
                               <!-- End Seventh Section -->
                                <!-- Eight Section -->
-                                <table class="table">
+                                <table class="table table-striped table-hover mb-50">
                                     <tbody>
                                         <tr>
-                                            <th colspan="3">
+                                            <th class="font-weight-bold" colspan="3">
                                                 Bedroom 2
                                             </th>
                                         </tr>
@@ -794,12 +794,12 @@
                                 </table>
                                 <!-- Eight Secntion End -->
                                 <!-- Nine Section  -->
-                                 <table class="table">
+                                 <table class="table table-striped table-hover mb-50">
                                 <tbody>
                                     <tr>
-                                        <th style="width: 44rem;">Bedroom 2 Inventory</th>
-                                        <th>number damage</th>
-                                        <th>united homes number</th>
+                                        <th class="font-weight-bold" style="width: 44rem;">Bedroom 2 Inventory</th>
+                                        <th class="font-weight-bold">number damage</th>
+                                        <th class="font-weight-bold">united homes number</th>
                                     </tr>
                                     <tr>
                                         <td class="width-48">Bed</td>
@@ -901,10 +901,10 @@
                              </table>
                                  <!-- End Nine Section -->
                                   <!-- tenth Section -->
-                                    <table class="table">
+                                    <table class="table table-striped table-hover mb-50">
                                     <tbody>
                                         <tr>
-                                            <th colspan="2">Kitchen 1</th>
+                                            <th  class="font-weight-bold" colspan="2">Kitchen 1</th>
                                         </tr>
                                         <tr>
                                             <td class="width-48">General Impression tided up /cleaned up
@@ -975,12 +975,12 @@
                                 </table>
                             <!-- End Tenth Section -->
                             <!-- Eleventh Section -->
-                             <table class="table">
+                             <table class="table table-striped table-hover mb-50">
                                 <tbody>
                                     <tr>
-                                        <th style="width: 44rem;">Kitchen 1 Inventory</th>
-                                        <th>number damage</th>
-                                        <th>united homes number</th>
+                                        <th class="font-weight-bold" style="width: 44rem;">Kitchen 1 Inventory</th>
+                                        <th class="font-weight-bold">number damage</th>
+                                        <th class="font-weight-bold">united homes number</th>
                                     </tr>
                                     <tr>
                                         <td>Refrigerator</td>
@@ -1083,10 +1083,10 @@
                              </table>
                             <!-- End Section -->
                             <!-- 12th Section -->
-                             <table class="table">
+                             <table class="table table-striped table-hover mb-50">
                                     <tbody>
                                         <tr>
-                                            <th colspan="2">Kitchen 2</th>
+                                            <th class="font-weight-bold" colspan="2">Kitchen 2</th>
                                         </tr>
                                         <tr>
                                             <td style="width: 44rem;">General Impression tided up /cleaned up
@@ -1156,12 +1156,12 @@
                                 </table>
                              <!-- End 12th section -->
                               <!-- Section -->
-                               <table class="table">
+                               <table class="table table-striped table-hover mb-50">
                                 <tbody>
                                     <tr>
-                                        <th style="width: 44rem;">Kitchen 2 Inventory</th>
-                                        <th>number damage</th>
-                                        <th>united homes number</th>
+                                        <th class="font-weight-bold" style="width: 44rem;">Kitchen 2 Inventory</th>
+                                        <th class="font-weight-bold">number damage</th>
+                                        <th class="font-weight-bold">united homes number</th>
                                     </tr>
                                     <tr>
                                         <td>Refrigerator</td>
@@ -1264,10 +1264,10 @@
                              </table>
                                <!-- End Section -->
                                 <!-- Section -->
-                                 <table class="table">
+                                 <table class="table table-striped table-hover mb-50">
                                 <tbody>
                                     <tr>
-                                        <th style="width: 44rem;" colspan="3">Bathroom 1</th>
+                                        <th class="font-weight-bold" style="width: 44rem;" colspan="3">Bathroom 1</th>
                                     </tr>
                                     <tr>
                                      <td style="width: 44rem;">General Impression tided up /cleaned up
@@ -1342,10 +1342,10 @@
                                 </table>
                                  <!--  -->
                             <!--  -->
-                             <table class="table">
+                             <table class="table table-striped table-hover mb-50">
                                     <tbody>
                                         <tr>
-                                            <th colspan="2">Toilets 1</th>
+                                            <th class="font-weight-bold" colspan="2">Toilets 1</th>
                                         </tr>
                                         <tr>
                                             <td style="width: 44rem;">General Impression tided up /cleaned up
@@ -1411,10 +1411,10 @@
                                 </table>
                             <!--  -->
                             <!--  -->
-                            <table class="table">
+                            <table class="table table-striped table-hover mb-50">
                                     <tbody>
                                         <tr>
-                                            <th colspan="2">Toilets 2</th>
+                                            <th class="font-weight-bold" colspan="2">Toilets 2</th>
                                         </tr>
                                         <tr>
                                             <td style="width: 44rem;">General Impression tided up /cleaned up
@@ -1480,10 +1480,10 @@
                                 </table>
                             <!--  -->
                             <!--  -->
-                             <table class="table">
+                             <table class="table table-striped table-hover mb-50">
                                     <tbody>
                                         <tr>
-                                            <th colspan="2">Outside</th>
+                                            <th class="font-weight-bold" colspan="2">Outside</th>
                                         </tr>
                                         <tr>
                                             <td style="width: 44rem;">General Impression garden/balcony/outside
@@ -1542,12 +1542,12 @@
                                 </table>
                             <!--  -->
                             <!--  -->
-                            <table class="table">
+                            <table class="table table-striped table-hover mb-50">
                                 <tbody>
                                     <tr>
-                                        <th style="width: 44rem;">Miscellaneous</th>
-                                        <th>number damage</th>
-                                        <th>united homes number</th>
+                                        <th  class="font-weight-bold">Miscellaneous</th>
+                                        <th class="font-weight-bold">number damage</th>
+                                        <th class="font-weight-bold">united homes number</th>
                                     </tr>
                                     <tr>
                                         <td>Ironing board/iron</td>
@@ -1647,14 +1647,14 @@
                                 </tbody>
                             <!--  -->
                             <!--  -->
-                            <table class="table">
+                            <table class="table table-striped table-hover mb-50">
                                 <tbody>
                                     <tr>
-                                        <th>Fire prevention</th>
-                                        <th>Number damage</th>
-                                        <th>inspected</th>
-                                        <th>inspection date</th>
-                                        <th>United homes number</th>
+                                        <th class="font-weight-bold">Fire prevention</th>
+                                        <th class="font-weight-bold">Number damage</th>
+                                        <th class="font-weight-bold">inspected</th>
+                                        <th class="font-weight-bold">inspection date</th>
+                                        <th class="font-weight-bold">United homes number</th>
                                     </tr>
                                     <tr>
                                         <td>Smoke alarm</td>
@@ -1830,10 +1830,11 @@
                             </table>
                             <!--  -->
                         <!--  -->
-                         <table class="table">
+                         <table class="table table-striped table-hover">
                                 <tbody>
                                     <tr>
-                                        <th class="width-48">Heating system</th>
+                                        <th class="font-weight-bold">Heating system</th>
+                                        <th>&nbsp;</th>
                                     </tr>
                                     <tr>
                                         <td class="width-48">Heating type</td>

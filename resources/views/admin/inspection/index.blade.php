@@ -32,7 +32,7 @@
         <!-- Row Start -->
         <div class="row">
         <!-- First Column -->
-            <div class="col col-md-2">
+            <div class="col col-md-3">
             <div class="card border border-primary">
                 <div class="card-block">
                     <p class="card-title">
@@ -41,19 +41,19 @@
                     <div class="card-text">
                         <div class="form-group">
                             
-                            <a type="button" href="" class="btn btn-primary" style="padding-right: 41px;">All Inspections</a>
+                            <a type="button" href="" class="btn btn-primary" style="width:100%">All Inspections</a>
                         </div>
                         <div class="form-group">
                             
-                            <a type="button" href="" class="btn btn-primary" style="padding-right: 41px;">Pre Inspection</a>
+                            <a type="button" href="" class="btn btn-primary" style="width:100%">Pre Inspection</a>
                         </div>
                         <div class="form-group">
                            
-                            <a type="button" href="" class="btn btn-primary" style="padding-right: 15px;">Regular Inspection</a>
+                            <a type="button" href="" class="btn btn-primary" style="width:100%">Regular Inspection</a>
                         </div>
                         <div class="form-group">
                             
-                            <a type="button" href="" class="btn btn-primary" style="padding-right: 41px;">End Inspection</a>
+                            <a type="button" href="" class="btn btn-primary" style="width:100%">End Inspection</a>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
             </div>
         <!-- End First Column -->
         <!-- Second Column -->
-            <div class="col col-md-10">
+            <div class="col col-md-9">
                 <div class="card border card-primary">
                     <div class="card-block">
                         <p class="card-title">
@@ -73,7 +73,7 @@
                             <div class="d-flex justify-content-end mb-2">
                             <a href="{{ url('/admin/inspections/store') }}" data-id="{{ $tenant_contract->id}}" class="btn btn-primary float-right btn-store-inspection"><i class="icon wb-plus-circle"></i>Create Inspection</a>
                         </div>
-                            <table class="table table-bordered">
+                            <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>Code</th>

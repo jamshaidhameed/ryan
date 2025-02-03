@@ -12,11 +12,11 @@
   <div class="page-content container-fluid">
     <p class="text text-info">{{ ucfirst(env('business_title'))}} </p>
     <div class="row">
-      <div class="col-xl-3 col-md-6 info-panel">
+      <div class="col-md-6 info-panel">
         <div class="card card-shadow">
           <div class="card-block bg-white p-20">
             <button type="button" class="btn btn-floating btn-sm btn-warning">
-              <i class="icon wb-shopping-cart"></i>
+              <i class="icon wb-home"></i>
             </button>
             <span class="ml-15 font-weight-400">Total Properties</span>
             <div class="content-text text-center mb-0">
@@ -29,11 +29,11 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-md-6 info-panel">
+      <div class="col-md-6 info-panel">
         <div class="card card-shadow">
           <div class="card-block bg-white p-20">
-            <button type="button" class="btn btn-floating btn-sm btn-danger">
-              <i class="icon fa-mortar-board"></i>
+            <button type="button" class="btn btn-floating btn-sm btn-success">
+              <i class="icon wb-user"></i>
             </button>
             <span class="ml-15 font-weight-400">Total Tenants</span>
             <div class="content-text text-center mb-0">
@@ -45,11 +45,11 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-md-6 info-panel">
+      <div class="col-md-6 info-panel">
         <div class="card card-shadow">
           <div class="card-block bg-white p-20">
             <button type="button" class="btn btn-floating btn-sm btn-success">
-              <i class="icon wb-book"></i>
+              <i class="icon wb-user"></i>
             </button>
             <span class="ml-15 font-weight-400">Total Landlords</span>
             <div class="content-text text-center mb-0">
@@ -61,7 +61,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-md-6 info-panel">
+      <div class="col-md-6 info-panel">
         <div class="card card-shadow">
           <div class="card-block bg-white p-20">
             <button type="button" class="btn btn-floating btn-sm btn-primary">
@@ -106,10 +106,6 @@
       </div> -->
       <!-- End Second Row -->
 
-      <!-- Third Row -->
-      <!-- Third Left -->
-    
-      <!-- End Third Left -->
 
       <!-- Third Right -->
       <div class="col-lg-12" id="ecommerceRevenue">
