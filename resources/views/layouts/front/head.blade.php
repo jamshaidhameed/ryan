@@ -1,4 +1,3 @@
-<div class="page_loader"></div>
 
 <!-- Top header start -->
 <header class="top-header top-header-bg" id="top-header-2">
