@@ -69,15 +69,18 @@ Developer:  Mohan K. Duwal
     *. Footer Item / .footer-item
 -------------------------------------------------------------------*/
 /** GLOBAL CLASSES **/
+
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
 body {
     font-family: 'Poppins', sans-serif;
-    color: #535353;
-    background: #fff9f7;
+    color: #333;
+    background: #fff;
 }
-
+/* 
 .index-body{
-    background: #fff9f7;
-}
+    background: #fff;
+} */
 
 .bg-white {
     background: #f7f7f7!important;
@@ -126,7 +129,7 @@ p {
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: #37404d;
     font-weight: 400;
 }
@@ -991,25 +994,7 @@ input[type=checkbox]:checked + label:before {
 
 .btn-4:hover {
     color: #fff;
-}
-
-.btn-4:hover:after {
-    transform: perspective(200px) scaleX(1.05) rotateX(0deg) translateZ(0);
-    transition: transform 0.4s linear, transform 0.4s linear;
-}
-
-.btn-4:after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    content: "";
-    border-radius: 3px;
-    transform: perspective(200px) scaleX(0.1) rotateX(90deg) translateZ(-10px);
-    transform-origin: bottom center;
-    transition: transform 0.4s linear, transform 0.4s linear;
-    z-index: -1;
+    background-color: #9cc338;
 }
 
 /** BTN 5 **/
@@ -1032,8 +1017,9 @@ input[type=checkbox]:checked + label:before {
     letter-spacing: 0.5px;
     font-family: 'Roboto', sans-serif;
     overflow: hidden;
-    background: #fff;
+    background: transparent;
     border-radius: 3px;
+    border: 1px solid #FFF;
 }
 
 .btn-5 i::before {
@@ -1659,13 +1645,17 @@ a {
     font-family: 'Open Sans', sans-serif;
 }
 
-.banner h1 span {
+/* .banner h1 span {
     font-weight: 700;
-}
+} */
 
 .banner .typed-text {
     font-size: 50px;
     margin-bottom: 20px;
+    font-family: "Yellowtail", serif;
+    font-weight: 400;
+    font-style: normal;
+    text-transform: capitalize!important;
 }
 
 .banner .tt2{
@@ -2384,6 +2374,10 @@ a {
 
 
 /** PROPERTY BOX 3 STARTED **/
+
+.recent-properties .row{
+    justify-content: center;
+}
 .property-box-3 {
     margin: 0 0 30px;
 }
@@ -2666,6 +2660,7 @@ a {
 .property-box-6 {
     background: #fff;
     margin-bottom: 30px;
+    border: 1px solid #BBB;
 }
 
 .property-box-6 img{
@@ -2900,12 +2895,17 @@ a {
     margin-bottom: 30px;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
+    border: 1px solid #BBB;
 }
 
 .property-box-8:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     -webkit-transform: translateY(-5px);
     transform: translateY(-5px);
+}
+
+.property-box-8:hover h3 a{
+    color: #9cc338;
 }
 
 .property-box-8 .photo-thumbnail {
@@ -2934,6 +2934,7 @@ a {
 .property-box-8 .price-ratings-box .price {
     font-weight: 600;
     font-size: 15px;
+    text-shadow: 0 1px 5px #000;
 }
 
 .property-box-8 .photo:before {
@@ -2960,7 +2961,7 @@ a {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgb(12 62 185 / 51%);
+    background: rgb(156 195 56 / 75%);
     position: absolute;
     display: flex;
     justify-content: center;
@@ -3867,6 +3868,7 @@ a {
     margin-bottom: 30px;
     position: relative;
     z-index: 1;
+    border: 1px solid #BBB;
 }
 
 .services-info-3:after{
@@ -3881,6 +3883,10 @@ a {
 
 .services-info-3 .read-more{
     font-size: 16px;
+}
+
+.services-info-3 .read-more:hover{
+    text-decoration:  underline;
 }
 
 /** PARTNER AREA STARTED **/
@@ -7052,7 +7058,8 @@ a {
 }
 
 .footer-1 a:hover{
-    color: #adabab;
+    color: #fff;
+    text-decoration: underline;
 }
 
 .footer-1 .footer-inner .links li {
@@ -7149,10 +7156,6 @@ a {
 .footer-1 .footer-inner .recent-posts .media h5 a {
     font-size: 17px;
     color: #fff;
-}
-
-.footer-1 .footer-inner .recent-posts .media h5 a:hover{
-    color: #adabab;
 }
 
 .footer-1 .recent-posts .media p {
@@ -10624,6 +10627,7 @@ table {
 /** TABBING BOX STARTED **/
 .tabbing-box .tab-pane {
     padding-top: 50px;
+    border-top: 1px solid #bbb;
 }
 
 .faq .tabbing-box .tab-pane {
@@ -11521,6 +11525,7 @@ table {
     padding: 30px 30px 10px;
     box-shadow: 0 0 8px 0 rgba(0,0,0,.12);
     background: #fff;
+    border: 1px solid #BBB;
 }
 
 #search-area-4 .search-area-inner .range-slider {
