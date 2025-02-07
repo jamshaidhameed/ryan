@@ -1292,7 +1292,7 @@ class HomeController extends Controller
              Properties::where('featured' ,1)->update(['featured' => 0]);
          }
 
-        Properties::where('id',$id)->update(
+        Properties::where('id',$id)->update( 
             [
                 'title_en' => $request->title_en,
                 'description_en' => $request->description_en,
@@ -1374,7 +1374,7 @@ class HomeController extends Controller
 
         $request->validate(
             [
-                'id' => 'required',
+                'enquiry_id' => 'required',
                 'inspection_type' => 'required',
                 'inspection_date' => 'required',
                 'inspected_by' => 'required',
@@ -1394,7 +1394,7 @@ class HomeController extends Controller
 
         Inspections::create(
             [
-                'inspectionable_id' => $request->id,
+                'inspectionable_id' => $request->enquiry_id,
                 'inspectionable_type' => $request->inspectionable_type,
                 'inspection_code' => $inspection_code,
                 'inspection_type' => $request->inspection_type,
@@ -1407,12 +1407,11 @@ class HomeController extends Controller
         session()->flash('success','Inspection Created Successfully');
 
 
-        return redirect()->route('admin.inspections.list',$request->id);
+        return redirect()->route('admin.inspections.list',$request->enquiry_id);
     }
     public function inspection_update(Request $request,string $id){
         $request->validate(
             [
-                'id' => 'required',
                 'inspection_type' => 'required',
                 'inspection_date' => 'required',
                 'inspected_by' => 'required',
@@ -1422,7 +1421,7 @@ class HomeController extends Controller
 
         Inspections::where('id',$id)->update(
             [
-                'inspectionable_id' => $request->id,
+                'inspectionable_id' => $request->enquiry_id,
                 'inspectionable_type' => $request->inspectionable_type,
                 'inspection_type' => $request->inspection_type,
                 'inspection_date' => date_format(date_create($request->inspection_date),'Y-m-d H:i:s'),
@@ -1431,26 +1430,24 @@ class HomeController extends Controller
             ]
             );
 
-        session()->flash('success','Inspection Updated Successfully');
-         return redirect()->route('admin.inspections.list',$id);
+         session()->flash('success','Inspection Updated Successfully');
+         return redirect()->route('admin.inspections.list',$request->enquiry_id);
         
-        return redirect($inspection_url);
+        // return redirect($inspection_url);
     }
     public function inspection_delete($id){
 
          
         $inspection = Inspections::find($id);
 
-        $property_id = $inspection->inspectionable_id;
+        $enquiry_id = $inspection->inspectionable_id;
 
         $inspection->delete();
 
         session()->flash('success','Inspection Deleted Successfully');
 
-        $type_url = "&property=".$property_id;
-        $inspection_url = route('admin.inspections.list',$type_url);
-
-        return redirect($inspection_url);
+        session()->flash('success','Inspection Updated Successfully');
+         return redirect()->route('admin.inspections.list',$enquiry_id);
     }
 
     //View Inspection Contents 

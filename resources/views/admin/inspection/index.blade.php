@@ -91,7 +91,7 @@
                                         <td class="text-center">
                                             @php $inspection_contents = \App\Models\InspectionContents::where('inspection_id',$inspection->id)->get(); @endphp
                                             @if(count($inspection_contents) == 0)
-                                            <a type="button" href="{{ url('/admin/inspections/update/'.$inspection->id) }}" class="btn btn-primary btn-outline btn-sm btn-update-inspection" data-insptype="{{ $inspection->inspection_type}}" data-insdate="{{ $inspection->inspection_date }}" data-assignto="{{ $inspection->inspected_by }}" data-note="{{ $inspection->inspection_notes }}"><i class="icon fa-pencil" aria-hidden="true" style="font-size: 15px;"></i> Edit</a>
+                                            <a type="button" href="{{ url('/admin/inspections/update/'.$inspection->id) }}" class="btn btn-primary btn-outline btn-sm btn-update-inspection" data-insptype="{{ $inspection->inspection_type}}" data-insdate="{{ $inspection->inspection_date }}" data-assignto="{{ $inspection->inspected_by }}" data-note="{{ $inspection->inspection_notes }}" data-enquiryid="{{$tenant_contract->id }}"><i class="icon fa-pencil" aria-hidden="true" style="font-size: 15px;"></i> Edit</a>
                                             <a type="button" href="{{ route('admin.landlord.delete',$inspection->id) }}" class="btn btn-danger btn-outline btn-sm" onClick="return confirm(`Are you sure to Delete the Record ? `);"><i class="icon fa-trash" aria-hidden="true" style="font-size: 15px;"></i> Delete</a>
                                             @else 
                                             <a type="button" href="{{ route('admin.inspection.contents',$inspection->id) }}" class="btn btn-primary btn-outline btn-sm btn-round" ><i class="icon fa-eye" aria-hidden="true" style="font-size: 15px;"></i> View Cotents</a>
@@ -126,7 +126,8 @@
         </div>
         <form class="form-horizontal" id="exampleConstraintsForm" autocomplete="off" action="" method="post">
          @csrf 
-         <input type="hidden" name="id" value="{{ $tenant_contract->id }}">
+         {{-- <input type="hidden" name="id" value="{{ $tenant_contract->id }}"> --}}
+         <input type="hidden" name="enquiry_id" value="{{ $tenant_contract->id }}">
          <div class="modal-body">
             <div class="form-group">
                 <label for="" class="form-control-label">Inspection Type</label>
