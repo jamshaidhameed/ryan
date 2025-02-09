@@ -101,7 +101,7 @@ return [
     'address' => 'Adres',
     'contract_period' => 'Contractperiode (in maanden)',
     'kitchen' => 'Keuken',
-    'parking' => 'Parkeerplaatsen',
+    'parking' => 'Parkeren',
     'youtube_link' => 'YouTube-video link',
     'descript_en' => 'Beschrijving [EN]',
     'description_nl' => 'Beschrijving [NL]',
@@ -161,6 +161,12 @@ return [
     'booked_property' => 'Geboekte woningen',
     'complaints' => 'Klachten',
     'resolve_issue' => 'Los probleem op',
-    'save' => 'Opslaan'
+    'save' => 'Opslaan',
+    'useful_links' => 'Handige links',
+    'recent_properties' => 'Recente eigendommen',
+    'subscription' => 'Abonnementen',
+    'beds' => 'Bedden',
+    'baths' => 'baden',
+    'sqft' => 'sqft',
 ];
 ?>

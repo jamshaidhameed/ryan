@@ -22,7 +22,7 @@
             <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
                 <div class="footer-item">
                     <h4>
-                        Useful Links
+                    {{ __('titles.useful_links') }}
                     </h4>
                     <ul class="links">
                         <li>
@@ -44,7 +44,7 @@
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <div class="footer-item recent-posts">
-                    <h4>Recent Properties</h4>
+                    <h4>{{ __('titles.recent_properties') }}</h4>
                     @php $recent_properties = \App\Models\Properties::orderBy('id','desc')->where('status',1)->limit(2)->get(); @endphp
                     @foreach($recent_properties as $property)
                     <div class="media mb-4">
@@ -66,7 +66,7 @@
             <div class="col-xl-4 col-lg-3 col-md-6 col-sm-6">
                 <div class="footer-item clearfix">
                     <div class="submitNewsletter">
-                        <h4>Abonnementen</h4>
+                        <h4>{{ __('titles.subscription') }}</h4>
                         <div class="Subscribe-box">
                             
                             <form action="#" method="GET">

@@ -81,16 +81,16 @@
                             <div class="portfolio_hover">
                                 <ul class="facilities-list clearfix">
                                     <li>
-                                        <i class="flaticon-bed"></i> {{ $property->bedrooms}} Beds
+                                        <i class="flaticon-bed"></i> {{ $property->bedrooms}} {{ __('titles.beds') }}
                                     </li>
                                     <li>
-                                        <i class="flaticon-bath"></i> {{ $property-> bathrooms}} Baths
+                                        <i class="flaticon-bath"></i> {{ $property-> bathrooms}} {{ __('titles.baths') }}
                                     </li>
                                     <li>
                                         <i class="flaticon-square-layouting-with-black-square-in-east-area"></i> Sq Ft:{{ $property-> area}}
                                     </li>
                                     <li>
-                                        <i class="flaticon-car-repair"></i> {{ $property->garages }} Garage
+                                        <i class="flaticon-car-repair"></i> {{ $property->garages }} {{ __('titles.garage') }}
                                     </li>
 <!-- 
                                     <li>

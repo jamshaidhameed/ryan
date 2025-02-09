@@ -42,10 +42,10 @@
                 <ul class="top-social-media pull-right">
                     @if(empty(Auth::user()->first_name))
                     <li>
-                        <a href="{{ route('login')}}" class="sign-in"><i class="fa fa-sign-in" style="margin-right:10px;"></i>Login </a>
+                        <a href="{{ route('login')}}" class="sign-in"><i class="fa fa-sign-in" style="margin-right:10px;"></i>{{ __('titles.login') }} </a>
                     </li>
                     <li>
-                        <a href="{{ route('register') }}" class="sign-in"><i class="fa fa-user" style="margin-right:10px;"></i> Register</a>
+                        <a href="{{ route('register') }}" class="sign-in"><i class="fa fa-user" style="margin-right:10px;"></i> {{ __('titles.register') }}</a>
                     </li>
                     @else 
                         @php 

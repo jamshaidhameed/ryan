@@ -283,19 +283,19 @@
                         <div class="row">
                             <div class="col-md-4 col-sm-4">
                                 <ul>
-                                    <li><i class="flaticon-bed"></i> {{ $featured_property->bedrooms}} Bedrooms</li>
-                                    <li><i class="flaticon-bath"></i> {{ $featured_property->bathrooms}} Bathrooms</li>
+                                    <li><i class="flaticon-bed"></i> {{ $featured_property->bedrooms}} {{ __('titles.bedrooms') }}</li>
+                                    <li><i class="flaticon-bath"></i> {{ $featured_property->bathrooms}} {{ __('titles.bathrooms') }}</li>
                                 </ul>
                             </div>
                             <div class="col-md-4 col-sm-4">
                                 <ul>
                                     <li><i class="flaticon-square-layouting-with-black-square-in-east-area"></i> Sq Ft:{{ $featured_property->area}}</li>
-                                    <li><i class="flaticon-car-repair"></i> {{ $featured_property->garages}} Garage</li>
+                                    <li><i class="flaticon-car-repair"></i> {{ $featured_property->garages}} {{ __('titles.garage') }}</li>
                                 </ul>
                             </div>
                             <div class="col-md-4 col-sm-4">
                                 <ul>
-                                    <li><i class="flaticon-balcony-and-door"></i>{{ $featured_property->parkings}} Parkings</li>
+                                    <li><i class="flaticon-balcony-and-door"></i>{{ $featured_property->parkings}} {{ __('titles.parking') }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -401,7 +401,7 @@
                                 <span class="blog-one__plus"></span>
                             </a>
                         </div>
-                        <div class="tag-for">For Rent</div>
+                        <div class="tag-for">{{ __('titles.for_rent') }}</div>
                         <div class="price-ratings-box">
                             <p class="price">
                                 &euro;{{ number_format($latest->price,2)}}
@@ -428,9 +428,9 @@
                             </div>
                         </div>
                         <div class="properties-listing">
-                            <span>{{ $latest->bedrooms}} Beds</span>
-                            <span>{{ $latest-> bathrooms}} Baths</span>
-                            <span>{{ $latest->area }} sqft</span>
+                            <span>{{ $latest->bedrooms}} {{ __('titles.beds') }}</span>
+                            <span>{{ $latest-> bathrooms}} {{ __('titles.baths') }}</span>
+                            <span>{{ $latest->area }} {{ __('titles.sqft') }}</span>
                         </div>
                     </div>
                 </div>

@@ -188,5 +188,11 @@ return [
     'costing' => 'Costing',
     'issue_ticket_cost_paid' => 'Issue Ticket Cost Paid',
     'remark' => 'Remarks',
-    'save' => 'Save' 
+    'save' => 'Save',
+    'useful_links' => 'Useful Links',
+    'recent_properties' => 'Recent Properties',
+    'subscription' => 'Subscription',
+    'beds' => 'Beds',
+    'baths' => 'Baths',
+    'sqft' => 'sqft',
 ];
