@@ -91,11 +91,50 @@
                                         <td class="text-center">
                                             @php $inspection_contents = \App\Models\InspectionContents::where('inspection_id',$inspection->id)->get(); @endphp
                                             @if(count($inspection_contents) == 0)
-                                            <a type="button" href="{{ url('/admin/inspections/update/'.$inspection->id) }}" class="btn btn-primary btn-outline btn-sm btn-update-inspection" data-insptype="{{ $inspection->inspection_type}}" data-insdate="{{ $inspection->inspection_date }}" data-assignto="{{ $inspection->inspected_by }}" data-note="{{ $inspection->inspection_notes }}" data-enquiryid="{{$tenant_contract->id }}"><i class="icon fa-pencil" aria-hidden="true" style="font-size: 15px;"></i> Edit</a>
+                                           <!-- <a type="button" href="{{ url('/admin/inspections/update/'.$inspection->id) }}" class="btn btn-primary btn-outline btn-sm btn-update-inspection" data-insptype="{{ $inspection->inspection_type}}" data-insdate="{{ $inspection->inspection_date }}" data-assignto="{{ $inspection->inspected_by }}" data-note="{{ $inspection->inspection_notes }}" data-enquiryid="{{$tenant_contract->id }}"><i class="icon fa-pencil" aria-hidden="true" style="font-size: 15px;"></i> Edit</a>
                                             <a type="button" href="{{ route('admin.landlord.delete',$inspection->id) }}" class="btn btn-danger btn-outline btn-sm" onClick="return confirm(`Are you sure to Delete the Record ? `);"><i class="icon fa-trash" aria-hidden="true" style="font-size: 15px;"></i> Delete</a>
+                                           -->
+
+
+
+                                            <button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">Actions <span class="caret"></span></button>
+                                            <div class="dropdown-menu" aria-labelledby="exampleIconDropdown1" role="menu">
+                                            
+                                                <a type="button" class="dropdown-item btn btn-primary btn-outline btn-sm btn-update-inspection"
+                                                data-insptype="{{ $inspection->inspection_type}}" data-insdate="{{ $inspection->inspection_date }}" data-assignto="{{ $inspection->inspected_by }}" data-note="{{ $inspection->inspection_notes }}" data-enquiryid="{{$tenant_contract->id }}"
+                                                href="{{ url('/admin/inspections/update/'.$inspection->id) }}">
+                                                    <i class="icon fa-pencil" aria-hidden="true" style="font-size: 15px;"></i>Edit</a>
+                                                    
+                                                <a type="button" class="dropdown-item btn btn-danger btn-outline"
+                                                id="" href="{{ route('admin.landlord.delete',$inspection->id) }}" onClick="return confirm(`Are you sure to Delete the Record ? `);">
+                                                <i class="icon fa-trash-o" aria-hidden="true" style="font-size: 15px;"></i>Delete</a>
+
+                                            </div>
+
+
+
                                             @else 
-                                            <a type="button" href="{{ route('admin.inspection.contents',$inspection->id) }}" class="btn btn-primary btn-outline btn-sm btn-round" ><i class="icon fa-eye" aria-hidden="true" style="font-size: 15px;"></i> View Cotents</a>
+                                           <!-- <a type="button" href="{{ route('admin.inspection.contents',$inspection->id) }}" class="btn btn-primary btn-outline btn-sm btn-round" ><i class="icon fa-eye" aria-hidden="true" style="font-size: 15px;"></i> View Cotents</a> -->
+
+
+                                            <button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">Actions <span class="caret"></span></button>
+                                            <div class="dropdown-menu" aria-labelledby="exampleIconDropdown1" role="menu">
+                                            
+                                                
+                                                <a type="button" class="dropdown-item btn btn-danger btn-outline"
+                                                id="" href="{{ route('admin.inspection.contents',$inspection->id) }}" >
+                                                <i class="icon fa-trash-o" aria-hidden="true" style="font-size: 15px;"></i>View Inspection Report</a>
+
+                                            </div>
+
                                             @endif
+
+
+
+
+                                           
+
+
                                             
                                         </td>
                                      </tr>
