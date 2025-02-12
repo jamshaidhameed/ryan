@@ -163,9 +163,9 @@ return [
     'resolve_issue' => 'Los probleem op',
     'save' => 'Opslaan',
     'useful_links' => 'Handige links',
-    'recent_properties' => 'Recente eigendommen',
+    'recent_properties' => 'Recente woningen',
     'subscription' => 'Abonnementen',
-    'beds' => 'Bedden',
+    'beds' => 'bedden',
     'baths' => 'baden',
     'sqft' => 'sqft',
 ];

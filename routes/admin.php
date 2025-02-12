@@ -50,7 +50,7 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
         Route::get('/user/create',[App\Http\Controllers\Admin\HomeController::class,'technision_create'])->name('user.create');
         Route::post('/user/store',[App\Http\Controllers\Admin\HomeController::class,'technision_store'])->name('user.store');
         Route::get('/user/edit/{id}',[App\Http\Controllers\Admin\HomeController::class,'technision_edit'])->name('user.edit');
-        Route::post('/user/update/{id}',[App\Http\Controllers\Admin\HomeController::class,'technision_update'])->name('technision.update');
+        Route::post('/user/update/{id}',[App\Http\Controllers\Admin\HomeController::class,'technision_update'])->name('user.update');
         Route::post('/user/delete/{id}',[App\Http\Controllers\Admin\HomeController::class,'technision_delete'])->name('user.delete');
         //Province CURD
         Route::get('/province/list',[App\Http\Controllers\Admin\HomeController::class,'province_list'])->name('province.list');

@@ -1,4 +1,4 @@
-@extends('tenant.layouts.Tenant') 
+@extends('tenant.layouts.tenant') 
 @section('title')
   {{ __('titles.my_booking_enquiries') }}
 @endsection
