@@ -79,9 +79,9 @@ class HomeController extends Controller
 
         $postal_url = '';
 
-        if (!empty($data['postal_code'])) {
+        if (!empty($data['postalcode'])) {
 
-            $code = $data['postal_code'];
+            $code = $data['postalcode'];
            
             if (empty($postal_url)) {
                     
@@ -98,14 +98,19 @@ class HomeController extends Controller
 
         if (!empty($data['province'])) {
 
-            $code = $data['province'];
+           $code = $data['province'];
+          
            
             if (empty($province_url)) {
                     
-                    $province_url .='&province='.$code;
+                   // $province_url .='&province='.$code;
+                  $province_url .="&street_address LIKE '%$code%' OR city LIKE '%$code%'";
+              //  exit;
             }else{
 
                 $province_url .=','.$code;
+               // echo $code;
+                //exit;
             }
         }
 
@@ -204,6 +209,9 @@ class HomeController extends Controller
             if (!empty($_GET['province']) ) {
                 
                 $properties = $properties->where(['province_id' => $_GET['province'],'status' => 1])->paginate(9);
+              // $properties = $properties->where('street_address', 'like', '%' . $_GET['province'] . '%')
+               //->where('status', 1);
+    
             }
 
             if (!empty($_GET['property_type'])) {

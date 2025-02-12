@@ -40,13 +40,30 @@
             </div>
             <div class="col-lg-5 col-md-5">
                 <ul class="top-social-media pull-right">
+                    
                     @if(empty(Auth::user()->first_name))
                     <li>
                         <a href="{{ route('login')}}" class="sign-in"><i class="fa fa-sign-in" style="margin-right:10px;"></i>{{ __('titles.login') }} </a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="{{ route('register') }}" class="sign-in"><i class="fa fa-user" style="margin-right:10px;"></i> {{ __('titles.register') }}</a>
-                    </li>
+                    </li>-->
+
+
+                    <div class="dropdown d-inline mx-3">
+                        <a data-mdb-dropdown-init class="dropdown-toggle pb-3" href="#" id="Dropdown2" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-user"></i> Register</a></a>
+                    
+                        <ul class="dropdown-menu register" aria-labelledby="Dropdown2">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('register', ['flag' => 'landlord']) }}"><i class="fa fa-user mx-2"></i> {{ __('titles.landlord')}}</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('register', ['flag' => 'tenant']) }}"><i class="fa fa-user mx-2"></i> {{ __('titles.tenant')}}</a>
+                            </li>
+        
+                        </ul>
+                    </div>
                     @else 
                         @php 
                         

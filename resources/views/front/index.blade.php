@@ -51,7 +51,7 @@
                                 </div>
                             </div> -->
                             <div class="col-6 col-lg-3 col-md-3">
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <select class="selectpicker search-fields" name="postal_code">
                                         <option value="">@lang('titles.postal_code')</option>
                                         @php $postal_codes  = \App\Models\Properties::orderBy('postcode','asc')->select('postcode')->distinct()->get(); @endphp
@@ -60,16 +60,36 @@
                                           <option value="{{ $postcode->postcode}}">{{ $postcode->postcode}}</option>
                                         @endforeach
                                     </select>
+                                </div> -->
+
+
+                                <div class="form-group">
+
+                                    <input type="text" class="form-control" name="postalcode" id="postalcode" placeholder="@lang('titles.postal_code')" />
+                                    <!-- <select class="selectpicker search-fields" name="postal_code">
+                                        <option value="">@lang('titles.postal_code')</option>
+                                        @php $postal_codes  = \App\Models\Properties::orderBy('postcode','asc')->select('postcode')->distinct()->get(); @endphp
+
+                                        @foreach($postal_codes as $postcode)
+                                          <option value="{{ $postcode->postcode}}">{{ $postcode->postcode}}</option>
+                                        @endforeach
+                                    </select> -->
                                 </div>
+
+
                             </div>
                             <div class="col-6 col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <select class="selectpicker search-fields" name="province">
+                                    <!--<select class="selectpicker search-fields" name="province">
                                         <option value="">@lang('titles.location')</option>
                                         @foreach(\App\Models\Provinces::all() as $province)
                                          <option value="{{ $province->id }}">{{ $province->name}}</option>
                                         @endforeach
                                     </select>
+                                -->
+
+
+                                <input type="text" class="form-control" name="province" id="province" placeholder="@lang('titles.location')" />
                                 </div>
                             </div>
                             <div class="col-6 col-lg-3 col-md-3">
@@ -240,7 +260,7 @@
     <div class="container">
         <div class="main-title">
             <h1>{{ __('titles.featured_property') }}</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+            <p>{{ __('titles.featured_property_desc') }}.</p>
         </div>
         @if(!empty($featured_property))
         <div class="col-lg-12">
@@ -314,7 +334,7 @@
     <div class="container">
         <div class="main-title">
             <h1>{{ __('titles.what_are_you_looking_for')}}</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+            <p>{{ __('titles.what_are_you_looking_for_desc')}}.</p>
         </div>
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-12 wow fadeInLeft delay-04s">
@@ -326,8 +346,8 @@
                         <h5>
                             <a href="#">{{ __('titles.apartment_clean') }}</a>
                         </h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        <a href="#" class="read-more">{{ __('titles.read_more.') }}</a>
+                        <p>{{ __('titles.apartment_clean_desc') }}</p>
+                        <!-- <a href="#" class="read-more">{{ __('titles.read_more.') }}</a> -->
                     </div>
                 </div>
             </div>
@@ -340,8 +360,8 @@
                         <h5>
                             <a href="#">{{ __('titles.Houses') }}</a>
                         </h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        <a href="#" class="read-more">{{ __('titles.read_more.') }}</a>
+                        <p>{{ __('titles.Houses_desc') }}</p>
+                        <!-- <a href="#" class="read-more">{{ __('titles.read_more.') }}</a>-->
                     </div>
                 </div>
             </div>
@@ -354,8 +374,8 @@
                         <h5>
                             <a href="#">{{ __('titles.support_24_7') }}</a>
                         </h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        <a href="#" class="read-more">{{ __('titles.read_more.') }}</a>
+                        <p>{{ __('titles.support_24_7') }}</p>
+                       <!-- <a href="#" class="read-more">{{ __('titles.read_more.') }}</a> -->
                     </div>
                 </div>
             </div>
@@ -368,14 +388,14 @@
                         <h5>
                             <a href="#">{{ __('titles.Commercial') }}</a>
                         </h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-                        <a href="#" class="read-more">{{ __('titles.read_more.') }}</a>
+                        <p>{{ __('titles.Commercial_desc') }}</p>
+                        <!-- <a href="#" class="read-more">{{ __('titles.read_more.') }}</a> -->
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 text-center">
+            <!-- <div class="col-lg-12 text-center">
                 <a data-animation="animated fadeInUp delay-10s" href="#" class="btn-5">{{ __('titles.more_details') }}</a>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
@@ -386,7 +406,7 @@
     <div class="container">
         <div class="main-title">
             <h1>{{ __('titles.recent_properties') }}</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+            <p>{{ __('titles.recent_properties_desc') }}</p>
         </div>
         <div class="row">
             @foreach($latest_properties as $latest)

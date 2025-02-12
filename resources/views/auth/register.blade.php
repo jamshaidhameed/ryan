@@ -73,8 +73,8 @@
                          <div class="form-group">
                             <select name="user_type" id="" class="form-control input-text">
                                 <option value="">{{ __('titles.i_am') }} </option>
-                                <option value="landlord" @if(!empty(old('user_type')) && old('user_type') == 'landlord')selected @endif>Landlord</option>
-                                <option value="tenant" @if(!empty(old('user_type')) && old('user_type') == 'tenant')selected @endif>Tenant</option>
+                                <option value="landlord" <?php if($_REQUEST["flag"] == "landlord") echo "selected"; ?> @if(!empty(old('user_type')) && old('user_type') == 'landlord')selected @endif>{{ __('titles.landlord')}}</option>
+                                <option value="tenant" <?php if($_REQUEST["flag"] == "tenant") echo "selected"; ?> @if(!empty(old('user_type')) && old('user_type') == 'tenant')selected @endif>{{ __('titles.tenant')}}</option>
                             </select>
                          </div>
                          <div class="form-group">
@@ -104,8 +104,8 @@
             </div>
             <div class="col-lg-6 bg-color-15 pad-0 none-992 bg-img">
                 <div class="info clearfix">
-                    <h1>Welcome to <a href="{{ route('home') }}">RyanRent</a></h1>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type</p>
+                    <h1>{{ __('titles.welcome_to')}} <a href="{{ route('home') }}">RyanRent</a></h1>
+                    <p>{{ __('titles.welcome_to_desc')}}</p>
                 </div>
             </div>
         </div>
