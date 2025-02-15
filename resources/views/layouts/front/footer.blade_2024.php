@@ -87,7 +87,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-12">
-                    <p class="copy">© <?php echo date("Y"); ?> {{ __('titles.all_right_reserve') }}</p>
+                    <p class="copy">© 2024 <a href="#">RyanRent.nl</a> {{ __('titles.all_right_reserve') }}</p>
                 </div>
                 
             </div>
