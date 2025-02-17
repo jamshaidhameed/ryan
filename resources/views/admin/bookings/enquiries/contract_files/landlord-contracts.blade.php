@@ -2,23 +2,27 @@
 <html>
 
 <head>
-    <title>Contract</title>
+    <title>Huurovereenkomst</title>
 </head>
 
 <body>
-    <h1>Rental Agreement Month-to-Month</h1>
-    <p>Date {{ $todays_date }}</p>
-    <p>Agreement between, {{$property_owner}}, Owner's and {{$company_name}} for the dwelling located at
-        {{$property->street_address}} (Location).
-    </p>
+    <h1>Huurovereenkomst per Maand</h1>
+
+    <p><strong>Datum:</strong> {{ $todays_date }}</p>
+
     <p>
-        Company agree to rent this dwelling the property in month-to-moth basis for {{$property_price}} per month payable on the 1st day of
-        calendar month.
+        Deze overeenkomst is gesloten tussen **{{$property_owner}}** (de "Eigenaar") en **{{$company_name}}** (het "Bedrijf")  
+        voor de verhuur van de woning gelegen aan **{{$property->street_address}}** (de "Woning").
+    </p>
+
+    <p>
+        Het Bedrijf stemt ermee in de Woning te huren op een **maand-tot-maand basis** voor een huurbedrag van **{{$property_price}} per maand**,  
+        te betalen op de **1e dag van elke kalendermaand**.
     </p>
 
     <pre>
         ____________________________________________ <br>
-                    Owner signature
+                    Handtekening Eigenaar
     </pre>
 </body>
 

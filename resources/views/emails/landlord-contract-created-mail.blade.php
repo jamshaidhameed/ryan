@@ -1,11 +1,15 @@
 <x-mail::message>
-    # Dear {{$property_owner}}
+    # Belangrijk: Contract Aangemaakt voor uw Beoordeling  
 
-    According to our conversation this contract is created.
-    Please sign the contract and upload through application.
-    Please see the attached contract paper.
+    Beste {{$property_owner}},  
 
-    Note: You can download the contract from application also.
-    Thanks
-    {{ env('Business_Title') }}
+    Zoals besproken hebben wij uw contract opgesteld.  
+    Gelieve het bijgevoegde document te bekijken, te ondertekenen en via de applicatie te uploaden.  
+
+    **Let op:** U kunt het contract ook rechtstreeks vanuit de applicatie downloaden wanneer het u uitkomt.  
+
+    Heeft u vragen of heeft u hulp nodig? Neem dan gerust contact met ons op.  
+
+    Met vriendelijke groet,  
+    **{{ env('Business_Title') }}**
 </x-mail::message>

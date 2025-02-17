@@ -374,7 +374,7 @@
                         <h5>
                             <a href="#">{{ __('titles.support_24_7') }}</a>
                         </h5>
-                        <p>{{ __('titles.support_24_7') }}</p>
+                        <p>{{ __('titles.support_24_7_desc') }}</p>
                        <!-- <a href="#" class="read-more">{{ __('titles.read_more.') }}</a> -->
                     </div>
                 </div>

@@ -1,15 +1,17 @@
 <x-mail::message>
-    # New Property added
+    # Nieuwe Woning Toegevoegd  
 
-    Dear Admins,
-    Mr. {{$owner}} has recently added new property.
+    Beste Beheerders,  
 
-    Property details
-    Title: {{$property->title_en}}
-    Price: {{$property->price}}
-    Address: {{$property->street_address}}
+    Dhr. {{$owner}} heeft onlangs een nieuwe woning toegevoegd aan het systeem.  
 
+    ## **Woningdetails**  
+    - **Titel:** {{$property->title_en}}  
+    - **Prijs:** {{$property->price}}  
+    - **Adres:** {{$property->street_address}}  
 
-    Thanks,<br>
-    {{ env('Business_Title') }}
+    Gelieve de vermelding te bekijken en eventuele noodzakelijke acties te ondernemen.  
+
+    Met vriendelijke groet,  
+    **{{ env('Business_Title') }}**
 </x-mail::message>

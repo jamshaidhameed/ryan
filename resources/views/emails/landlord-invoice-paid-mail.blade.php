@@ -1,9 +1,15 @@
 <x-mail::message>
-    # Invoice paid
-    Dear {{$owner_name}}
+    # Betalingsbevestiging – Factuur Betaald  
 
-    The invoice for the property named {{$property_name}} has been paid for the month {{$invoice_month}}.
-    Amount: {{number_format($invoice_amount,2)}}
-    Thanks
-    {{ env('Business_Title') }}
+    Beste {{$owner_name}},  
+
+    Wij informeren u graag dat de factuur voor uw woning, **{{$property_name}}**, succesvol is betaald voor de maand **{{$invoice_month}}**.  
+
+    ## **Betalingsdetails**  
+    - **Betaald Bedrag:** €{{ number_format($invoice_amount, 2) }}  
+
+    Mocht u vragen hebben of verdere details nodig hebben, neem dan gerust contact met ons op.  
+
+    Met vriendelijke groet,  
+    **{{ env('Business_Title') }}**
 </x-mail::message>

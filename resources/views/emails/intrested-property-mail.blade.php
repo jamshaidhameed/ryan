@@ -1,10 +1,14 @@
 <x-mail::message>
-    # New property that match your intreste is added in ryanrent.
+    # Een Nieuwe Woning die bij uw Interesse Past is Nu Beschikbaar op RyanRent!  
 
+    We hebben zojuist een nieuwe woning toegevoegd die aansluit bij uw voorkeuren.  
 
-    Property: {{$property->title_en}}
-    Price: {{$property->price}}
+    ## **Woningdetails**  
+    - **Titel:** {{$property->title_en}}  
+    - **Prijs:** €{{ number_format($property->price, 2) }}  
 
-    Thanks
-    {{ env('Business_Title') }}
+    Bezoek ons platform om deze woning te bekijken en uw ideale match te vinden.  
+
+    Met vriendelijke groet,  
+    **{{ env('Business_Title') }}**
 </x-mail::message>

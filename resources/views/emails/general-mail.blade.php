@@ -1,12 +1,12 @@
 <x-mail::message>
-   # {{ $mail_subject}}
+    # {{ $mail_subject }}  
 
-    Dear {{ $receiver}},
-    
+    Beste {{ $receiver }},  
 
-    {{ $mail_message}}
+    {{ $mail_message }}  
 
+    Heeft u vragen of heeft u verdere assistentie nodig? Neem dan gerust contact met ons op.  
 
-    Thanks,<br>
-    {{ env('Business_Title') }}
+    Met vriendelijke groet,  
+    **{{ env('Business_Title') }}**
 </x-mail::message>

@@ -8,13 +8,13 @@
                     <h4>{{ __('titles.contact_us') }}</h4>
                     <ul class="contact-info">
                         <li>
-                            <i class="flaticon-facebook-placeholder-for-locate-places-on-maps"></i>Energieweg 22C, 3133EC Vlaardingen
+                            <i class="flaticon-facebook-placeholder-for-locate-places-on-maps"></i>Honderdland 960, 2676 LV Maasdijk
                         </li>
                         <li>
                             <i class="fa fa-envelope"></i><a href="mailto:info@ryanrent.nl">info@ryanrent.nl</a>
                         </li>
                         <li>
-                            <i class="fa fa-phone"></i><a href="tel:+06 82 746 368">+06 82 746 368</a>
+                            <i class="fa fa-phone"></i><a href="tel:+06 82 746 368">085-111 97 91</a>
                         </li>
                     </ul>
                 </div>

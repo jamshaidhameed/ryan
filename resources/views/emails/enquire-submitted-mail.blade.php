@@ -1,12 +1,14 @@
 <x-mail::message>
-    # Enquire submitted
-    Dear {{$enquire->first_name." ".$enquire->last_name}},
+    # Aanvraag Ontvangen – Bedankt!  
 
-    Thank you for submitting your inquiry to our team. We have received your message and will be reviewing it shortly.
-    We appreciate your interest in our services and will do our best to respond as soon as possible.
-    Thank you again for reaching out to us, and we look forward to speaking with you soon.
-    
-    Best regards,
-    Thanks,
-    {{ env('Business_Title') }}
+    Beste {{$enquire->first_name." ".$enquire->last_name}},  
+
+    Bedankt voor uw bericht. Wij hebben uw aanvraag ontvangen en ons team is deze momenteel aan het beoordelen.  
+
+    Wij waarderen uw interesse in onze diensten en zullen zo snel mogelijk contact met u opnemen. Heeft u dringend hulp nodig? Neem dan gerust direct contact met ons op.  
+
+    We kijken ernaar uit om u binnenkort van dienst te zijn.  
+
+    Met vriendelijke groet,  
+    **{{ env('Business_Title') }}**
 </x-mail::message>

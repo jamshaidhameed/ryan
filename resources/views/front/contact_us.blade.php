@@ -62,7 +62,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="send-btn">
-                                    <button type="submit" class="btn btn-4">{{ __('titles.enter_email')}}</button>
+                                    <button type="submit" class="btn btn-4">{{ __('titles.send')}}</button>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="detail">
                                     <h5>{{ __('titles.office_address')}}</h5>
-                                    <p>20/F Green Road, Dhanmondi, Dhaka</p>
+                                    <p>Honderdland 960, 2676 LV Maasdijk</p>
                                 </div>
                             </div>
                             <div class="ci-box">
@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="detail">
                                     <h5>{{ __('titles.phone')}}</h5>
-                                    <p><a href="tel:+0477-85x6-552">+55 417 634 7X71</a> </p>
+                                    <p><a href="tel:+0477-85x6-552">085-111 97 91</a> </p>
                                 </div>
                             </div>
                             <div class="ci-box">
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="detail">
                                     <h5>{{ __('titles.email')}}</h5>
-                                    <p><a href="tel:info@themevessel.com">info@themevessel.com</a></p>
+                                    <p><a href="tel:info@themevessel.com">info@ryanrent.nl</a></p>
                                 </div>
                             </div>
                         </div>

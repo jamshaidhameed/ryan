@@ -56,10 +56,10 @@
                     
                         <ul class="dropdown-menu register" aria-labelledby="Dropdown2">
                             <li>
-                                <a class="dropdown-item" href="{{ route('register', ['flag' => 'landlord']) }}"><i class="fa fa-user mx-2"></i> {{ __('titles.landlord')}}</a>
+                                <a class="dropdown-item" href="{{ route('register', ['flag' => 'landlord']) }}"><i class="fa fa-user mx-2"></i> Landlords</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('register', ['flag' => 'tenant']) }}"><i class="fa fa-user mx-2"></i> {{ __('titles.tenant')}}</a>
+                                <a class="dropdown-item" href="{{ route('register', ['flag' => 'tenant']) }}"><i class="fa fa-user mx-2"></i> Tenants</a>
                             </li>
         
                         </ul>

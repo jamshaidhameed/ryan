@@ -1,11 +1,13 @@
 <x-mail::message>
-    # Dear {{$name}}
+    # Beste {{$name}},  
 
-    According to our conversation this contract is created.
-    Please sign the contract and upload through application.
-    Please see the attached contract paper.
+    Zoals besproken hebben wij uw contract opgesteld.  
+    Gelieve het bijgevoegde document te bekijken, te ondertekenen en via de applicatie te uploaden.  
 
-    Note: You can download the contract from application also.
-    Thanks,
-    {{ env('Business_Title') }}
+    **Let op:** U kunt het contract ook rechtstreeks vanuit de applicatie downloaden.  
+
+    Mocht u vragen hebben, neem dan gerust contact met ons op.  
+
+    Met vriendelijke groet,  
+    **{{ env('Business_Title') }}**
 </x-mail::message>

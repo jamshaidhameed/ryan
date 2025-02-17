@@ -1,12 +1,16 @@
 <x-mail::message>
-    # Registration Confirmation
+    # Registratie Succesvol – Welkom bij {{ env('Business_Title') }}!  
 
-    Dear {{$user->name}}
-    We are pleased to inform you that you have successfully registered for our system.
-    Your account has been created and is now ready for use.
+    Beste {{$user->name}},  
 
-    Account: {{$user->email}}
+    Wij zijn verheugd u te informeren dat uw registratie succesvol is voltooid.  
+    Uw account is nu actief en u kunt direct gebruik maken van ons platform.  
 
-    Best regards,
-    {{ env('Business_Title') }}
+    ## **Uw Accountgegevens**  
+    - **E-mail:** {{$user->email}}  
+
+    Mocht u vragen hebben of hulp nodig hebben, neem dan gerust contact op met ons supportteam.  
+
+    Met vriendelijke groet,  
+    **{{ env('Business_Title') }}**
 </x-mail::message>

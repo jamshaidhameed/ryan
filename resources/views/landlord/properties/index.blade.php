@@ -37,7 +37,7 @@
                         <a href="{{ route('landlord.properties.add') }}" class="btn btn-primary"><i class="fa fa-plus-circle" style="margin-right:10px;"></i>{{ __('titles.add')}}</a>
                     </div>
                     <br> 
-                    <table class="manage-table">
+                    <table class="table table-striped table-hover dashboard">
                         <thead>
                         <tr>
                             <th>{{ __('titles.my_properties') }}</th>
@@ -80,12 +80,12 @@
                                    @if(!empty($landlord_contract))
                                       <li>
                                         <a href="{{ $landlord_contract->id}},{{ asset('upload/booking/'.$landlord_contract->link) }},{{ !empty($landlord_contract->signed_at) ? '1' : '0' }}" class="contract-btn">
-                                            <i class="fa fa-upload"> {{ __('titles.contract') }}</i>
+                                            <i class="fa fa-upload"> </i> {{ __('titles.contract') }}
                                         </a>
                                       </li>
                                        <li>
                                         <a href="{{ route('landlord.invoices.list',$landlord_contract->id) }}">
-                                            <i class="fa fa-money"> {{__('titles.invoices') }}</i>
+                                            <i class="fa fa-money"></i> {{__('titles.invoices') }}
                                         </a>
                                       </li>
                                    @endif
