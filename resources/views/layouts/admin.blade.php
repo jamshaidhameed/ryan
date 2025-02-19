@@ -299,6 +299,14 @@
                  
               </a>
             </li>
+            <li class="site-menu-item {{ Route::currentRouteName() == 'admin.all.inspections' ? 'active' : ''}}">
+                <a href="{{ route('admin.all.inspections') }}">
+                  <!-- <i class="site-menu-icon wb-users" aria-hidden="true"></i> -->
+                   <i class="icon wb-plugin" aria-hidden="true" style="font-size: 15px;margin-right:10px;"></i>
+                  <span class="site-menu-title">All Inspections</span>
+                 
+              </a>
+            </li>
             <!-- Admin List -->
              <li class="site-menu-item {{ Route::currentRouteName() == 'admin.user.list' || Route::currentRouteName() == 'admin.user.create' || Route::currentRouteName() == 'admin.user.edit' ? 'active' : ''}}">
                 <a href="{{ route('admin.user.list') }}">

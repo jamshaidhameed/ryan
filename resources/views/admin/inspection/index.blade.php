@@ -3,6 +3,11 @@
   Inspections
 @endsection
 @section('style')
+ <style>
+    .btn-active {
+    background-color: #762904;
+ }
+ </style>
 @endsection
 @section('content')
  
@@ -41,19 +46,19 @@
                     <div class="card-text">
                         <div class="form-group">
                             
-                            <a type="button" href="" class="btn btn-primary" style="width:100%">All Inspections</a>
+                            <a type="button" href="{{ url('admin/inspections/filter?id='.$tenant_contract->id.'&type=all') }}" class="btn btn-primary" style="width:100%">All Inspections</a>
                         </div>
                         <div class="form-group">
                             
-                            <a type="button" href="" class="btn btn-primary" style="width:100%">Pre Inspection</a>
+                            <a type="button" href="{{ url('admin/inspections/filter?id='.$tenant_contract->id.'&type=pre') }}" class="btn btn-primary {{ !empty($_GET['type']) && $_GET['type'] == 'pre' ? 'btn-active' : ''}}" style="width:100%">Pre Inspection</a>
                         </div>
                         <div class="form-group">
                            
-                            <a type="button" href="" class="btn btn-primary" style="width:100%">Regular Inspection</a>
+                            <a type="button" href="{{ url('admin/inspections/filter?id='.$tenant_contract->id.'&type=regular') }}" class="btn btn-primary {{ !empty($_GET['type']) && $_GET['type'] == 'regular' ? 'btn-active' : ''}}" style="width:100%">Regular Inspection</a>
                         </div>
                         <div class="form-group">
                             
-                            <a type="button" href="" class="btn btn-primary" style="width:100%">End Inspection</a>
+                            <a type="button" href="{{ url('admin/inspections/filter?id='.$tenant_contract->id.'&type=post') }}" class="btn btn-primary {{ !empty($_GET['type']) && $_GET['type'] == 'post' ? 'btn-active' : ''}}" style="width:100%">End Inspection</a>
                         </div>
                     </div>
                 </div>

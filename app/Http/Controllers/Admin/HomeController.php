@@ -1370,6 +1370,38 @@ class HomeController extends Controller
 
         return view('admin.inspection.index',compact('inspections','tenant_contract'));
     }
+
+    public function inspection_filter(Request $request){
+
+        $id = $request["id"];
+        $type = $request["type"];
+
+        if ($type == 'all') {
+            
+            return redirect()->route('admin.inspections.list',$id);
+        }
+
+
+        $tenant_contract = TenantContracts::where('id',$id)->with(['tenant','property'])->first();
+
+        $inspections = [];
+
+        if ($type == 'pre') {
+
+            $inspections = Inspections::where(['inspectionable_id' => $id,'inspection_type' => 'Pre Inspection'])->get();
+
+        
+        }elseif ($type == 'regular') {
+
+             $inspections = Inspections::where(['inspectionable_id' => $id,'inspection_type' => 'Regular Inspection'])->get();
+        }elseif ($type == 'post') {
+
+             $inspections = Inspections::where(['inspectionable_id' => $id,'inspection_type' => 'Post Inspection'])->get();
+        } 
+
+        return view('admin.inspection.index',compact('inspections','tenant_contract'));
+
+    }
     public function store_inspection(Request $request){
 
         $request->validate(
@@ -1572,5 +1604,63 @@ class HomeController extends Controller
       $property->save();
 
       return response()->json(['success' => true,'Image Removed']);
+    }
+
+    
+
+
+    public function apply_filters(Request $request){
+
+        $inspections = Inspections::query();
+
+        if (!empty($_GET["prop"]) || !empty($_GET["type"])) {
+            
+            if (!empty($_GET["prop"])) {
+            
+            $inspections = $inspections->where('inspectionable_id',$_GET['prop'])->get();
+            }
+
+            if (!empty($_GET["type"])) {
+                
+                $inspections = $inspections->where('inspection_type',$_GET['type'])->get();
+            }
+        }else{
+           
+            $inspections = $inspections->get();
+        }
+
+        return view('admin.inspection.filter',compact('inspections'));
+    }
+
+    public function filters_apply(Request $request){
+
+        
+        $property_type_url = '';
+
+        if (!empty($request->property)) {
+            
+            if (empty($property_type_url)) {
+                
+                $property_type_url .='&property='.$request->property;
+            }else{
+
+                $property_type_url .=','.$request->property;
+            }
+        }
+
+        $type_url = '';
+
+        if (!empty($request->type)) {
+            
+            if (empty($type_url)) {
+                
+                $type_url .='&type='.$request->type;
+            }else{
+
+                $type_url .=','.$request->type;
+            }
+        }
+
+        return redirect()->route('admin.all.inspections',$property_type_url.$type_url);
     }
 }

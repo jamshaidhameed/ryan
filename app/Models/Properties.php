@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Properties extends Model
 {
@@ -46,5 +47,10 @@ class Properties extends Model
     public function type(){
 
          return $this->belongsTo(PropertyTypes::class,'property_type_id','id');
+    }
+
+    public static function inspected_properties(){
+
+        return DB::select("SELECT DISTINCT i.inspectionable_id,p.title_en FROM `inspections` i JOIN tenant_contracts t ON i.inspectionable_id = t.id JOIN properties p ON t.property_id = p.id ORDER BY i.inspection_code DESC");
     }
 }

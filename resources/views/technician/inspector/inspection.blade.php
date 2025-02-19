@@ -26,6 +26,12 @@
     .sm-width {
         width:70%;
     }
+
+    textarea {
+        text-align: left;
+        direction: ltr;
+        padding-left: 5px;
+    }
     
 </style>
 <!-- <style>
@@ -299,13 +305,19 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <div class="d-flex justify-content-end">
+                            <div class="form-group">
+                                 {{-- <canvas id="canvas" width="320" height="240"></canvas>
+                                 <video id="video" width="320" height="240" autoplay></video>
+                                <canvas id="canvas" width="320" height="240"></canvas> --}}
+                            </div>
+                            <div class="d-flex justify-content-end mr-5">
                                 <input type="hidden" name="selected_images" value="" id="first">
                                 @if(count($image_array) > 0)
                                 
                                  <button class="btn btn-default first-btn-view mr-4">Choose from Existing Images</button>
                                 @endif
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-primary mr-4">Save</button>
+                                {{-- <button type="button" id="capture" class="btn btn-success">Capture</button> --}}
                             </div>
                         </form>
                         <!-- Images Model Start -->
@@ -433,7 +445,7 @@
                                                 @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Key Management','name' => 'Comments'])->first() : null;
                                                  @endphp
                                                 <input type="hidden" name="name[]" value="Comments" cols="20" rows = "10">
-                                               <textarea name="value[]" id=""  class="form-control">
+                                                <textarea wrap="on" cols="3" rows="3" name="value[]" id=""  class="form-control">
                                                 @if(!empty($value))
                                                  {{ $value->value }}
                                                 @endif
@@ -545,7 +557,7 @@
                                         </td>
                                         <td class="text-center">
 
-                                            <textarea name="comment[]" id="" class="form-control">
+                                             <textarea name="comment[]" id="" class="form-control">
                                                 @if(!empty($value))
                                                   {{ $value->comment}}
                                                 @endif
@@ -568,7 +580,7 @@
                                             </div>
                                         </td>
                                         <td class="text-center">
-                                            <textarea name="comment[]" id="" class="form-control">
+                                             <textarea name="comment[]" id="" class="form-control">
                                                 @if(!empty($value))
                                                   {{ $value->comment}}
                                                 @endif
@@ -591,7 +603,7 @@
                                             </div>
                                         </td>
                                         <td class="text-center">
-                                            <textarea name="comment[]" id="" class="form-control">
+                                             <textarea name="comment[]" id="" class="form-control">
                                                 @if(!empty($value))
                                                   {{ $value->comment}}
                                                 @endif
@@ -614,7 +626,7 @@
                                             </div>
                                         </td>
                                         <td> 
-                                            <textarea name="comment[]" id="" class="form-control">
+                                             <textarea name="comment[]" id="" class="form-control">
                                                 @if(!empty($value))
                                                   {{ $value->comment}}
                                                 @endif
@@ -629,7 +641,7 @@
                                                 @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Entrance / Hallway','name' => 'Prticularities'])->first() : null;
                                                 @endphp
                                                 <input type="hidden" name="name[]" value="Prticularities">
-                                               <textarea name="value[]" id="" class="form-control " wrap="hard">
+                                                <textarea name="value[]" id="" class="form-control " wrap="hard">
                                                  @if(!empty($value))
                                                   {{ $value->value}}
                                                 @endif
@@ -743,7 +755,7 @@
                                             </div>
                                         </td>
                                         <td class="text-center">
-                                            <textarea name="comment[]" id="" class="form-control">
+                                             <textarea name="comment[]" id="" class="form-control">
                                                 @if(!empty($value))
                                                  {{ $value->comment }}
                                                 @endif
@@ -765,7 +777,7 @@
                                             </div>
                                         </td>
                                         <td class="text-center">
-                                            <textarea name="comment[]" id="" class="form-control">
+                                             <textarea name="comment[]" id="" class="form-control">
                                                 @if(!empty($value))
                                                  {{ $value->comment }}
                                                 @endif
@@ -788,7 +800,7 @@
                                             </div>
                                         </td>
                                         <td class="text-center">
-                                            <textarea name="comment[]" id="" class="form-control">
+                                             <textarea name="comment[]" id="" class="form-control">
                                                 @if(!empty($value))
                                                  {{ $value->comment }}
                                                 @endif
@@ -810,7 +822,7 @@
                                             </div>
                                         </td>
                                         <td class="text-center">
-                                            <textarea name="comment[]" id="" class="form-control">
+                                             <textarea name="comment[]" id="" class="form-control">
                                                 @if(!empty($value))
                                                  {{ $value->comment }}
                                                 @endif
@@ -825,7 +837,7 @@
                                             @endphp
                                             <input type="hidden" name="name[]" value="Prticularities">
                                             <div class="form-group">
-                                               <textarea name="value[]" id="" class="form-control">
+                                                <textarea name="value[]" id="" class="form-control">
                                                 @if(!empty($value))
                                                  {{ $value->value }}
                                                 @endif
@@ -1147,7 +1159,7 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="form-group">
-                                        <textarea name="comment[]" id="" class="form-control">
+                                         <textarea name="comment[]" id="" class="form-control">
                                             @if(!empty($value))
                                              {{ $value->comment}}
                                             @endif
@@ -1171,7 +1183,7 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <textarea name="comment[]" id="" class="form-control">
+                                         <textarea name="comment[]" id="" class="form-control">
                                              @if(!empty($value))
                                              {{ $value->comment}}
                                             @endif
@@ -1195,7 +1207,7 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <textarea name="comment[]" id="" class="form-control">
+                                         <textarea name="comment[]" id="" class="form-control">
                                             @if(!empty($value))
                                              {{ $value->comment}}
                                             @endif
@@ -1219,7 +1231,7 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <textarea name="comment[]" id="" class="form-control">
+                                         <textarea name="comment[]" id="" class="form-control">
                                             @if(!empty($value))
                                              {{ $value->comment}}
                                             @endif
@@ -1527,7 +1539,7 @@
                                             </td>
                                             <td  class="text-center">
                                                 <div class="form-group">
-                                                    <textarea name="comment[]" id="" class="form-control">
+                                                     <textarea name="comment[]" id="" class="form-control">
                                                         @if(!empty($value))
                                                           {{ $value->comment }}
                                                         @endif
@@ -1551,7 +1563,7 @@
                                             </td>
                                             <td>
                                                 <div class="form-group">
-                                                    <textarea name="comment[]" id="" class="form-control">
+                                                     <textarea name="comment[]" id="" class="form-control">
                                                         @if(!empty($value))
                                                           {{ $value->comment }}
                                                         @endif
@@ -1575,7 +1587,7 @@
                                             </td>
                                             <td>
                                                 <div class="form-group">
-                                                    <textarea name="comment[]" id="" class="form-control">
+                                                     <textarea name="comment[]" id="" class="form-control">
                                                         @if(!empty($value))
                                                           {{ $value->comment }}
                                                         @endif
@@ -1599,7 +1611,7 @@
                                             </td>
                                             <td>
                                                 <div class="form-group">
-                                                    <textarea name="comment[]" id="" class="form-control">
+                                                     <textarea name="comment[]" id="" class="form-control">
                                                         @if(!empty($value))
                                                           {{ $value->comment }}
                                                         @endif
@@ -1893,7 +1905,7 @@
                                             </div>
                                         </td>
                                         <td class="text-center">
-                                            <textarea name="comment[]" id="" class="form-control">
+                                             <textarea name="comment[]" id="" class="form-control">
                                                 @if(!empty($value))
                                                  {{ $value->comment }}
                                                 @endif
@@ -1917,7 +1929,7 @@
                                             </div>
                                         </td>
                                         <td class="text-center">
-                                            <textarea name="comment[]" id="" class="form-control">
+                                             <textarea name="comment[]" id="" class="form-control">
                                                 @if(!empty($value))
                                                  {{ $value->comment }}
                                                 @endif
@@ -1940,7 +1952,7 @@
                                         </td>
                                         <td class="text-center">
                                             
-                                                <textarea name="comment[]" id="" class="form-control">
+                                                 <textarea name="comment[]" id="" class="form-control">
                                                     @if(!empty($value))
                                                      {{ $value->comment }}
                                                     @endif
@@ -1963,7 +1975,7 @@
                                         </td>
                                         <td class="text-center">
                                             
-                                                <textarea name="comment[]" id="" class="form-control">
+                                                 <textarea name="comment[]" id="" class="form-control">
                                                     @if(!empty($value))
                                                      {{ $value->comment }}
                                                     @endif
@@ -1978,7 +1990,7 @@
                                                 @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1','name' => 'Prticularities'])->first() : null;
                                                  @endphp
                                                 <input type="hidden" name="name[]" value="Prticularities">
-                                            <textarea name="value[]" id="" class="form-control">
+                                             <textarea name="value[]" id="" class="form-control">
                                                 @if(!empty($value))
                                                   {{ $value->value }}
                                                 @endif
@@ -2272,7 +2284,7 @@
                                                 </div>
                                             </td>
                                             <td class="text-center">
-                                                <textarea name="comment[]" id="" class="form-control">
+                                                 <textarea name="comment[]" id="" class="form-control">
                                                     @if(!empty($value))
                                                       {{ $value->comment }}
                                                     @endif
@@ -2295,7 +2307,7 @@
                                                 </div>
                                             </td>
                                             <td class="text-center">
-                                                <textarea name="comment[]" id="" class="form-control">
+                                                 <textarea name="comment[]" id="" class="form-control">
                                                     @if(!empty($value))
                                                       {{ $value->comment }}
                                                     @endif
@@ -2317,7 +2329,7 @@
                                                 </div>
                                             </td>
                                             <td class="text-center">
-                                                <textarea name="comment[]" id="" class="form-control">
+                                                 <textarea name="comment[]" id="" class="form-control">
                                                     @if(!empty($value))
                                                       {{ $value->comment }}
                                                     @endif
@@ -2339,7 +2351,7 @@
                                                 </div>
                                             </td>
                                             <td class="text-center">
-                                                <textarea name="comment[]" id="" class="form-control">
+                                                 <textarea name="comment[]" id="" class="form-control">
                                                     @if(!empty($value))
                                                       {{ $value->comment }}
                                                     @endif
@@ -2354,7 +2366,7 @@
                                                     @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 2','name' => 'Prticularities'])->first() : null;
                                                     @endphp
                                                     <input type="hidden" name="name[]" value="Prticularities">
-                                                    <textarea name="value[]" id="" class="form-control">
+                                                     <textarea name="value[]" id="" class="form-control">
                                                         @if(!empty($value))
                                                         {{ $value->comment }}
                                                         @endif
@@ -2649,7 +2661,7 @@
                                             </div>
                                         </td>
                                         <td class="text-center">
-                                            <textarea name="comment[]" id="" class="form-control">
+                                             <textarea name="comment[]" id="" class="form-control">
                                                 @if(!empty($value))
                                                  {{ $value->comment}}
                                                 @endif
@@ -2665,7 +2677,7 @@
                                                  @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Bathroom 1','name' => 'Particularities'])->first() : null;
                                                  @endphp
                                                 <div class="form-group">
-                                                    <textarea name="value[]" id="" class="form-control">
+                                                     <textarea name="value[]" id="" class="form-control">
                                                         @if(!empty($value))
                                                          {{ $value->value }}
                                                         @endif
@@ -2777,7 +2789,7 @@
                                             </div>
                                         </td>
                                         <td class="text-center">
-                                            <textarea name="comment[]" id="" class="form-control">
+                                             <textarea name="comment[]" id="" class="form-control">
                                                 @if(!empty($value))
                                                  {{ $value->comment}}
                                                  @endif
@@ -2794,7 +2806,7 @@
                                                 <input type="hidden" name="name[]" value="Particularities">
                                                 
                                                 <div class="form-group">
-                                                    <textarea name="value[]" id="" class="form-control">@If(!empty($value)) {{ $value->value }} @endif</textarea>
+                                                     <textarea name="value[]" id="" class="form-control">@If(!empty($value)) {{ $value->value }} @endif</textarea>
                                                 </div>
                                             </div>
                                         </td>
@@ -2900,7 +2912,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                       <textarea name="comment[]" id="" class="form-control">
+                                        <textarea name="comment[]" id="" class="form-control">
                                          @if(!empty($value))
                                           {{ $value->comment}}
                                         @endif
@@ -2923,7 +2935,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                       <textarea name="comment[]" id="" class="form-control">
+                                        <textarea name="comment[]" id="" class="form-control">
                                          @if(!empty($value))
                                           {{ $value->comment}}
                                         @endif
@@ -2945,7 +2957,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                       <textarea name="comment[]" id="" class="form-control">
+                                        <textarea name="comment[]" id="" class="form-control">
                                          @if(!empty($value))
                                           {{ $value->comment}}
                                         @endif
@@ -2967,7 +2979,7 @@
                                     </div>
                                     </td>
                                     <td class="text-center">
-                                       <textarea name="comment[]" id="" class="form-control">
+                                        <textarea name="comment[]" id="" class="form-control">
                                          @if(!empty($value))
                                           {{ $value->comment}}
                                         @endif
@@ -2981,7 +2993,7 @@
                                             @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Toilets 1','name' => 'Prticularities'])->first() : null;
                                          @endphp
                                             <input type="hidden" name="name[]" value="Prticularities">
-                                        <textarea name="value[]" id="" class="form-control">@if(!empty($value)) {{ $value->value }} @endif</textarea>
+                                         <textarea name="value[]" id="" class="form-control">@if(!empty($value)) {{ $value->value }} @endif</textarea>
                                         </div>
                                     </td>
                                 </tr>
@@ -3086,7 +3098,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <textarea name="comment[]" id="" class="form-control">
+                                         <textarea name="comment[]" id="" class="form-control">
                                             @if(!empty($value))
                                              {{ $value->comment}}
                                             @endif
@@ -3109,7 +3121,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <textarea name="comment[]" id="" class="form-control">
+                                         <textarea name="comment[]" id="" class="form-control">
                                             @if(!empty($value))
                                              {{ $value->comment}}
                                             @endif
@@ -3131,7 +3143,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <textarea name="comment[]" id="" class="form-control">
+                                         <textarea name="comment[]" id="" class="form-control">
                                             @if(!empty($value))
                                              {{ $value->comment}}
                                             @endif
@@ -3153,7 +3165,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <textarea name="comment[]" id="" class="form-control">
+                                         <textarea name="comment[]" id="" class="form-control">
                                             @if(!empty($value))
                                              {{ $value->comment}}
                                             @endif
@@ -3167,7 +3179,7 @@
                                             @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Toilets 2','name' => 'Prticularities'])->first() : null;
                                             @endphp
                                             <input type="hidden" name="name[]" value="Prticularities">
-                                        <textarea name="value[]" id="" class="form-control">@if(!empty($value)) {{ $value->value }}@endif</textarea>
+                                         <textarea name="value[]" id="" class="form-control">@if(!empty($value)) {{ $value->value }}@endif</textarea>
                                         </div>
                                     </td>
                                 </tr>
@@ -3272,7 +3284,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <textarea name="comment[]" id="" class="form-control">@if(!empty($value)) {{ $value->comment }} @endif</textarea>
+                                         <textarea name="comment[]" id="" class="form-control">@if(!empty($value)) {{ $value->comment }} @endif</textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -3291,7 +3303,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <textarea name="comment[]" id="" class="form-control">@if(!empty($value)) {{ $value->comment }} @endif</textarea>
+                                         <textarea name="comment[]" id="" class="form-control">@if(!empty($value)) {{ $value->comment }} @endif</textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -3309,7 +3321,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        <textarea name="comment[]" id="" class="form-control">@if(!empty($value)) {{ $value->comment }} @endif</textarea>
+                                         <textarea name="comment[]" id="" class="form-control">@if(!empty($value)) {{ $value->comment }} @endif</textarea>
                                     </td>
                                 </tr>
                                 
@@ -3320,7 +3332,7 @@
                                             @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Outside','name' => 'Prticularities'])->first() : null;
                                             @endphp
                                             <input type="hidden" name="name[]" value="Prticularities">
-                                        <textarea name="value[]" id="" class="form-control">
+                                         <textarea name="value[]" id="" class="form-control">
                                             @if(!empty($value))
                                              {{ $value->value }}
                                             @endif
@@ -3502,7 +3514,7 @@
                                             @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Miscellaneous','name' => 'Particularities'])->first() : null;
                                             @endphp
                                             <input type="hidden" name="name[]" value="Particularities">
-                                            <textarea name="value[]" id="" class="form-control"></textarea>
+                                             <textarea name="value[]" id="" class="form-control"></textarea>
                                         </div>
                                     </td>
                                     <td class="text-center">
@@ -3738,7 +3750,7 @@
                                             @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Fire prevention','name' => 'Particularities'])->first() : null;
                                             @endphp
                                             <input type="hidden" name="name[]" value="Particularities">
-                                            <textarea name="value[]" id="" class="form-control">
+                                             <textarea name="value[]" id="" class="form-control">
                                                 @if(!empty($value))
                                                  {{ $value->value}}
                                                 @endif
@@ -3862,7 +3874,7 @@
                                                 @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Heating system','name' => 'Bar Cv'])->first() : null;
                                                 @endphp
                                                 <input type="hidden" name="name[]" value="Bar Cv">
-                                               <textarea name="value[]" id="" class="form-control">
+                                                <textarea name="value[]" id="" class="form-control">
                                                 @If(!empty($value))
                                                   {{ $value->value}}
                                                 @endif
@@ -3987,4 +3999,67 @@
         });
     });
 </script>
+<script>
+       $(document).on('click','#capture',function(e){
+         const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const captureButton = document.getElementById('capture');
+        const uploadForm = document.getElementById('uploadForm');
+        const imageDataInput = document.getElementById('imageData');
+        debugger;
+        // Open camera
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(err => {
+                console.error("Error accessing the camera", err);
+            });
+
+        // Capture image from video
+        captureButton.addEventListener('click', () => {
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            imageDataInput.value = canvas.toDataURL('image/png'); // Convert to Base64
+        });
+
+        // Upload image
+        // uploadForm.addEventListener('submit', (e) => {
+        //     e.preventDefault();
+        //     const formData = new FormData();
+        //     // formData.append('image', );
+        // });
+
+        if (imageDataInput.value) {
+            $('[name="images[]"]').val(dataURLtoBlob(imageDataInput.value)); 
+        }
+        
+
+        // Convert Base64 to Blob
+        function dataURLtoBlob(dataURL) {
+            const byteString = atob(dataURL.split(',')[1]);
+            const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
+            const arrayBuffer = new ArrayBuffer(byteString.length);
+            const uintArray = new Uint8Array(arrayBuffer);
+            for (let i = 0; i < byteString.length; i++) {
+                uintArray[i] = byteString.charCodeAt(i);
+            }
+            return new Blob([arrayBuffer], { type: mimeString });
+        }
+       });
+    </script>
+
+    <script>
+        
+        $(document).on('click','textarea',function(e){
+
+            let textarea = this;
+            let cursofPosition = textarea.selectionStart;
+
+            if(cursofPosition > 0){
+                e.preventDefault();
+                textarea.setSelectionRange(0,0);
+            }
+        });
+    </script>
 @endsection

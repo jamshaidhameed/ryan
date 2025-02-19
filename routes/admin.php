@@ -129,7 +129,7 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
         Route::get('/inspection/delete/{id}',[App\Http\Controllers\Admin\HomeController::class,'inspection_delete'])->name('landlord.delete');
         //Inspection Contents 
         Route::get('/inspection/contents/{id}',[App\Http\Controllers\Admin\HomeController::class,'inspection_content'])->name('inspection.contents');
-
+          
         //CMS CURD 
         Route::get('/cms/pages/list',[App\Http\Controllers\Admin\HomeController::class,'cms_pages_index'])->name('cms.pages.list');
         Route::get('/cms/pages/create',[App\Http\Controllers\Admin\HomeController::class,'cms_pages_create'])->name('cms.pages.create');
@@ -141,5 +141,12 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
 
         //Remove Property Image
           Route::post('remov/image/',[App\Http\Controllers\Admin\HomeController::class,'remove_property_image'])->name('property.remove.image');
+
+        //Inspection Filter
+
+        Route::get('/inspections/filter',[App\Http\Controllers\Admin\HomeController::class,'inspection_filter'])->name('inspection.filter');
+
+        Route::get('all/inspections',[App\Http\Controllers\Admin\HomeController::class,'apply_filters'])->name('all.inspections');
+        Route::post('/apply/inspection/filters',[App\Http\Controllers\Admin\HomeController::class,'filters_apply'])->name('apply.inspection.filters');
 
     });

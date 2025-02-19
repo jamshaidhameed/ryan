@@ -75,6 +75,8 @@ class HomeController extends Controller
 
         $data = $request->all();
 
+        // return $request->all();
+
         //Postal Code Filter 
 
         $postal_url = '';
@@ -103,8 +105,8 @@ class HomeController extends Controller
            
             if (empty($province_url)) {
                     
-                   // $province_url .='&province='.$code;
-                  $province_url .="&street_address LIKE '%$code%' OR city LIKE '%$code%'";
+                   $province_url .='&province='.$code;
+                //   $province_url .="&street_address LIKE '%$code%' OR city LIKE '%$code%'";
               //  exit;
             }else{
 
@@ -201,16 +203,16 @@ class HomeController extends Controller
 
         if (!empty($_GET['postalcode']) || !empty($_GET['province']) || !empty($_GET['property_type']) || !empty($_GET['bedrooms']) || !empty($_GET['bathrooms']) || !empty($_GET['price']) || !empty($_GET['sortBy']) || !empty($_GET['type'])) {
 
+            // return $_GET['province'];
+
             if (!empty($_GET['postalcode'])) {
             
                $properties = $properties->where('postcode',$_GET['postalcode'])->where(['status' => 1])->paginate(9);
              }
 
             if (!empty($_GET['province']) ) {
-                
-                $properties = $properties->where(['province_id' => $_GET['province'],'status' => 1])->paginate(9);
-              // $properties = $properties->where('street_address', 'like', '%' . $_GET['province'] . '%')
-               //->where('status', 1);
+               $properties = $properties->where('street_address', 'like', '%'.$_GET['province'].'%')
+                             ->where('status', 1)->paginate(9);
     
             }
 
