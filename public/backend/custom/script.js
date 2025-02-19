@@ -933,3 +933,222 @@ $(document).on("click", ".btn-r-img", function (e) {
     },
   });
 });
+
+//Add Living Room
+
+$(document).on("click", "#btn-add-living-room", function (e) {
+  e.preventDefault();
+
+  var group = $(".living-room-div").last(),
+    count = parseInt(group.attr("row-no")) + 1,
+    new_group = group.clone();
+
+  new_group.find('[name="title"]').val("Living/Room " + count);
+  new_group.find(".group-name").text("Living/Room " + count);
+  new_group.find("select").val(" ");
+  new_group.find("textarea").val(" ");
+  new_group.attr("row-no", count);
+  new_group.find(".selectBox").show();
+  new_group.find(".selectBox-dropdown").remove();
+
+  group.after(new_group);
+});
+
+$(document).on("click", ".remove-living-room", function (e) {
+  e.preventDefault();
+  var row = $(this).parent().parent();
+
+  if (row.attr("row-no") == 1) {
+    return this;
+  }
+
+  row.remove();
+});
+
+//Living Room Inventory
+
+$(document).on("click", "#btn-add-living-room-inventory", function (e) {
+  e.preventDefault();
+  var group = $(".living-room-inventory-div").last(),
+    count = parseInt(group.attr("row-id") + 1),
+    new_group = group.clone();
+
+  new_group.attr("row-id", count);
+  new_group.find('[type="number"]').val(" ");
+  new_group.find('[type="text"]').val(" ");
+  new_group.find('[name="title"]').val("Living/Room " + count + " Inventory");
+  new_group.find(".title").text("Living/Room " + count + " Inventory");
+  group.after(new_group);
+});
+
+$(document).on("click", ".remove-living-room-inventory", function (e) {
+  e.preventDefault();
+  var row = $(this).parent().parent();
+
+  if (row.attr("row-id") == 1) {
+    return this;
+  }
+
+  row.remove();
+});
+
+//Bed Room Add
+$(document).on("click", "#btn-add-bed-room", function (e) {
+  e.preventDefault();
+  var group = $(".bedroom-div").last(),
+    count = parseInt(group.attr("row-id")) + 1,
+    new_group = group.clone();
+
+  new_group.find(['name="title"]']).val("Bedroom " + count);
+  new_group.find(".title").text("Bedroom " + count);
+  new_group.find(".selectBox").show();
+  new_group.find(".selectBox-dropdown").remove();
+  new_group.attr("row-id", count);
+
+  group.after(new_group);
+});
+
+$(document).on("click", ".remove-bed-room", function (e) {
+  e.preventDefault();
+  var row = $(this).parent().parent();
+
+  if (row.attr("row-id") == 1) {
+    return this;
+  }
+
+  row.remove();
+});
+
+//Add bed Room Inventory
+
+$(document).on("click", "#btn-add-bed-room-inventory", function (e) {
+  e.preventDefault();
+  var group = $(".bed-room-inventory-div").last(),
+    count = parseInt(group.attr("row-id")) + 1,
+    new_group = group.clone();
+
+  new_group.find("[type='number']").val(" ");
+  new_group.find("[type='text']").val(" ");
+  new_group.attr("row-id", count);
+  new_group.find('[name="title"]').val("Bedroom " + count + " Inventory");
+  new_group.find(".title").text("Bedroom " + count + " Inventory");
+  group.after(new_group);
+});
+
+$(document).on("click", ".remove-bed-room-inventory", function (e) {
+  e.preventDefault();
+  var row = $(this).parent().parent();
+
+  if (row.attr("row-id") == 1) {
+    return this;
+  }
+
+  row.remove();
+});
+
+//Add New Kitchen Div
+$(document).on("click", "#btn-add-kitchen", function (e) {
+  e.preventDefault();
+  var group = $(".kitchen-div").last(),
+    count = parseInt(group.attr("row-id")) + 1,
+    new_group = group.clone();
+  new_group.find('[name="title"]').val("Kitchen " + count);
+  new_group.find(".title").text("Kitchen " + count);
+  new_group.find(".selectBox").show();
+  new_group.find(".selectBox-dropdown").remove();
+  new_group.find("select").val(" ");
+  new_group.find("textarea").val(" ");
+  group.after(new_group);
+});
+
+$(document).on("click", ".remove-kitchen", function (e) {
+  e.preventDefault();
+  var row = $(this).parent().parent();
+
+  if (row.attr("row-id") == 1) {
+    return this;
+  }
+
+  row.remove();
+});
+
+//Kitchen Add Button
+$(document).on("click", "#btn-add-kitchen-inventory", function (e) {
+  e.preventDefault();
+  var group = $(".kitchen-inventory-div").last(),
+    count = parseInt(group.attr("row-id")) + 1,
+    new_group = group.clone();
+
+  new_group.find('[type="number"]').val(" ");
+  new_group.find('[type="text"]').val(" ");
+  new_group.attr("row-id", count);
+  new_group.find('[name="title"]').val("Kitchen " + count + " Inventory");
+  new_group.find(".title").text("Kitchen " + count + " Inventory");
+  group.after(new_group);
+});
+
+$(document).on("click", ".remove-kitchen-inventory", function (e) {
+  e.preventDefault();
+  var row = $(this).parent().parent();
+
+  if (row.attr("row-id") == 1) {
+    return this;
+  }
+
+  row.remove();
+});
+
+//Add Bathroom
+$(document).on("click", "#btn-add-bathroom", function (e) {
+  e.preventDefault();
+  var group = $(".bathroom-div").last(),
+    count = parseInt(group.attr("row-id")) + 1,
+    new_group = group.clone();
+
+  new_group.find('[name="title"]').val("Bathroom " + count);
+  new_group.find(".title").text("Bathroom " + count);
+  new_group.find(".selectBox").show();
+  new_group.find(".selectBox-dropdown").remove();
+  new_group.find("select").val(" ");
+  new_group.find("textarea").val(" ");
+  new_group.attr("row-id", count);
+  group.after(new_group);
+});
+
+$(document).on("click", ".remove-bathroom", function (e) {
+  e.preventDefault();
+  var row = $(this).parent().parent();
+
+  if (row.attr("row-id") == 1) {
+    return this;
+  }
+
+  row.remove();
+});
+
+//Add Toilet
+$(document).on("click", "#btn-add-toilet", function (e) {
+  e.preventDefault();
+  var group = $(".toilet-div").last(),
+    count = parseInt(group.attr("row-id")) + 1,
+    new_group = group.clone();
+  new_group.find('[name="title"]').val("Toilets " + count);
+  new_group.find(".title").text("Toilets " + count);
+  new_group.find(".selectBox").show();
+  new_group.find(".selectBox-dropdown").remove();
+  new_group.find("select").val(" ");
+  new_group.find("textarea").val(" ");
+  new_group.focus();
+
+  group.after(new_group);
+});
+$(document).on("click", ".remove-toilet", function (e) {
+  e.preventDefault();
+  var row = $(this).parent().parent();
+
+  if (row.attr("row-id") == 1) {
+    return this;
+  }
+
+  row.remove();
+});

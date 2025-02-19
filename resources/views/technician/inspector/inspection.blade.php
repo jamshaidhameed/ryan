@@ -34,95 +34,6 @@
     }
     
 </style>
-<!-- <style>
-    .card-title img{
-        width: 73px;
-        margin-top: -21px;
-    }
-    .card-title .reg-title {
-        margin-top: -8px;
-        margin-right: 8px;
-    }
-    .card-title .p-email{
-        margin-right: 23px;
-        margin-top: -12px;
-    }
-    .card-title .p-website{
-        margin-top: -17px;
-        margin-top: -12px;
-    }
-    .card-title .p-contact {
-        margin-top: -12px;
-        margin-right: 12px;
-    }
-    table tbody tr td{
-        font-size:12pt;
-        line-height:2px;
-    }
-    table tbody tr td .form-group {
-        margin-bottom: -2px;
-    }
-    .form-one table tbody tr td .form-group .form-control {
-        width: 359px;
-        margin-left: 44rem;
-        height: 31px;
-        font-size:9pt;
-    }
-    .form-two table tbody tr td .form-group .form-control {
-        width: 331px;
-        margin-left: 32rem;
-        height: 31px;
-        font-size:9pt;
-    }
-    table tbody tr td textarea {
-        height: 55px;
-        margin-right: 98px;
-        width: 21rem;
-        padding: 16px 3px;
-    }
-     .form-three table tbody tr td .form-group .form-control {
-        width: 176px;
-        margin-left: 32rem;
-        height: 31px;
-        font-size:9pt;
-     }
-     .form-three table tbody tr td textarea{
-        height: 32px;
-        margin-right: 98px;
-        width: 15rem;
-        padding: 16px 3px;
-        margin-left: 7px;
-     }
-
-     .living-one-inventory table tbody tr td .form-group .form-control {
-        height: 31px;
-        width: 256px;
-     }
-     .bedroom-one table tbody tr td .form-group .form-control{
-        height: 31px;
-        width:256px;
-        font-size:9pt;
-     }
-     .form-kitchen-one-inventory table tbody tr td .form-control {
-        width: 16rem;
-        height: 38px;
-        font-size: 9pt;
-     }
-
-     .fire-prevent table tbody tr td,.fire-prevent table tbody tr td .form-control {
-        width: 16rem;
-        font-size: 9pt;
-
-     }
-    
-    .table td {
-        vertical-align: middle;
-    }
-    .justify-content-end{
-       margin-right: 122px;
-    }
-
-</style> -->
 @endsection
 @section('content')
 <div class="sub-banner">
@@ -730,14 +641,22 @@
                  </div>
                  <!-- Fourth Form Start -->
                   <br>
-                  <form  class="form-three post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
+                  <hr>
+                  <div class="d-flex justify-content-end mb-2">
+                    <a href="javascript(0)" class="btn btn-primary float-right" id="btn-add-living-room"><i class="icon wb-plus-circle"></i>Add</a>
+                </div>
+                 <div class="living-room-div" row-no="1">
+                    <div class="d-flex justify-content-start mb-2">
+                        <a href="javascript(0)" class="btn btn-warning float-left remove-living-room"><i class="icon wb-plus-circle"></i>Remove</a>
+                    </div>
+                     <form  class="form-three post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                           @csrf 
                           <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
                           <input type="hidden" name="title" value="Living/Room 1">
                           <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th colspan="3">Living/Room 1</th>
+                                        <th colspan="3"><span class="group-name">Living/Room 1</span></th>
                                     </tr>
                                     <tr>
                                         <td>General Impression tided up /cleaned up</td>
@@ -919,18 +838,29 @@
                             <!-- /.modal-dialog -->
                         </div>
                   <!-- Fourth Form End -->
+                 </div>
                    <br>
                    <!-- Fifth Form Start  -->
-                    <form  class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
+                   {{-- Living Room Inventory --}}
+                   <div class="d-flex justify-content-end mb-2">
+                        <a href="javascript(0)" class="btn btn-primary float-right" id="btn-add-living-room-inventory"><i class="icon wb-plus-circle"></i>Add</a>
+                    </div>
+                   <div class="living-room-inventory-div" row-id="1">
+
+                    <div class="d-flex justify-content-start mb-2">
+                        <a href="javascript(0)" class="btn btn-warning float-left remove-living-room-inventory"><i class="icon wb-plus-circle"></i>Remove</a>
+                    </div>
+
+                     <form  class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                         @csrf 
                         <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
                         <input type="hidden" name="title" value="Living/Room 1 Inventory">
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <th>Living/Room 1 Inventory</th>
+                                    <th><span class="title">Living/Room 1 Inventory</span></th>
                                     <th>number damage</th>
-                                    <th>united homes number</th>
+                                    <th>Description</th>
                                 </tr>
                                 <tr>
                                     <td>Dining Chairs</td>
@@ -944,7 +874,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
                                         </div>
                                     </td>
                                 </tr>
@@ -1119,7 +1049,17 @@
                         </div>
                    <!-- Fifth Form End -->
                     <!-- Sixth Form Start  -->
+                   </div>
+                   
                      <br>
+                     <hr>
+                     <div class="d-flex justify-content-end mb-2">
+                        <a href="javascript(0)" class="btn btn-primary float-right" id="btn-add-bed-room"><i class="icon wb-plus-circle"></i>Add</a>
+                    </div>
+                    <div class="bedroom-div" row-id="1">
+                        <div class="d-flex justify-content-start mb-2">
+                            <a href="javascript(0)" class="btn btn-warning float-left remove-bed-room"><i class="icon wb-plus-circle"></i>Remove</a>
+                        </div>
                      <form  class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                         @csrf 
                         <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
@@ -1128,7 +1068,7 @@
                         <tbody>
                             <tr>
                                 <th colspan="3">
-                                    Bedroom 1
+                                    <span class="title">Bedroom 1</span>
                                 </th>
                             </tr>
                             <tr>
@@ -1312,19 +1252,30 @@
                             </div>
                             <!-- /.modal-dialog -->
                         </div>
+                    </div>
                      <!-- End Sixth Form -->
                       <!-- Seventh Form -->
                        <br>
-                       <form  class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
+                       <hr>
+                        <div class="d-flex justify-content-end mb-2">
+                            <a href="javascript(0)" class="btn btn-primary float-right" id="btn-add-bed-room-inventory"><i class="icon wb-plus-circle"></i>Add</a>
+                        </div>
+                       <div class="bed-room-inventory-div" row-id="1">
+
+                            <div class="d-flex justify-content-start mb-2">
+                                <a href="javascript(0)" class="btn btn-warning float-left remove-bed-room-inventory"><i class="icon wb-plus-circle"></i>Remove</a>
+                            </div>
+
+                        <form  class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                                 @csrf 
                                 <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
                                 <input type="hidden" name="title" value="Bedroom 1 Inventory">
                           <table class="table">
                             <tbody>
                                 <tr>
-                                    <th>Bedroom 1 Inventory</th>
-                                    <th>number damage</th>
-                                    <th>united homes number</th>
+                                    <th><span class="title">Bedroom 1 Inventory</span></th>
+                                    <th>Number Damage</th>
+                                    <th>Description</th>
                                 </tr>
                                 <tr>
                                     <td>Bed</td>
@@ -1338,7 +1289,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -1354,7 +1305,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -1370,7 +1321,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -1386,7 +1337,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -1402,7 +1353,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -1418,7 +1369,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -1495,9 +1446,10 @@
                             </div>
                             <!-- /.modal-dialog -->
                         </div>
+                       </div>
                        <!-- End Seventh Form -->
                         <br> 
-                        <!-- Eighth Form  Start-->
+                        {{-- <!-- Eighth Form  Start-->
                          <form  class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                             @csrf 
                             <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
@@ -1876,17 +1828,27 @@
                             </div>
                             <!-- /.modal-dialog -->
                         </div>
-                    <!-- End Ninth Form  -->
+                    <!-- End Ninth Form  --> --}}
                      <br>
+                     <hr>
+                        <div class="d-flex justify-content-end mb-2">
+                            <a href="javascript(0)" class="btn btn-primary float-right" id="btn-add-kitchen"><i class="icon wb-plus-circle"></i>Add</a>
+                        </div>
                      <!-- Tenth Form Start -->
-                      <form  class="form-three post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
+                      <div class="kitchen-div" row-id="1">
+
+                        <div class="d-flex justify-content-start mb-2">
+                                <a href="javascript(0)" class="btn btn-warning float-left remove-kitchen"><i class="icon wb-plus-circle"></i>Remove</a>
+                            </div>
+
+                        <form  class="form-three post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                         @csrf 
                         <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
                         <input type="hidden" name="title" value="Kitchen 1">
                         <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th colspan="3">Kitchen 1</th>
+                                        <th colspan="3"><span class="title">Kitchen 1</span></th>
                                     </tr>
                                     <tr>
                                         <td>General Impression tided up /cleaned up
@@ -2071,194 +2033,207 @@
                         </div>
                         <!-- /.modal-dialog -->
                     </div>
+                      </div>
                      <!-- End Tenth Form -->
                       <!-- Eleventh Form Start -->
                       <br>
-                        <form class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
-                        @csrf 
-                        <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
-                        <input type="hidden" name="title" value="Kitchen 1 Inventory">
-                        <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <th>Kitchen 1 Inventory</th>
-                                        <th>number damage</th>
-                                        <th>united homes number</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Refrigerator</td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                                @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory','name' => 'Refrigerator'])->first() : null;
-                                                 @endphp
-                                            <input type="hidden" name="name[]" value="Refrigerator">
-                                            <input type="number" name="value[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->value : '' }}">
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                            <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
-                                          </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Freezer</td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                                @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory','name' => 'Freezer'])->first() : null;
-                                                 @endphp
-                                            <input type="hidden" name="name[]" value="Freezer">
-                                            <input type="number" name="value[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->value : '' }}">
-                                          </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                            <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
-                                          </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Microwave/Oven</td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                                @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory','name' => 'Microwave/Oven'])->first() : null;
-                                                 @endphp
-                                             <input type="hidden" name="name[]" value="Microwave/Oven">
-                                            <input type="number" name="value[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->value : '' }}">
-                                          </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                            <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
-                                          </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Stove</td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                                 @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory','name' => 'Stove'])->first() : null;
-                                                 @endphp
-                                             <input type="hidden" name="name[]" value="Stove">
-                                            <input type="number" name="value[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->value : '' }}">
-                                          </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                            <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
-                                          </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Coffee machine/Kettle</td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                                @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory','name' => 'Coffee machine/Kettle'])->first() : null;
-                                                 @endphp
-                                            <input type="hidden" name="name[]" value="Coffee machine/Kettle">
-                                            <input type="number" name="value[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->value : '' }}">
-                                          </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                            <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
-                                          </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sufficient Kitchen Inventory</td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                                @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory','name' => 'Sufficient Kitchen Inventory'])->first() : null;
-                                                 @endphp
-                                              <input type="hidden" name="name[]" value="Sufficient Kitchen Inventory">
-                                            <input type="number" name="value[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->value : '' }}">
-                                          </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                            <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
-                                          </div>
-                                        </td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>Images</td>
-                                        <td class="text-right">
-                                            <input type="file" name="images[]" id="" class="form-control"  multiple="true"  accept="image/*">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                             </table>
-                             <div class="d-flex justify-content-end">
-                                @php $images = !empty($old_inspection) ? \App\Models\InspectionFiles::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory'])->get() : array();
-                                    $image_array = array();
-                                    @endphp
-                                    @foreach($images as $img)
-                                        @php array_push($image_array,$img->file_url); @endphp
-                                    @endforeach
-                                    <input type="hidden" id="eleventh-images" name="selected_images" value="">
-                                    @if(count($image_array) > 0)
-                                    
-                                    <button type="button" class="btn btn-default eleventh-btn-view mr-4">Choose from Existing Images</button>
-                                    @endif
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
-                        </form>
-                        <!-- Images Model Start -->
-                        <div class="modal fade book-d eleventh-images" id="modal-info">
-                        <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h4 class="modal-title">Select Existing Image Files</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            
-                            <div class="modal-body">
-                                <!-- Modal Body Start -->
-                                    <table class="table table-bordered tbl-eleventh-images">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">S.No</th>
-                                            <th class="text-center">Select</th>
-                                            <th class="text-center">Image</th>
-                                        </tr>
-                                    </thead>
+                      <hr>
+                         <div class="d-flex justify-content-end mb-2">
+                            <a href="javascript(0)" class="btn btn-primary float-right" id="btn-add-kitchen-inventory"><i class="icon wb-plus-circle"></i>Add</a>
+                        </div>
+                     <div class="kitchen-inventory-div" row-id="1">
+
+                        <div class="d-flex justify-content-start mb-2">
+                            <a href="javascript(0)" class="btn btn-warning float-left remove-kitchen-inventory"><i class="icon wb-plus-circle"></i>Remove</a>
+                        </div>
+
+
+                         <form class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
+                                @csrf 
+                                <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
+                                <input type="hidden" name="title" value="Kitchen 1 Inventory">
+                                <table class="table">
                                     <tbody>
-                                        @php $images = !empty($old_inspection) ? \App\Models\InspectionFiles::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory'])->get() : array();
-                                            @endphp
-                                        @foreach($images as $image)
-                                            <tr>
-                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                        <tr>
+                                            <th><span class="title">Kitchen 1 Inventory</span></th>
+                                            <th>Number Damage</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Refrigerator</td>
                                             <td class="text-center">
                                                 <div class="form-group">
-                                                    <input type="checkbox" name="select_images[]" id="" value="{{ $image->file_url}}">
+                                                    @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory','name' => 'Refrigerator'])->first() : null;
+                                                        @endphp
+                                                <input type="hidden" name="name[]" value="Refrigerator">
+                                                <input type="number" name="value[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->value : '' }}">
                                                 </div>
                                             </td>
                                             <td class="text-center">
-                                                <img src="{{ asset('upload/inspection/'.$image->file_url)}}" alt="inspection" class="img-thumbnail">
+                                                <div class="form-group">
+                                                <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
+                                                </div>
                                             </td>
-                                            </tr>
-                                        @endforeach
+                                        </tr>
+                                        <tr>
+                                            <td>Freezer</td>
+                                            <td class="text-center">
+                                                <div class="form-group">
+                                                    @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory','name' => 'Freezer'])->first() : null;
+                                                        @endphp
+                                                <input type="hidden" name="name[]" value="Freezer">
+                                                <input type="number" name="value[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->value : '' }}">
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="form-group">
+                                                <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Microwave/Oven</td>
+                                            <td class="text-center">
+                                                <div class="form-group">
+                                                    @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory','name' => 'Microwave/Oven'])->first() : null;
+                                                        @endphp
+                                                    <input type="hidden" name="name[]" value="Microwave/Oven">
+                                                <input type="number" name="value[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->value : '' }}">
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="form-group">
+                                                <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Stove</td>
+                                            <td class="text-center">
+                                                <div class="form-group">
+                                                        @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory','name' => 'Stove'])->first() : null;
+                                                        @endphp
+                                                    <input type="hidden" name="name[]" value="Stove">
+                                                <input type="number" name="value[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->value : '' }}">
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="form-group">
+                                                <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Coffee machine/Kettle</td>
+                                            <td class="text-center">
+                                                <div class="form-group">
+                                                    @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory','name' => 'Coffee machine/Kettle'])->first() : null;
+                                                        @endphp
+                                                <input type="hidden" name="name[]" value="Coffee machine/Kettle">
+                                                <input type="number" name="value[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->value : '' }}">
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="form-group">
+                                                <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sufficient Kitchen Inventory</td>
+                                            <td class="text-center">
+                                                <div class="form-group">
+                                                    @php $value = !empty($old_inspection) ? \App\Models\InspectionContents::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory','name' => 'Sufficient Kitchen Inventory'])->first() : null;
+                                                        @endphp
+                                                    <input type="hidden" name="name[]" value="Sufficient Kitchen Inventory">
+                                                <input type="number" name="value[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->value : '' }}">
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="form-group">
+                                                <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Images</td>
+                                            <td class="text-right">
+                                                <input type="file" name="images[]" id="" class="form-control"  multiple="true"  accept="image/*">
+                                            </td>
+                                        </tr>
                                     </tbody>
                                     </table>
-                                <!-- End Modal Body -->
+                                    <div class="d-flex justify-content-end">
+                                    @php $images = !empty($old_inspection) ? \App\Models\InspectionFiles::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory'])->get() : array();
+                                        $image_array = array();
+                                        @endphp
+                                        @foreach($images as $img)
+                                            @php array_push($image_array,$img->file_url); @endphp
+                                        @endforeach
+                                        <input type="hidden" id="eleventh-images" name="selected_images" value="">
+                                        @if(count($image_array) > 0)
+                                        
+                                        <button type="button" class="btn btn-default eleventh-btn-view mr-4">Choose from Existing Images</button>
+                                        @endif
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
+                            <!-- Images Model Start -->
+                            <div class="modal fade book-d eleventh-images" id="modal-info">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h4 class="modal-title">Select Existing Image Files</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                
+                                <div class="modal-body">
+                                    <!-- Modal Body Start -->
+                                        <table class="table table-bordered tbl-eleventh-images">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">S.No</th>
+                                                <th class="text-center">Select</th>
+                                                <th class="text-center">Image</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php $images = !empty($old_inspection) ? \App\Models\InspectionFiles::where(['inspection_id' => $old_inspection->id,'title' => 'Kitchen 1 Inventory'])->get() : array();
+                                                @endphp
+                                            @foreach($images as $image)
+                                                <tr>
+                                                <td class="text-center">{{ $loop->iteration }}</td>
+                                                <td class="text-center">
+                                                    <div class="form-group">
+                                                        <input type="checkbox" name="select_images[]" id="" value="{{ $image->file_url}}">
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <img src="{{ asset('upload/inspection/'.$image->file_url)}}" alt="inspection" class="img-thumbnail">
+                                                </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                        </table>
+                                    <!-- End Modal Body -->
+                                </div>
+                                <div class="modal-footer justify-content-end">
+                                <button type="button" class="btn btn-warning btn-outline-light" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary btn-outline-light btn-eleventh-select-images">Choose</button>
+                                </div>
                             </div>
-                            <div class="modal-footer justify-content-end">
-                            <button type="button" class="btn btn-warning btn-outline-light" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary btn-outline-light btn-eleventh-select-images">Choose</button>
+                            <!-- /.modal-content -->
                             </div>
+                            <!-- /.modal-dialog -->
                         </div>
-                        <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
+                     </div>
                       <!-- Eleventh Form End -->
                       <br>
                     {{-- Twelth Form Start --}}
-                     <form  class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
+                     {{-- <form  class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                         @csrf 
                         <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
                         <input type="hidden" name="title" value="Kitchen 2">
@@ -2397,9 +2372,9 @@
                                     @endif
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </div>
-                     </form>
+                     </form> --}}
                       <!-- Images Model Start -->
-                        <div class="modal fade book-d twelth-images" id="modal-info">
+                        {{-- <div class="modal fade book-d twelth-images" id="modal-info">
                         <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -2445,13 +2420,13 @@
                             </div>
                         </div>
                         <!-- /.modal-content -->
-                        </div>
+                        </div> --}}
                         <!-- /.modal-dialog -->
-                    </div>
+                    {{-- </div> --}}
                     {{-- End Twelth Form --}}
                     <br>
                     {{-- thirteen Form Start --}}
-                    <form class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
+                    {{-- <form class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                         @csrf 
                         <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
                         <input type="hidden" name="title" value="Kitchen 2 Inventory">
@@ -2631,18 +2606,28 @@
                         <!-- /.modal-content -->
                         </div>
                         <!-- /.modal-dialog -->
-                    </div>
+                    </div> --}}
                     {{-- Thirdteen Form End --}}
                     <br>
+                    <hr>
+                       <div class="d-flex justify-content-end mb-2">
+                            <a href="javascript(0)" class="btn btn-primary float-right" id="btn-add-bathroom"><i class="icon wb-plus-circle"></i>Add</a>
+                        </div>
                     {{-- Fourtheenth Form Start --}}
-                    <form  class="form-three post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
+                    <div class="bathroom-div" row-id="1">
+
+                        <div class="d-flex justify-content-start mb-2">
+                            <a href="javascript(0)" class="btn btn-warning float-left remove-bathroom"><i class="icon wb-plus-circle"></i>Remove</a>
+                        </div>
+
+                        <form  class="form-three post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                         @csrf 
                         <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
                         <input type="hidden" name="title" value="Bathroom 1">
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <th colspan="3">Bathroom 1</th>
+                                    <th colspan="3"><span class="title">Bathroom 1</span></th>
                                 </tr>
                                 <tr>
                                     <td>General Impression tided up /cleaned up
@@ -2712,14 +2697,14 @@
                     </form>
                     <!-- Images Model Start -->
                         <div class="modal fade book-d fourteen-images" id="modal-info">
-                        <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h4 class="modal-title">Select Existing Image Files</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h4 class="modal-title">Select Existing Image Files</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
                             
                             <div class="modal-body">
                                 <!-- Modal Body Start -->
@@ -2755,15 +2740,16 @@
                             <button type="button" class="btn btn-warning btn-outline-light" data-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary btn-outline-light btn-fourteen-select-images">Choose</button>
                             </div>
-                        </div>
+                         </div>
                         <!-- /.modal-content -->
                         </div>
                         <!-- /.modal-dialog -->
                     </div>
+                    </div>
                     {{-- End Fourtheenth Form --}}
                     <br>
                     {{-- Fifteenth Form Start --}}
-                    <form  class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
+                    {{-- <form  class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                         @csrf 
                         <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
                         <input type="hidden" name="title" value="Bathroom 2">
@@ -2883,10 +2869,19 @@
                         <!-- /.modal-content -->
                         </div>
                         <!-- /.modal-dialog -->
-                    </div>
+                    </div> --}}
                     {{-- End Fifteenth Form --}}
                     <br>
                     {{-- sixteen Form Start --}}
+                    
+                    <hr>
+                       <div class="d-flex justify-content-end mb-2">
+                            <a href="javascript(0)" class="btn btn-primary float-right" id="btn-add-toilet"><i class="icon wb-plus-circle"></i>Add</a>
+                        </div>
+                    <div class="toilet-div" row-id="1">
+                        <div class="d-flex justify-content-start mb-2">
+                            <a href="javascript(0)" class="btn btn-warning float-left remove-toilet"><i class="icon wb-plus-circle"></i>Remove</a>
+                        </div>
                     <form  class="form-three post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                         @csrf 
                         <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
@@ -2894,7 +2889,7 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <th colspan="3">Toilets 1</th>
+                                    <th colspan="3"><span class="title">Toilets 1</span></th>
                                 </tr>
                                 <tr>
                                     <td>General Impression tided up /cleaned up
@@ -3070,10 +3065,11 @@
                         </div>
                         <!-- /.modal-dialog -->
                     </div>
+                    </div>
                     {{-- sixteen Form End --}}
-                    <br>
+                    {{-- <br> --}}
                     {{-- Seventeen Form --}}
-                    <form  class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
+                    {{-- <form  class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                         @csrf 
                         <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
                         <input type="hidden" name="title" value="Toilets 2">
@@ -3255,7 +3251,7 @@
                         <!-- /.modal-content -->
                         </div>
                         <!-- /.modal-dialog -->
-                    </div>
+                    </div> --}}
                     <br>
                     {{-- End Seventeen Form --}}
                     {{-- Eighteen Form Start --}}
@@ -3424,8 +3420,8 @@
                             <tbody>
                                 <tr>
                                     <th>Miscellaneous</th>
-                                    <th>number damage</th>
-                                    <th>united homes number</th>
+                                    <th>Number Damage</th>
+                                    <th>Description</th>
                                 </tr>
                                 <tr>
                                     <td>Ironing board/iron</td>
@@ -3439,7 +3435,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -3455,7 +3451,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -3471,7 +3467,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -3487,7 +3483,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -3503,7 +3499,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -3608,8 +3604,8 @@
                                         <th>Fire prevention</th>
                                         <th>Number damage</th>
                                         <th>inspected</th>
-                                        <th>inspection date</th>
-                                        <th>United homes number</th>
+                                        {{-- <th>inspection date</th> --}}
+                                        <th>Description</th>
                                     </tr>
                                     <tr>
                                         <td>Smoke alarm</td>
@@ -3626,11 +3622,11 @@
                                                 <option value="Bad" @if(!empty($value) && $value->comment == 'Bad') selected @endif>Bad</option>
                                             </select>
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <input type="date" name="inspection_date[]" id="" class="form-control"  value="{{ !empty($value) ? $value->inspected_date : ''}}">
-                                        </td>
+                                        </td> --}}
                                         <td>
-                                            <input type="number" name="united_homes[]" min="0" id="" class="form-control"  value="{{ !empty($value) ? $value->united_homes : ''}}">
+                                            <input type="text" name="united_homes[]" min="0" id="" class="form-control"  value="{{ !empty($value) ? $value->united_homes : ''}}">
                                         </td>
                                     </tr>
 
@@ -3649,11 +3645,11 @@
                                                 <option value="Bad" @if(!empty($value) && $value->comment == 'Bad') selected @endif>Bad</option>
                                             </select>
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <input type="date" name="inspection_date[]" id="" class="form-control" value="{{ !empty($value) ? $value->inspected_date : ''}}">
-                                        </td>
+                                        </td> --}}
                                         <td>
-                                            <input type="number" name="united_homes[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->united_homes : ''}}">
+                                            <input type="text" name="united_homes[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->united_homes : ''}}">
                                         </td>
                                     </tr>
                                     <tr>
@@ -3671,11 +3667,11 @@
                                                 <option value="Bad" @if(!empty($value) && $value->comment == 'Bad') selected @endif>Bad</option>
                                             </select>
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <input type="date" name="inspection_date[]" id="" class="form-control" value="{{ !empty($value) ? $value->inspected_date : ''}}">
-                                        </td>
+                                        </td> --}}
                                         <td>
-                                            <input type="number" name="united_homes[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->united_homes : ''}}">
+                                            <input type="text" name="united_homes[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->united_homes : ''}}">
                                         </td>
                                     </tr>
                                     <tr>
@@ -3693,11 +3689,11 @@
                                                 <option value="Bad" @if(!empty($value) && $value->comment == 'Bad') selected @endif>Bad</option>
                                             </select>
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <input type="date" name="inspection_date[]" id="" class="form-control" value="{{ !empty($value) ? $value->inspected_date : ''}}">
-                                        </td>
+                                        </td> --}}
                                         <td>
-                                            <input type="number" name="united_homes[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->united_homes : ''}}">
+                                            <input type="text" name="united_homes[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->united_homes : ''}}">
                                         </td>
                                     </tr>
                                     <tr>
@@ -3715,11 +3711,11 @@
                                                 <option value="Bad" @if(!empty($value) && $value->comment == 'Bad') selected @endif>Bad</option>
                                             </select>
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <input type="date" name="inspection_date[]" id="" class="form-control" value="{{ !empty($value) ? $value->inspected_date : ''}}">
-                                        </td>
+                                        </td> --}}
                                         <td>
-                                            <input type="number" name="united_homes[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->united_homes : ''}}">
+                                            <input type="text" name="united_homes[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->united_homes : ''}}">
                                         </td>
                                     </tr>
                                     <tr>
@@ -3737,11 +3733,11 @@
                                                 <option value="Bad" @if(!empty($value) && $value->comment == 'Bad') selected @endif>Bad</option>
                                             </select>
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <input type="date" name="inspection_date[]" id="" class="form-control" value="{{ !empty($value) ? $value->inspected_date : ''}}">
-                                        </td>
+                                        </td> --}}
                                         <td>
-                                            <input type="number" name="united_homes[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->united_homes : ''}}">
+                                            <input type="text" name="united_homes[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->united_homes : ''}}">
                                         </td>
                                     </tr>
                                     <tr>
