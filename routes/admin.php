@@ -149,4 +149,8 @@ Route::middleware(['auth', 'redirect_if_not_authenticated'])
         Route::get('all/inspections',[App\Http\Controllers\Admin\HomeController::class,'apply_filters'])->name('all.inspections');
         Route::post('/apply/inspection/filters',[App\Http\Controllers\Admin\HomeController::class,'filters_apply'])->name('apply.inspection.filters');
 
+        //Donwload Inspection Report
+
+        Route::get('/inspection/report/{id}',[App\Http\Controllers\Admin\HomeController::class,'donwload_inspection'])->name('inspection.report');
+
     });

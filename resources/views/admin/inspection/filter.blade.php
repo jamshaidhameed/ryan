@@ -63,7 +63,7 @@
                         </div>
                         <div class="col col-md-4">
                             <button type="submit" class="btn btn-primary btn-sm btn-outline">Apply Filters</button>
-                            @if (!empty($_GET["property"]) || !empty($_GET["type"]))
+                            @if (!empty($_GET["property"]) && !empty($_GET["type"]))
                                 <a type="button" href="{{ route('admin.all.inspections') }}" class="btn btn-info btn-sm btn-outline">Remove Filters</a>
                             @endif
                             

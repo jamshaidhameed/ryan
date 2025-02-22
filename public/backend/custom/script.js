@@ -950,6 +950,13 @@ $(document).on("click", "#btn-add-living-room", function (e) {
   new_group.attr("row-no", count);
   new_group.find(".selectBox").show();
   new_group.find(".selectBox-dropdown").remove();
+  if (parseInt(group.attr("row-no")) == 1) {
+    new_group
+      .find("#btn")
+      .after(
+        '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-living-room"><i class="icon wb-plus-circle"></i>Remove</a></div>'
+      );
+  }
 
   group.after(new_group);
 });
@@ -970,7 +977,7 @@ $(document).on("click", ".remove-living-room", function (e) {
 $(document).on("click", "#btn-add-living-room-inventory", function (e) {
   e.preventDefault();
   var group = $(".living-room-inventory-div").last(),
-    count = parseInt(group.attr("row-id") + 1),
+    count = parseInt(group.attr("row-id")) + 1,
     new_group = group.clone();
 
   new_group.attr("row-id", count);
@@ -978,6 +985,14 @@ $(document).on("click", "#btn-add-living-room-inventory", function (e) {
   new_group.find('[type="text"]').val(" ");
   new_group.find('[name="title"]').val("Living/Room " + count + " Inventory");
   new_group.find(".title").text("Living/Room " + count + " Inventory");
+
+  if (parseInt(parseInt(group.attr("row-id"))) == 1) {
+    new_group
+      .find("#btn")
+      .after(
+        '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-living-room-inventory"><i class="icon wb-plus-circle"></i>Remove</a></div>'
+      );
+  }
   group.after(new_group);
 });
 
@@ -1004,6 +1019,14 @@ $(document).on("click", "#btn-add-bed-room", function (e) {
   new_group.find(".selectBox").show();
   new_group.find(".selectBox-dropdown").remove();
   new_group.attr("row-id", count);
+
+  if (parseInt(group.attr("row-id")) == 1) {
+    new_group
+      .find("#btn")
+      .after(
+        '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-bed-room"><i class="icon wb-plus-circle"></i>Remove</a></div>'
+      );
+  }
 
   group.after(new_group);
 });
@@ -1032,6 +1055,13 @@ $(document).on("click", "#btn-add-bed-room-inventory", function (e) {
   new_group.attr("row-id", count);
   new_group.find('[name="title"]').val("Bedroom " + count + " Inventory");
   new_group.find(".title").text("Bedroom " + count + " Inventory");
+  if (parseInt(group.attr("row-id"))) {
+    new_group
+      .find("#btn")
+      .after(
+        '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-bed-room-inventory"><i class="icon wb-plus-circle"></i>Remove</a> </div>'
+      );
+  }
   group.after(new_group);
 });
 
@@ -1058,6 +1088,14 @@ $(document).on("click", "#btn-add-kitchen", function (e) {
   new_group.find(".selectBox-dropdown").remove();
   new_group.find("select").val(" ");
   new_group.find("textarea").val(" ");
+  new_group.attr("row-id", count);
+  if (parseInt(group.attr("row-id")) === 1) {
+    new_group
+      .find("#btn")
+      .after(
+        '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-kitchen"><i class="icon wb-plus-circle"></i>Remove</a> </div>'
+      );
+  }
   group.after(new_group);
 });
 
@@ -1084,6 +1122,13 @@ $(document).on("click", "#btn-add-kitchen-inventory", function (e) {
   new_group.attr("row-id", count);
   new_group.find('[name="title"]').val("Kitchen " + count + " Inventory");
   new_group.find(".title").text("Kitchen " + count + " Inventory");
+  if (parseInt(group.attr("row-id")) == 1) {
+    new_group
+      .find("#btn")
+      .after(
+        '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-kitchen-inventory"><i class="icon wb-plus-circle"></i>Remove</a></div>'
+      );
+  }
   group.after(new_group);
 });
 
@@ -1112,6 +1157,13 @@ $(document).on("click", "#btn-add-bathroom", function (e) {
   new_group.find("select").val(" ");
   new_group.find("textarea").val(" ");
   new_group.attr("row-id", count);
+  if (parseInt(group.attr("row-id")) == 1) {
+    new_group
+      .find("#btn")
+      .after(
+        '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-bathroom"><i class="icon wb-plus-circle"></i>Remove</a></div>'
+      );
+  }
   group.after(new_group);
 });
 
@@ -1138,6 +1190,14 @@ $(document).on("click", "#btn-add-toilet", function (e) {
   new_group.find(".selectBox-dropdown").remove();
   new_group.find("select").val(" ");
   new_group.find("textarea").val(" ");
+  new_group.attr("row-id", count);
+  if (parseInt(group.attr("row-id")) == 1) {
+    new_group
+      .find("#btn")
+      .after(
+        '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-toilet"><i class="icon wb-plus-circle"></i>Remove</a></div>'
+      );
+  }
   new_group.focus();
 
   group.after(new_group);
