@@ -22,6 +22,7 @@ use App\Models\IssueTickets;
 Use App\Models\IssueTicketInvoices;
 use App\Models\Inspections;
 use App\Models\cms;
+use App\Models\InspectionContents;
 use App\Mail\TenantContract;
 use App\Mail\UserRegister;
 use App\Mail\LandlordInvoicePaid;
@@ -1493,8 +1494,10 @@ class HomeController extends Controller
         }
 
         $tenant_contract = TenantContracts::where('id',$inspection->inspectionable_id)->with('tenant','property')->first();
+        $inspection_group = InspectionContents::where('inspection_id',$id)->select(['title'])->whereNotIn('title',['Electric Meter','Key Management','Entrance / Hallway','Outside','Miscellaneous','Fire prevention','
+Heating system'])->distinct()->get();
         
-        return view('admin.inspection.detail',compact('inspection','tenant_contract'));
+        return view('admin.inspection.detail',compact('inspection','tenant_contract','inspection_group'));
     }
 
     // CMS Pages CURD 
@@ -1613,17 +1616,22 @@ class HomeController extends Controller
 
         $inspections = Inspections::query();
 
-        if (!empty($_GET["prop"]) || !empty($_GET["type"])) {
+        // return $_GET["property"];
+
+        if (!empty($_GET["property"]) || !empty($_GET["type"])) {
             
-            if (!empty($_GET["prop"])) {
+            if (!empty($_GET["property"])) {
             
-            $inspections = $inspections->where('inspectionable_id',$_GET['prop'])->get();
+            $inspections = $inspections->where('inspectionable_id',$_GET['property']);
             }
 
             if (!empty($_GET["type"])) {
+
+                $type =  (string) $_GET["type"];
                 
-                $inspections = $inspections->where('inspection_type',$_GET['type'])->get();
+                $inspections = $inspections->where(['inspection_type' => $type]);
             }
+            $inspections = $inspections->get();
         }else{
            
             $inspections = $inspections->get();
@@ -1639,28 +1647,54 @@ class HomeController extends Controller
 
         if (!empty($request->property)) {
             
-            if (empty($property_type_url)) {
+            // if (empty($property_type_url)) {
                 
                 $property_type_url .='&property='.$request->property;
-            }else{
+            // }else{
 
-                $property_type_url .=','.$request->property;
-            }
+            //     $property_type_url .=','.$request->property;
+            // }
         }
 
         $type_url = '';
 
         if (!empty($request->type)) {
             
-            if (empty($type_url)) {
+            // if (empty($type_url)) {
                 
                 $type_url .='&type='.$request->type;
-            }else{
+            // }else{
 
-                $type_url .=','.$request->type;
-            }
+            //     $type_url .=','.$request->type;
+            // }
         }
 
         return redirect()->route('admin.all.inspections',$property_type_url.$type_url);
+    }
+
+    public function donwload_inspection($id){
+
+        $inspection = Inspections::find($id);
+        $tenant_contract = TenantContracts::where('id',$inspection->inspectionable_id)->with(['tenant','property'])->first();
+
+        $inspection_group = InspectionContents::where('inspection_id',$id)->select(['title'])->whereNotIn('title',['Electric Meter','Key Management','Entrance / Hallway','Outside','Miscellaneous','Fire prevention','
+Heating system'])->distinct()->get();
+
+
+
+
+        // return view('reports.inspection-report',compact('inspection','tenant_contract','inspection_group'));
+        $pdf = Pdf::loadView('reports.inspection-report',compact('inspection','tenant_contract','inspection_group'))->setOption('isHtml5arserEnabled',true)->setOption('isPhpEnabled',true)->setOptions([
+            'tempDir' => public_path(),
+            'chroot' => public_path()
+        ]);
+
+        $ticket_no = rand(10000000,12345678).date('Y-m-d H:i:s');
+
+        $pdf->setPaper('A4','landscape');
+
+        return $pdf->download('Inspection-report-'.$ticket_no.'.pdf');
+
+        // return view('reports.inspection-report',compact('inspection','tenant_contract','inspection_group'));
     }
 }

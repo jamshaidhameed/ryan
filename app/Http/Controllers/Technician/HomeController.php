@@ -355,4 +355,33 @@ class HomeController extends Controller
     }
 
 
+    //Download Inspection
+
+    public function donwload_inspection($id){
+
+        $inspection = Inspections::find($id);
+        $tenant_contract = TenantContracts::where('id',$inspection->inspectionable_id)->with(['tenant','property'])->first();
+
+        $inspection_group = InspectionContents::where('inspection_id',$id)->select(['title'])->whereNotIn('title',['Electric Meter','Key Management','Entrance / Hallway','Outside','Miscellaneous','Fire prevention','
+Heating system'])->distinct()->get();
+
+
+
+
+        // return view('reports.inspection-report',compact('inspection','tenant_contract','inspection_group'));
+        $pdf = Pdf::loadView('reports.inspection-report',compact('inspection','tenant_contract','inspection_group'))->setOption('isHtml5arserEnabled',true)->setOption('isPhpEnabled',true)->setOptions([
+            'tempDir' => public_path(),
+            'chroot' => public_path()
+        ]);
+
+        $ticket_no = rand(10000000,12345678).date('Y-m-d H:i:s');
+
+        $pdf->setPaper('A4','landscape');
+
+        return $pdf->download('Inspection-report-'.$ticket_no.'.pdf');
+
+        // return view('reports.inspection-report',compact('inspection','tenant_contract','inspection_group'));
+    }
+
+
 }

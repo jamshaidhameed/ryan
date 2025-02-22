@@ -26,4 +26,8 @@ Route::middleware(['auth','url_redirect', 'redirect_if_not_authenticated'])
      Route::get('/inspection/{id}',[App\Http\Controllers\Technician\HomeController::class,'inspect'])->name('take.inspections');
      Route::post('inspection/form',[App\Http\Controllers\Technician\HomeController::class,'inspection_form_submit'])->name('inspection.form.submit');
 
+     //Donwload Inspection 
+
+     Route::get('/inspection/download/{id}',[App\Http\Controllers\Technician\HomeController::class,'donwload_inspection'])->name('inspection.download');
+
     });

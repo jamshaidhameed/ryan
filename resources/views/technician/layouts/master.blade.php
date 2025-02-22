@@ -148,6 +148,8 @@
 <script src="{{ asset('front/assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4omYJlOaP814WDcCG8eubXcbhB-44Uac"></script>
 <script src="{{ asset('front/assets/js/ie-emulation-modes-warning.js') }}"></script>
+{{-- <script src="{{ asset('backend/custom/script.js')}}"></script> --}}
+<script src="{{ asset('custom/script.js')}}"></script>
 <!-- Custom JS Script -->
 <script  src="{{ asset('front/assets/js/app.js') }}"></script>
 @yield('script')

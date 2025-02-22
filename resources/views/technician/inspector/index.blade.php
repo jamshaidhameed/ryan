@@ -46,6 +46,7 @@
 
                              @php $tenant_contract = \App\Models\TenantContracts::find($inspection->inspectionable_id);
                                   $property = !empty($tenant_contract) ? \App\Models\Properties::find($tenant_contract->property_id) : null;
+                                $inspection_contents = \App\Models\InspectionContents::where('inspection_id',$inspection->id)->get();
                              @endphp
                              <tr>
                                 <td>{{ $inspection->inspection_code}}</td>
@@ -64,7 +65,19 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('technision.take.inspections',$inspection->id) }}" class="btn btn-primary btn-sm"> <i class="fa fa-pencil"></i> Inspect</a>
+                                    {{-- <a href="" class="btn btn-primary btn-sm"> <i class="fa fa-pencil"></i> Inspect</a> --}}
+                                    
+
+                                     <button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">Actions <span class="caret"></span></button>
+                                    <div class="dropdown-menu" aria-labelledby="exampleIconDropdown1" role="menu">
+                                    
+                                        <a type="button" class="dropdown-item"
+                                            id="" href="{{ route('technision.take.inspections',$inspection->id) }}">
+                                            <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i> Inspect</a>
+                                        @if(count($inspection_contents) > 0)
+                                     <a target="_blank" href="{{ route('technision.inspection.download',$inspection->id) }}"  class="dropdown-item"><i class="fa fa-download"></i> Download</a>
+                                    @endif
+                                    </div>
                                 </td>
                              </tr>
                             @endforeach

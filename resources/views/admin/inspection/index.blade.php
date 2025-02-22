@@ -129,6 +129,9 @@
                                                 <a type="button" class="dropdown-item btn btn-danger btn-outline"
                                                 id="" href="{{ route('admin.inspection.contents',$inspection->id) }}" >
                                                 <i class="icon fa-trash-o" aria-hidden="true" style="font-size: 15px;"></i>View Inspection Report</a>
+                                                <a type="button" class="dropdown-item btn btn-info btn-outline"
+                                                id="" href="{{ route('admin.inspection.report',$inspection->id) }}" >
+                                                <i class="icon fa-download" aria-hidden="true" style="font-size: 15px;"></i>View Donwload Report</a>
 
                                             </div>
 

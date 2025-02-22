@@ -217,9 +217,6 @@
                                 </tbody>
                             </table>
                             <div class="form-group">
-                                 {{-- <canvas id="canvas" width="320" height="240"></canvas>
-                                 <video id="video" width="320" height="240" autoplay></video>
-                                <canvas id="canvas" width="320" height="240"></canvas> --}}
                             </div>
                             <div class="d-flex justify-content-end mr-5">
                                 <input type="hidden" name="selected_images" value="" id="first">
@@ -228,8 +225,18 @@
                                  <button class="btn btn-default first-btn-view mr-4">Choose from Existing Images</button>
                                 @endif
                                 <button type="submit" class="btn btn-primary mr-4">Save</button>
+                                {{-- <a type="button" href="javascript(0)" class="btn btn-info btn-capture" onclick="capture('form')"><i class="fa fa-camera" style="font-size: 18px;"></i></a>
+                                <input type="hidden" name="captured_images[]" value="" class="captured-images"> --}}
                                 {{-- <button type="button" id="capture" class="btn btn-success">Capture</button> --}}
+                                
                             </div>
+                            {{-- <div id="camera">
+                                <video id="video" width="640" height="480" autoplay></video>
+                                <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+                                <img id="photo" src="" alt="Captured Image" style="display: none;">
+                                <button type="button" id="capture" style="display:none">Capture</button>
+                            </div> --}}
+                            
                         </form>
                         <!-- Images Model Start -->
                           <div class="modal fade book-d first-images" id="modal-info">
@@ -643,12 +650,13 @@
                   <br>
                   <hr>
                   <div class="d-flex justify-content-end mb-2">
-                    <a href="javascript(0)" class="btn btn-primary float-right" id="btn-add-living-room"><i class="icon wb-plus-circle"></i>Add</a>
+                    <a type="button" href="javascript(0)" class="btn btn-primary float-right" id="btn-add-living-room"><i class="icon wb-plus-circle"></i>Add</a>
                 </div>
                  <div class="living-room-div" row-no="1">
-                    <div class="d-flex justify-content-start mb-2">
+                    {{-- <div class="d-flex justify-content-start mb-2">
                         <a href="javascript(0)" class="btn btn-warning float-left remove-living-room"><i class="icon wb-plus-circle"></i>Remove</a>
-                    </div>
+                    </div> --}}
+                    <div id="btn"></div>
                      <form  class="form-three post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                           @csrf 
                           <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
@@ -839,7 +847,7 @@
                         </div>
                   <!-- Fourth Form End -->
                  </div>
-                   <br>
+                   <br><br>
                    <!-- Fifth Form Start  -->
                    {{-- Living Room Inventory --}}
                    <div class="d-flex justify-content-end mb-2">
@@ -847,9 +855,11 @@
                     </div>
                    <div class="living-room-inventory-div" row-id="1">
 
-                    <div class="d-flex justify-content-start mb-2">
+                    {{-- <div class="d-flex justify-content-start mb-2">
                         <a href="javascript(0)" class="btn btn-warning float-left remove-living-room-inventory"><i class="icon wb-plus-circle"></i>Remove</a>
-                    </div>
+                    </div> --}}
+
+                    <div id="btn"></div>
 
                      <form  class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                         @csrf 
@@ -890,7 +900,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
                                         </div>
                                     </td>
                                 </tr>
@@ -906,7 +916,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
                                         </div>
                                     </td>
                                 </tr>
@@ -922,7 +932,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
                                         </div>
                                     </td>
                                 </tr>
@@ -938,7 +948,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
                                         </div>
                                     </td>
                                 </tr>
@@ -954,7 +964,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
                                         </div>
                                     </td>
                                 </tr>
@@ -970,7 +980,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : '' }}">
                                         </div>
                                     </td>
                                 </tr>
@@ -1057,9 +1067,10 @@
                         <a href="javascript(0)" class="btn btn-primary float-right" id="btn-add-bed-room"><i class="icon wb-plus-circle"></i>Add</a>
                     </div>
                     <div class="bedroom-div" row-id="1">
-                        <div class="d-flex justify-content-start mb-2">
+                        {{-- <div class="d-flex justify-content-start mb-2">
                             <a href="javascript(0)" class="btn btn-warning float-left remove-bed-room"><i class="icon wb-plus-circle"></i>Remove</a>
-                        </div>
+                        </div> --}}
+                         <div id="btn"></div>
                      <form  class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                         @csrf 
                         <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
@@ -1262,9 +1273,11 @@
                         </div>
                        <div class="bed-room-inventory-div" row-id="1">
 
-                            <div class="d-flex justify-content-start mb-2">
+                            {{-- <div class="d-flex justify-content-start mb-2">
                                 <a href="javascript(0)" class="btn btn-warning float-left remove-bed-room-inventory"><i class="icon wb-plus-circle"></i>Remove</a>
-                            </div>
+                            </div> --}}
+
+                            <div id="btn"></div>
 
                         <form  class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                                 @csrf 
@@ -1671,7 +1684,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -1687,7 +1700,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -1703,7 +1716,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -1719,7 +1732,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -1735,7 +1748,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -1751,7 +1764,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -1837,9 +1850,11 @@
                      <!-- Tenth Form Start -->
                       <div class="kitchen-div" row-id="1">
 
-                        <div class="d-flex justify-content-start mb-2">
+                        {{-- <div class="d-flex justify-content-start mb-2">
                                 <a href="javascript(0)" class="btn btn-warning float-left remove-kitchen"><i class="icon wb-plus-circle"></i>Remove</a>
-                            </div>
+                            </div> --}}
+
+                            <div id="btn"></div>
 
                         <form  class="form-three post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                         @csrf 
@@ -2043,9 +2058,11 @@
                         </div>
                      <div class="kitchen-inventory-div" row-id="1">
 
-                        <div class="d-flex justify-content-start mb-2">
+                        {{-- <div class="d-flex justify-content-start mb-2">
                             <a href="javascript(0)" class="btn btn-warning float-left remove-kitchen-inventory"><i class="icon wb-plus-circle"></i>Remove</a>
-                        </div>
+                        </div> --}}
+
+                        <div id="btn"></div> 
 
 
                          <form class="post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
@@ -2449,7 +2466,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -2465,7 +2482,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -2481,7 +2498,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -2497,7 +2514,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -2513,7 +2530,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -2529,7 +2546,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group">
-                                        <input type="number" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
+                                        <input type="text" name="comment[]" min="0" id="" class="form-control" value="{{ !empty($value) ? $value->comment : ''}}">
                                         </div>
                                     </td>
                                 </tr>
@@ -2616,9 +2633,11 @@
                     {{-- Fourtheenth Form Start --}}
                     <div class="bathroom-div" row-id="1">
 
-                        <div class="d-flex justify-content-start mb-2">
+                        {{-- <div class="d-flex justify-content-start mb-2">
                             <a href="javascript(0)" class="btn btn-warning float-left remove-bathroom"><i class="icon wb-plus-circle"></i>Remove</a>
-                        </div>
+                        </div> --}}
+
+                        <div id="btn"></div>
 
                         <form  class="form-three post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                         @csrf 
@@ -2879,9 +2898,10 @@
                             <a href="javascript(0)" class="btn btn-primary float-right" id="btn-add-toilet"><i class="icon wb-plus-circle"></i>Add</a>
                         </div>
                     <div class="toilet-div" row-id="1">
-                        <div class="d-flex justify-content-start mb-2">
+                        {{-- <div class="d-flex justify-content-start mb-2">
                             <a href="javascript(0)" class="btn btn-warning float-left remove-toilet"><i class="icon wb-plus-circle"></i>Remove</a>
-                        </div>
+                        </div> --}}
+                        <div id="btn"></div>
                     <form  class="form-three post-form" action="{{ route('technision.inspection.form.submit') }}" method="post"  enctype="multipart/form-data">
                         @csrf 
                         <input type="hidden" name="insp_id" value="{{ $inspection->id }}">
@@ -3996,66 +4016,16 @@
     });
 </script>
 <script>
-       $(document).on('click','#capture',function(e){
-         const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const captureButton = document.getElementById('capture');
-        const uploadForm = document.getElementById('uploadForm');
-        const imageDataInput = document.getElementById('imageData');
-        debugger;
-        // Open camera
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(stream => {
-                video.srcObject = stream;
-            })
-            .catch(err => {
-                console.error("Error accessing the camera", err);
-            });
-
-        // Capture image from video
-        captureButton.addEventListener('click', () => {
-            const context = canvas.getContext('2d');
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            imageDataInput.value = canvas.toDataURL('image/png'); // Convert to Base64
-        });
-
-        // Upload image
-        // uploadForm.addEventListener('submit', (e) => {
-        //     e.preventDefault();
-        //     const formData = new FormData();
-        //     // formData.append('image', );
-        // });
-
-        if (imageDataInput.value) {
-            $('[name="images[]"]').val(dataURLtoBlob(imageDataInput.value)); 
-        }
         
+$(document).on('click','textarea',function(e){
 
-        // Convert Base64 to Blob
-        function dataURLtoBlob(dataURL) {
-            const byteString = atob(dataURL.split(',')[1]);
-            const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
-            const arrayBuffer = new ArrayBuffer(byteString.length);
-            const uintArray = new Uint8Array(arrayBuffer);
-            for (let i = 0; i < byteString.length; i++) {
-                uintArray[i] = byteString.charCodeAt(i);
-            }
-            return new Blob([arrayBuffer], { type: mimeString });
-        }
-       });
-    </script>
+    let textarea = this;
+    let cursofPosition = textarea.selectionStart;
 
-    <script>
-        
-        $(document).on('click','textarea',function(e){
-
-            let textarea = this;
-            let cursofPosition = textarea.selectionStart;
-
-            if(cursofPosition > 0){
-                e.preventDefault();
-                textarea.setSelectionRange(0,0);
-            }
-        });
-    </script>
+    if(cursofPosition > 0){
+        e.preventDefault();
+        textarea.setSelectionRange(0,0);
+    }
+});
+</script>
 @endsection
