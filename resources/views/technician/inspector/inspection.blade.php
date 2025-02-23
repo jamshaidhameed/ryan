@@ -128,9 +128,15 @@
                         </tbody>
                      </table>
                      <!-- End Table -->
+
+                     
                       @php  $inspect = \Illuminate\Support\Facades\DB::select("SELECT * FROM `inspections` WHERE id < ".$inspection->id." ORDER BY id DESC LIMIT 1;");
                          $old_inspection = count($inspect) > 0 ? $inspect[0] : null;
                       @endphp
+                      <input type="hidden" name="old_inspection_id" value="{{ empty($old_inspection) ? $inspection->id : $old_inspection->id }}">
+                       <input type="hidden" name="content_url" value="{{ url('technision/inspection/contents/json') }}">
+                     
+
                       <!-- First Form -->
                        <form action="{{ route('technision.inspection.form.submit') }}" class="post-form" method="post"  enctype="multipart/form-data">
                           @csrf 
