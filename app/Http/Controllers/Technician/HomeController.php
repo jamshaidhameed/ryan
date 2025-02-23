@@ -354,6 +354,19 @@ class HomeController extends Controller
         return response()->json(['success' => true,'message' => 'Inspection Stored Successfully']);
     }
 
+    public function inspection_content_json(Request $request){
+
+        // return $request->all();
+
+        $inspect_id = $request->inspect_id;
+        $title = $request->title;
+
+        $inspection_content = InspectionContents::where(['inspection_id' => $inspect_id,'title' => $title])->get();
+
+        return response()->json($inspection_content);
+
+    }
+
 
     //Download Inspection
 

@@ -941,10 +941,13 @@ $(document).on("click", "#btn-add-living-room", function (e) {
 
   var group = $(".living-room-div").last(),
     count = parseInt(group.attr("row-no")) + 1,
-    new_group = group.clone();
+    new_group = group.clone(),
+    inspect_id = $('[name="old_inspection_id"]').val(),
+    get_inspect_url = $('[name="content_url"]').val(),
+    title = "Living/Room " + count;
 
-  new_group.find('[name="title"]').val("Living/Room " + count);
-  new_group.find(".group-name").text("Living/Room " + count);
+  new_group.find('[name="title"]').val(title);
+  new_group.find(".group-name").text(title);
   new_group.find("select").val(" ");
   new_group.find("textarea").val(" ");
   new_group.attr("row-no", count);
@@ -956,6 +959,46 @@ $(document).on("click", "#btn-add-living-room", function (e) {
       .after(
         '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-living-room"><i class="icon wb-plus-circle"></i>Remove</a></div>'
       );
+  }
+
+  if (inspect_id) {
+    $.ajax({
+      type: "get",
+      url: get_inspect_url,
+      data: {
+        inspect_id: inspect_id,
+        title: title,
+      },
+      dataType: "json",
+      success: function (data) {
+        if (data) {
+          console.log(data);
+
+          $.each(new_group.find(".table tbody tr"), function () {
+            var row = $(this);
+            $.each(data, function () {
+              var dtrow = this;
+
+              if (row.find("td").find('[name="name[]"]').val() === dtrow.name) {
+                row.find("td").find('[name ="value[]"]').val(dtrow.value);
+                row.find("td").find('[name="comment[]"]').val(dtrow.comment);
+              }
+            });
+          });
+        }
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error("AJAX Error: ", textStatus, errorThrown);
+
+        swal({
+          title: "Error",
+          text: errorThrown,
+          type: "error",
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "OK",
+        });
+      },
+    });
   }
 
   group.after(new_group);
@@ -978,13 +1021,16 @@ $(document).on("click", "#btn-add-living-room-inventory", function (e) {
   e.preventDefault();
   var group = $(".living-room-inventory-div").last(),
     count = parseInt(group.attr("row-id")) + 1,
-    new_group = group.clone();
+    new_group = group.clone(),
+    title = "Living/Room " + count + " Inventory",
+    inspect_id = $('[name="old_inspection_id"]').val(),
+    get_inspect_url = $('[name="content_url"]').val();
 
   new_group.attr("row-id", count);
   new_group.find('[type="number"]').val(" ");
   new_group.find('[type="text"]').val(" ");
-  new_group.find('[name="title"]').val("Living/Room " + count + " Inventory");
-  new_group.find(".title").text("Living/Room " + count + " Inventory");
+  new_group.find('[name="title"]').val(title);
+  new_group.find(".title").text(title);
 
   if (parseInt(parseInt(group.attr("row-id"))) == 1) {
     new_group
@@ -992,6 +1038,46 @@ $(document).on("click", "#btn-add-living-room-inventory", function (e) {
       .after(
         '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-living-room-inventory"><i class="icon wb-plus-circle"></i>Remove</a></div>'
       );
+  }
+
+  if (inspect_id) {
+    $.ajax({
+      type: "get",
+      url: get_inspect_url,
+      data: {
+        inspect_id: inspect_id,
+        title: title,
+      },
+      dataType: "json",
+      success: function (data) {
+        if (data) {
+          console.log(data);
+
+          $.each(new_group.find(".table tbody tr"), function () {
+            var row = $(this);
+            $.each(data, function () {
+              var dtrow = this;
+
+              if (row.find("td").find('[name="name[]"]').val() === dtrow.name) {
+                row.find("td").find('[name ="value[]"]').val(dtrow.value);
+                row.find("td").find('[name="comment[]"]').val(dtrow.comment);
+              }
+            });
+          });
+        }
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error("AJAX Error: ", textStatus, errorThrown);
+
+        swal({
+          title: "Error",
+          text: errorThrown,
+          type: "error",
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "OK",
+        });
+      },
+    });
   }
   group.after(new_group);
 });
@@ -1012,10 +1098,13 @@ $(document).on("click", "#btn-add-bed-room", function (e) {
   e.preventDefault();
   var group = $(".bedroom-div").last(),
     count = parseInt(group.attr("row-id")) + 1,
-    new_group = group.clone();
+    new_group = group.clone(),
+    title = "Bedroom " + count,
+    inspect_id = $('[name="old_inspection_id"]').val(),
+    get_inspect_url = $('[name="content_url"]').val();
 
-  new_group.find(['name="title"]']).val("Bedroom " + count);
-  new_group.find(".title").text("Bedroom " + count);
+  new_group.find(['name="title"]']).val(title);
+  new_group.find(".title").text(title);
   new_group.find(".selectBox").show();
   new_group.find(".selectBox-dropdown").remove();
   new_group.attr("row-id", count);
@@ -1026,6 +1115,46 @@ $(document).on("click", "#btn-add-bed-room", function (e) {
       .after(
         '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-bed-room"><i class="icon wb-plus-circle"></i>Remove</a></div>'
       );
+  }
+
+  if (inspect_id) {
+    $.ajax({
+      type: "get",
+      url: get_inspect_url,
+      data: {
+        inspect_id: inspect_id,
+        title: title,
+      },
+      dataType: "json",
+      success: function (data) {
+        if (data) {
+          console.log(data);
+
+          $.each(new_group.find(".table tbody tr"), function () {
+            var row = $(this);
+            $.each(data, function () {
+              var dtrow = this;
+
+              if (row.find("td").find('[name="name[]"]').val() === dtrow.name) {
+                row.find("td").find('[name ="value[]"]').val(dtrow.value);
+                row.find("td").find('[name="comment[]"]').val(dtrow.comment);
+              }
+            });
+          });
+        }
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error("AJAX Error: ", textStatus, errorThrown);
+
+        swal({
+          title: "Error",
+          text: errorThrown,
+          type: "error",
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "OK",
+        });
+      },
+    });
   }
 
   group.after(new_group);
@@ -1048,19 +1177,62 @@ $(document).on("click", "#btn-add-bed-room-inventory", function (e) {
   e.preventDefault();
   var group = $(".bed-room-inventory-div").last(),
     count = parseInt(group.attr("row-id")) + 1,
-    new_group = group.clone();
+    new_group = group.clone(),
+    title = "Bedroom " + count + " Inventory",
+    inspect_id = $('[name="old_inspection_id"]').val(),
+    get_inspect_url = $('[name="content_url"]').val();
 
   new_group.find("[type='number']").val(" ");
   new_group.find("[type='text']").val(" ");
   new_group.attr("row-id", count);
-  new_group.find('[name="title"]').val("Bedroom " + count + " Inventory");
-  new_group.find(".title").text("Bedroom " + count + " Inventory");
+  new_group.find('[name="title"]').val(title);
+  new_group.find(".title").text(title);
   if (parseInt(group.attr("row-id"))) {
     new_group
       .find("#btn")
       .after(
         '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-bed-room-inventory"><i class="icon wb-plus-circle"></i>Remove</a> </div>'
       );
+  }
+
+  if (inspect_id) {
+    $.ajax({
+      type: "get",
+      url: get_inspect_url,
+      data: {
+        inspect_id: inspect_id,
+        title: title,
+      },
+      dataType: "json",
+      success: function (data) {
+        if (data) {
+          console.log(data);
+
+          $.each(new_group.find(".table tbody tr"), function () {
+            var row = $(this);
+            $.each(data, function () {
+              var dtrow = this;
+
+              if (row.find("td").find('[name="name[]"]').val() === dtrow.name) {
+                row.find("td").find('[name ="value[]"]').val(dtrow.value);
+                row.find("td").find('[name="comment[]"]').val(dtrow.comment);
+              }
+            });
+          });
+        }
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error("AJAX Error: ", textStatus, errorThrown);
+
+        swal({
+          title: "Error",
+          text: errorThrown,
+          type: "error",
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "OK",
+        });
+      },
+    });
   }
   group.after(new_group);
 });
@@ -1081,8 +1253,11 @@ $(document).on("click", "#btn-add-kitchen", function (e) {
   e.preventDefault();
   var group = $(".kitchen-div").last(),
     count = parseInt(group.attr("row-id")) + 1,
-    new_group = group.clone();
-  new_group.find('[name="title"]').val("Kitchen " + count);
+    new_group = group.clone(),
+    title = "Kitchen " + count,
+    inspect_id = $('[name="old_inspection_id"]').val(),
+    get_inspect_url = $('[name="content_url"]').val();
+  new_group.find('[name="title"]').val();
   new_group.find(".title").text("Kitchen " + count);
   new_group.find(".selectBox").show();
   new_group.find(".selectBox-dropdown").remove();
@@ -1095,6 +1270,46 @@ $(document).on("click", "#btn-add-kitchen", function (e) {
       .after(
         '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-kitchen"><i class="icon wb-plus-circle"></i>Remove</a> </div>'
       );
+  }
+
+  if (inspect_id) {
+    $.ajax({
+      type: "get",
+      url: get_inspect_url,
+      data: {
+        inspect_id: inspect_id,
+        title: title,
+      },
+      dataType: "json",
+      success: function (data) {
+        if (data) {
+          console.log(data);
+
+          $.each(new_group.find(".table tbody tr"), function () {
+            var row = $(this);
+            $.each(data, function () {
+              var dtrow = this;
+
+              if (row.find("td").find('[name="name[]"]').val() === dtrow.name) {
+                row.find("td").find('[name ="value[]"]').val(dtrow.value);
+                row.find("td").find('[name="comment[]"]').val(dtrow.comment);
+              }
+            });
+          });
+        }
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error("AJAX Error: ", textStatus, errorThrown);
+
+        swal({
+          title: "Error",
+          text: errorThrown,
+          type: "error",
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "OK",
+        });
+      },
+    });
   }
   group.after(new_group);
 });
@@ -1115,19 +1330,62 @@ $(document).on("click", "#btn-add-kitchen-inventory", function (e) {
   e.preventDefault();
   var group = $(".kitchen-inventory-div").last(),
     count = parseInt(group.attr("row-id")) + 1,
-    new_group = group.clone();
+    new_group = group.clone(),
+    title = "Kitchen " + count + " Inventory",
+    inspect_id = $('[name="old_inspection_id"]').val(),
+    get_inspect_url = $('[name="content_url"]').val();
 
   new_group.find('[type="number"]').val(" ");
   new_group.find('[type="text"]').val(" ");
   new_group.attr("row-id", count);
-  new_group.find('[name="title"]').val("Kitchen " + count + " Inventory");
-  new_group.find(".title").text("Kitchen " + count + " Inventory");
+  new_group.find('[name="title"]').val(title);
+  new_group.find(".title").text(title);
   if (parseInt(group.attr("row-id")) == 1) {
     new_group
       .find("#btn")
       .after(
         '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-kitchen-inventory"><i class="icon wb-plus-circle"></i>Remove</a></div>'
       );
+  }
+
+  if (inspect_id) {
+    $.ajax({
+      type: "get",
+      url: get_inspect_url,
+      data: {
+        inspect_id: inspect_id,
+        title: title,
+      },
+      dataType: "json",
+      success: function (data) {
+        if (data) {
+          console.log(data);
+
+          $.each(new_group.find(".table tbody tr"), function () {
+            var row = $(this);
+            $.each(data, function () {
+              var dtrow = this;
+
+              if (row.find("td").find('[name="name[]"]').val() === dtrow.name) {
+                row.find("td").find('[name ="value[]"]').val(dtrow.value);
+                row.find("td").find('[name="comment[]"]').val(dtrow.comment);
+              }
+            });
+          });
+        }
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error("AJAX Error: ", textStatus, errorThrown);
+
+        swal({
+          title: "Error",
+          text: errorThrown,
+          type: "error",
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "OK",
+        });
+      },
+    });
   }
   group.after(new_group);
 });
@@ -1148,9 +1406,12 @@ $(document).on("click", "#btn-add-bathroom", function (e) {
   e.preventDefault();
   var group = $(".bathroom-div").last(),
     count = parseInt(group.attr("row-id")) + 1,
-    new_group = group.clone();
+    new_group = group.clone(),
+    title = "Bathroom " + count,
+    inspect_id = $('[name="old_inspection_id"]').val(),
+    get_inspect_url = $('[name="content_url"]').val();
 
-  new_group.find('[name="title"]').val("Bathroom " + count);
+  new_group.find('[name="title"]').val();
   new_group.find(".title").text("Bathroom " + count);
   new_group.find(".selectBox").show();
   new_group.find(".selectBox-dropdown").remove();
@@ -1163,6 +1424,46 @@ $(document).on("click", "#btn-add-bathroom", function (e) {
       .after(
         '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-bathroom"><i class="icon wb-plus-circle"></i>Remove</a></div>'
       );
+  }
+
+  if (inspect_id) {
+    $.ajax({
+      type: "get",
+      url: get_inspect_url,
+      data: {
+        inspect_id: inspect_id,
+        title: title,
+      },
+      dataType: "json",
+      success: function (data) {
+        if (data) {
+          console.log(data);
+
+          $.each(new_group.find(".table tbody tr"), function () {
+            var row = $(this);
+            $.each(data, function () {
+              var dtrow = this;
+
+              if (row.find("td").find('[name="name[]"]').val() === dtrow.name) {
+                row.find("td").find('[name ="value[]"]').val(dtrow.value);
+                row.find("td").find('[name="comment[]"]').val(dtrow.comment);
+              }
+            });
+          });
+        }
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error("AJAX Error: ", textStatus, errorThrown);
+
+        swal({
+          title: "Error",
+          text: errorThrown,
+          type: "error",
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "OK",
+        });
+      },
+    });
   }
   group.after(new_group);
 });
@@ -1183,8 +1484,11 @@ $(document).on("click", "#btn-add-toilet", function (e) {
   e.preventDefault();
   var group = $(".toilet-div").last(),
     count = parseInt(group.attr("row-id")) + 1,
-    new_group = group.clone();
-  new_group.find('[name="title"]').val("Toilets " + count);
+    new_group = group.clone(),
+    title = "Toilets " + count,
+    inspect_id = $('[name="old_inspection_id"]').val(),
+    get_inspect_url = $('[name="content_url"]').val();
+  new_group.find('[name="title"]').val();
   new_group.find(".title").text("Toilets " + count);
   new_group.find(".selectBox").show();
   new_group.find(".selectBox-dropdown").remove();
@@ -1197,6 +1501,46 @@ $(document).on("click", "#btn-add-toilet", function (e) {
       .after(
         '<div class="d-flex justify-content-start mb-2"><a href="javascript(0)" class="btn btn-warning float-left remove-toilet"><i class="icon wb-plus-circle"></i>Remove</a></div>'
       );
+  }
+
+  if (inspect_id) {
+    $.ajax({
+      type: "get",
+      url: get_inspect_url,
+      data: {
+        inspect_id: inspect_id,
+        title: title,
+      },
+      dataType: "json",
+      success: function (data) {
+        if (data) {
+          console.log(data);
+
+          $.each(new_group.find(".table tbody tr"), function () {
+            var row = $(this);
+            $.each(data, function () {
+              var dtrow = this;
+
+              if (row.find("td").find('[name="name[]"]').val() === dtrow.name) {
+                row.find("td").find('[name ="value[]"]').val(dtrow.value);
+                row.find("td").find('[name="comment[]"]').val(dtrow.comment);
+              }
+            });
+          });
+        }
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error("AJAX Error: ", textStatus, errorThrown);
+
+        swal({
+          title: "Error",
+          text: errorThrown,
+          type: "error",
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "OK",
+        });
+      },
+    });
   }
   new_group.focus();
 
